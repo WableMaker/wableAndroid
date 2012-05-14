@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/textTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="26dp"
+        android:text="Wable 시작하기"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/btnFacebook"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="17dp"
+        android:text="페이스북으로 로그인 하기" />
+
+    <TextView
+        android:id="@+id/TextView01"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/textTitle"
+        android:layout_centerHorizontal="true"
+        android:background="@android:color/darker_gray" />
+
+    <TextView
+        android:id="@+id/textLine"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/btnFacebook"
+        android:layout_centerHorizontal="true"
+        android:background="@android:color/darker_gray" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textLine"
+        android:layout_marginTop="14dp"
+        android:text="이메일로 로그인 하기"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <EditText
+        android:id="@+id/editLoginEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView1"
+        android:inputType="textEmailAddress" android:hint="이메일" android:layout_marginRight="5dp" android:layout_marginLeft="5dp">
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/editLoginPass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/editLoginEmail"
+        android:inputType="textPassword" android:hint="비밀번호" android:layout_marginLeft="5dp" android:layout_marginRight="5dp"/>
+
+    <Button
+        android:id="@+id/btnLoginFind"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/editLoginPass"
+        android:text="비밀번호 찾기" />
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/editLoginPass"
+        android:layout_toRightOf="@+id/btnLoginFind"
+        android:text="로그인" />
+
+    <TextView
+        android:id="@+id/TextView02"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/btnLoginFind"
+        android:background="@android:color/darker_gray" />
+
+    <Button
+        android:id="@+id/btnLoginRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/TextView02"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="21dp"
+        android:text="Wable 회원가입" />
+
+</RelativeLayout>

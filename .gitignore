@@ -1,0 +1,13 @@
+document/
+bin/
+debug/
+release/
+obj/
+ipch/
+packages/
+*.sdf
+*.opensdf
+*.mdf
+*.ldf
+.metadata/
+gen/

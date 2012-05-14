@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/btnPostRequest"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp"
+        android:text="요청등록                          원하는 사항을 등록하세요" android:gravity="left"/>
+
+    <Button
+        android:id="@+id/btnPostOffer"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnPostRequest"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="54dp"
+        android:gravity="left"
+        android:text="제공등록                               제공할 대상을 등록하세요" />
+
+</RelativeLayout>
