@@ -13,7 +13,7 @@ import org.json.JSONException;
 
 public class HttpConnectionHelper {
 	
-	public static void excuteHttpMethod(Object obj, IhttpCallback callback) throws JSONException {
+	public static void excuteHttpMethod(Object obj, IHttpCallback callback) throws JSONException {
 		
 		try{
 			
