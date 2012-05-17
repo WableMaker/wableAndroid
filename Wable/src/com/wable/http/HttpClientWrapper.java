@@ -83,26 +83,17 @@ public class HttpClientWrapper implements IHttpConnectionLayer {
 			
 			if(resEntity !=null)
 			{
-				Logger.Instance().Write(url+"  response: " + EntityUtils.toString(resEntity));
-				
-				BufferedReader br = new BufferedReader(new InputStreamReader(resEntity.getContent()));
-				
-				String line ="";
-				while(true)
-				{
-					String r = br.readLine();
-					if(null == r) break;
-					line +=r;
-					if(!br.ready()) break;
-				}
-				br.close();
+				String line =EntityUtils.toString(resEntity);
+				Logger.Instance().Write(url+"  response: " + line);
 				callback.OnCallback(true,line);
 				return  true;
 				
 			}
 
 		}
-		catch(Exception e){Logger.Instance().Write(e);}
+		catch(Exception e){
+			Logger.Instance().Write(e);
+			}
 		
 		
 		callback.OnCallback(false,null);
