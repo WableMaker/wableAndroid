@@ -29,7 +29,12 @@ public class HttpClientWrapper implements IHttpConnectionLayer {
 	
 	DefaultHttpClient httpClient = new DefaultHttpClient();
 	BasicCookieStore cookieStore = new  BasicCookieStore();
-	HttpContext httpContext = new BasicHttpContext();
+	HttpContext httpContext = new BasicHttpContext();	 
+	 /// 로그인 해서 세션 가지고 있는지 여부
+	 static boolean m_session = false ;
+	 
+	 static long m_sessionLimitTime = 600000 ;  /// 세션 시간제한 (밀리세컨드)
+	 static long m_sessionTime = 0 ;    /// 세션을 얻은 시간
 	
 	// [end]
 	
@@ -109,6 +114,25 @@ public class HttpClientWrapper implements IHttpConnectionLayer {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	@Override
+	public void SessionEstablished() {
+		// TODO Auto-generated method stub
+		m_session = true;
+		m_sessionTime = System.currentTimeMillis( ) ;
+	}
+
+	@Override
+	public void SessionClosed() {
+		// TODO Auto-generated method stub
+		m_session = false;
+	}
+
+	@Override
+	public void SessionUpdate() {
+		// TODO Auto-generated method stub
+		m_sessionTime = System.currentTimeMillis( ) ;
+	}
+	
 	// [end]
 
 }

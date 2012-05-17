@@ -8,4 +8,9 @@ public interface IHttpConnectionLayer {
 	boolean POST(String url, Map<String,Object> params, IHttpCallback callback);
 	boolean GET(String url, IHttpCallback callback);
 	
+	void SessionEstablished();
+	void SessionClosed();
+	void SessionUpdate();
+
+	
 }

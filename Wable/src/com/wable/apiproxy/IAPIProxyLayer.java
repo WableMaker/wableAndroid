@@ -14,5 +14,5 @@ public interface IAPIProxyLayer {
 	
 	// [end]
 	
-	boolean GetMyInfo(IAPIProxyCallback callback);//로그인 시도
+	boolean MyInfo(IAPIProxyCallback callback);//로그인 시도
 }

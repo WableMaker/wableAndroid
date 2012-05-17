@@ -80,8 +80,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	@Override
 	public boolean Login(String loginid, String password,
 			final IAPIProxyCallback callback) {
-		if(!httpLayer.IsConnectedSession())
-			return false;
+
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("loginid", loginid);
 		params.put("password", password);
@@ -113,8 +112,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						Logger.Instance().Write(e);
 						callback.OnCallback(false,null);
 					}
-				}
-				callback.OnCallback(success,null);
+				}else callback.OnCallback(success,null);
 			}
 		
 		});
@@ -130,8 +128,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	}
 
 	@Override
-	public boolean GetMyInfo(final IAPIProxyCallback callback) {
-		if(httpLayer.IsConnectedSession())
+	public boolean MyInfo(final IAPIProxyCallback callback) {
+		if(!httpLayer.IsConnectedSession())
 			return false;
 		
 		Map<String,Object> params = new HashMap<String,Object>();
@@ -163,8 +161,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						Logger.Instance().Write(e);
 						callback.OnCallback(false,null);
 					}
-				}
-				callback.OnCallback(success,null);
+				}else callback.OnCallback(success,null);
 			}
 		
 		});
@@ -211,16 +208,16 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	
 	void SessionDisconnected()
 	{
-		
+		httpLayer.SessionClosed();
 	}
 	
 	void SessionConnected()
 	{
-		
+		httpLayer.SessionEstablished();
 	}
 	
 	void SessionUpdate()
 	{
-		
+		httpLayer.SessionUpdate();
 	}
 }
