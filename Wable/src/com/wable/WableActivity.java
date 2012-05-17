@@ -72,7 +72,7 @@ public class WableActivity extends Activity implements OnClickListener {
 				{
 					Logger.Instance().Write(json.toString());
 					
-					APIProxyLayer.Instance().GetMyInfo(new IAPIProxyCallback(){
+					APIProxyLayer.Instance().MyInfo(new IAPIProxyCallback(){
 
 						@Override
 						public void OnCallback(boolean success, JSONObject json) {
