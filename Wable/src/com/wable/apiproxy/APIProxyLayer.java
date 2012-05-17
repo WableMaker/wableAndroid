@@ -5,6 +5,8 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 
+import org.json.JSONObject;
+
 import android.os.Build;
 
 import com.wable.http.HttpClientWrapper;
@@ -77,26 +79,48 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	
 	@Override
 	public boolean Login(String loginid, String password,
-			IAPIProxyCallback callback) {
+			final IAPIProxyCallback callback) {
 		if(!httpLayer.IsConnectedSession())
 			return false;
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("loginid", loginid);
 		params.put("password", password);
 		
-		httpLayer.POST(domain+"loginmobile", params, new IHttpCallback(){
+		httpLayer.POST(domain+"account/loginmobile", params, new IHttpCallback(){
 
 			@Override
-			public void OnCallback(String result) {
+			public void OnCallback(boolean success,String result) {
 				// TODO Auto-generated method stub
-				
+				if(success == true)
+				{
+					try
+					{
+						JSONObject obj = null;
+						if(result !=null)
+						{
+							obj = new JSONObject(result);
+							if(false == obj.getBoolean("success"))
+								SessionDisconnected();
+							else SessionConnected();
+							
+							callback.OnCallback(success,new JSONObject(result));
+							
+						}
+						else callback.OnCallback(success,null);
+					}
+					catch(Exception e)
+					{
+						Logger.Instance().Write(e);
+						callback.OnCallback(false,null);
+					}
+				}
+				callback.OnCallback(success,null);
 			}
 		
 		});
 		
 		return true;
-		
-		
+
 	}
 
 	@Override
@@ -106,9 +130,45 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	}
 
 	@Override
-	public boolean GetMyInfo(IAPIProxyCallback callback) {
+	public boolean GetMyInfo(final IAPIProxyCallback callback) {
 		if(httpLayer.IsConnectedSession())
 			return false;
+		
+		Map<String,Object> params = new HashMap<String,Object>();
+		
+		httpLayer.POST(domain+"user/myinfo", params, new IHttpCallback(){
+
+			@Override
+			public void OnCallback(boolean success,String result) {
+				// TODO Auto-generated method stub
+				if(success == true)
+				{
+					try
+					{
+						JSONObject obj = null;
+						if(result !=null)
+						{
+							obj = new JSONObject(result);
+							if(false == obj.getBoolean("success"))
+								SessionDisconnected();
+							else SessionConnected();
+							
+							callback.OnCallback(success,new JSONObject(result));
+							
+						}
+						else callback.OnCallback(success,null);
+					}
+					catch(Exception e)
+					{
+						Logger.Instance().Write(e);
+						callback.OnCallback(false,null);
+					}
+				}
+				callback.OnCallback(success,null);
+			}
+		
+		});
+		
 		return true;
 	}
 
@@ -148,4 +208,19 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	}
 	
 	// [end]
+	
+	void SessionDisconnected()
+	{
+		
+	}
+	
+	void SessionConnected()
+	{
+		
+	}
+	
+	void SessionUpdate()
+	{
+		
+	}
 }

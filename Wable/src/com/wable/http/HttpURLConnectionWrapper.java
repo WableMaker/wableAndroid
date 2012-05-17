@@ -71,13 +71,14 @@ public class HttpURLConnectionWrapper implements IHttpConnectionLayer  {
 			/// 일단 주소에 데이터랑 보내고
 			String recv = Request(new URL(url),"POST",params);
 			Logger.Instance().Write(recv);
-			callback.OnCallback(recv);
+			callback.OnCallback(true, recv);
 			
 		}
 		catch(Exception e)
 		{
 			Logger.Instance().Write(e);
 		}
+		callback.OnCallback(false, null);
 		return false;
 	}
 
@@ -156,7 +157,6 @@ public class HttpURLConnectionWrapper implements IHttpConnectionLayer  {
 			    /// 버퍼 리셋하고 에러값 받을 인풋스트림 생성해서 레어메세지 얻기
 				BufferedReader br = new BufferedReader(new InputStreamReader(httpcon.getInputStream()));
 					
-			    InputStream err = httpcon.getErrorStream();
 			    String line="";
 			    while (true) 
 			    {

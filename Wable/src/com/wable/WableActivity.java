@@ -1,5 +1,7 @@
 package com.wable;
 
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -20,11 +22,14 @@ import com.facebook.android.DialogError;
 import com.facebook.android.Facebook;
 import com.facebook.android.Facebook.DialogListener;
 import com.facebook.android.FacebookError;
+import com.wable.apiproxy.APIProxyLayer;
+import com.wable.apiproxy.IAPIProxyCallback;
 import com.wable.login.PasswordFindActivity;
 import com.wable.login.RegisterActivity;
 import com.wable.main.MainActivity;
 import com.wable.mypage.MypageActivity;
 import com.wable.mypage.RequestListActivity;
+import com.wable.util.Logger;
 
 public class WableActivity extends Activity implements OnClickListener {
     /** Called when the activity is first created. */
@@ -58,7 +63,32 @@ public class WableActivity extends Activity implements OnClickListener {
 		});
         
              
-        
+        APIProxyLayer.Instance().Login("cc", "111111", new IAPIProxyCallback(){
+
+			@Override
+			public void OnCallback(boolean success, JSONObject json) {
+				// TODO Auto-generated method stub
+				if(success)
+				{
+					Logger.Instance().Write(json.toString());
+					
+					APIProxyLayer.Instance().GetMyInfo(new IAPIProxyCallback(){
+
+						@Override
+						public void OnCallback(boolean success, JSONObject json) {
+							// TODO Auto-generated method stub
+							if(success)
+							{
+								Logger.Instance().Write(json.toString());
+							}
+							else Logger.Instance().Write("Fail to GetMyInfo");
+						}
+						
+					});
+				}else 	Logger.Instance().Write("Fail to login");
+			}
+        	
+        });
     }
     
     @Override
