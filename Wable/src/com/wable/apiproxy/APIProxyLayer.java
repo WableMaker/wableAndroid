@@ -75,6 +75,29 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	
 	// [end]
 		
+	// [Start] 멤버 함수
+	
+	void SessionDisconnected()
+	{
+		Logger.Instance().Write("SessionDisconnected");
+		httpLayer.SessionClosed();
+	}
+	
+	void SessionConnected()
+	{
+		Logger.Instance().Write("SessionConnected");
+		httpLayer.SessionEstablished();
+	}
+	
+	void SessionUpdate()
+	{
+		Logger.Instance().Write("SessionUpdate");
+		httpLayer.SessionUpdate();
+	}
+
+	
+	// [end]
+	
 	// [start] IAPIProxyLayer 구현
 	
 	@Override
@@ -130,7 +153,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		if(!httpLayer.IsConnectedSession())
 			return false;
 
-		httpLayer.GET(domain+"user/myinfo", new IHttpCallback(){
+		httpLayer.GET(domain+"user/myinfo",null, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -335,23 +358,233 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		return true;
 	}
 	
+	@Override
+	public boolean OtherRequestList(String userid, String lastid,
+			final IAPIProxyCallback callback) {
+
+		if(!httpLayer.IsConnectedSession())
+			return false;
+		Map<String,Object> params = new HashMap<String,Object>();
+		params.put("userid", userid);
+		if(lastid !=null)
+			params.put("lastid", lastid);
+		
+		httpLayer.GET(domain+"Request/OtherRequestList",params, new IHttpCallback(){
+
+			@Override
+			public void OnCallback(boolean success,String result) {
+				// TODO Auto-generated method stub
+				JSONObject obj = null;
+				if(success == true)
+				{
+					try
+					{
+						
+						if(result !=null)
+						{
+							obj = new JSONObject(result);
+							if(true == obj.getBoolean("success"))
+								SessionUpdate();
+						}
+					}
+					catch(Exception e)
+					{
+						Logger.Instance().Write(e);
+						callback.OnCallback(false,null);
+					}
+				}
+				callback.OnCallback(success,obj);
+			}
+		
+		});
+		
+		return true;
+	}
+
+
+
+	@Override
+	public boolean MyRequestList(String lastid, final IAPIProxyCallback callback) {
+
+		if(!httpLayer.IsConnectedSession())
+			return false;
+		Map<String,Object> params = new HashMap<String,Object>();
+		if(lastid !=null)
+			params.put("lastid", lastid);
+		
+		httpLayer.GET(domain+"Request/MyList", params, new IHttpCallback(){
+
+			@Override
+			public void OnCallback(boolean success,String result) {
+				// TODO Auto-generated method stub
+				JSONObject obj = null;
+				if(success == true)
+				{
+					try
+					{
+						
+						if(result !=null)
+						{
+							obj = new JSONObject(result);
+							if(true == obj.getBoolean("success"))
+								SessionUpdate();
+						}
+					}
+					catch(Exception e)
+					{
+						Logger.Instance().Write(e);
+						callback.OnCallback(false,null);
+					}
+				}
+				callback.OnCallback(success,obj);
+			}
+		
+		});
+		
+		return true;
+	}
+
+
+
+	@Override
+	public boolean RequestListbyTime(String lastid, String keyword,
+			final IAPIProxyCallback callback) {
+
+		if(!httpLayer.IsConnectedSession())
+			return false;
+		Map<String,Object> params = new HashMap<String,Object>();
+		if(lastid !=null)params.put("lastid", lastid);
+		if(keyword !=null)params.put("keyword", keyword);
+		
+		httpLayer.GET(domain+"request/ListbyTime", params, new IHttpCallback(){
+
+			@Override
+			public void OnCallback(boolean success,String result) {
+				// TODO Auto-generated method stub
+				JSONObject obj = null;
+				if(success == true)
+				{
+					try
+					{
+						
+						if(result !=null)
+						{
+							obj = new JSONObject(result);
+							if(true == obj.getBoolean("success"))
+								SessionUpdate();
+						}
+					}
+					catch(Exception e)
+					{
+						Logger.Instance().Write(e);
+						callback.OnCallback(false,null);
+					}
+				}
+				callback.OnCallback(success,obj);
+			}
+		
+		});
+		
+		return true;
+	}
+
+
+
+	@Override
+	public boolean RequestListbyArea(double north, double south, double east,
+			double west, String keyword, final IAPIProxyCallback callback) {
+
+		if(!httpLayer.IsConnectedSession())
+			return false;
+		Map<String,Object> params = new HashMap<String,Object>();
+		params.put("north", north);
+		params.put("south", south);
+		params.put("east", east);
+		params.put("west", west);
+		if(keyword !=null)params.put("keyword", keyword);
+		
+		httpLayer.GET(domain+"request/ListbyArea", params, new IHttpCallback(){
+
+			@Override
+			public void OnCallback(boolean success,String result) {
+				// TODO Auto-generated method stub
+				JSONObject obj = null;
+				if(success == true)
+				{
+					try
+					{
+						
+						if(result !=null)
+						{
+							obj = new JSONObject(result);
+							if(true == obj.getBoolean("success"))
+								SessionUpdate();
+						}
+					}
+					catch(Exception e)
+					{
+						Logger.Instance().Write(e);
+						callback.OnCallback(false,null);
+					}
+				}
+				callback.OnCallback(success,obj);
+			}
+		
+		});
+		
+		return true;
+	}
+
+
+
+	@Override
+	public boolean RequestListbyDistance(double lat, double lon,
+			double distance, String keyword, final IAPIProxyCallback callback) {
+		
+		if(!httpLayer.IsConnectedSession())
+			return false;
+		Map<String,Object> params = new HashMap<String,Object>();
+		params.put("lat", lat);
+		params.put("lon", lon);
+		params.put("distance", distance);
+		if(keyword !=null)params.put("keyword", keyword);
+		
+		httpLayer.GET(domain+"Request/ListbyDistance", params, new IHttpCallback(){
+
+			@Override
+			public void OnCallback(boolean success,String result) {
+				// TODO Auto-generated method stub
+				JSONObject obj = null;
+				if(success == true)
+				{
+					try
+					{
+						
+						if(result !=null)
+						{
+							obj = new JSONObject(result);
+							if(true == obj.getBoolean("success"))
+								SessionUpdate();
+						}
+					}
+					catch(Exception e)
+					{
+						Logger.Instance().Write(e);
+						callback.OnCallback(false,null);
+					}
+				}
+				callback.OnCallback(success,obj);
+			}
+		
+		});
+		
+		return true;
+	}
+	
 	// [end]
 	
-	void SessionDisconnected()
-	{
-		Logger.Instance().Write("SessionDisconnected");
-		httpLayer.SessionClosed();
-	}
-	
-	void SessionConnected()
-	{
-		Logger.Instance().Write("SessionConnected");
-		httpLayer.SessionEstablished();
-	}
-	
-	void SessionUpdate()
-	{
-		Logger.Instance().Write("SessionUpdate");
-		httpLayer.SessionUpdate();
-	}
+
+
+
+
 }

@@ -23,7 +23,7 @@ import org.apache.http.util.EntityUtils;
 
 import com.wable.util.Logger;
 
-public class HttpClientWrapper implements IHttpConnectionLayer {
+public class HttpClientWrapper extends HttpWrapper  {
 
 	
 	// [start] 멤버변수
@@ -31,11 +31,6 @@ public class HttpClientWrapper implements IHttpConnectionLayer {
 	DefaultHttpClient httpClient = new DefaultHttpClient();
 	BasicCookieStore cookieStore = new  BasicCookieStore();
 	HttpContext httpContext = new BasicHttpContext();	 
-	 /// 로그인 해서 세션 가지고 있는지 여부
-	 static boolean m_session = false ;
-	 
-	 static long m_sessionLimitTime = 600000 ;  /// 세션 시간제한 (밀리세컨드)
-	 static long m_sessionTime = 0 ;    /// 세션을 얻은 시간
 	
 	// [end]
 	
@@ -44,34 +39,6 @@ public class HttpClientWrapper implements IHttpConnectionLayer {
 		httpContext.setAttribute(ClientContext.COOKIE_STORE,cookieStore);
 	}
 	
-	
-	
-	// [start] IHttpConnectionLayer 구현
-	@Override
-	public String RequestContents() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean IsConnectedSession() {
-		 if( !m_session )
-		  {
-		   return false ;
-		  }
-		  
-		  if( System.currentTimeMillis( ) < m_sessionTime + m_sessionLimitTime )
-		  {
-
-		   return true ; 
-		  }
-		  else
-		  {
-		   /// 제한시간을 넘겼음 세션을 제거함
-		   m_session = false ;
-		   return false ; 
-		  }
-	}
 
 	@Override
 	public boolean POST(String url, Map<String, Object> params,
@@ -109,6 +76,7 @@ public class HttpClientWrapper implements IHttpConnectionLayer {
 		}
 		catch(Exception e){
 			Logger.Instance().Write(e);
+			} finally {
 			}
 		
 		
@@ -117,7 +85,7 @@ public class HttpClientWrapper implements IHttpConnectionLayer {
 	}
 
 	@Override
-	public boolean GET(String url, IHttpCallback callback) {
+	public boolean GET(String url,Map<String, Object> params, IHttpCallback callback) {
 		// TODO Auto-generated method stub
 		try
 		{
@@ -126,6 +94,7 @@ public class HttpClientWrapper implements IHttpConnectionLayer {
 		//	HttpParams params = http.getParams();
 		//	HttpConnectionparams.setConnectionTimeout(params,5000);
 		// HttpConnectionParams.setSoTimeout(params,5000);
+			url +="?"+buildParameters(params);
 			
 			HttpGet httpGet = new HttpGet(url);
 			
@@ -155,25 +124,7 @@ public class HttpClientWrapper implements IHttpConnectionLayer {
 		callback.OnCallback(false,null);
 		return false;
 	}
-	@Override
-	public void SessionEstablished() {
-		// TODO Auto-generated method stub
-		m_session = true;
-		m_sessionTime = System.currentTimeMillis( ) ;
-	}
 
-	@Override
-	public void SessionClosed() {
-		// TODO Auto-generated method stub
-		m_session = false;
-		m_sessionTime=0;
-	}
-
-	@Override
-	public void SessionUpdate() {
-		// TODO Auto-generated method stub
-		m_sessionTime = System.currentTimeMillis( ) ;
-	}
 	
 	// [end]
 

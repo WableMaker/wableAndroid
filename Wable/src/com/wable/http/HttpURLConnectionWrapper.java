@@ -14,7 +14,7 @@ import java.util.Map;
 
 import com.wable.util.Logger;
 
-public class HttpURLConnectionWrapper implements IHttpConnectionLayer  {
+public class HttpURLConnectionWrapper extends HttpWrapper {
 
 	// [start] IHttpConnectionLayer 구현
 	
@@ -22,18 +22,13 @@ public class HttpURLConnectionWrapper implements IHttpConnectionLayer  {
 	 public String m_request ;
 	 	 
 	 /// 세션 유지에 필요한 쿠키
-	 static String m_cookies = "" ;
-	 
-	 /// 로그인 해서 세션 가지고 있는지 여부
-	 static boolean m_session = false ;
-	 
-	 static long m_sessionLimitTime = 600000 ;  /// 세션 시간제한 (밀리세컨드)
-	 static long m_sessionTime = 0 ;    /// 세션을 얻은 시간
+	 String m_cookies = "" ;
+
 
 	 // [end]
 	 
 
-		protected String Request(URL url,String method, Map<String,Object> params) throws IOException
+	protected String Request(URL url,String method, Map<String,Object> params) throws IOException
 		{
 			InputStream in = null;
 			OutputStream out = null;
@@ -125,48 +120,10 @@ public class HttpURLConnectionWrapper implements IHttpConnectionLayer  {
 			
 		}
 		
-		protected String buildParameters(Map<String,Object> params) throws IOException
-		{
-			if(params == null) return "";
-			StringBuilder sb= new StringBuilder();
-			for(Iterator<String> i=params.keySet().iterator();i.hasNext();) {
-				String key = (String)i.next();
-				sb.append(key);
-				sb.append('=');
-				sb.append(URLEncoder.encode(String.valueOf(params.get(key)),"UTF-8"));
-				if(i.hasNext()) sb.append('&');
-			
-			}
-			
-			return sb.toString();
-		}
+		
 	 
 	// [start] IHttpConnectionLayer 구현
-	@Override
-	public String RequestContents() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	@Override
-	public boolean IsConnectedSession() {
-		 if( !m_session )
-		  {
-		   return false ;
-		  }
-		  
-		  if( System.currentTimeMillis( ) < m_sessionTime + m_sessionLimitTime )
-		  {
-
-		   return true ; 
-		  }
-		  else
-		  {
-		   /// 제한시간을 넘겼음 세션을 제거함
-		   m_session = false ;
-		   return false ; 
-		  }
-	}
 
 	@Override
 	public boolean POST(String url, Map<String, Object> params,
@@ -191,9 +148,11 @@ public class HttpURLConnectionWrapper implements IHttpConnectionLayer  {
 	}
 
 	@Override
-	public boolean GET(String url, IHttpCallback callback) {
+	public boolean GET(String url, Map<String, Object> params,
+			IHttpCallback callback) {
 		try
 		{
+			url +="?"+buildParameters(params);
 			/// 일단 주소에 데이터랑 보내고
 			String recv = Request(new URL(url),"GET",null);
 			Logger.Instance().Write(recv);
@@ -208,27 +167,7 @@ public class HttpURLConnectionWrapper implements IHttpConnectionLayer  {
 		
 		return false;
 	}
-	
 
-	@Override
-	public void SessionEstablished() {
-		// TODO Auto-generated method stub
-		m_session = true;
-		m_sessionTime = System.currentTimeMillis( ) ;
-	}
-
-	@Override
-	public void SessionClosed() {
-		// TODO Auto-generated method stub
-		m_session = false;
-	}
-
-	@Override
-	public void SessionUpdate() {
-		// TODO Auto-generated method stub
-		m_sessionTime = System.currentTimeMillis( ) ;
-	}
-	
 	// [end]
 	
 
