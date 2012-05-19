@@ -1,5 +1,9 @@
 package com.wable.apiproxy;
 
+import java.util.Date;
+
+import android.text.format.DateFormat;
+
 public interface IAPIProxyLayer {
 	
 	// [start] Account
@@ -29,6 +33,8 @@ public interface IAPIProxyLayer {
 	boolean RequestListbyArea(double north,double south,double ease,double west,String keyword,IAPIProxyCallback callback);//내정보
 	boolean RequestListbyDistance(double lat, double lon,double distance,String keyword,IAPIProxyCallback callback);//내정보
 
+	boolean AddRequest(String title, String description,int price,int category,Date duedate
+			,double lat,double lon,boolean totwitter, boolean tofacebook, boolean userprofilepos,IAPIProxyCallback callback);//내정보
 	
 	
 	// [end]
@@ -41,6 +47,8 @@ public interface IAPIProxyLayer {
 	boolean ProvideListbyArea(double north,double south,double ease,double west,String keyword,IAPIProxyCallback callback);//내정보
 	boolean ProvideListbyDistance(double lat, double lon,double distance,String keyword,IAPIProxyCallback callback);//내정보
 
+	boolean AddProvide(String title, int price,int category
+			,double lat,double lon,int radius, boolean userprofilepos,IAPIProxyCallback callback);//내정보
 	
 	// [end]
 	

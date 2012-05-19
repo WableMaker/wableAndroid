@@ -2,6 +2,7 @@ package com.wable.http;
 
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -36,6 +37,7 @@ public class HttpWrapper implements IHttpConnectionLayer {
 		
 		return sb.toString();
 	}
+
 		
 	// [end]
 	 

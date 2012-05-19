@@ -1,5 +1,6 @@
 package com.wable.apiproxy;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -8,6 +9,7 @@ import java.util.concurrent.locks.ReentrantLock;
 import org.json.JSONObject;
 
 import android.os.Build;
+import android.text.format.DateFormat;
 
 import com.wable.http.HttpClientWrapper;
 import com.wable.http.HttpURLConnectionWrapper;
@@ -95,6 +97,13 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		httpLayer.SessionUpdate();
 	}
 
+	
+	String ConvertDateToString(Date date)
+	{
+		String result = android.text.format.DateFormat.format("yyyy-MM-dd HH:mm:ss", date).toString();
+		
+		return result;
+	}
 	
 	// [end]
 	
@@ -339,9 +348,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						if(result !=null)
 						{
 							obj = new JSONObject(result);
-							if(false == obj.getBoolean("success"))
-								SessionDisconnected("FBconnect");
-							else SessionConnected("FBconnect");
+							if(true == obj.getBoolean("success"))
+								SessionUpdate("FBconnect");
 						}
 					}
 					catch(Exception e)
@@ -789,6 +797,114 @@ public class APIProxyLayer implements IAPIProxyLayer {
 							obj = new JSONObject(result);
 							if(true == obj.getBoolean("success"))
 								SessionUpdate("ProvideListbyDistance");
+						}
+					}
+					catch(Exception e)
+					{
+						Logger.Instance().Write(e);
+						callback.OnCallback(false,null);
+					}
+				}
+				callback.OnCallback(success,obj);
+			}
+		
+		});
+		
+		return true;
+	}
+
+
+
+	@Override
+	public boolean AddRequest(String title, String description, int price,
+			int category, Date duedate, double lat, double lon,
+			boolean totwitter, boolean tofacebook, boolean userprofilepos,
+			final IAPIProxyCallback callback) {
+
+		
+		if(!httpLayer.IsConnectedSession())
+			return false;
+		Map<String,Object> params = new HashMap<String,Object>();
+		params.put("title", title);
+		params.put("description", description);
+		params.put("price", price);
+		params.put("category", category);
+		params.put("duedate", ConvertDateToString(duedate));
+		params.put("lat", lat);
+		params.put("lon", lon);
+		params.put("totwitter", totwitter);
+		params.put("tofacebook", tofacebook);
+		params.put("userprofilepos", userprofilepos);
+		
+		
+		httpLayer.POST(domain+"Request/Add", params, new IHttpCallback(){
+
+			@Override
+			public void OnCallback(boolean success,String result) {
+				// TODO Auto-generated method stub
+				JSONObject obj = null;
+				if(success == true)
+				{
+					try
+					{
+						
+						if(result !=null)
+						{
+							obj = new JSONObject(result);
+							if(true == obj.getBoolean("success"))
+								SessionUpdate("FBconnect");
+						}
+					}
+					catch(Exception e)
+					{
+						Logger.Instance().Write(e);
+						callback.OnCallback(false,null);
+					}
+				}
+				callback.OnCallback(success,obj);
+			}
+		
+		});
+		
+		return true;
+	}
+
+
+
+	@Override
+	public boolean AddProvide(String title, int price, int category,
+			double lat, double lon, int radius, boolean userprofilepos,
+			final IAPIProxyCallback callback) {
+
+
+		if(!httpLayer.IsConnectedSession())
+			return false;
+		Map<String,Object> params = new HashMap<String,Object>();
+		params.put("title", title);
+		params.put("price", price);
+		params.put("category", category);
+		params.put("radius", radius);
+		params.put("lat", lat);
+		params.put("lon", lon);
+		params.put("userprofilepos", userprofilepos);
+		
+		
+		httpLayer.POST(domain+"Provide/Add", params, new IHttpCallback(){
+
+			@Override
+			public void OnCallback(boolean success,String result) {
+				// TODO Auto-generated method stub
+				JSONObject obj = null;
+				if(success == true)
+				{
+					try
+					{
+						
+						if(result !=null)
+						{
+							obj = new JSONObject(result);
+							if(true == obj.getBoolean("success"))
+								SessionUpdate("FBconnect");
 						}
 					}
 					catch(Exception e)
