@@ -61,7 +61,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		}
 		else	
 		{
-			httpLayer = new HttpURLConnectionWrapper();
+			httpLayer = new HttpClientWrapper();//new HttpURLConnectionWrapper();
 		}
 	}
 	
@@ -131,10 +131,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	public boolean MyInfo(final IAPIProxyCallback callback) {
 		if(!httpLayer.IsConnectedSession())
 			return false;
-		
-		Map<String,Object> params = new HashMap<String,Object>();
-		
-		httpLayer.POST(domain+"user/myinfo", params, new IHttpCallback(){
+
+		httpLayer.GET(domain+"user/myinfo", new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {

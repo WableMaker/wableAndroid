@@ -46,7 +46,7 @@ public class HttpURLConnectionWrapper implements IHttpConnectionLayer  {
 				httpcon.setRequestMethod(method);//POST냐 GET이냐
 				httpcon.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");//인코딩방식
 				httpcon.setRequestProperty("Language", "ko");//언어
-				
+		
 				httpcon.setDoInput(true);//인풋스트림 사용여부
 				if(m_session) httpcon.setRequestProperty("cookie", m_cookies);
 				if(method.equals("POST"))
@@ -58,40 +58,41 @@ public class HttpURLConnectionWrapper implements IHttpConnectionLayer  {
 					out.write(paramstr.getBytes("UTF-8"));
 					out.flush();
 					out.close();
-					Logger.Instance().Write(url.toString()+  " Post success");
-					long start = System.currentTimeMillis();
-					
-					int response =httpcon.getResponseCode();
-					
-					Logger.Instance().Write(url.toString()+" recv elapsed time  "+(System.currentTimeMillis()-start) + " Post success");
-					
-					// 갤럭시 S에서 어떤앱은 WebView라던가 Http통신에서 15초인가 넘어가면 세션 끊기는
-	                /// 원인을 알 수 없는 경우도 있었음 다른기기 다 잘되는데 오로지 갤럭시 S만!!! 그랬음 참고 바람요
-					/// 루프를 돌면서 리퀘스트로 받은내용을 저장한다.
-					
-					if(response == HttpURLConnection.HTTP_OK)
-					{
-						BufferedReader br = new BufferedReader(new InputStreamReader(httpcon.getInputStream()));
-						String line="";
-						while(true)
-						{
-							String r = br.readLine();
-							if(null == r) break;
-							line +=r;
-						}
-						br.close();
-						Map<String,List<String>> imap = httpcon.getHeaderFields();
-						if(imap.containsKey("Set-Cookie"))
-						{
-							List<String> cookie = imap.get("Set-Cookie");
-							for(int i=0;i<cookie.size();i++) m_cookies += cookie.get(i);
-							Logger.Instance().Write(m_cookies);			
-						}
-						
-						return line;
-					}
-				
 				}
+				Logger.Instance().Write(url.toString()+  " Request success "+  m_cookies);
+				long start = System.currentTimeMillis();
+				
+				int response =httpcon.getResponseCode();
+				
+				Logger.Instance().Write(url.toString()+" recv elapsed time  "+(System.currentTimeMillis()-start) );
+				
+				// 갤럭시 S에서 어떤앱은 WebView라던가 Http통신에서 15초인가 넘어가면 세션 끊기는
+                /// 원인을 알 수 없는 경우도 있었음 다른기기 다 잘되는데 오로지 갤럭시 S만!!! 그랬음 참고 바람요
+				/// 루프를 돌면서 리퀘스트로 받은내용을 저장한다.
+				
+				if(response == HttpURLConnection.HTTP_OK)
+				{
+					BufferedReader br = new BufferedReader(new InputStreamReader(httpcon.getInputStream()));
+					String line="";
+					while(true)
+					{
+						String r = br.readLine();
+						if(null == r) break;
+						line +=r;
+					}
+					br.close();
+					Map<String,List<String>> imap = httpcon.getHeaderFields();
+					if(imap.containsKey("Set-Cookie"))
+					{
+						List<String> cookie = imap.get("Set-Cookie");
+						for(int i=0;i<cookie.size();i++) m_cookies += cookie.get(i);
+						Logger.Instance().Write(m_cookies);			
+					}
+					
+					return line;
+				}
+				
+				
 			}
 			catch (IOException e) 
 			{
@@ -191,7 +192,20 @@ public class HttpURLConnectionWrapper implements IHttpConnectionLayer  {
 
 	@Override
 	public boolean GET(String url, IHttpCallback callback) {
-		// TODO Auto-generated method stub
+		try
+		{
+			/// 일단 주소에 데이터랑 보내고
+			String recv = Request(new URL(url),"GET",null);
+			Logger.Instance().Write(recv);
+			callback.OnCallback(true, recv);
+			
+		}
+		catch(Exception e)
+		{
+			Logger.Instance().Write(e);
+			callback.OnCallback(false, null);
+		}
+		
 		return false;
 	}
 	

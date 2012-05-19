@@ -55,8 +55,22 @@ public class HttpClientWrapper implements IHttpConnectionLayer {
 
 	@Override
 	public boolean IsConnectedSession() {
-		// TODO Auto-generated method stub
-		return false;
+		 if( !m_session )
+		  {
+		   return false ;
+		  }
+		  
+		  if( System.currentTimeMillis( ) < m_sessionTime + m_sessionLimitTime )
+		  {
+
+		   return true ; 
+		  }
+		  else
+		  {
+		   /// 제한시간을 넘겼음 세션을 제거함
+		   m_session = false ;
+		   return false ; 
+		  }
 	}
 
 	@Override
