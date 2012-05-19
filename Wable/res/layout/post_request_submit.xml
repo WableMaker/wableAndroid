@@ -5,65 +5,91 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
+    <RelativeLayout
+        android:id="@+id/RelativeLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="요청사항" />
+
+        <Button
+            android:id="@+id/POSTbtnCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="취소" />
+
+        <Button
+            android:id="@+id/POSTbtnRequestList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:text="요청목록" />
+    </RelativeLayout>
+
     <Button
-        android:id="@+id/btnPostSubmitTitle"
+        android:id="@+id/POSTbtnSubmitTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/RelativeLayout2"
         android:text="나의 요청사항 1" />
-
-    <Button
-        android:id="@+id/btnPostSubmitDetail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/btnPostSubmitTitle"
-        android:text="상세 설명 1" />
-
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/btnPostSubmitDetail"
-        android:text="서비스 비용" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/btnPostSubmitDetail"
-        android:text="남은 시간" />
-
-    <com.google.android.maps.MapView
-        android:id="@+id/mapview"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/button1"
-        android:apiKey="0oqzs7eIvbFX8Faveem2CANcvsCaS5O1nULYH3A"
-        android:clickable="true" >
-
-    </com.google.android.maps.MapView>
-
-    <Button
-        android:id="@+id/btnPostSubmitOk"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/mapview"
-        android:layout_centerHorizontal="true"
-        android:text="Let's Wable" />
 
     <TextView
         android:id="@+id/textPostSubmitAddr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/mapview"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="15dp"
         android:text="서울시 강남구 근처" />
+
+    <Button
+        android:id="@+id/POSTbtnSubmitOk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:text="Let&apos;s Wable" />
+
+    <Button
+        android:id="@+id/POSTbtnSubmitDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/POSTbtnSubmitTitle"
+        android:text="상세 설명 1" />
+
+    <Button
+        android:id="@+id/POSTbtnService"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/POSTbtnSubmitDetail"
+        android:text="서비스 비용" />
+
+    <Button
+        android:id="@+id/POSTbtnTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/POSTbtnSubmitDetail"
+        android:text="남은 시간" />
+
+    <com.google.android.maps.MapView
+        android:id="@+id/mapview"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/POSTbtnService"
+        android:apiKey="0oqzs7eIvbFX8Faveem2CANcvsCaS5O1nULYH3A"
+        android:clickable="true" >
+    </com.google.android.maps.MapView>
 
 </RelativeLayout>

@@ -5,12 +5,15 @@ import java.util.List;
 import java.util.Locale;
 
 import android.content.Context;
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,7 +24,7 @@ import com.google.android.maps.MapView;
 import com.google.android.maps.MapView.LayoutParams;
 import com.wable.R;
 
-public class RequestPostSubmit extends MapActivity implements LocationListener {
+public class RequestPostSubmit extends MapActivity implements LocationListener, OnClickListener {
 
 	private Geocoder geo;
 	private LocationManager manager;
@@ -39,6 +42,14 @@ public class RequestPostSubmit extends MapActivity implements LocationListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.post_request_submit);
 		
+		findViewById(R.id.POSTbtnSubmitTitle).setOnClickListener(this);
+		findViewById(R.id.POSTbtnSubmitDetail).setOnClickListener(this);
+		findViewById(R.id.POSTbtnService).setOnClickListener(this);
+		findViewById(R.id.POSTbtnTime).setOnClickListener(this);
+		findViewById(R.id.POSTbtnCancel).setOnClickListener(this);
+		findViewById(R.id.POSTbtnRequestList).setOnClickListener(this);
+		
+		
 		mapview = (MapView)findViewById(R.id.mapview);
 		tvAddr = (TextView)findViewById(R.id.textPostSubmitAddr);
 		
@@ -52,6 +63,45 @@ public class RequestPostSubmit extends MapActivity implements LocationListener {
 		geo = new Geocoder(this, Locale.KOREAN);
 		
 		pin = new ImageView(this);
+		
+	}
+	
+	@Override
+	public void onClick(View v) {
+		
+		Intent i;
+		
+		switch (v.getId()) {
+		
+		
+		case R.id.POSTbtnSubmitTitle:
+			i = new Intent(this, RequestCategory.class);
+			startActivity(i);
+			break;
+			
+		case R.id.POSTbtnSubmitDetail:
+			
+			break;
+			
+		case R.id.POSTbtnService:
+			
+			break;
+			
+		case R.id.POSTbtnTime:
+			
+			break;
+			
+		case R.id.POSTbtnCancel:
+			
+			break;
+			
+		case R.id.POSTbtnRequestList:
+			i = new Intent(this, RequestPostList.class);
+			startActivity(i);
+			break;
+			
+
+		}
 		
 	}
 	
@@ -109,4 +159,6 @@ public class RequestPostSubmit extends MapActivity implements LocationListener {
 
 	@Override
 	public void onStatusChanged(String arg0, int arg1, Bundle arg2) { }
+
+
 }

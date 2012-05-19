@@ -25,20 +25,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".login.PasswordFindActivity" android:launchMode="singleTop"></activity>
-        <activity android:name=".login.RegisterActivity" android:launchMode="singleTop"></activity>
-        <activity android:name=".mypage.RequestListActivity"></activity>
-        <activity android:name=".mypage.MypageActivity" android:launchMode="singleTop"></activity>
-        <activity android:name=".mypage.OfferListActivity"></activity>
-        <activity android:name=".MainActivity"></activity>
-        <activity android:name=".post.RequestCategory"></activity>
-        <activity android:name=".post.PostActivity" android:launchMode="singleTop"></activity>
-        <activity android:name=".post.RequestPost"></activity>
-        <activity android:name=".post.RequestPostList"></activity>
-        <activity android:name=".post.RequestPostSubmit"></activity>
-        <activity android:name=".post.RequestCategoryDetail"></activity>
-        <activity android:name=".search.SearchActivity"></activity>
+        <activity android:name=".tab.login.PasswordFindActivity" android:launchMode="singleTop"></activity>
+        <activity android:name=".tab.login.RegisterActivity" android:launchMode="singleTop"></activity>
+        <activity android:name=".tab.mypage.RequestListActivity"></activity>
+        <activity android:name=".tab.mypage.MypageActivity" android:launchMode="singleTop"></activity>
+        <activity android:name=".tab.mypage.OfferListActivity"></activity>
+        <activity android:name="MainActivity"></activity>
+        <activity android:name=".tab.post.RequestCategory"></activity>
+        <activity android:name=".tab.post.PostActivity" android:launchMode="singleTop"></activity>
+        <activity android:name=".tab.post.RequestPost"></activity>
+        <activity android:name=".tab.post.RequestPostList"></activity>
+        <activity android:name=".tab.post.RequestPostSubmit" android:launchMode="singleTop"></activity>
+        <activity android:name=".tab.post.RequestCategoryDetail"></activity>
+        <activity android:name=".tab.search.SearchActivity"></activity>
         <activity android:name=".tab.setting.SettingActivity"></activity>
+        <activity android:name=".tab.setting.WebviewActivity"></activity>
+        <activity android:name=".tab.setting.PushActivity"></activity>
     </application>
 
 </manifest>

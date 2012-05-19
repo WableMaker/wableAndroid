@@ -1,8 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    
 
-</LinearLayout>
+    <RelativeLayout
+        android:id="@+id/RelativeLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" >
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:text="로그인" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="설정" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/RelativeLayout2" >
+
+        <LinearLayout
+            android:id="@+id/LinearLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <Button
+                android:id="@+id/STbtnNotice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="공지사항" />
+
+            <Button
+                android:id="@+id/STbtnPrivacy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="알림설정" />
+
+            <Button
+                android:id="@+id/STbtnLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="소개동영상" />
+
+            <Button
+                android:id="@+id/STbtnPush"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="이용방법" />
+
+            <Button
+                android:id="@+id/Button03"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="FAQ" />
+
+            <Button
+                android:id="@+id/Button02"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="버전정보" />
+
+            <Button
+                android:id="@+id/Button01"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="앱공유" />
+
+            <Button
+                android:id="@+id/button1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="아이튠스 리뷰남기기" />
+
+            <Button
+                android:id="@+id/Button08"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="페이스북 좋아요하기" />
+
+            <Button
+                android:id="@+id/Button09"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="트위터 팔로잉하기" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

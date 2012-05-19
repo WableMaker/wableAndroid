@@ -15,7 +15,6 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.TextView.OnEditorActionListener;
 
 import com.facebook.android.DialogError;
@@ -26,8 +25,6 @@ import com.wable.http.apiproxy.APIProxyLayer;
 import com.wable.http.apiproxy.IAPIProxyCallback;
 import com.wable.tab.login.PasswordFindActivity;
 import com.wable.tab.login.RegisterActivity;
-import com.wable.tab.mypage.MypageActivity;
-import com.wable.tab.mypage.RequestListActivity;
 import com.wable.util.Logger;
 
 public class WableActivity extends Activity implements OnClickListener {

@@ -5,47 +5,43 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/btnMainMypage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:text="마이" />
-
-    <Button
-        android:id="@+id/btnMainSetting"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:text="설정" />
-
-    <Button
-        android:id="@+id/btnMainPost"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/btnMainMypage"
-        android:text="등록" />
-
-    <Button
-        android:id="@+id/btnMainSearch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/btnMainSetting"
-        android:text="검색" />
-
     <LinearLayout
-        android:id="@+id/Container"
+        android:id="@+id/Containers"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/btnMainMypage"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
         android:orientation="vertical" >
+    </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/Bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true" >
+
+        <Button
+            android:id="@+id/btnMainMypage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="마이" />
+
+        <Button
+            android:id="@+id/btnMainPost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="등록" />
+
+        <Button
+            android:id="@+id/btnMainSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="검색" />
+
+        <Button
+            android:id="@+id/btnMainSetting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="설정" />
     </LinearLayout>
 
 </RelativeLayout>

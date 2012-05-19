@@ -15,7 +15,7 @@ public class RequestCategory extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.post_request_category);
 		
-		findViewById(R.id.btnPostRequestList).setOnClickListener(this);
+		//findViewById(R.id.btnPostRequestList).setOnClickListener(this);
 		findViewById(R.id.btnPostMakeRequest).setOnClickListener(this);
 		
 	}
@@ -26,10 +26,10 @@ public class RequestCategory extends Activity implements OnClickListener {
 		Intent intent;
 		
 		switch (v.getId()) {
-		case R.id.btnPostRequestList:
-			intent = new Intent(this, RequestPostList.class);
-			startActivity(intent);
-			break;
+//		case R.id.btnPostRequestList:
+//			intent = new Intent(this, RequestPostList.class);
+//			startActivity(intent);
+//			break;
 			
 		case R.id.btnPostMakeRequest:
 			intent = new Intent(this, RequestPostSubmit.class);

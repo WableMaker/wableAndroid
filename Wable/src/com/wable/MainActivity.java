@@ -5,10 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.Window;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.RelativeLayout.LayoutParams;
 
-import com.wable.R;
 import com.wable.tab.mypage.MypageActivity;
 import com.wable.tab.post.PostActivity;
 import com.wable.tab.search.SearchActivity;
@@ -20,12 +20,15 @@ public class MainActivity extends ActivityGroup implements OnClickListener {
 	private View[] views;
 	private LinearLayout container;
 	
+	private LayoutParams params;
+	private LayoutParams paramh;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		
-		container = (LinearLayout)findViewById(R.id.Container);
+		container = (LinearLayout)findViewById(R.id.Containers);
 		findViewById(R.id.btnMainMypage).setOnClickListener(this);
 		findViewById(R.id.btnMainPost).setOnClickListener(this);
 		findViewById(R.id.btnMainSearch).setOnClickListener(this);
@@ -39,6 +42,19 @@ public class MainActivity extends ActivityGroup implements OnClickListener {
 		
 		viewId = views[0].getId();
 		container.addView(views[0]);
+		
+		params =  new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT); 
+		paramh =  new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT); 
+
+        params.addRule(RelativeLayout.ABOVE, R.id.Bottom);
+        params.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
+        params.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
+        
+        paramh.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
+        paramh.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
+        paramh.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
+        container.setLayoutParams(params);
+
 		
 	}
 
@@ -66,10 +82,11 @@ public class MainActivity extends ActivityGroup implements OnClickListener {
 			container.addView(views[3]);
 			break;
 
-		}
-		
+		}		
 		viewId = v.getId();
-		
 	}
+	
+	public void hideBottomTab() { container.setLayoutParams(paramh); }
+	public void showBottomTab() { container.setLayoutParams(params); }
 
 }

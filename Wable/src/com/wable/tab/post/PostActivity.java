@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 
+import com.wable.MainActivity;
 import com.wable.R;
 
 public class PostActivity extends Activity implements OnClickListener {
@@ -23,7 +24,11 @@ public class PostActivity extends Activity implements OnClickListener {
 		Intent intent;
 		switch (v.getId()) {
 		case R.id.btnPostRequest:
-			intent = new Intent(this, RequestCategory.class);
+			
+			MainActivity activity = (MainActivity)getParent();
+			//activity.hideBottomTab();			
+			
+			intent = new Intent(this, RequestPostSubmit.class);
 			startActivity(intent);
 			break;
 
