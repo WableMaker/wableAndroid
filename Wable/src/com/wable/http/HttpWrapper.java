@@ -5,6 +5,7 @@ import java.net.URLEncoder;
 import java.util.Iterator;
 import java.util.Map;
 
+//IHttpConnectionLayer를 구현하는 HttpClientWrapper와 HttpURLConnectionWrapper부모 클래스
 public class HttpWrapper implements IHttpConnectionLayer {
 	
 	// [start] 멤버 변수
