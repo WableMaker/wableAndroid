@@ -8,11 +8,13 @@ public interface IAPIProxyLayer {
 	boolean Logout(IAPIProxyCallback callback);//로그인 시도
 	boolean Register(String loginid,String email,String username,String password, IAPIProxyCallback callback);//로그인 시도
 	
-	boolean FBlogin(String fb_user_id,String oauth_token, IAPIProxyCallback callback);//로그인 시도
+	boolean FBlogin(String fb_uid,String oauth_token, IAPIProxyCallback callback);//로그인 시도
 	boolean FBregister(String oauth_token, IAPIProxyCallback callback);//로그인 시도
-	boolean FBconnect(String fb_user_id,String oauth_token, IAPIProxyCallback callback);//로그인 시도
+	boolean FBconnect(String fb_uid,String oauth_token, IAPIProxyCallback callback);//로그인 시도
 	
 	// [end]
 	
-	boolean MyInfo(IAPIProxyCallback callback);//로그인 시도
+	boolean MyInfo(IAPIProxyCallback callback);//내정보
+	
+	
 }

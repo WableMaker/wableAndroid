@@ -145,9 +145,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						if(result !=null)
 						{
 							obj = new JSONObject(result);
-							if(false == obj.getBoolean("success"))
-								SessionDisconnected();
-							else SessionConnected();
+							if(true == obj.getBoolean("success"))
+								SessionUpdate();
 							
 							callback.OnCallback(success,new JSONObject(result));
 							
@@ -179,10 +178,45 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 
 	@Override
-	public boolean FBlogin(String fb_user_id, String oauth_token,
-			IAPIProxyCallback callback) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean FBlogin(String fb_uid, String oauth_token,
+			final IAPIProxyCallback callback) {
+		Map<String,Object> params = new HashMap<String,Object>();
+		params.put("fb_uid", fb_uid);
+		params.put("oauth_token", oauth_token);
+		
+		httpLayer.POST(domain+"account/FBLoginMobile", params, new IHttpCallback(){
+
+			@Override
+			public void OnCallback(boolean success,String result) {
+				// TODO Auto-generated method stub
+				if(success == true)
+				{
+					try
+					{
+						JSONObject obj = null;
+						if(result !=null)
+						{
+							obj = new JSONObject(result);
+							if(false == obj.getBoolean("success"))
+								SessionDisconnected();
+							else SessionConnected();
+							
+							callback.OnCallback(success,new JSONObject(result));
+							
+						}
+						else callback.OnCallback(success,null);
+					}
+					catch(Exception e)
+					{
+						Logger.Instance().Write(e);
+						callback.OnCallback(false,null);
+					}
+				}else callback.OnCallback(success,null);
+			}
+		
+		});
+		
+		return true;
 	}
 
 
@@ -206,16 +240,18 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	
 	void SessionDisconnected()
 	{
+		Logger.Instance().Write("SessionDisconnected");
 		httpLayer.SessionClosed();
 	}
 	
 	void SessionConnected()
-	{
+	{Logger.Instance().Write("SessionConnected");
 		httpLayer.SessionEstablished();
 	}
 	
 	void SessionUpdate()
 	{
+		Logger.Instance().Write("SessionUpdate");
 		httpLayer.SessionUpdate();
 	}
 }
