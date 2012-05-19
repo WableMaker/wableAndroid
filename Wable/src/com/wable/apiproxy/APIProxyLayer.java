@@ -580,6 +580,230 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		
 		return true;
 	}
+
+
+
+	@Override
+	public boolean OtherProvideList(String userid, String lastid,
+			final IAPIProxyCallback callback) {
+
+		if(!httpLayer.IsConnectedSession())
+			return false;
+		Map<String,Object> params = new HashMap<String,Object>();
+		params.put("userid", userid);
+		if(lastid !=null)
+			params.put("lastid", lastid);
+		
+		httpLayer.GET(domain+"Provide/OtherProvideList",params, new IHttpCallback(){
+
+			@Override
+			public void OnCallback(boolean success,String result) {
+				// TODO Auto-generated method stub
+				JSONObject obj = null;
+				if(success == true)
+				{
+					try
+					{
+						
+						if(result !=null)
+						{
+							obj = new JSONObject(result);
+							if(true == obj.getBoolean("success"))
+								SessionUpdate("OtherProvideList");
+						}
+					}
+					catch(Exception e)
+					{
+						Logger.Instance().Write(e);
+						callback.OnCallback(false,null);
+					}
+				}
+				callback.OnCallback(success,obj);
+			}
+		
+		});
+		
+		return true;
+	}
+
+
+
+	@Override
+	public boolean MyProvideList(String lastid, final IAPIProxyCallback callback) {
+
+		if(!httpLayer.IsConnectedSession())
+			return false;
+		Map<String,Object> params = new HashMap<String,Object>();
+		if(lastid !=null)
+			params.put("lastid", lastid);
+		
+		httpLayer.GET(domain+"Provide/MyList", params, new IHttpCallback(){
+
+			@Override
+			public void OnCallback(boolean success,String result) {
+				// TODO Auto-generated method stub
+				JSONObject obj = null;
+				if(success == true)
+				{
+					try
+					{
+						
+						if(result !=null)
+						{
+							obj = new JSONObject(result);
+							if(true == obj.getBoolean("success"))
+								SessionUpdate("MyProvideList");
+						}
+					}
+					catch(Exception e)
+					{
+						Logger.Instance().Write(e);
+						callback.OnCallback(false,null);
+					}
+				}
+				callback.OnCallback(success,obj);
+			}
+		
+		});
+		
+		return true;
+	}
+
+
+
+	@Override
+	public boolean ProvideListbyTime(String lastid, String keyword,
+			final IAPIProxyCallback callback) {
+
+		if(!httpLayer.IsConnectedSession())
+			return false;
+		Map<String,Object> params = new HashMap<String,Object>();
+		if(lastid !=null)params.put("lastid", lastid);
+		if(keyword !=null)params.put("keyword", keyword);
+		
+		httpLayer.GET(domain+"Provide/ListbyTime", params, new IHttpCallback(){
+
+			@Override
+			public void OnCallback(boolean success,String result) {
+				// TODO Auto-generated method stub
+				JSONObject obj = null;
+				if(success == true)
+				{
+					try
+					{
+						
+						if(result !=null)
+						{
+							obj = new JSONObject(result);
+							if(true == obj.getBoolean("success"))
+								SessionUpdate("ProvideListbyTime");
+						}
+					}
+					catch(Exception e)
+					{
+						Logger.Instance().Write(e);
+						callback.OnCallback(false,null);
+					}
+				}
+				callback.OnCallback(success,obj);
+			}
+		
+		});
+		
+		return true;
+	}
+
+
+
+	@Override
+	public boolean ProvideListbyArea(double north, double south, double east,
+			double west, String keyword, final IAPIProxyCallback callback) {
+
+		if(!httpLayer.IsConnectedSession())
+			return false;
+		Map<String,Object> params = new HashMap<String,Object>();
+		params.put("north", north);
+		params.put("south", south);
+		params.put("east", east);
+		params.put("west", west);
+		if(keyword !=null)params.put("keyword", keyword);
+		
+		httpLayer.GET(domain+"Provide/ListbyArea", params, new IHttpCallback(){
+
+			@Override
+			public void OnCallback(boolean success,String result) {
+				// TODO Auto-generated method stub
+				JSONObject obj = null;
+				if(success == true)
+				{
+					try
+					{
+						
+						if(result !=null)
+						{
+							obj = new JSONObject(result);
+							if(true == obj.getBoolean("success"))
+								SessionUpdate("ProvideListbyArea");
+						}
+					}
+					catch(Exception e)
+					{
+						Logger.Instance().Write(e);
+						callback.OnCallback(false,null);
+					}
+				}
+				callback.OnCallback(success,obj);
+			}
+		
+		});
+		
+		return true;
+	}
+
+
+	@Override
+	public boolean ProvideListbyDistance(double lat, double lon,
+			double distance, String keyword, final IAPIProxyCallback callback) {
+
+		if(!httpLayer.IsConnectedSession())
+			return false;
+		Map<String,Object> params = new HashMap<String,Object>();
+		params.put("lat", lat);
+		params.put("lon", lon);
+		params.put("distance", distance);
+		if(keyword !=null)params.put("keyword", keyword);
+		
+		httpLayer.GET(domain+"Provide/ListbyDistance", params, new IHttpCallback(){
+
+			@Override
+			public void OnCallback(boolean success,String result) {
+				// TODO Auto-generated method stub
+				JSONObject obj = null;
+				if(success == true)
+				{
+					try
+					{
+						
+						if(result !=null)
+						{
+							obj = new JSONObject(result);
+							if(true == obj.getBoolean("success"))
+								SessionUpdate("ProvideListbyDistance");
+						}
+					}
+					catch(Exception e)
+					{
+						Logger.Instance().Write(e);
+						callback.OnCallback(false,null);
+					}
+				}
+				callback.OnCallback(success,obj);
+			}
+		
+		});
+		
+		return true;
+	}
 	
 	// [end]
 	

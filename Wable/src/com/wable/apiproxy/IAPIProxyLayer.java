@@ -35,6 +35,12 @@ public interface IAPIProxyLayer {
 	
 	// [start] Provide
 	
+	boolean OtherProvideList(String userid,String lastid,IAPIProxyCallback callback);//내정보
+	boolean MyProvideList(String lastid,IAPIProxyCallback callback);//내정보
+	boolean ProvideListbyTime(String lastid,String keyword,IAPIProxyCallback callback);//내정보
+	boolean ProvideListbyArea(double north,double south,double ease,double west,String keyword,IAPIProxyCallback callback);//내정보
+	boolean ProvideListbyDistance(double lat, double lon,double distance,String keyword,IAPIProxyCallback callback);//내정보
+
 	
 	// [end]
 	
