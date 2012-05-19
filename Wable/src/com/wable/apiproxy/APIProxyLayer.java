@@ -90,29 +90,27 @@ public class APIProxyLayer implements IAPIProxyLayer {
 			@Override
 			public void OnCallback(boolean success,String result) {
 				// TODO Auto-generated method stub
+				JSONObject obj = null;
 				if(success == true)
 				{
 					try
 					{
-						JSONObject obj = null;
+						
 						if(result !=null)
 						{
 							obj = new JSONObject(result);
 							if(false == obj.getBoolean("success"))
 								SessionDisconnected();
 							else SessionConnected();
-							
-							callback.OnCallback(success,new JSONObject(result));
-							
 						}
-						else callback.OnCallback(success,null);
 					}
 					catch(Exception e)
 					{
 						Logger.Instance().Write(e);
 						callback.OnCallback(false,null);
 					}
-				}else callback.OnCallback(success,null);
+				}
+				callback.OnCallback(success,obj);
 			}
 		
 		});
@@ -137,28 +135,26 @@ public class APIProxyLayer implements IAPIProxyLayer {
 			@Override
 			public void OnCallback(boolean success,String result) {
 				// TODO Auto-generated method stub
+				JSONObject obj = null;
 				if(success == true)
 				{
 					try
 					{
-						JSONObject obj = null;
+						
 						if(result !=null)
 						{
 							obj = new JSONObject(result);
 							if(true == obj.getBoolean("success"))
 								SessionUpdate();
-							
-							callback.OnCallback(success,new JSONObject(result));
-							
 						}
-						else callback.OnCallback(success,null);
 					}
 					catch(Exception e)
 					{
 						Logger.Instance().Write(e);
 						callback.OnCallback(false,null);
 					}
-				}else callback.OnCallback(success,null);
+				}
+				callback.OnCallback(success,obj);
 			}
 		
 		});
@@ -189,29 +185,27 @@ public class APIProxyLayer implements IAPIProxyLayer {
 			@Override
 			public void OnCallback(boolean success,String result) {
 				// TODO Auto-generated method stub
+				JSONObject obj = null;
 				if(success == true)
 				{
 					try
 					{
-						JSONObject obj = null;
+						
 						if(result !=null)
 						{
 							obj = new JSONObject(result);
 							if(false == obj.getBoolean("success"))
 								SessionDisconnected();
 							else SessionConnected();
-							
-							callback.OnCallback(success,new JSONObject(result));
-							
 						}
-						else callback.OnCallback(success,null);
 					}
 					catch(Exception e)
 					{
 						Logger.Instance().Write(e);
 						callback.OnCallback(false,null);
 					}
-				}else callback.OnCallback(success,null);
+				}
+				callback.OnCallback(success,obj);
 			}
 		
 		});
@@ -222,9 +216,41 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 
 	@Override
-	public boolean FBregister(String oauth_token, IAPIProxyCallback callback) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean FBregister(String oauth_token, final IAPIProxyCallback callback) {
+		Map<String,Object> params = new HashMap<String,Object>();
+		params.put("oauth_token", oauth_token);
+		
+		httpLayer.POST(domain+"account/FBLoginMobile", params, new IHttpCallback(){
+
+			@Override
+			public void OnCallback(boolean success,String result) {
+				// TODO Auto-generated method stub
+				JSONObject obj = null;
+				if(success == true)
+				{
+					try
+					{
+						
+						if(result !=null)
+						{
+							obj = new JSONObject(result);
+							if(false == obj.getBoolean("success"))
+								SessionDisconnected();
+							else SessionConnected();
+						}
+					}
+					catch(Exception e)
+					{
+						Logger.Instance().Write(e);
+						callback.OnCallback(false,null);
+					}
+				}
+				callback.OnCallback(success,obj);
+			}
+		
+		});
+		
+		return true;
 	}
 
 
@@ -245,7 +271,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	}
 	
 	void SessionConnected()
-	{Logger.Instance().Write("SessionConnected");
+	{
+		Logger.Instance().Write("SessionConnected");
 		httpLayer.SessionEstablished();
 	}
 	
