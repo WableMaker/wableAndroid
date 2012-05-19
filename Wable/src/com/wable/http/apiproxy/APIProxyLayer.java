@@ -1,4 +1,4 @@
-package com.wable.apiproxy;
+package com.wable.http.apiproxy;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
