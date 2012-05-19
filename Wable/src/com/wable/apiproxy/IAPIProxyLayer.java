@@ -16,5 +16,9 @@ public interface IAPIProxyLayer {
 	
 	boolean MyInfo(IAPIProxyCallback callback);//내정보
 	
+	// [start] 요청
+	
+	// [end]
+	
 	
 }

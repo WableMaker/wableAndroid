@@ -166,9 +166,47 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 	@Override
 	public boolean Register(String loginid, String email, String username,
-			String password, IAPIProxyCallback callback) {
-		// TODO Auto-generated method stub
-		return false;
+			String password, final IAPIProxyCallback callback) {
+
+
+		Map<String,Object> params = new HashMap<String,Object>();
+		params.put("loginid", loginid);
+		params.put("email", email);
+		params.put("username", username);
+		params.put("password", password);
+		
+		httpLayer.POST(domain+"account/RegisterMobile", params, new IHttpCallback(){
+
+			@Override
+			public void OnCallback(boolean success,String result) {
+				// TODO Auto-generated method stub
+				JSONObject obj = null;
+				if(success == true)
+				{
+					try
+					{
+						
+						if(result !=null)
+						{
+							obj = new JSONObject(result);
+							if(false == obj.getBoolean("success"))
+								SessionDisconnected();
+							else SessionConnected();
+						}
+					}
+					catch(Exception e)
+					{
+						Logger.Instance().Write(e);
+						callback.OnCallback(false,null);
+					}
+				}
+				callback.OnCallback(success,obj);
+			}
+		
+		});
+		
+		return true;
+
 	}
 
 
@@ -220,7 +258,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("oauth_token", oauth_token);
 		
-		httpLayer.POST(domain+"account/FBLoginMobile", params, new IHttpCallback(){
+		httpLayer.POST(domain+"account/FBRegisterMobile", params, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -256,10 +294,45 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 
 	@Override
-	public boolean FBconnect(String fb_user_id, String oauth_token,
-			IAPIProxyCallback callback) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean FBconnect(String fb_uid, String oauth_token,
+			final IAPIProxyCallback callback) {
+		if(!httpLayer.IsConnectedSession())
+			return false;
+		Map<String,Object> params = new HashMap<String,Object>();
+		params.put("fb_uid", fb_uid);
+		params.put("oauth_token", oauth_token);
+		
+		httpLayer.POST(domain+"account/FBConnectMobile", params, new IHttpCallback(){
+
+			@Override
+			public void OnCallback(boolean success,String result) {
+				// TODO Auto-generated method stub
+				JSONObject obj = null;
+				if(success == true)
+				{
+					try
+					{
+						
+						if(result !=null)
+						{
+							obj = new JSONObject(result);
+							if(false == obj.getBoolean("success"))
+								SessionDisconnected();
+							else SessionConnected();
+						}
+					}
+					catch(Exception e)
+					{
+						Logger.Instance().Write(e);
+						callback.OnCallback(false,null);
+					}
+				}
+				callback.OnCallback(success,obj);
+			}
+		
+		});
+		
+		return true;
 	}
 	
 	// [end]
