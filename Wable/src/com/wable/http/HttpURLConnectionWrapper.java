@@ -45,6 +45,8 @@ public class HttpURLConnectionWrapper implements IHttpConnectionLayer  {
 				httpcon.setUseCaches(false);
 				httpcon.setRequestMethod(method);//POST냐 GET이냐
 				httpcon.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");//인코딩방식
+				httpcon.setRequestProperty("Language", "ko");//언어
+				
 				httpcon.setDoInput(true);//인풋스트림 사용여부
 				if(m_session) httpcon.setRequestProperty("cookie", m_cookies);
 				if(method.equals("POST"))
