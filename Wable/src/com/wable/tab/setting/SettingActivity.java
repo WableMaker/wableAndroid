@@ -1,4 +1,4 @@
-package com.wable.setting;
+package com.wable.tab.setting;
 
 import com.wable.R;
 

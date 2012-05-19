@@ -1,4 +1,4 @@
-package com.wable.mypage;
+package com.wable.tab.mypage;
 
 import android.app.Activity;
 import android.content.Context;
