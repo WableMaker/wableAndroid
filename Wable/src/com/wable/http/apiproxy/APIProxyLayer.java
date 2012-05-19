@@ -1,5 +1,6 @@
 package com.wable.http.apiproxy;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -100,8 +101,10 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	
 	String ConvertDateToString(Date date)
 	{
-		String result = android.text.format.DateFormat.format("yyyy-MM-dd HH:mm:ss", date).toString();
-		
+		SimpleDateFormat curFormater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
+		Logger.Instance().Write(date.toString());
+		String result = curFormater.format(date);
+		Logger.Instance().Write(result);
 		return result;
 	}
 	
@@ -816,7 +819,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 
 	@Override
-	public boolean AddRequest(String title, String description, int price,
+	public boolean AddRequest(String title, String description, int postprice,
 			int category, Date duedate, double lat, double lon,
 			boolean totwitter, boolean tofacebook, boolean userprofilepos,
 			final IAPIProxyCallback callback) {
@@ -827,7 +830,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("title", title);
 		params.put("description", description);
-		params.put("price", price);
+		params.put("postprice", postprice);
 		params.put("category", category);
 		params.put("duedate", ConvertDateToString(duedate));
 		params.put("lat", lat);
@@ -852,7 +855,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						{
 							obj = new JSONObject(result);
 							if(true == obj.getBoolean("success"))
-								SessionUpdate("FBconnect");
+								SessionUpdate("AddRequest");
 						}
 					}
 					catch(Exception e)
@@ -872,7 +875,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 
 	@Override
-	public boolean AddProvide(String title, int price, int category,
+	public boolean AddProvide(String title, int minprice, int category,
 			double lat, double lon, int radius, boolean userprofilepos,
 			final IAPIProxyCallback callback) {
 
@@ -881,7 +884,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 			return false;
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("title", title);
-		params.put("price", price);
+		params.put("minprice", minprice);
 		params.put("category", category);
 		params.put("radius", radius);
 		params.put("lat", lat);
@@ -904,7 +907,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						{
 							obj = new JSONObject(result);
 							if(true == obj.getBoolean("success"))
-								SessionUpdate("FBconnect");
+								SessionUpdate("AddProvide");
 						}
 					}
 					catch(Exception e)
