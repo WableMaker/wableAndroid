@@ -1,5 +1,7 @@
 package com.wable;
 
+import java.util.Date;
+
 import org.json.JSONObject;
 
 import android.app.Activity;
@@ -82,6 +84,23 @@ public class WableActivity extends Activity implements OnClickListener {
 								Logger.Instance().Write(json.toString());
 							}
 							else Logger.Instance().Write("Fail to GetMyInfo");
+						}
+						
+					});
+					
+					long dtMili = System.currentTimeMillis();
+					Date dt = new Date(dtMili);
+					
+					APIProxyLayer.Instance().AddRequest("android", "android", 123, 0, dt, 36, 127, false, false, false, new IAPIProxyCallback(){
+
+						@Override
+						public void OnCallback(boolean success, JSONObject json) {
+							// TODO Auto-generated method stub
+							if(success)
+							{
+								Logger.Instance().Write(json.toString());
+							}
+							else Logger.Instance().Write("Fail to AddRequest");
 						}
 						
 					});
