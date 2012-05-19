@@ -923,6 +923,80 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		
 		return true;
 	}
+
+
+
+	@Override
+	public boolean CategoryList(final IAPIProxyCallback callback) {
+		
+		httpLayer.GET(domain+"Category/List",null, new IHttpCallback(){
+
+			@Override
+			public void OnCallback(boolean success,String result) {
+
+				JSONObject obj = null;
+				if(success == true)
+				{
+					try
+					{
+						
+						if(result !=null)
+						{
+							obj = new JSONObject(result);
+							if(true == obj.getBoolean("success"))
+								SessionUpdate("Category");
+						}
+					}
+					catch(Exception e)
+					{
+						Logger.Instance().Write(e);
+						callback.OnCallback(false,null);
+					}
+				}
+				callback.OnCallback(success,obj);
+			}
+		
+		});
+		
+		return true;
+	}
+
+
+
+	@Override
+	public boolean CategoryUpdatedTime(final IAPIProxyCallback callback) {
+		
+		httpLayer.GET(domain+"Category/Updatedtime",null, new IHttpCallback(){
+
+			@Override
+			public void OnCallback(boolean success,String result) {
+				
+				JSONObject obj = null;
+				if(success == true)
+				{
+					try
+					{
+						
+						if(result !=null)
+						{
+							obj = new JSONObject(result);
+							if(true == obj.getBoolean("success"))
+								SessionUpdate("Category");
+						}
+					}
+					catch(Exception e)
+					{
+						Logger.Instance().Write(e);
+						callback.OnCallback(false,null);
+					}
+				}
+				callback.OnCallback(success,obj);
+			}
+		
+		});
+		
+		return true;
+	}
 	
 	// [end]
 	

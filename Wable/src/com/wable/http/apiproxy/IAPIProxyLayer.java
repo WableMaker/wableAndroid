@@ -57,5 +57,12 @@ public interface IAPIProxyLayer {
 	
 	// [end]
 	
+	// [end]
+	
+	// [start] Category
+	boolean CategoryList(IAPIProxyCallback callback);	
+	boolean CategoryUpdatedTime(IAPIProxyCallback callback);
+	
+	// [end]
 	
 }
