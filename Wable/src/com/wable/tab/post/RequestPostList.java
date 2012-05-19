@@ -1,4 +1,4 @@
-package com.wable.post;
+package com.wable.tab.post;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,29 +8,29 @@ import android.view.View.OnClickListener;
 
 import com.wable.R;
 
-public class PostActivity extends Activity implements OnClickListener {
-
+public class RequestPostList extends Activity implements OnClickListener {
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.post_main);
+		setContentView(R.layout.post_request_list);
 		
-		findViewById(R.id.btnPostRequest).setOnClickListener(this);
+		findViewById(R.id.btnPostRequestListNext).setOnClickListener(this);
+		
+		
 	}
 
 	@Override
 	public void onClick(View v) {
-		Intent intent;
+		
 		switch (v.getId()) {
-		case R.id.btnPostRequest:
-			intent = new Intent(this, RequestCategory.class);
+		case R.id.btnPostRequestListNext:
+			Intent intent = new Intent(this, RequestPostSubmit.class);
 			startActivity(intent);
 			break;
 
-		case R.id.btnPostOffer:
-			
-			break;
 		}
 		
 	}
+
 }

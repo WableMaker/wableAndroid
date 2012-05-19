@@ -1,4 +1,4 @@
-package com.wable.main;
+package com.wable;
 
 import android.app.ActivityGroup;
 import android.content.Intent;
@@ -9,10 +9,10 @@ import android.view.Window;
 import android.widget.LinearLayout;
 
 import com.wable.R;
-import com.wable.mypage.MypageActivity;
-import com.wable.post.PostActivity;
-import com.wable.search.SearchActivity;
-import com.wable.setting.SettingActivity;
+import com.wable.tab.mypage.MypageActivity;
+import com.wable.tab.post.PostActivity;
+import com.wable.tab.search.SearchActivity;
+import com.wable.tab.setting.SettingActivity;
 
 public class MainActivity extends ActivityGroup implements OnClickListener {
 

@@ -22,13 +22,12 @@ import com.facebook.android.DialogError;
 import com.facebook.android.Facebook;
 import com.facebook.android.Facebook.DialogListener;
 import com.facebook.android.FacebookError;
-import com.wable.apiproxy.APIProxyLayer;
-import com.wable.apiproxy.IAPIProxyCallback;
-import com.wable.login.PasswordFindActivity;
-import com.wable.login.RegisterActivity;
-import com.wable.main.MainActivity;
-import com.wable.mypage.MypageActivity;
-import com.wable.mypage.RequestListActivity;
+import com.wable.http.apiproxy.APIProxyLayer;
+import com.wable.http.apiproxy.IAPIProxyCallback;
+import com.wable.tab.login.PasswordFindActivity;
+import com.wable.tab.login.RegisterActivity;
+import com.wable.tab.mypage.MypageActivity;
+import com.wable.tab.mypage.RequestListActivity;
 import com.wable.util.Logger;
 
 public class WableActivity extends Activity implements OnClickListener {

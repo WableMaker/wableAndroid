@@ -1,14 +1,11 @@
-package com.wable.mypage;
+package com.wable.tab.post;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
-import org.apache.http.client.CircularRedirectException;
-
 import android.content.Context;
 import android.location.Address;
-import android.location.Criteria;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
@@ -24,28 +21,26 @@ import com.google.android.maps.MapView;
 import com.google.android.maps.MapView.LayoutParams;
 import com.wable.R;
 
-public class RequestListActivity extends MapActivity implements LocationListener {
+public class RequestPostSubmit extends MapActivity implements LocationListener {
 
 	private Geocoder geo;
-	private Location location;
 	private LocationManager manager;
 	
 	private MapView mapview;
 	private MapController mapCtrl;
 	private ImageView pin;
 	
-	private TextView tvDistance, tvPrice, tvAddr;
+	private TextView tvAddr;
+	
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.mypage_requestlist);
-	
-		mapview = (MapView)findViewById(R.id.mapview);
-		tvDistance = (TextView)findViewById(R.id.textMapDistance);
-		tvPrice = (TextView)findViewById(R.id.textMapPrice);
-		tvAddr = (TextView)findViewById(R.id.textMapAddr);
+		setContentView(R.layout.post_request_submit);
 		
+		mapview = (MapView)findViewById(R.id.mapview);
+		tvAddr = (TextView)findViewById(R.id.textPostSubmitAddr);
 		
 		mapCtrl = mapview.getController();
 		mapCtrl.setZoom(16);
@@ -59,9 +54,9 @@ public class RequestListActivity extends MapActivity implements LocationListener
 		pin = new ImageView(this);
 		
 	}
+	
 	@Override
 	public void onLocationChanged(Location location) {
-		this.location = location;
 		
 		StringBuffer buff = new StringBuffer();
 		double latitude = location.getLatitude();
@@ -70,16 +65,13 @@ public class RequestListActivity extends MapActivity implements LocationListener
 		
 		mapCtrl.animateTo(gp);
 		
-		
 		pin.setImageResource(R.drawable.map_pin);
 		MapView.LayoutParams lp = new MapView.LayoutParams
 				(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, gp, LayoutParams.CENTER);
 		
 		mapview.removeView(pin);
 		mapview.addView(pin, lp);
-		
-//		float speed = location.getSpeed();
-//		
+
 		try {
 			List<Address> addr = geo.getFromLocation(latitude, longitude, 1);
 			
@@ -88,19 +80,13 @@ public class RequestListActivity extends MapActivity implements LocationListener
 				buff.append(a.getLocality() + " ");
 				buff.append(a.getSubLocality() + " ±Ÿ√≥");
 				
-//				int idx = a.getMaxAddressLineIndex();
-//				for(int i=0; i<=idx; i++) {
-//					buff.append(a.getAddressLine(i));
-//					buff.append(" ");
-//				}
-//				buff.append("\n");
 			}
 			
 			tvAddr.setText(buff.toString());
 			
 		} catch (IOException e) {
 			e.printStackTrace();
-		}		
+		}	
 		
 	}
 	
@@ -113,16 +99,14 @@ public class RequestListActivity extends MapActivity implements LocationListener
 	}
 	
 	@Override
-	protected void onStop() {
-		super.onStop();
-	}
-	
-	@Override
-	public void onProviderDisabled(String provider) {}
-	@Override
-	public void onProviderEnabled(String provider) {}
-	@Override
-	public void onStatusChanged(String provider, int status, Bundle extras) {}
-	@Override
 	protected boolean isRouteDisplayed() { return false; }
+
+	@Override
+	public void onProviderDisabled(String arg0) { }
+
+	@Override
+	public void onProviderEnabled(String arg0) { }
+
+	@Override
+	public void onStatusChanged(String arg0, int arg1, Bundle arg2) { }
 }

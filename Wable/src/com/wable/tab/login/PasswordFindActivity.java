@@ -1,17 +1,17 @@
-package com.wable.login;
+package com.wable.tab.login;
 
 import com.wable.R;
 
 import android.app.Activity;
 import android.os.Bundle;
 
-public class RegisterActivity extends Activity {
-	
+public class PasswordFindActivity extends Activity {
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.login_register);
+		setContentView(R.layout.login_passfind);
 		
 	}
-
+	
 }

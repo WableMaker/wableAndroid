@@ -1,16 +1,15 @@
-package com.wable.search;
-
-import com.wable.R;
+package com.wable.tab.mypage;
 
 import android.app.Activity;
 import android.os.Bundle;
 
-public class SearchActivity extends Activity {
+public class OfferListActivity extends Activity {
+
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.search_main);
+		
+		
 	}
-
 }

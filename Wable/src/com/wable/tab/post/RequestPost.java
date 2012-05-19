@@ -1,4 +1,4 @@
-package com.wable.post;
+package com.wable.tab.post;
 
 import android.app.Activity;
 
