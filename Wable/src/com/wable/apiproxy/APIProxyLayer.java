@@ -77,21 +77,21 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		
 	// [Start] ¸â¹ö ÇÔ¼ö
 	
-	void SessionDisconnected()
+	void SessionDisconnected(String function)
 	{
-		Logger.Instance().Write("SessionDisconnected");
+		Logger.Instance().Write("SessionDisconnected "+function);
 		httpLayer.SessionClosed();
 	}
 	
-	void SessionConnected()
+	void SessionConnected(String function)
 	{
-		Logger.Instance().Write("SessionConnected");
+		Logger.Instance().Write("SessionConnected "+function);
 		httpLayer.SessionEstablished();
 	}
 	
-	void SessionUpdate()
+	void SessionUpdate(String function)
 	{
-		Logger.Instance().Write("SessionUpdate");
+		Logger.Instance().Write("SessionUpdate "+function);
 		httpLayer.SessionUpdate();
 	}
 
@@ -123,8 +123,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						{
 							obj = new JSONObject(result);
 							if(false == obj.getBoolean("success"))
-								SessionDisconnected();
-							else SessionConnected();
+								SessionDisconnected("Login");
+							else SessionConnected("Login");
 						}
 					}
 					catch(Exception e)
@@ -168,7 +168,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						{
 							obj = new JSONObject(result);
 							if(true == obj.getBoolean("success"))
-								SessionUpdate();
+								SessionUpdate("MyInfo");
 						}
 					}
 					catch(Exception e)
@@ -213,8 +213,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						{
 							obj = new JSONObject(result);
 							if(false == obj.getBoolean("success"))
-								SessionDisconnected();
-							else SessionConnected();
+								SessionDisconnected("Register");
+							else SessionConnected("Register");
 						}
 					}
 					catch(Exception e)
@@ -256,8 +256,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						{
 							obj = new JSONObject(result);
 							if(false == obj.getBoolean("success"))
-								SessionDisconnected();
-							else SessionConnected();
+								SessionDisconnected("FBlogin");
+							else SessionConnected("FBlogin");
 						}
 					}
 					catch(Exception e)
@@ -296,8 +296,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						{
 							obj = new JSONObject(result);
 							if(false == obj.getBoolean("success"))
-								SessionDisconnected();
-							else SessionConnected();
+								SessionDisconnected("FBregister");
+							else SessionConnected("FBregister");
 						}
 					}
 					catch(Exception e)
@@ -340,8 +340,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						{
 							obj = new JSONObject(result);
 							if(false == obj.getBoolean("success"))
-								SessionDisconnected();
-							else SessionConnected();
+								SessionDisconnected("FBconnect");
+							else SessionConnected("FBconnect");
 						}
 					}
 					catch(Exception e)
@@ -384,7 +384,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						{
 							obj = new JSONObject(result);
 							if(true == obj.getBoolean("success"))
-								SessionUpdate();
+								SessionUpdate("OtherRequestList");
 						}
 					}
 					catch(Exception e)
@@ -427,7 +427,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						{
 							obj = new JSONObject(result);
 							if(true == obj.getBoolean("success"))
-								SessionUpdate();
+								SessionUpdate("MyRequestList");
 						}
 					}
 					catch(Exception e)
@@ -471,7 +471,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						{
 							obj = new JSONObject(result);
 							if(true == obj.getBoolean("success"))
-								SessionUpdate();
+								SessionUpdate("RequestListbyTime");
 						}
 					}
 					catch(Exception e)
@@ -518,7 +518,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						{
 							obj = new JSONObject(result);
 							if(true == obj.getBoolean("success"))
-								SessionUpdate();
+								SessionUpdate("RequestListbyArea");
 						}
 					}
 					catch(Exception e)
@@ -564,7 +564,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						{
 							obj = new JSONObject(result);
 							if(true == obj.getBoolean("success"))
-								SessionUpdate();
+								SessionUpdate("RequestListbyDistance");
 						}
 					}
 					catch(Exception e)
