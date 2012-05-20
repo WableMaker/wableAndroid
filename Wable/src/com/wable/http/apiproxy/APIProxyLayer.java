@@ -10,7 +10,6 @@ import java.util.concurrent.locks.ReentrantLock;
 import org.json.JSONObject;
 
 import android.os.Build;
-import android.text.format.DateFormat;
 
 import com.wable.http.HttpClientWrapper;
 import com.wable.http.HttpURLConnectionWrapper;
@@ -64,7 +63,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		}
 		else	
 		{
-			httpLayer = new HttpClientWrapper();//new HttpURLConnectionWrapper();
+			httpLayer = new HttpClientWrapper();// new HttpURLConnectionWrapper();
 		}
 	}
 	
@@ -74,7 +73,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	
 	IHttpConnectionLayer httpLayer;
 	
-	String domain= "http://www.wable.co.kr/";
+	String domain= "http://wable.co.kr/";
 	
 	// [end]
 		
@@ -370,7 +369,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	}
 	
 	@Override
-	public boolean OtherRequestList(String userid, String lastid,
+	public boolean RequestOtherList(String userid, String lastid,
 			final IAPIProxyCallback callback) {
 
 		if(!httpLayer.IsConnectedSession())
@@ -415,7 +414,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 
 	@Override
-	public boolean MyRequestList(String lastid, final IAPIProxyCallback callback) {
+	public boolean RequestMyList(String lastid, final IAPIProxyCallback callback) {
 
 		if(!httpLayer.IsConnectedSession())
 			return false;
@@ -595,7 +594,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 
 	@Override
-	public boolean OtherProvideList(String userid, String lastid,
+	public boolean ProvideOtherList(String userid, String lastid,
 			final IAPIProxyCallback callback) {
 
 		if(!httpLayer.IsConnectedSession())
@@ -640,7 +639,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 
 	@Override
-	public boolean MyProvideList(String lastid, final IAPIProxyCallback callback) {
+	public boolean ProvideMyList(String lastid, final IAPIProxyCallback callback) {
 
 		if(!httpLayer.IsConnectedSession())
 			return false;
@@ -819,7 +818,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 
 	@Override
-	public boolean AddRequest(String title, String description, int postprice,
+	public boolean RequestAdd(String title, String description, int postprice,
 			int category, Date duedate, double lat, double lon,
 			boolean totwitter, boolean tofacebook, boolean userprofilepos,
 			final IAPIProxyCallback callback) {
@@ -875,7 +874,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 
 	@Override
-	public boolean AddProvide(String title, int minprice, int category,
+	public boolean ProvideAdd(String title, int minprice, int category,
 			double lat, double lon, int radius, boolean userprofilepos,
 			final IAPIProxyCallback callback) {
 
@@ -1001,7 +1000,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 
 	@Override
-	public boolean OfferAsProvider(String request_id, int price,
+	public boolean BiddingOfferAsProvider(String request_id, int price,
 			final IAPIProxyCallback callback) {
 		
 
@@ -1046,7 +1045,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 
 	@Override
-	public boolean OfferAsRequester(String provide_id, int price,
+	public boolean BiddingOfferAsRequester(String provide_id, int price,
 			final IAPIProxyCallback callback) {
 		
 
@@ -1089,7 +1088,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	}
 	
 	@Override
-	public boolean SetMessage(String biddingid, String message,
+	public boolean MessageSend(String biddingid, String message,
 			final IAPIProxyCallback callback) {
 		
 
