@@ -23,8 +23,7 @@ public interface IAPIProxyLayer {
 	boolean MyInfo(IAPIProxyCallback callback);//내정보
 	
 	// [end]
-	
-	
+		
 	// [start] Request
 	
 	boolean OtherRequestList(String userid,String lastid,IAPIProxyCallback callback);//내정보
@@ -59,6 +58,11 @@ public interface IAPIProxyLayer {
 
 	
 	// [end]
+	
+	// [start] Message
+	
+	boolean SetMessage(String biddingid, String message,IAPIProxyCallback callback);//내정보
+
 	
 	// [end]
 	
