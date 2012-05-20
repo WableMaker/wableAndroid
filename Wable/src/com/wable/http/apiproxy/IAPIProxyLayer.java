@@ -54,6 +54,9 @@ public interface IAPIProxyLayer {
 	
 	// [start] Bidding
 	
+	boolean OfferAsProvider(String request_id, int price,IAPIProxyCallback callback);//내정보
+	boolean OfferAsRequester(String provide_id, int price,IAPIProxyCallback callback);//내정보
+
 	
 	// [end]
 	

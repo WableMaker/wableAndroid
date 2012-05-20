@@ -997,6 +997,96 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		
 		return true;
 	}
+
+
+
+	@Override
+	public boolean OfferAsProvider(String request_id, int price,
+			final IAPIProxyCallback callback) {
+		
+
+		if(!httpLayer.IsConnectedSession())
+			return false;
+		Map<String,Object> params = new HashMap<String,Object>();
+		params.put("request_id", request_id);
+		params.put("price", price);
+		
+		httpLayer.POST(domain+"Bidding/OfferAsProvider", params, new IHttpCallback(){
+
+			@Override
+			public void OnCallback(boolean success,String result) {
+				// TODO Auto-generated method stub
+				JSONObject obj = null;
+				if(success == true)
+				{
+					try
+					{
+						
+						if(result !=null)
+						{
+							obj = new JSONObject(result);
+							if(true == obj.getBoolean("success"))
+								SessionUpdate("OfferAsProvider");
+						}
+					}
+					catch(Exception e)
+					{
+						Logger.Instance().Write(e);
+						callback.OnCallback(false,null);
+					}
+				}
+				callback.OnCallback(success,obj);
+			}
+		
+		});
+		
+		return true;
+	}
+
+
+
+	@Override
+	public boolean OfferAsRequester(String provide_id, int price,
+			final IAPIProxyCallback callback) {
+		
+
+		if(!httpLayer.IsConnectedSession())
+			return false;
+		Map<String,Object> params = new HashMap<String,Object>();
+		params.put("provide_id", provide_id);
+		params.put("price", price);
+		
+		httpLayer.POST(domain+"Bidding/OfferAsRequester", params, new IHttpCallback(){
+
+			@Override
+			public void OnCallback(boolean success,String result) {
+				// TODO Auto-generated method stub
+				JSONObject obj = null;
+				if(success == true)
+				{
+					try
+					{
+						
+						if(result !=null)
+						{
+							obj = new JSONObject(result);
+							if(true == obj.getBoolean("success"))
+								SessionUpdate("OfferAsRequester");
+						}
+					}
+					catch(Exception e)
+					{
+						Logger.Instance().Write(e);
+						callback.OnCallback(false,null);
+					}
+				}
+				callback.OnCallback(success,obj);
+			}
+		
+		});
+		
+		return true;
+	}
 	
 	// [end]
 	
