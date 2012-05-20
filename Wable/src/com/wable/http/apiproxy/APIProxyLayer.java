@@ -63,7 +63,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		}
 		else	
 		{
-			httpLayer = new HttpClientWrapper();// new HttpURLConnectionWrapper();
+			httpLayer =new HttpClientWrapper();// new HttpURLConnectionWrapper();
 		}
 	}
 	
@@ -73,7 +73,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	
 	IHttpConnectionLayer httpLayer;
 	
-	String domain= "http://wable.co.kr/";
+	String domain= "http://www.wable.co.kr/";
 	
 	// [end]
 		
@@ -1114,6 +1114,134 @@ public class APIProxyLayer implements IAPIProxyLayer {
 							obj = new JSONObject(result);
 							if(true == obj.getBoolean("success"))
 								SessionUpdate("OfferAsRequester");
+						}
+					}
+					catch(Exception e)
+					{
+						Logger.Instance().Write(e);
+						callback.OnCallback(false,null);
+					}
+				}
+				callback.OnCallback(success,obj);
+			}
+		
+		});
+		
+		return true;
+	}
+
+
+
+	@Override
+	public boolean RequestDelete(String request_id, final IAPIProxyCallback callback) {
+		
+		if(!httpLayer.IsConnectedSession())
+			return false;
+		Map<String,Object> params = new HashMap<String,Object>();
+		params.put("request_id", request_id);
+		
+		httpLayer.POST(domain+"Request/Delete", params, new IHttpCallback(){
+
+			@Override
+			public void OnCallback(boolean success,String result) {
+				// TODO Auto-generated method stub
+				JSONObject obj = null;
+				if(success == true)
+				{
+					try
+					{
+						
+						if(result !=null)
+						{
+							obj = new JSONObject(result);
+							if(true == obj.getBoolean("success"))
+								SessionUpdate("RequestDelete");
+						}
+					}
+					catch(Exception e)
+					{
+						Logger.Instance().Write(e);
+						callback.OnCallback(false,null);
+					}
+				}
+				callback.OnCallback(success,obj);
+			}
+		
+		});
+		
+		return true;
+	}
+
+
+
+	@Override
+	public boolean ProvideDelete(String provide_id, final IAPIProxyCallback callback) {
+		
+		if(!httpLayer.IsConnectedSession())
+			return false;
+		Map<String,Object> params = new HashMap<String,Object>();
+		params.put("provide_id", provide_id);
+		
+		httpLayer.POST(domain+"Provide/Delete", params, new IHttpCallback(){
+
+			@Override
+			public void OnCallback(boolean success,String result) {
+				// TODO Auto-generated method stub
+				JSONObject obj = null;
+				if(success == true)
+				{
+					try
+					{
+						
+						if(result !=null)
+						{
+							obj = new JSONObject(result);
+							if(true == obj.getBoolean("success"))
+								SessionUpdate("ProvideDelete");
+						}
+					}
+					catch(Exception e)
+					{
+						Logger.Instance().Write(e);
+						callback.OnCallback(false,null);
+					}
+				}
+				callback.OnCallback(success,obj);
+			}
+		
+		});
+		
+		return true;
+	}
+
+
+
+	@Override
+	public boolean MessageGet(String biddingid, long lastmsgutctick,
+			final IAPIProxyCallback callback) {
+		
+		if(!httpLayer.IsConnectedSession())
+			return false;
+		Map<String,Object> params = new HashMap<String,Object>();
+		params.put("biddingid", biddingid);
+		params.put("lastmsgutctick", lastmsgutctick);
+		
+		httpLayer.GET(domain+"Message/GetMessageFromApp",null, new IHttpCallback(){
+
+			@Override
+			public void OnCallback(boolean success,String result) {
+				
+				JSONObject obj = null;
+				if(success == true)
+				{
+					try
+					{
+						
+						if(result !=null)
+						{
+							obj = new JSONObject(result);
+							if(true == obj.getBoolean("success"))
+								SessionUpdate("MessageGet");
 						}
 					}
 					catch(Exception e)

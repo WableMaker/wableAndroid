@@ -34,6 +34,7 @@ public interface IAPIProxyLayer {
 
 	boolean RequestAdd(String title, String description,int postprice,int category,Date duedate
 			,double lat,double lon,boolean totwitter, boolean tofacebook, boolean userprofilepos,IAPIProxyCallback callback);//내정보
+	boolean RequestDelete(String request_id ,IAPIProxyCallback callback);//내정보
 	
 	
 	// [end]
@@ -48,6 +49,8 @@ public interface IAPIProxyLayer {
 
 	boolean ProvideAdd(String title, int minprice,int category
 			,double lat,double lon,int radius, boolean userprofilepos,IAPIProxyCallback callback);//내정보
+	boolean ProvideDelete(String provide_id ,IAPIProxyCallback callback);//내정보
+	
 	
 	// [end]
 	
@@ -62,6 +65,7 @@ public interface IAPIProxyLayer {
 	// [start] Message
 	
 	boolean MessageSend(String biddingid, String message,IAPIProxyCallback callback);//내정보
+	boolean MessageGet(String biddingid,long tick,IAPIProxyCallback callback);//내정보
 
 	
 	// [end]
