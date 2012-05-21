@@ -19,8 +19,9 @@ import com.wable.util.Logger;
 
 public class APIProxyLayer implements IAPIProxyLayer {
 
-	// [start] IAPIProxyLayer ΩÃ±€≈Ê
+	// [start] ΩÃ±€≈Ê
 	
+
 	static ReentrantLock lock = new ReentrantLock();
 	static IAPIProxyLayer instance;
 	public static IAPIProxyLayer Instance()
@@ -63,7 +64,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		}
 		else	
 		{
-			httpLayer =new HttpClientWrapper();// new HttpURLConnectionWrapper();
+			httpLayer =new HttpURLConnectionWrapper();
 		}
 	}
 	
@@ -154,9 +155,39 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	}
 
 	@Override
-	public boolean Logout(IAPIProxyCallback callback) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean Logout(final IAPIProxyCallback callback) {
+		if(!httpLayer.IsConnectedSession())
+			return true;
+		httpLayer.POST(domain+"account/LogOffMobile", null, new IHttpCallback(){
+
+			@Override
+			public void OnCallback(boolean success,String result) {
+				// TODO Auto-generated method stub
+				JSONObject obj = null;
+				if(success == true)
+				{
+					try
+					{
+						
+						if(result !=null)
+						{
+							obj = new JSONObject(result);
+							if(true == obj.getBoolean("success"))
+								SessionDisconnected("Logout");
+						}
+					}
+					catch(Exception e)
+					{
+						Logger.Instance().Write(e);
+						callback.OnCallback(false,null);
+					}
+				}
+				callback.OnCallback(success,obj);
+			}
+		
+		});
+		
+		return true;
 	}
 
 	@Override
@@ -1226,7 +1257,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		params.put("biddingid", biddingid);
 		params.put("lastmsgutctick", lastmsgutctick);
 		
-		httpLayer.GET(domain+"Message/GetMessageFromApp",null, new IHttpCallback(){
+		httpLayer.GET(domain+"Message/GetMessageFromApp",params, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -1257,7 +1288,92 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		
 		return true;
 	}
-	
+
+
+
+	@Override
+	public boolean RequestMyDetailById(String request_id,
+			final IAPIProxyCallback callback) {
+		if(!httpLayer.IsConnectedSession())
+			return false;
+		Map<String,Object> params = new HashMap<String,Object>();
+		params.put("request_id", request_id);
+		
+		httpLayer.GET(domain+"Request/MyDetailById",params, new IHttpCallback(){
+
+			@Override
+			public void OnCallback(boolean success,String result) {
+				
+				JSONObject obj = null;
+				if(success == true)
+				{
+					try
+					{
+						
+						if(result !=null)
+						{
+							obj = new JSONObject(result);
+							if(true == obj.getBoolean("success"))
+								SessionUpdate("RequestMyDetailById");
+						}
+					}
+					catch(Exception e)
+					{
+						Logger.Instance().Write(e);
+						callback.OnCallback(false,null);
+					}
+				}
+				callback.OnCallback(success,obj);
+			}
+		
+		});
+		
+		return true;
+	}
+
+
+
+	@Override
+	public boolean ProvideMyDetailById(String request_id,
+			final IAPIProxyCallback callback) {
+		if(!httpLayer.IsConnectedSession())
+			return false;
+		Map<String,Object> params = new HashMap<String,Object>();
+		params.put("request_id", request_id);
+		
+		httpLayer.GET(domain+"Provide/MyDetailById",params, new IHttpCallback(){
+
+			@Override
+			public void OnCallback(boolean success,String result) {
+				
+				JSONObject obj = null;
+				if(success == true)
+				{
+					try
+					{
+						
+						if(result !=null)
+						{
+							obj = new JSONObject(result);
+							if(true == obj.getBoolean("success"))
+								SessionUpdate("RequestMyDetailById");
+						}
+					}
+					catch(Exception e)
+					{
+						Logger.Instance().Write(e);
+						callback.OnCallback(false,null);
+					}
+				}
+				callback.OnCallback(success,obj);
+			}
+		
+		});
+		
+		return true;
+	}
+
+
 	// [end]
 	
 

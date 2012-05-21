@@ -36,6 +36,7 @@ public interface IAPIProxyLayer {
 			,double lat,double lon,boolean totwitter, boolean tofacebook, boolean userprofilepos,IAPIProxyCallback callback);//내정보
 	boolean RequestDelete(String request_id ,IAPIProxyCallback callback);//내정보
 	
+	boolean RequestMyDetailById(String request_id ,IAPIProxyCallback callback);//내정보
 	
 	// [end]
 	
@@ -51,7 +52,7 @@ public interface IAPIProxyLayer {
 			,double lat,double lon,int radius, boolean userprofilepos,IAPIProxyCallback callback);//내정보
 	boolean ProvideDelete(String provide_id ,IAPIProxyCallback callback);//내정보
 	
-	
+	boolean ProvideMyDetailById(String request_id ,IAPIProxyCallback callback);//내정보
 	// [end]
 	
 	// [start] Bidding
