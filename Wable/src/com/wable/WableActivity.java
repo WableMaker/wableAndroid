@@ -94,6 +94,18 @@ public class WableActivity extends Activity implements OnClickListener {
 						
 					});
 					
+					APIProxyLayer.Instance().MessageSendImage("-9223372036854775805", "G:/ORM1.png", new IAPIProxyCallback(){
+						@Override
+						public void OnCallback(boolean success, JSONObject json) {
+							if(success)
+							{
+								Logger.Instance().Write(json.toString());
+								
+							}
+							else Logger.Instance().Write("Fail to GetMyInfo");
+						}
+					});
+					
 //					long dtMili = System.currentTimeMillis();
 //					Date dt = new Date(dtMili);
 //					

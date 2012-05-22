@@ -65,7 +65,8 @@ public interface IAPIProxyLayer {
 	
 	// [start] Message
 	
-	boolean MessageSend(String biddingid, String message,IAPIProxyCallback callback);//내정보
+	boolean MessageSendText(String biddingid, String message,IAPIProxyCallback callback);//내정보
+	boolean MessageSendImage(String biddingid, String message,IAPIProxyCallback callback);//내정보
 	boolean MessageGet(String biddingid,long tick,IAPIProxyCallback callback);//내정보
 
 	

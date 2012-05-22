@@ -120,7 +120,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		params.put("loginid", loginid);
 		params.put("password", password);
 		
-		httpLayer.POST(domain+"account/loginmobile", params, new IHttpCallback(){
+		httpLayer.POSTAsync(domain+"account/loginmobile", params, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -158,7 +158,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	public boolean Logout(final IAPIProxyCallback callback) {
 		if(!httpLayer.IsConnectedSession())
 			return true;
-		httpLayer.POST(domain+"account/LogOffMobile", null, new IHttpCallback(){
+		httpLayer.POSTAsync(domain+"account/LogOffMobile", null, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -195,7 +195,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		if(!httpLayer.IsConnectedSession())
 			return false;
 
-		httpLayer.GET(domain+"user/myinfo",null, new IHttpCallback(){
+		httpLayer.GETAsync(domain+"user/myinfo",null, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -240,7 +240,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		params.put("username", username);
 		params.put("password", password);
 		
-		httpLayer.POST(domain+"account/RegisterMobile", params, new IHttpCallback(){
+		httpLayer.POSTAsync(domain+"account/RegisterMobile", params, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -283,7 +283,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		params.put("fb_uid", fb_uid);
 		params.put("oauth_token", oauth_token);
 		
-		httpLayer.POST(domain+"account/FBLoginMobile", params, new IHttpCallback(){
+		httpLayer.POSTAsync(domain+"account/FBLoginMobile", params, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -323,7 +323,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("oauth_token", oauth_token);
 		
-		httpLayer.POST(domain+"account/FBRegisterMobile", params, new IHttpCallback(){
+		httpLayer.POSTAsync(domain+"account/FBRegisterMobile", params, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -367,7 +367,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		params.put("fb_uid", fb_uid);
 		params.put("oauth_token", oauth_token);
 		
-		httpLayer.POST(domain+"account/FBConnectMobile", params, new IHttpCallback(){
+		httpLayer.POSTAsync(domain+"account/FBConnectMobile", params, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -410,7 +410,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		if(lastid !=null)
 			params.put("lastid", lastid);
 		
-		httpLayer.GET(domain+"Request/OtherRequestList",params, new IHttpCallback(){
+		httpLayer.GETAsync(domain+"Request/OtherRequestList",params, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -453,7 +453,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		if(lastid !=null)
 			params.put("lastid", lastid);
 		
-		httpLayer.GET(domain+"Request/MyList", params, new IHttpCallback(){
+		httpLayer.GETAsync(domain+"Request/MyList", params, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -497,7 +497,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		if(lastid !=null)params.put("lastid", lastid);
 		if(keyword !=null)params.put("keyword", keyword);
 		
-		httpLayer.GET(domain+"request/ListbyTime", params, new IHttpCallback(){
+		httpLayer.GETAsync(domain+"request/ListbyTime", params, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -544,7 +544,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		params.put("west", west);
 		if(keyword !=null)params.put("keyword", keyword);
 		
-		httpLayer.GET(domain+"request/ListbyArea", params, new IHttpCallback(){
+		httpLayer.GETAsync(domain+"request/ListbyArea", params, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -590,7 +590,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		params.put("distance", distance);
 		if(keyword !=null)params.put("keyword", keyword);
 		
-		httpLayer.GET(domain+"Request/ListbyDistance", params, new IHttpCallback(){
+		httpLayer.GETAsync(domain+"Request/ListbyDistance", params, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -635,7 +635,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		if(lastid !=null)
 			params.put("lastid", lastid);
 		
-		httpLayer.GET(domain+"Provide/OtherProvideList",params, new IHttpCallback(){
+		httpLayer.GETAsync(domain+"Provide/OtherProvideList",params, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -678,7 +678,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		if(lastid !=null)
 			params.put("lastid", lastid);
 		
-		httpLayer.GET(domain+"Provide/MyList", params, new IHttpCallback(){
+		httpLayer.GETAsync(domain+"Provide/MyList", params, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -722,7 +722,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		if(lastid !=null)params.put("lastid", lastid);
 		if(keyword !=null)params.put("keyword", keyword);
 		
-		httpLayer.GET(domain+"Provide/ListbyTime", params, new IHttpCallback(){
+		httpLayer.GETAsync(domain+"Provide/ListbyTime", params, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -769,7 +769,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		params.put("west", west);
 		if(keyword !=null)params.put("keyword", keyword);
 		
-		httpLayer.GET(domain+"Provide/ListbyArea", params, new IHttpCallback(){
+		httpLayer.GETAsync(domain+"Provide/ListbyArea", params, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -814,7 +814,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		params.put("distance", distance);
 		if(keyword !=null)params.put("keyword", keyword);
 		
-		httpLayer.GET(domain+"Provide/ListbyDistance", params, new IHttpCallback(){
+		httpLayer.GETAsync(domain+"Provide/ListbyDistance", params, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -870,7 +870,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		params.put("userprofilepos", userprofilepos);
 		
 		
-		httpLayer.POST(domain+"Request/Add", params, new IHttpCallback(){
+		httpLayer.POSTAsync(domain+"Request/Add", params, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -922,7 +922,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		params.put("userprofilepos", userprofilepos);
 		
 		
-		httpLayer.POST(domain+"Provide/Add", params, new IHttpCallback(){
+		httpLayer.POSTAsync(domain+"Provide/Add", params, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -959,7 +959,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	@Override
 	public boolean CategoryList(final IAPIProxyCallback callback) {
 		
-		httpLayer.GET(domain+"Category/List",null, new IHttpCallback(){
+		httpLayer.GETAsync(domain+"Category/List",null, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -996,7 +996,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	@Override
 	public boolean CategoryUpdatedTime(final IAPIProxyCallback callback) {
 		
-		httpLayer.GET(domain+"Category/Updatedtime",null, new IHttpCallback(){
+		httpLayer.GETAsync(domain+"Category/Updatedtime",null, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -1041,7 +1041,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		params.put("request_id", request_id);
 		params.put("price", price);
 		
-		httpLayer.POST(domain+"Bidding/OfferAsProvider", params, new IHttpCallback(){
+		httpLayer.POSTAsync(domain+"Bidding/OfferAsProvider", params, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -1086,7 +1086,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		params.put("provide_id", provide_id);
 		params.put("price", price);
 		
-		httpLayer.POST(domain+"Bidding/OfferAsRequester", params, new IHttpCallback(){
+		httpLayer.POSTAsync(domain+"Bidding/OfferAsRequester", params, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -1119,7 +1119,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	}
 	
 	@Override
-	public boolean MessageSend(String biddingid, String message,
+	public boolean MessageSendText(String biddingid, String message,
 			final IAPIProxyCallback callback) {
 		
 
@@ -1129,7 +1129,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		params.put("biddingid", biddingid);
 		params.put("message", message);
 		
-		httpLayer.POST(domain+"Message/SetMessage", params, new IHttpCallback(){
+		httpLayer.POSTAsync(domain+"Message/SetMessage", params, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -1171,7 +1171,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("request_id", request_id);
 		
-		httpLayer.POST(domain+"Request/Delete", params, new IHttpCallback(){
+		httpLayer.POSTAsync(domain+"Request/Delete", params, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -1213,7 +1213,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("provide_id", provide_id);
 		
-		httpLayer.POST(domain+"Provide/Delete", params, new IHttpCallback(){
+		httpLayer.POSTAsync(domain+"Provide/Delete", params, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -1257,7 +1257,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		params.put("biddingid", biddingid);
 		params.put("lastmsgutctick", lastmsgutctick);
 		
-		httpLayer.GET(domain+"Message/GetMessageFromApp",params, new IHttpCallback(){
+		httpLayer.GETAsync(domain+"Message/GetMessageFromApp",params, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -1299,7 +1299,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("request_id", request_id);
 		
-		httpLayer.GET(domain+"Request/MyDetailById",params, new IHttpCallback(){
+		httpLayer.GETAsync(domain+"Request/MyDetailById",params, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -1341,7 +1341,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("request_id", request_id);
 		
-		httpLayer.GET(domain+"Provide/MyDetailById",params, new IHttpCallback(){
+		httpLayer.GETAsync(domain+"Provide/MyDetailById",params, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -1357,6 +1357,52 @@ public class APIProxyLayer implements IAPIProxyLayer {
 							obj = new JSONObject(result);
 							if(true == obj.getBoolean("success"))
 								SessionUpdate("RequestMyDetailById");
+						}
+					}
+					catch(Exception e)
+					{
+						Logger.Instance().Write(e);
+						callback.OnCallback(false,null);
+					}
+				}
+				callback.OnCallback(success,obj);
+			}
+		
+		});
+		
+		return true;
+	}
+
+
+
+	@Override
+	public boolean MessageSendImage(String biddingid, String filepath,
+			final IAPIProxyCallback callback) {
+		
+		
+		if(!httpLayer.IsConnectedSession())
+			return false;
+		Map<String,Object> params = new HashMap<String,Object>();
+		params.put("biddingid", biddingid);
+		Map<String,Object> files = new HashMap<String,Object>();
+		files.put("filepath", filepath);
+		
+		httpLayer.POSTFileAsync(domain+"Message/SetImage", params,files, new IHttpCallback(){
+
+			@Override
+			public void OnCallback(boolean success,String result) {
+				// TODO Auto-generated method stub
+				JSONObject obj = null;
+				if(success == true)
+				{
+					try
+					{
+						
+						if(result !=null)
+						{
+							obj = new JSONObject(result);
+							if(true == obj.getBoolean("success"))
+								SessionUpdate("OfferAsRequester");
 						}
 					}
 					catch(Exception e)
