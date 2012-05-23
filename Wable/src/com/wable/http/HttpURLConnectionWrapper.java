@@ -29,7 +29,7 @@ public class HttpURLConnectionWrapper extends HttpWrapper {
 
 	 String lineEnd = "\r\n";
 	 String twoHyphens = "--";
-	 String boundary = "*****";
+	 String boundary = "*****************";
 
 	 // [end]
 	 String buildeMultipartNormalParameter(Map<String,Object> params)
