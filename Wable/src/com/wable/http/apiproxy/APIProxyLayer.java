@@ -74,7 +74,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	
 	IHttpConnectionLayer httpLayer;
 	
-	String domain= "http://www.wable.co.kr/";
+	String domain= "http://wable.co.kr/";
 	
 	// [end]
 		

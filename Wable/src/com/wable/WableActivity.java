@@ -77,16 +77,7 @@ public class WableActivity extends Activity implements OnClickListener {
 							if(success)
 							{
 								Logger.Instance().Write(json.toString());
-								try {
-									JSONObject data = new JSONObject(json.getString("data"));
-									String str = data.getString("name");
-									str = data.getString("email");
-									str = data.getString("phone");
-									str = data.getString("mobile");
-									
-								} catch (JSONException e) {
-									e.printStackTrace();
-								}
+			
 								
 							}
 							else Logger.Instance().Write("Fail to GetMyInfo");
@@ -94,7 +85,7 @@ public class WableActivity extends Activity implements OnClickListener {
 						
 					});
 					
-					APIProxyLayer.Instance().MessageSendImage("-9223372036854775805", "/sdcard/orm1.png", new IAPIProxyCallback(){
+					APIProxyLayer.Instance().MessageSendImage("-9223372036854775805", "/sdcard/desert.jpg", new IAPIProxyCallback(){
 						@Override
 						public void OnCallback(boolean success, JSONObject json) {
 							if(success)
