@@ -151,20 +151,18 @@ public class HttpClientWrapper extends HttpWrapper  {
 				
 				MultipartEntity entity = new MultipartEntity(HttpMultipartMode.STRICT); 
 				
-				for(Map.Entry<String,Object> entry:files.entrySet())
-				{
-					File file = new File(entry.getValue().toString());
-                    FileBody isb = new FileBody(file,"application/*");
-                    entity.addPart(entry.getKey(), isb);
-				}
-				
-				ContentBody cb;
-	            for(Map.Entry<String,Object> entry:params.entrySet())
+				for(Map.Entry<String,Object> entry:params.entrySet())
 	            {
-	            	 cb =  new StringBody(entry.getValue().toString(),"", null);
+					ContentBody cb =  new StringBody(entry.getValue().toString(),"", null);
 	            	 entity.addPart(entry.getKey(),cb); 
 	            }
-
+				
+				for(Map.Entry<String,Object> entry:files.entrySet())
+	            {
+					 File file = new File(entry.getValue().toString());
+					 ContentBody cbFile = new FileBody(file, "image");
+	            	 entity.addPart(entry.getKey(),cbFile); 
+	            }
 				
 				httpClient.getParams().setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
 				httpPost.setEntity(entity);

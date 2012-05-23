@@ -1397,7 +1397,6 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				{
 					try
 					{
-						
 						if(result !=null)
 						{
 							obj = new JSONObject(result);
