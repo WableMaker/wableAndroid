@@ -29,7 +29,7 @@ public class HttpURLConnectionWrapper extends HttpWrapper {
 
 	 String lineEnd = "\r\n";
 	 String twoHyphens = "--";
-	 String boundary = "*****************";
+	 String boundary = "dkjsei40f9844-------djs8dviw--4-s-df-";
 
 	 // [end]
 	 String buildeMultipartNormalParameter(Map<String,Object> params)
@@ -50,7 +50,7 @@ public class HttpURLConnectionWrapper extends HttpWrapper {
 			return sb.toString();
 	 }
 
-	protected String Request(URL url,String method, Map<String,Object> params, Map<String,Object> files) throws IOException
+	protected String Request(URL url,String method, Map<String,Object> params) throws IOException
 		{
 			InputStream in = null;
 			OutputStream out = null;
@@ -69,66 +69,12 @@ public class HttpURLConnectionWrapper extends HttpWrapper {
 				if(method.equals("POST"))
 				{
 					httpcon.setDoOutput(true);//post는 데이터를 주소와 별개로 보냄 즉 바디에 넣어서..
+
+					String paramstr =buildParameters(params);
+					Logger.Instance().Write(url.toString()+" parameter " +paramstr);
+					out = httpcon.getOutputStream();
+					out.write(paramstr.getBytes("UTF-8"));
 					
-					
-					if(files ==null)//파일이 있다면..
-					{
-						String paramstr =buildParameters(params);
-						Logger.Instance().Write(url.toString()+" parameter " +paramstr);
-						out = httpcon.getOutputStream();
-						out.write(paramstr.getBytes("UTF-8"));
-					}
-					else
-					{
-						Logger.Instance().Write(url.toString()+" parameter files ");
-						//연결전에 헤더 세팅
-						httpcon.setRequestProperty("Connection","Keep-Alive"); 
-						httpcon.setRequestProperty("Content-Type","multipart/form-data;boundary="+boundary);
-						
-						out =new DataOutputStream(httpcon.getOutputStream());
-					    // Send normal param.
-						out.write(buildeMultipartNormalParameter(params).getBytes());
-						
-						
-						for(Map.Entry<String,Object> entry:files.entrySet())
-						{
-							File file = new File(entry.getValue().toString());
-							FileInputStream fileInputStream = new FileInputStream(file);
-
-							out.write((twoHyphens + boundary + lineEnd).getBytes());
-							String temp = "Content-Disposition: form-data;name=\""+ file.getName() +"\";filename=\""
-		                            + file.getName() + "\"" + lineEnd+"Content-Type:image"+lineEnd+"Content-Transfer-Encoding: binary"+lineEnd;
-							out.write(temp.getBytes());
-							
-							
-							int bytesAvailable = fileInputStream.available();
-							Logger.Instance().Write(url.toString()+" parameter files "+ bytesAvailable);
-							 int bufferSize = Math.min(bytesAvailable, 1024); 
-				            byte[] buffer = new byte[bufferSize];
-
-				            // read file and write it into form...
-
-				            int bytesRead = fileInputStream.read(buffer, 0, bufferSize);
-
-				            while (bytesRead > 0) {
-				            	out.write(buffer, 0, bytesRead);
-				                bytesAvailable = fileInputStream.available();
-				                bytesAvailable = Math.min(bytesAvailable, bufferSize);
-				                bytesRead = fileInputStream.read(buffer, 0, bytesAvailable);
-				                
-				            }
-
-				            // send multipart form data necesssary after file data...
-
-				            out.write(lineEnd.getBytes());
-				            out.write((twoHyphens + boundary + twoHyphens + lineEnd).getBytes());
-
-				            // close streams
-				            fileInputStream.close();
-				           
-						}
-						
-					}
 					out.flush();
 					out.close();
 				}
@@ -199,6 +145,99 @@ public class HttpURLConnectionWrapper extends HttpWrapper {
 		}
 		
 		
+	protected String RequestWithFiles(URL url,Map<String,Object> params,  Map<String,Object> files) throws IOException
+	{
+
+		//새로운 접속을 연다.
+		HttpURLConnection conn = (HttpURLConnection)url.openConnection(); 
+		String bd= "dkjsei40f9844-------djs8dviw--4-s-df-";
+		//읽기와 쓰기 모두 가능하게 설정
+		conn.setDoInput(true);
+		conn.setDoOutput(true);
+
+		//캐시를 사용하지 않게 설정
+		conn.setUseCaches(false); 
+
+		//POST타입으로 설정
+		conn.setRequestMethod("POST"); 
+		if(m_session) conn.setRequestProperty("cookie", m_cookies);
+		//헤더 설정
+
+		conn.setRequestProperty("Connection","Keep-Alive"); 
+		conn.setRequestProperty("Content-Type","multipart/form-data;boundary=" + bd); 
+
+		//Output스트림을 열어
+		DataOutputStream dos = new DataOutputStream(conn.getOutputStream()); 
+		dos.write(buildeMultipartNormalParameter(params).getBytes());
+		
+
+		for(Map.Entry<String,Object> entry:files.entrySet())
+		{
+			File file = new File(entry.getValue().toString());
+			FileInputStream fileInputStream = new FileInputStream(file);
+			dos.writeBytes("--" + bd + "\r\n"); 
+			dos.writeBytes("Content-Disposition: form-data; name=\"asd\";filename=\""+ file.getName() +"\"" + "\r\n"); 
+			dos.writeBytes("\r\n"); 
+
+			//버퍼사이즈를 설정하여 buffer할당
+			int bytesAvailable = fileInputStream.available(); 
+			int maxBufferSize = 1024;
+			int bufferSize = Math.min(bytesAvailable, maxBufferSize); 
+			byte[] buffer = new byte[bufferSize];
+			 
+			//스트림에 작성
+			int bytesRead = fileInputStream.read(buffer, 0, bufferSize); 
+			while (bytesRead > 0) 
+			{ 
+				// Upload file part(s) 
+				dos.write(buffer, 0, bufferSize); 
+				bytesAvailable = fileInputStream.available(); 
+				bufferSize = Math.min(bytesAvailable, maxBufferSize); 
+				bytesRead = fileInputStream.read(buffer, 0, bufferSize); 
+			} 
+			dos.writeBytes("\r\n"); 
+			dos.writeBytes("--" + bd + "--" + "\r\n"); 
+			fileInputStream.close();
+
+			//써진 버퍼를 stream에 출력.  
+			dos.flush(); 
+		}
+		
+
+		Logger.Instance().Write(url.toString()+  " Request success "+  m_cookies);
+		long start = System.currentTimeMillis();
+		
+		int response =conn.getResponseCode();
+		
+		Logger.Instance().Write(url.toString()+" recv elapsed time  "+(System.currentTimeMillis()-start) );
+		
+		// 갤럭시 S에서 어떤앱은 WebView라던가 Http통신에서 15초인가 넘어가면 세션 끊기는
+        /// 원인을 알 수 없는 경우도 있었음 다른기기 다 잘되는데 오로지 갤럭시 S만!!! 그랬음 참고 바람요
+		/// 루프를 돌면서 리퀘스트로 받은내용을 저장한다.
+		String line="";
+		if(response == HttpURLConnection.HTTP_OK)
+		{
+			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			
+			while(true)
+			{
+				String r = br.readLine();
+				if(null == r) break;
+				line +=r;
+			}
+			br.close();
+			Map<String,List<String>> imap = conn.getHeaderFields();
+			if(imap.containsKey("Set-Cookie"))
+			{
+				List<String> cookie = imap.get("Set-Cookie");
+				for(int i=0;i<cookie.size();i++) m_cookies += cookie.get(i)+";";
+				Logger.Instance().Write(m_cookies);			
+			}
+			
+			
+		}
+		return line;
+	}
 	 
 	// [start] IHttpConnectionLayer 구현
 
@@ -211,7 +250,8 @@ public class HttpURLConnectionWrapper extends HttpWrapper {
 		try
 		{
 			/// 일단 주소에 데이터랑 보내고
-			String recv = Request(new URL(url),"POST",params,null);
+			//String recv = Request(new URL(url),"POST",params,null);
+			String recv = Request(new URL(url),"POST",params);
 			Logger.Instance().Write(recv);
 			callback.OnCallback(true, recv);
 			
@@ -232,7 +272,7 @@ public class HttpURLConnectionWrapper extends HttpWrapper {
 		{
 			url +="?"+buildParameters(params);
 			/// 일단 주소에 데이터랑 보내고
-			String recv = Request(new URL(url),"GET",null,null);
+			String recv = Request(new URL(url),"GET",null);
 			Logger.Instance().Write(recv);
 			callback.OnCallback(true, recv);
 			
@@ -254,7 +294,7 @@ public class HttpURLConnectionWrapper extends HttpWrapper {
 		try
 		{
 			/// 일단 주소에 데이터랑 보내고
-			String recv = Request(new URL(url),"POST",params,files);
+			String recv = RequestWithFiles(new URL(url),params,files);
 			Logger.Instance().Write(recv);
 			callback.OnCallback(true, recv);
 			

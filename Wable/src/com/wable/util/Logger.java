@@ -22,6 +22,8 @@ public class Logger {
 	
 	public void Write(String message)
 	{
-		Log.i(tag, message);
+		if(message !=null)
+			Log.i(tag, message);
+		else Log.i(tag, "null message");
 	}
 }
