@@ -134,48 +134,48 @@ public class WableActivity extends Activity implements OnClickListener {
 		
 		case R.id.btnFacebook:
 			
-			facebook = new Facebook("180729825379631");
-	        
-	        pref = getPreferences(MODE_PRIVATE);
-	        String access_token = pref.getString("access_token", null);
-	        long expires = pref.getLong("access_expires", 0);
-	        if(access_token != null) {
-	            facebook.setAccessToken(access_token);
-	        }
-	        if(expires != 0) {
-	            facebook.setAccessExpires(expires);
-	        }
-
-	        
-	        
-			
-			facebook.authorize(WableActivity.this, new DialogListener() {
-		        @Override
-		        public void onComplete(Bundle values) {
-		        	
-		        	Editor editor = pref.edit();
-	                editor.putString("access_token", facebook.getAccessToken());
-	                editor.putLong("access_expires", facebook.getAccessExpires());
-	                editor.commit();
-		        }
-
-		        @Override
-		        public void onFacebookError(FacebookError error) {
-		        	
-		        }
-
-		        @Override
-		        public void onError(DialogError e) {
-		        	
-		        }
-
-		        @Override
-		        public void onCancel() {
-		        	
-		        }
-		    }); 
-			
-			
+//			facebook = new Facebook("180729825379631");
+//	        
+//	        pref = getPreferences(MODE_PRIVATE);
+//	        String access_token = pref.getString("access_token", null);
+//	        long expires = pref.getLong("access_expires", 0);
+//	        if(access_token != null) {
+//	            facebook.setAccessToken(access_token);
+//	        }
+//	        if(expires != 0) {
+//	            facebook.setAccessExpires(expires);
+//	        }
+//
+//	        
+//	        
+//			
+//			facebook.authorize(WableActivity.this, new DialogListener() {
+//		        @Override
+//		        public void onComplete(Bundle values) {
+//		        	
+//		        	Editor editor = pref.edit();
+//	                editor.putString("access_token", facebook.getAccessToken());
+//	                editor.putLong("access_expires", facebook.getAccessExpires());
+//	                editor.commit();
+//		        }
+//
+//		        @Override
+//		        public void onFacebookError(FacebookError error) {
+//		        	
+//		        }
+//
+//		        @Override
+//		        public void onError(DialogError e) {
+//		        	
+//		        }
+//
+//		        @Override
+//		        public void onCancel() {
+//		        	
+//		        }
+//		    }); 
+//			
+//			
 			break;
 			
 		case R.id.btnLoginFind:

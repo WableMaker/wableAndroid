@@ -13,7 +13,7 @@ public interface IAPIProxyLayer {
 	boolean Register(String loginid,String email,String username,String password, IAPIProxyCallback callback);//로그인 시도
 	
 	boolean FBlogin(String fb_uid,String oauth_token, IAPIProxyCallback callback);//로그인 시도
-	boolean FBregister(String oauth_token, IAPIProxyCallback callback);//로그인 시도
+	boolean FBregister(String fb_uid,String oauth_token, IAPIProxyCallback callback);//로그인 시도
 	boolean FBconnect(String fb_uid,String oauth_token, IAPIProxyCallback callback);//로그인 시도
 	
 	// [end]

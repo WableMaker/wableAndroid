@@ -106,18 +106,16 @@ public class HttpWrapper implements IHttpConnectionLayer {
 
 
 	@Override
-	public boolean POSTSync(String url, Map<String, Object> params,
-			IHttpCallback callback) {
+	public String POSTSync(String url, Map<String, Object> params) {
 		// TODO Auto-generated method stub
-		return false;
+		return null;
 	}
 
 
 	@Override
-	public boolean GETSync(String url, Map<String, Object> params,
-			IHttpCallback callback) {
+	public String GETSync(String url, Map<String, Object> params) {
 		// TODO Auto-generated method stub
-		return false;
+		return null;
 	}
 	
 	// [end]

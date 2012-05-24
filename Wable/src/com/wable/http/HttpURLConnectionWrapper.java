@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Iterator;
@@ -310,18 +311,36 @@ public class HttpURLConnectionWrapper extends HttpWrapper {
 
 
 	@Override
-	public boolean POSTSync(String url, Map<String, Object> params,
-			IHttpCallback callback) {
+	public String POSTSync(String url, Map<String, Object> params){
 		// TODO Auto-generated method stub
-		return false;
+		try
+		{
+			String recv = Request(new URL(url),"POST",params);
+			Logger.Instance().Write(recv);
+			return recv;
+		}
+		catch(Exception e)
+		{
+			Logger.Instance().Write(e);
+		}
+		return null;
 	}
 
 
 	@Override
-	public boolean GETSync(String url, Map<String, Object> params,
-			IHttpCallback callback) {
-		// TODO Auto-generated method stub
-		return false;
+	public String GETSync(String url, Map<String, Object> params) {
+		try
+		{
+			url +="?"+buildParameters(params);
+			String recv = Request(new URL(url),"GET",params);
+			Logger.Instance().Write(recv);
+			return recv;
+		}
+		catch(Exception e)
+		{
+			Logger.Instance().Write(e);
+		}
+		return null;
 	}
 	// [end]
 	
