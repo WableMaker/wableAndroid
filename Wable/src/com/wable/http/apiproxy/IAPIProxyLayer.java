@@ -37,7 +37,7 @@ public interface IAPIProxyLayer {
 	boolean RequestDelete(String request_id ,IAPIProxyCallback callback);//내정보
 	
 	boolean RequestMyDetailById(String request_id ,IAPIProxyCallback callback);//내정보
-	
+	boolean RequestOtherDetailById(String request_id ,IAPIProxyCallback callback);
 	// [end]
 	
 	// [start] Provide
@@ -52,7 +52,9 @@ public interface IAPIProxyLayer {
 			,double lat,double lon,int radius, boolean userprofilepos,IAPIProxyCallback callback);//내정보
 	boolean ProvideDelete(String provide_id ,IAPIProxyCallback callback);//내정보
 	
-	boolean ProvideMyDetailById(String request_id ,IAPIProxyCallback callback);//내정보
+	boolean ProvideMyDetailById(String provide_id ,IAPIProxyCallback callback);//내정보
+	
+	boolean ProvideOtherDetailById(String provide_id ,IAPIProxyCallback callback);
 	// [end]
 	
 	// [start] Bidding

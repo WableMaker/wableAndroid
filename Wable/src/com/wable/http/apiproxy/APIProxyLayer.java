@@ -112,6 +112,59 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		return result;
 	}
 	
+	boolean Relogin()
+	{
+		try
+		{
+			Map<String,Object> params = new HashMap<String,Object>();
+			String result;
+			if(_loginid==null || _password ==null)//로그인 계정정보 없는경우
+			{
+				if(_oauth_token==null || _fb_uid ==null)//페북계겅정보 없는 경우
+				{
+					return false;
+				}				
+				
+				params.put("fb_uid", _fb_uid);
+				params.put("oauth_token", _oauth_token);
+				result = _httpLayer.POSTSync(_domain+"account/FBLoginMobile", params);
+
+			}
+			else
+			{
+				params.put("loginid", _loginid);
+				params.put("password", _password);
+				result = _httpLayer.POSTSync(_domain+"account/loginmobile", params);
+			}
+			
+			JSONObject json = new JSONObject(result);
+			boolean blogin= json.getBoolean("success");
+			return blogin;
+		}
+		catch(Exception e)
+		{
+			Logger.Instance().Write(e);
+		}
+		return false;
+	}
+
+	void SetAccountInfo(String loginid,	String password,String fb_uid ,	String oauth_token)
+	{
+		
+		if(loginid==null)
+		{
+			_oauth_token = oauth_token;
+			_fb_uid = fb_uid;
+		}
+		else
+		{
+			_loginid = loginid;
+			_password = password;
+		}
+		
+	}
+
+	
 	// [end]
 	
 	// [start] IAPIProxyLayer 구현
@@ -1502,56 +1555,95 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		return true;
 	}
 	
-	boolean Relogin()
-	{
-		try
-		{
-			Map<String,Object> params = new HashMap<String,Object>();
-			String result;
-			if(_loginid==null || _password ==null)//로그인 계정정보 없는경우
-			{
-				if(_oauth_token==null || _fb_uid ==null)//페북계겅정보 없는 경우
-				{
-					return false;
-				}				
-				
-				params.put("fb_uid", _fb_uid);
-				params.put("oauth_token", _oauth_token);
-				result = _httpLayer.POSTSync(_domain+"account/FBLoginMobile", params);
 
-			}
-			else
-			{
-				params.put("loginid", _loginid);
-				params.put("password", _password);
-				result = _httpLayer.POSTSync(_domain+"account/loginmobile", params);
-			}
-			
-			JSONObject json = new JSONObject(result);
-			boolean blogin= json.getBoolean("success");
-			return blogin;
-		}
-		catch(Exception e)
+
+
+	@Override
+	public boolean RequestOtherDetailById(String request_id,
+			final IAPIProxyCallback callback) {
+		
+		if(!_httpLayer.IsConnectedSession())
 		{
-			Logger.Instance().Write(e);
+			if(!Relogin())
+				return false;
 		}
-		return false;
+		Map<String,Object> params = new HashMap<String,Object>();
+		params.put("request_id", request_id);
+		
+		_httpLayer.GETAsync(_domain+"Request/OtherDetailById", params, new IHttpCallback(){
+
+			@Override
+			public void OnCallback(boolean success,String result) {
+				// TODO Auto-generated method stub
+				JSONObject obj = null;
+				if(success == true)
+				{
+					try
+					{
+						if(result !=null)
+						{
+							obj = new JSONObject(result);
+							if(true == obj.getBoolean("success"))
+								SessionUpdate("RequestOtherDetailById");
+						}
+					}
+					catch(Exception e)
+					{
+						Logger.Instance().Write(e);
+						callback.OnCallback(false,null);
+					}
+				}
+				callback.OnCallback(success,obj);
+			}
+		
+		});
+		
+		return true;
 	}
 
-	void SetAccountInfo(String loginid,	String password,String fb_uid ,	String oauth_token)
-	{
+
+
+	@Override
+	public boolean ProvideOtherDetailById(String provide_id,
+			final IAPIProxyCallback callback) {
 		
-		if(loginid==null)
+		if(!_httpLayer.IsConnectedSession())
 		{
-			_oauth_token = oauth_token;
-			_fb_uid = fb_uid;
+			if(!Relogin())
+				return false;
 		}
-		else
-		{
-			_loginid = loginid;
-			_password = password;
-		}
+		Map<String,Object> params = new HashMap<String,Object>();
+		params.put("provide_id", provide_id);
 		
+		_httpLayer.GETAsync(_domain+"Provide/OtherDetailById", params, new IHttpCallback(){
+
+			@Override
+			public void OnCallback(boolean success,String result) {
+				// TODO Auto-generated method stub
+				JSONObject obj = null;
+				if(success == true)
+				{
+					try
+					{
+						if(result !=null)
+						{
+							obj = new JSONObject(result);
+							if(true == obj.getBoolean("success"))
+								SessionUpdate("ProvideOtherDetailById");
+						}
+					}
+					catch(Exception e)
+					{
+						Logger.Instance().Write(e);
+						callback.OnCallback(false,null);
+					}
+				}
+				callback.OnCallback(success,obj);
+			}
+		
+		});
+		
+		return true;
 	}
 
 	// [end]
