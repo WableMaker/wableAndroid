@@ -17,6 +17,8 @@ public class HttpWrapper implements IHttpConnectionLayer {
 	long m_sessionLimitTime = 600000 ;  /// 세션 시간제한 (밀리세컨드)
 	long m_sessionTime = 0 ;    /// 세션을 얻은 시간
 	
+	protected int timeout_ms_syncrequest = 5000;//ms
+	
 	// [end]
 	
 	// [start] 멤버 함수

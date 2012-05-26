@@ -209,8 +209,8 @@ public class HttpClientWrapper extends HttpWrapper  {
 			
 			//타임아웃 걸기
 			HttpParams httpParams = httpPost.getParams();
-			HttpConnectionParams.setConnectionTimeout(httpParams,5000);
-			HttpConnectionParams.setSoTimeout(httpParams,5000);
+			HttpConnectionParams.setConnectionTimeout(httpParams,timeout_ms_syncrequest);
+			HttpConnectionParams.setSoTimeout(httpParams,timeout_ms_syncrequest);
 	
 			
 			List<NameValuePair> paramList = new ArrayList<NameValuePair>();
@@ -250,6 +250,11 @@ public class HttpClientWrapper extends HttpWrapper  {
 			
 			HttpGet httpGet = new HttpGet(url);
 			
+			//타임아웃 걸기
+			HttpParams httpParams = httpGet.getParams();
+			HttpConnectionParams.setConnectionTimeout(httpParams,timeout_ms_syncrequest);
+			HttpConnectionParams.setSoTimeout(httpParams,timeout_ms_syncrequest);
+	
 			
 			httpGet.setHeader("Location", "ko");
 			HttpResponse responsePost = httpClient.execute(httpGet,httpContext);

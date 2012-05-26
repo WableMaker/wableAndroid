@@ -51,7 +51,7 @@ public class HttpURLConnectionWrapper extends HttpWrapper {
 			return sb.toString();
 	 }
 
-	protected String Request(URL url,String method, Map<String,Object> params) throws IOException
+	protected String Request(URL url,String method, Map<String,Object> params,boolean timeout) throws IOException
 		{
 			InputStream in = null;
 			OutputStream out = null;
@@ -64,7 +64,12 @@ public class HttpURLConnectionWrapper extends HttpWrapper {
 				httpcon.setRequestMethod(method);//POST냐 GET이냐
 				httpcon.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");//인코딩방식
 				httpcon.setRequestProperty("Language", "ko");//언어
-		
+				
+				if(timeout)
+				{
+					httpcon.setConnectTimeout(timeout_ms_syncrequest);
+					httpcon.setReadTimeout(timeout_ms_syncrequest);
+				}
 				httpcon.setDoInput(true);//인풋스트림 사용여부
 				if(m_session) httpcon.setRequestProperty("cookie", m_cookies);
 				if(method.equals("POST"))
@@ -252,7 +257,7 @@ public class HttpURLConnectionWrapper extends HttpWrapper {
 		{
 			/// 일단 주소에 데이터랑 보내고
 			//String recv = Request(new URL(url),"POST",params,null);
-			String recv = Request(new URL(url),"POST",params);
+			String recv = Request(new URL(url),"POST",params,false);
 			Logger.Instance().Write(recv);
 			callback.OnCallback(true, recv);
 			
@@ -273,7 +278,7 @@ public class HttpURLConnectionWrapper extends HttpWrapper {
 		{
 			url +="?"+buildParameters(params);
 			/// 일단 주소에 데이터랑 보내고
-			String recv = Request(new URL(url),"GET",null);
+			String recv = Request(new URL(url),"GET",null,false);
 			Logger.Instance().Write(recv);
 			callback.OnCallback(true, recv);
 			
@@ -315,7 +320,7 @@ public class HttpURLConnectionWrapper extends HttpWrapper {
 		// TODO Auto-generated method stub
 		try
 		{
-			String recv = Request(new URL(url),"POST",params);
+			String recv = Request(new URL(url),"POST",params,true);
 			Logger.Instance().Write(recv);
 			return recv;
 		}
@@ -332,7 +337,7 @@ public class HttpURLConnectionWrapper extends HttpWrapper {
 		try
 		{
 			url +="?"+buildParameters(params);
-			String recv = Request(new URL(url),"GET",params);
+			String recv = Request(new URL(url),"GET",params,true);
 			Logger.Instance().Write(recv);
 			return recv;
 		}
