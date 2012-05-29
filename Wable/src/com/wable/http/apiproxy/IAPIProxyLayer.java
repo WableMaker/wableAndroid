@@ -2,7 +2,6 @@ package com.wable.http.apiproxy;
 
 import java.util.Date;
 
-import android.text.format.DateFormat;
 
 public interface IAPIProxyLayer {
 	
@@ -33,11 +32,13 @@ public interface IAPIProxyLayer {
 	boolean RequestListbyDistance(double lat, double lon,double distance,String keyword,IAPIProxyCallback callback);//내정보
 
 	boolean RequestAdd(String title, String description,int postprice,int category,Date duedate
-			,double lat,double lon,boolean totwitter, boolean tofacebook, boolean userprofilepos,IAPIProxyCallback callback);//내정보
+			,double lat,double lon,boolean totwitter, boolean tofacebook, IAPIProxyCallback callback);//내정보
 	boolean RequestDelete(String request_id ,IAPIProxyCallback callback);//내정보
 	
 	boolean RequestMyDetailById(String request_id ,IAPIProxyCallback callback);//내정보
 	boolean RequestOtherDetailById(String request_id ,IAPIProxyCallback callback);
+	boolean RequestUpdate(String request_id,String title, String description,int postprice,int category,Date duedate
+			,double lat,double lon,boolean totwitter, boolean tofacebook, IAPIProxyCallback callback);//내정보
 	// [end]
 	
 	// [start] Provide
@@ -49,12 +50,14 @@ public interface IAPIProxyLayer {
 	boolean ProvideListbyDistance(double lat, double lon,double distance,String keyword,IAPIProxyCallback callback);//내정보
 
 	boolean ProvideAdd(String title, int minprice,int category
-			,double lat,double lon,int radius, boolean userprofilepos,IAPIProxyCallback callback);//내정보
+			,double lat,double lon,int radius, IAPIProxyCallback callback);//내정보
 	boolean ProvideDelete(String provide_id ,IAPIProxyCallback callback);//내정보
 	
 	boolean ProvideMyDetailById(String provide_id ,IAPIProxyCallback callback);//내정보
 	
 	boolean ProvideOtherDetailById(String provide_id ,IAPIProxyCallback callback);
+	boolean ProvideUpdate(String provide_id,String title, int minprice,int category
+			,double lat,double lon,int radius, IAPIProxyCallback callback);//내정보
 	// [end]
 	
 	// [start] Bidding
@@ -68,7 +71,7 @@ public interface IAPIProxyLayer {
 	// [start] Message
 	
 	boolean MessageSendText(String biddingid, String message,IAPIProxyCallback callback);//내정보
-	boolean MessageSendImage(String biddingid, String message,IAPIProxyCallback callback);//내정보
+	boolean MessageSendImage(String biddingid, String filepath,IAPIProxyCallback callback);//내정보
 	boolean MessageGet(String biddingid,long tick,IAPIProxyCallback callback);//내정보
 
 	

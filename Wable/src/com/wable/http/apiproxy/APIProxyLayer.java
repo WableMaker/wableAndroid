@@ -957,7 +957,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	@Override
 	public boolean RequestAdd(String title, String description, int postprice,
 			int category, Date duedate, double lat, double lon,
-			boolean totwitter, boolean tofacebook, boolean userprofilepos,
+			boolean totwitter, boolean tofacebook, 
 			final IAPIProxyCallback callback) {
 
 		
@@ -976,7 +976,6 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		params.put("lon", lon);
 		params.put("totwitter", totwitter);
 		params.put("tofacebook", tofacebook);
-		params.put("userprofilepos", userprofilepos);
 		
 		
 		_httpLayer.POSTAsync(_domain+"Request/Add", params, new IHttpCallback(){
@@ -1015,7 +1014,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 	@Override
 	public boolean ProvideAdd(String title, int minprice, int category,
-			double lat, double lon, int radius, boolean userprofilepos,
+			double lat, double lon, int radius,  
 			final IAPIProxyCallback callback) {
 
 
@@ -1031,7 +1030,6 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		params.put("radius", radius);
 		params.put("lat", lat);
 		params.put("lon", lon);
-		params.put("userprofilepos", userprofilepos);
 		
 		
 		_httpLayer.POSTAsync(_domain+"Provide/Add", params, new IHttpCallback(){
@@ -1630,6 +1628,125 @@ public class APIProxyLayer implements IAPIProxyLayer {
 							obj = new JSONObject(result);
 							if(true == obj.getBoolean("success"))
 								SessionUpdate("ProvideOtherDetailById");
+						}
+					}
+					catch(Exception e)
+					{
+						Logger.Instance().Write(e);
+						callback.OnCallback(false,null);
+					}
+				}
+				callback.OnCallback(success,obj);
+			}
+		
+		});
+		
+		return true;
+	}
+
+
+
+
+	@Override
+	public boolean RequestUpdate(String request_id, String title,
+			String description, int postprice, int category, Date duedate,
+			double lat, double lon, boolean totwitter, boolean tofacebook,
+			final IAPIProxyCallback callback) {
+		
+
+		if(!_httpLayer.IsConnectedSession())
+		{
+			if(!Relogin())
+				return false;
+		}
+		Map<String,Object> params = new HashMap<String,Object>();
+		params.put("id", request_id);
+		params.put("title", title);
+		params.put("description", description);
+		params.put("postprice", postprice);
+		params.put("category", category);
+		params.put("duedate", ConvertDateToString(duedate));
+		params.put("lat", lat);
+		params.put("lon", lon);
+		params.put("totwitter", totwitter);
+		params.put("tofacebook", tofacebook);
+		
+		
+		_httpLayer.POSTAsync(_domain+"Request/Update", params, new IHttpCallback(){
+
+			@Override
+			public void OnCallback(boolean success,String result) {
+				// TODO Auto-generated method stub
+				JSONObject obj = null;
+				if(success == true)
+				{
+					try
+					{
+						
+						if(result !=null)
+						{
+							obj = new JSONObject(result);
+							if(true == obj.getBoolean("success"))
+								SessionUpdate("RequestUpdate");
+						}
+					}
+					catch(Exception e)
+					{
+						Logger.Instance().Write(e);
+						callback.OnCallback(false,null);
+					}
+				}
+				callback.OnCallback(success,obj);
+			}
+		
+		});
+		
+		return true;
+		
+	}
+
+
+
+
+
+
+
+	@Override
+	public boolean ProvideUpdate(String provide_id, String title, int minprice,
+			int category, double lat, double lon, int radius,
+			final IAPIProxyCallback callback) {
+		
+
+		if(!_httpLayer.IsConnectedSession())
+		{
+			if(!Relogin())
+				return false;
+		}
+		Map<String,Object> params = new HashMap<String,Object>();
+		params.put("id", provide_id);
+		params.put("title", title);
+		params.put("minprice", minprice);
+		params.put("category", category);
+		params.put("radius", radius);
+		params.put("lat", lat);
+		params.put("lon", lon);
+		
+		_httpLayer.POSTAsync(_domain+"Provide/Update", params, new IHttpCallback(){
+
+			@Override
+			public void OnCallback(boolean success,String result) {
+				// TODO Auto-generated method stub
+				JSONObject obj = null;
+				if(success == true)
+				{
+					try
+					{
+						
+						if(result !=null)
+						{
+							obj = new JSONObject(result);
+							if(true == obj.getBoolean("success"))
+								SessionUpdate("ProvideUpdate");
 						}
 					}
 					catch(Exception e)
