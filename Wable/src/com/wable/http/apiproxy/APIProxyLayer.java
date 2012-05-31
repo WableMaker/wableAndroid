@@ -489,7 +489,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		if(lastid !=null)
 			params.put("lastid", lastid);
 		
-		_httpLayer.GETAsync(_domain+"Request/OtherRequestList",params, new IHttpCallback(){
+		_httpLayer.GETAsync(_domain+"Request/OtherList",params, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -729,7 +729,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		if(lastid !=null)
 			params.put("lastid", lastid);
 		
-		_httpLayer.GETAsync(_domain+"Provide/OtherProvideList",params, new IHttpCallback(){
+		_httpLayer.GETAsync(_domain+"Provide/OtherList",params, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
