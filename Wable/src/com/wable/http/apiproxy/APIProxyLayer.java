@@ -19,20 +19,21 @@ import com.wable.util.Logger;
 
 public class APIProxyLayer implements IAPIProxyLayer {
 
-	// [start] IAPIProxyLayer ½Ì±ÛÅæ
+	// [start] ½Ì±ÛÅæ
 	
-	static ReentrantLock lock = new ReentrantLock();
-	static IAPIProxyLayer instance;
+
+	static ReentrantLock _lock = new ReentrantLock();
+	static IAPIProxyLayer _instance;
 	public static IAPIProxyLayer Instance()
 	{
 		try
 		{
-			if(lock.tryLock(2000,TimeUnit.MILLISECONDS))
+			if(_lock.tryLock(2000,TimeUnit.MILLISECONDS))
 			{
 				try
 				{	
-					if(instance == null)
-						instance = new APIProxyLayer();
+					if(_instance == null)
+						_instance = new APIProxyLayer();
 				}
 				catch(Exception e)
 				{
@@ -40,7 +41,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				}
 				finally
 				{
-					lock.unlock();
+					_lock.unlock();
 				}
 			}
 			
@@ -51,7 +52,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 			Logger.Instance().Write(e);
 		}
 		
-		return instance;
+		return _instance;
 	}
 	
 	
@@ -59,11 +60,11 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	APIProxyLayer(){
 		if(Integer.parseInt(Build.VERSION.SDK)<=Build.VERSION_CODES.FROYO)
 		{
-			httpLayer = new HttpClientWrapper();
+			_httpLayer = new HttpClientWrapper();
 		}
 		else	
 		{
-			httpLayer =new HttpClientWrapper();// new HttpURLConnectionWrapper();
+			_httpLayer =new HttpURLConnectionWrapper();
 		}
 	}
 	
@@ -71,10 +72,14 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		
 	// [start] ¸â¹ö º¯¼ö
 	
-	IHttpConnectionLayer httpLayer;
+	IHttpConnectionLayer _httpLayer;
 	
-	String domain= "http://www.wable.co.kr/";
+	String _domain= "http://wable.co.kr/";
 	
+	String _loginid;
+	String _password;
+	String _oauth_token;
+	String _fb_uid;
 	// [end]
 		
 	// [Start] ¸â¹ö ÇÔ¼ö
@@ -82,19 +87,19 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	void SessionDisconnected(String function)
 	{
 		Logger.Instance().Write("SessionDisconnected "+function);
-		httpLayer.SessionClosed();
+		_httpLayer.SessionClosed();
 	}
 	
 	void SessionConnected(String function)
 	{
 		Logger.Instance().Write("SessionConnected "+function);
-		httpLayer.SessionEstablished();
+		_httpLayer.SessionEstablished();
 	}
 	
 	void SessionUpdate(String function)
 	{
 		Logger.Instance().Write("SessionUpdate "+function);
-		httpLayer.SessionUpdate();
+		_httpLayer.SessionUpdate();
 	}
 
 	
@@ -107,6 +112,59 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		return result;
 	}
 	
+	boolean Relogin()
+	{
+		try
+		{
+			Map<String,Object> params = new HashMap<String,Object>();
+			String result;
+			if(_loginid==null || _password ==null)//·Î±×ÀÎ °èÁ¤Á¤º¸ ¾ø´Â°æ¿ì
+			{
+				if(_oauth_token==null || _fb_uid ==null)//ÆäºÏ°è°ÏÁ¤º¸ ¾ø´Â °æ¿ì
+				{
+					return false;
+				}				
+				
+				params.put("fb_uid", _fb_uid);
+				params.put("oauth_token", _oauth_token);
+				result = _httpLayer.POSTSync(_domain+"account/FBLoginMobile", params);
+
+			}
+			else
+			{
+				params.put("loginid", _loginid);
+				params.put("password", _password);
+				result = _httpLayer.POSTSync(_domain+"account/loginmobile", params);
+			}
+			
+			JSONObject json = new JSONObject(result);
+			boolean blogin= json.getBoolean("success");
+			return blogin;
+		}
+		catch(Exception e)
+		{
+			Logger.Instance().Write(e);
+		}
+		return false;
+	}
+
+	void SetAccountInfo(String loginid,	String password,String fb_uid ,	String oauth_token)
+	{
+		
+		if(loginid==null)
+		{
+			_oauth_token = oauth_token;
+			_fb_uid = fb_uid;
+		}
+		else
+		{
+			_loginid = loginid;
+			_password = password;
+		}
+		
+	}
+
+	
 	// [end]
 	
 	// [start] IAPIProxyLayer ±¸Çö
@@ -115,11 +173,12 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	public boolean Login(String loginid, String password,
 			final IAPIProxyCallback callback) {
 
+		SetAccountInfo(loginid,password,null,null);
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("loginid", loginid);
 		params.put("password", password);
 		
-		httpLayer.POST(domain+"account/loginmobile", params, new IHttpCallback(){
+		_httpLayer.POSTAsync(_domain+"account/loginmobile", params, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -154,17 +213,51 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	}
 
 	@Override
-	public boolean Logout(IAPIProxyCallback callback) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean Logout(final IAPIProxyCallback callback) {
+		SetAccountInfo(null,null,null,null);
+		if(!_httpLayer.IsConnectedSession())
+			return true;
+		_httpLayer.POSTAsync(_domain+"account/LogOffMobile", null, new IHttpCallback(){
+
+			@Override
+			public void OnCallback(boolean success,String result) {
+				// TODO Auto-generated method stub
+				JSONObject obj = null;
+				if(success == true)
+				{
+					try
+					{
+						
+						if(result !=null)
+						{
+							obj = new JSONObject(result);
+							if(true == obj.getBoolean("success"))
+								SessionDisconnected("Logout");
+						}
+					}
+					catch(Exception e)
+					{
+						Logger.Instance().Write(e);
+						callback.OnCallback(false,null);
+					}
+				}
+				callback.OnCallback(success,obj);
+			}
+		
+		});
+		
+		return true;
 	}
 
 	@Override
 	public boolean MyInfo(final IAPIProxyCallback callback) {
-		if(!httpLayer.IsConnectedSession())
-			return false;
-
-		httpLayer.GET(domain+"user/myinfo",null, new IHttpCallback(){
+		
+		if(!_httpLayer.IsConnectedSession())
+		{
+			if(!Relogin())
+				return false;
+		}
+		_httpLayer.GETAsync(_domain+"user/myinfo",null, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -202,6 +295,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	public boolean Register(String loginid, String email, String username,
 			String password, final IAPIProxyCallback callback) {
 
+		SetAccountInfo(loginid,password,null,null);
 
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("loginid", loginid);
@@ -209,7 +303,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		params.put("username", username);
 		params.put("password", password);
 		
-		httpLayer.POST(domain+"account/RegisterMobile", params, new IHttpCallback(){
+		_httpLayer.POSTAsync(_domain+"account/RegisterMobile", params, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -248,11 +342,14 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	@Override
 	public boolean FBlogin(String fb_uid, String oauth_token,
 			final IAPIProxyCallback callback) {
+		
+		SetAccountInfo(null,null,fb_uid,oauth_token);
+		
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("fb_uid", fb_uid);
 		params.put("oauth_token", oauth_token);
 		
-		httpLayer.POST(domain+"account/FBLoginMobile", params, new IHttpCallback(){
+		_httpLayer.POSTAsync(_domain+"account/FBLoginMobile", params, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -288,11 +385,16 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 
 	@Override
-	public boolean FBregister(String oauth_token, final IAPIProxyCallback callback) {
+	public boolean FBregister(String fb_uid,String oauth_token, final IAPIProxyCallback callback) {
+		
+		
+		SetAccountInfo(null,null,fb_uid,oauth_token);
+		
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("oauth_token", oauth_token);
+		params.put("fb_uid", fb_uid);
 		
-		httpLayer.POST(domain+"account/FBRegisterMobile", params, new IHttpCallback(){
+		_httpLayer.POSTAsync(_domain+"account/FBRegisterMobile", params, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -330,13 +432,18 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	@Override
 	public boolean FBconnect(String fb_uid, String oauth_token,
 			final IAPIProxyCallback callback) {
-		if(!httpLayer.IsConnectedSession())
-			return false;
+		
+		if(!_httpLayer.IsConnectedSession())
+		{
+			if(!Relogin())
+				return false;
+		}
+			
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("fb_uid", fb_uid);
 		params.put("oauth_token", oauth_token);
 		
-		httpLayer.POST(domain+"account/FBConnectMobile", params, new IHttpCallback(){
+		_httpLayer.POSTAsync(_domain+"account/FBConnectMobile", params, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -372,14 +479,17 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	public boolean RequestOtherList(String userid, String lastid,
 			final IAPIProxyCallback callback) {
 
-		if(!httpLayer.IsConnectedSession())
-			return false;
+		if(!_httpLayer.IsConnectedSession())
+		{
+			if(!Relogin())
+				return false;
+		}
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("userid", userid);
 		if(lastid !=null)
 			params.put("lastid", lastid);
 		
-		httpLayer.GET(domain+"Request/OtherRequestList",params, new IHttpCallback(){
+		_httpLayer.GETAsync(_domain+"Request/OtherList",params, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -416,13 +526,16 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	@Override
 	public boolean RequestMyList(String lastid, final IAPIProxyCallback callback) {
 
-		if(!httpLayer.IsConnectedSession())
-			return false;
+		if(!_httpLayer.IsConnectedSession())
+		{
+			if(!Relogin())
+				return false;
+		}
 		Map<String,Object> params = new HashMap<String,Object>();
 		if(lastid !=null)
 			params.put("lastid", lastid);
 		
-		httpLayer.GET(domain+"Request/MyList", params, new IHttpCallback(){
+		_httpLayer.GETAsync(_domain+"Request/MyList", params, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -460,13 +573,16 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	public boolean RequestListbyTime(String lastid, String keyword,
 			final IAPIProxyCallback callback) {
 
-		if(!httpLayer.IsConnectedSession())
-			return false;
+		if(!_httpLayer.IsConnectedSession())
+		{
+			if(!Relogin())
+				return false;
+		}
 		Map<String,Object> params = new HashMap<String,Object>();
 		if(lastid !=null)params.put("lastid", lastid);
 		if(keyword !=null)params.put("keyword", keyword);
 		
-		httpLayer.GET(domain+"request/ListbyTime", params, new IHttpCallback(){
+		_httpLayer.GETAsync(_domain+"request/ListbyTime", params, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -504,8 +620,11 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	public boolean RequestListbyArea(double north, double south, double east,
 			double west, String keyword, final IAPIProxyCallback callback) {
 
-		if(!httpLayer.IsConnectedSession())
-			return false;
+		if(!_httpLayer.IsConnectedSession())
+		{
+			if(!Relogin())
+				return false;
+		}
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("north", north);
 		params.put("south", south);
@@ -513,7 +632,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		params.put("west", west);
 		if(keyword !=null)params.put("keyword", keyword);
 		
-		httpLayer.GET(domain+"request/ListbyArea", params, new IHttpCallback(){
+		_httpLayer.GETAsync(_domain+"request/ListbyArea", params, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -551,15 +670,18 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	public boolean RequestListbyDistance(double lat, double lon,
 			double distance, String keyword, final IAPIProxyCallback callback) {
 		
-		if(!httpLayer.IsConnectedSession())
-			return false;
+		if(!_httpLayer.IsConnectedSession())
+		{
+			if(!Relogin())
+				return false;
+		}
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("lat", lat);
 		params.put("lon", lon);
 		params.put("distance", distance);
 		if(keyword !=null)params.put("keyword", keyword);
 		
-		httpLayer.GET(domain+"Request/ListbyDistance", params, new IHttpCallback(){
+		_httpLayer.GETAsync(_domain+"Request/ListbyDistance", params, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -597,14 +719,17 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	public boolean ProvideOtherList(String userid, String lastid,
 			final IAPIProxyCallback callback) {
 
-		if(!httpLayer.IsConnectedSession())
-			return false;
+		if(!_httpLayer.IsConnectedSession())
+		{
+			if(!Relogin())
+				return false;
+		}
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("userid", userid);
 		if(lastid !=null)
 			params.put("lastid", lastid);
 		
-		httpLayer.GET(domain+"Provide/OtherProvideList",params, new IHttpCallback(){
+		_httpLayer.GETAsync(_domain+"Provide/OtherList",params, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -641,13 +766,16 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	@Override
 	public boolean ProvideMyList(String lastid, final IAPIProxyCallback callback) {
 
-		if(!httpLayer.IsConnectedSession())
-			return false;
+		if(!_httpLayer.IsConnectedSession())
+		{
+			if(!Relogin())
+				return false;
+		}
 		Map<String,Object> params = new HashMap<String,Object>();
 		if(lastid !=null)
 			params.put("lastid", lastid);
 		
-		httpLayer.GET(domain+"Provide/MyList", params, new IHttpCallback(){
+		_httpLayer.GETAsync(_domain+"Provide/MyList", params, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -685,13 +813,16 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	public boolean ProvideListbyTime(String lastid, String keyword,
 			final IAPIProxyCallback callback) {
 
-		if(!httpLayer.IsConnectedSession())
-			return false;
+		if(!_httpLayer.IsConnectedSession())
+		{
+			if(!Relogin())
+				return false;
+		}
 		Map<String,Object> params = new HashMap<String,Object>();
 		if(lastid !=null)params.put("lastid", lastid);
 		if(keyword !=null)params.put("keyword", keyword);
 		
-		httpLayer.GET(domain+"Provide/ListbyTime", params, new IHttpCallback(){
+		_httpLayer.GETAsync(_domain+"Provide/ListbyTime", params, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -729,8 +860,11 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	public boolean ProvideListbyArea(double north, double south, double east,
 			double west, String keyword, final IAPIProxyCallback callback) {
 
-		if(!httpLayer.IsConnectedSession())
-			return false;
+		if(!_httpLayer.IsConnectedSession())
+		{
+			if(!Relogin())
+				return false;
+		}
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("north", north);
 		params.put("south", south);
@@ -738,7 +872,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		params.put("west", west);
 		if(keyword !=null)params.put("keyword", keyword);
 		
-		httpLayer.GET(domain+"Provide/ListbyArea", params, new IHttpCallback(){
+		_httpLayer.GETAsync(_domain+"Provide/ListbyArea", params, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -775,15 +909,18 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	public boolean ProvideListbyDistance(double lat, double lon,
 			double distance, String keyword, final IAPIProxyCallback callback) {
 
-		if(!httpLayer.IsConnectedSession())
-			return false;
+		if(!_httpLayer.IsConnectedSession())
+		{
+			if(!Relogin())
+				return false;
+		}
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("lat", lat);
 		params.put("lon", lon);
 		params.put("distance", distance);
 		if(keyword !=null)params.put("keyword", keyword);
 		
-		httpLayer.GET(domain+"Provide/ListbyDistance", params, new IHttpCallback(){
+		_httpLayer.GETAsync(_domain+"Provide/ListbyDistance", params, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -820,12 +957,15 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	@Override
 	public boolean RequestAdd(String title, String description, int postprice,
 			int category, Date duedate, double lat, double lon,
-			boolean totwitter, boolean tofacebook, boolean userprofilepos,
+			boolean totwitter, boolean tofacebook, 
 			final IAPIProxyCallback callback) {
 
 		
-		if(!httpLayer.IsConnectedSession())
-			return false;
+		if(!_httpLayer.IsConnectedSession())
+		{
+			if(!Relogin())
+				return false;
+		}
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("title", title);
 		params.put("description", description);
@@ -836,10 +976,9 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		params.put("lon", lon);
 		params.put("totwitter", totwitter);
 		params.put("tofacebook", tofacebook);
-		params.put("userprofilepos", userprofilepos);
 		
 		
-		httpLayer.POST(domain+"Request/Add", params, new IHttpCallback(){
+		_httpLayer.POSTAsync(_domain+"Request/Add", params, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -875,12 +1014,15 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 	@Override
 	public boolean ProvideAdd(String title, int minprice, int category,
-			double lat, double lon, int radius, boolean userprofilepos,
+			double lat, double lon, int radius,  
 			final IAPIProxyCallback callback) {
 
 
-		if(!httpLayer.IsConnectedSession())
-			return false;
+		if(!_httpLayer.IsConnectedSession())
+		{
+			if(!Relogin())
+				return false;
+		}
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("title", title);
 		params.put("minprice", minprice);
@@ -888,10 +1030,9 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		params.put("radius", radius);
 		params.put("lat", lat);
 		params.put("lon", lon);
-		params.put("userprofilepos", userprofilepos);
 		
 		
-		httpLayer.POST(domain+"Provide/Add", params, new IHttpCallback(){
+		_httpLayer.POSTAsync(_domain+"Provide/Add", params, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -928,7 +1069,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	@Override
 	public boolean CategoryList(final IAPIProxyCallback callback) {
 		
-		httpLayer.GET(domain+"Category/List",null, new IHttpCallback(){
+		_httpLayer.GETAsync(_domain+"Category/List",null, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -965,7 +1106,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	@Override
 	public boolean CategoryUpdatedTime(final IAPIProxyCallback callback) {
 		
-		httpLayer.GET(domain+"Category/Updatedtime",null, new IHttpCallback(){
+		_httpLayer.GETAsync(_domain+"Category/Updatedtime",null, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -1004,13 +1145,16 @@ public class APIProxyLayer implements IAPIProxyLayer {
 			final IAPIProxyCallback callback) {
 		
 
-		if(!httpLayer.IsConnectedSession())
-			return false;
+		if(!_httpLayer.IsConnectedSession())
+		{
+			if(!Relogin())
+				return false;
+		}
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("request_id", request_id);
 		params.put("price", price);
 		
-		httpLayer.POST(domain+"Bidding/OfferAsProvider", params, new IHttpCallback(){
+		_httpLayer.POSTAsync(_domain+"Bidding/OfferAsProvider", params, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -1049,13 +1193,16 @@ public class APIProxyLayer implements IAPIProxyLayer {
 			final IAPIProxyCallback callback) {
 		
 
-		if(!httpLayer.IsConnectedSession())
-			return false;
+		if(!_httpLayer.IsConnectedSession())
+		{
+			if(!Relogin())
+				return false;
+		}
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("provide_id", provide_id);
 		params.put("price", price);
 		
-		httpLayer.POST(domain+"Bidding/OfferAsRequester", params, new IHttpCallback(){
+		_httpLayer.POSTAsync(_domain+"Bidding/OfferAsRequester", params, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -1088,17 +1235,20 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	}
 	
 	@Override
-	public boolean MessageSend(String biddingid, String message,
+	public boolean MessageSendText(String biddingid, String message,
 			final IAPIProxyCallback callback) {
 		
 
-		if(!httpLayer.IsConnectedSession())
-			return false;
+		if(!_httpLayer.IsConnectedSession())
+		{
+			if(!Relogin())
+				return false;
+		}
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("biddingid", biddingid);
 		params.put("message", message);
 		
-		httpLayer.POST(domain+"Message/SetMessage", params, new IHttpCallback(){
+		_httpLayer.POSTAsync(_domain+"Message/SetMessage", params, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -1135,12 +1285,15 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	@Override
 	public boolean RequestDelete(String request_id, final IAPIProxyCallback callback) {
 		
-		if(!httpLayer.IsConnectedSession())
-			return false;
+		if(!_httpLayer.IsConnectedSession())
+		{
+			if(!Relogin())
+				return false;
+		}
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("request_id", request_id);
 		
-		httpLayer.POST(domain+"Request/Delete", params, new IHttpCallback(){
+		_httpLayer.POSTAsync(_domain+"Request/Delete", params, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -1177,12 +1330,15 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	@Override
 	public boolean ProvideDelete(String provide_id, final IAPIProxyCallback callback) {
 		
-		if(!httpLayer.IsConnectedSession())
-			return false;
+		if(!_httpLayer.IsConnectedSession())
+		{
+			if(!Relogin())
+				return false;
+		}
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("provide_id", provide_id);
 		
-		httpLayer.POST(domain+"Provide/Delete", params, new IHttpCallback(){
+		_httpLayer.POSTAsync(_domain+"Provide/Delete", params, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -1220,13 +1376,16 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	public boolean MessageGet(String biddingid, long lastmsgutctick,
 			final IAPIProxyCallback callback) {
 		
-		if(!httpLayer.IsConnectedSession())
-			return false;
+		if(!_httpLayer.IsConnectedSession())
+		{
+			if(!Relogin())
+				return false;
+		}
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("biddingid", biddingid);
 		params.put("lastmsgutctick", lastmsgutctick);
 		
-		httpLayer.GET(domain+"Message/GetMessageFromApp",null, new IHttpCallback(){
+		_httpLayer.GETAsync(_domain+"Message/GetMessageFromApp",params, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -1257,7 +1416,353 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		
 		return true;
 	}
+
+
+
+	@Override
+	public boolean RequestMyDetailById(String request_id,
+			final IAPIProxyCallback callback) {
+		if(!_httpLayer.IsConnectedSession())
+		{
+			if(!Relogin())
+				return false;
+		}
+		Map<String,Object> params = new HashMap<String,Object>();
+		params.put("request_id", request_id);
+		
+		_httpLayer.GETAsync(_domain+"Request/MyDetailById",params, new IHttpCallback(){
+
+			@Override
+			public void OnCallback(boolean success,String result) {
+				
+				JSONObject obj = null;
+				if(success == true)
+				{
+					try
+					{
+						
+						if(result !=null)
+						{
+							obj = new JSONObject(result);
+							if(true == obj.getBoolean("success"))
+								SessionUpdate("RequestMyDetailById");
+						}
+					}
+					catch(Exception e)
+					{
+						Logger.Instance().Write(e);
+						callback.OnCallback(false,null);
+					}
+				}
+				callback.OnCallback(success,obj);
+			}
+		
+		});
+		
+		return true;
+	}
+
+
+
+	@Override
+	public boolean ProvideMyDetailById(String request_id,
+			final IAPIProxyCallback callback) {
+		if(!_httpLayer.IsConnectedSession())
+		{
+			if(!Relogin())
+				return false;
+		}
+		Map<String,Object> params = new HashMap<String,Object>();
+		params.put("request_id", request_id);
+		
+		_httpLayer.GETAsync(_domain+"Provide/MyDetailById",params, new IHttpCallback(){
+
+			@Override
+			public void OnCallback(boolean success,String result) {
+				
+				JSONObject obj = null;
+				if(success == true)
+				{
+					try
+					{
+						
+						if(result !=null)
+						{
+							obj = new JSONObject(result);
+							if(true == obj.getBoolean("success"))
+								SessionUpdate("RequestMyDetailById");
+						}
+					}
+					catch(Exception e)
+					{
+						Logger.Instance().Write(e);
+						callback.OnCallback(false,null);
+					}
+				}
+				callback.OnCallback(success,obj);
+			}
+		
+		});
+		
+		return true;
+	}
+
+	@Override
+	public boolean MessageSendImage(String biddingid, String filepath,
+			final IAPIProxyCallback callback) {
+		
+		
+		if(!_httpLayer.IsConnectedSession())
+		{
+			if(!Relogin())
+				return false;
+		}
+		Map<String,Object> params = new HashMap<String,Object>();
+		params.put("biddingid", biddingid);
+		Map<String,Object> files = new HashMap<String,Object>();
+		files.put("filepath", filepath);
+		
+		_httpLayer.POSTFileAsync(_domain+"Message/SetImage", params,files, new IHttpCallback(){
+
+			@Override
+			public void OnCallback(boolean success,String result) {
+				// TODO Auto-generated method stub
+				JSONObject obj = null;
+				if(success == true)
+				{
+					try
+					{
+						if(result !=null)
+						{
+							obj = new JSONObject(result);
+							if(true == obj.getBoolean("success"))
+								SessionUpdate("OfferAsRequester");
+						}
+					}
+					catch(Exception e)
+					{
+						Logger.Instance().Write(e);
+						callback.OnCallback(false,null);
+					}
+				}
+				callback.OnCallback(success,obj);
+			}
+		
+		});
+		
+		return true;
+	}
 	
+
+
+
+	@Override
+	public boolean RequestOtherDetailById(String request_id,
+			final IAPIProxyCallback callback) {
+		
+		if(!_httpLayer.IsConnectedSession())
+		{
+			if(!Relogin())
+				return false;
+		}
+		Map<String,Object> params = new HashMap<String,Object>();
+		params.put("request_id", request_id);
+		
+		_httpLayer.GETAsync(_domain+"Request/OtherDetailById", params, new IHttpCallback(){
+
+			@Override
+			public void OnCallback(boolean success,String result) {
+				// TODO Auto-generated method stub
+				JSONObject obj = null;
+				if(success == true)
+				{
+					try
+					{
+						if(result !=null)
+						{
+							obj = new JSONObject(result);
+							if(true == obj.getBoolean("success"))
+								SessionUpdate("RequestOtherDetailById");
+						}
+					}
+					catch(Exception e)
+					{
+						Logger.Instance().Write(e);
+						callback.OnCallback(false,null);
+					}
+				}
+				callback.OnCallback(success,obj);
+			}
+		
+		});
+		
+		return true;
+	}
+
+
+
+	@Override
+	public boolean ProvideOtherDetailById(String provide_id,
+			final IAPIProxyCallback callback) {
+		
+		if(!_httpLayer.IsConnectedSession())
+		{
+			if(!Relogin())
+				return false;
+		}
+		Map<String,Object> params = new HashMap<String,Object>();
+		params.put("provide_id", provide_id);
+		
+		_httpLayer.GETAsync(_domain+"Provide/OtherDetailById", params, new IHttpCallback(){
+
+			@Override
+			public void OnCallback(boolean success,String result) {
+				// TODO Auto-generated method stub
+				JSONObject obj = null;
+				if(success == true)
+				{
+					try
+					{
+						if(result !=null)
+						{
+							obj = new JSONObject(result);
+							if(true == obj.getBoolean("success"))
+								SessionUpdate("ProvideOtherDetailById");
+						}
+					}
+					catch(Exception e)
+					{
+						Logger.Instance().Write(e);
+						callback.OnCallback(false,null);
+					}
+				}
+				callback.OnCallback(success,obj);
+			}
+		
+		});
+		
+		return true;
+	}
+
+
+
+
+	@Override
+	public boolean RequestUpdate(String request_id, String title,
+			String description, int postprice, int category, Date duedate,
+			double lat, double lon, boolean totwitter, boolean tofacebook,
+			final IAPIProxyCallback callback) {
+		
+
+		if(!_httpLayer.IsConnectedSession())
+		{
+			if(!Relogin())
+				return false;
+		}
+		Map<String,Object> params = new HashMap<String,Object>();
+		params.put("id", request_id);
+		params.put("title", title);
+		params.put("description", description);
+		params.put("postprice", postprice);
+		params.put("category", category);
+		params.put("duedate", ConvertDateToString(duedate));
+		params.put("lat", lat);
+		params.put("lon", lon);
+		params.put("totwitter", totwitter);
+		params.put("tofacebook", tofacebook);
+		
+		
+		_httpLayer.POSTAsync(_domain+"Request/Update", params, new IHttpCallback(){
+
+			@Override
+			public void OnCallback(boolean success,String result) {
+				// TODO Auto-generated method stub
+				JSONObject obj = null;
+				if(success == true)
+				{
+					try
+					{
+						
+						if(result !=null)
+						{
+							obj = new JSONObject(result);
+							if(true == obj.getBoolean("success"))
+								SessionUpdate("RequestUpdate");
+						}
+					}
+					catch(Exception e)
+					{
+						Logger.Instance().Write(e);
+						callback.OnCallback(false,null);
+					}
+				}
+				callback.OnCallback(success,obj);
+			}
+		
+		});
+		
+		return true;
+		
+	}
+
+
+
+
+
+
+
+	@Override
+	public boolean ProvideUpdate(String provide_id, String title, int minprice,
+			int category, double lat, double lon, int radius,
+			final IAPIProxyCallback callback) {
+		
+
+		if(!_httpLayer.IsConnectedSession())
+		{
+			if(!Relogin())
+				return false;
+		}
+		Map<String,Object> params = new HashMap<String,Object>();
+		params.put("id", provide_id);
+		params.put("title", title);
+		params.put("minprice", minprice);
+		params.put("category", category);
+		params.put("radius", radius);
+		params.put("lat", lat);
+		params.put("lon", lon);
+		
+		_httpLayer.POSTAsync(_domain+"Provide/Update", params, new IHttpCallback(){
+
+			@Override
+			public void OnCallback(boolean success,String result) {
+				// TODO Auto-generated method stub
+				JSONObject obj = null;
+				if(success == true)
+				{
+					try
+					{
+						
+						if(result !=null)
+						{
+							obj = new JSONObject(result);
+							if(true == obj.getBoolean("success"))
+								SessionUpdate("ProvideUpdate");
+						}
+					}
+					catch(Exception e)
+					{
+						Logger.Instance().Write(e);
+						callback.OnCallback(false,null);
+					}
+				}
+				callback.OnCallback(success,obj);
+			}
+		
+		});
+		
+		return true;
+	}
+
 	// [end]
 	
 

@@ -17,6 +17,8 @@ public class HttpWrapper implements IHttpConnectionLayer {
 	long m_sessionLimitTime = 600000 ;  /// 세션 시간제한 (밀리세컨드)
 	long m_sessionTime = 0 ;    /// 세션을 얻은 시간
 	
+	protected int timeout_ms_syncrequest = 5000;//ms
+	
 	// [end]
 	
 	// [start] 멤버 함수
@@ -64,14 +66,14 @@ public class HttpWrapper implements IHttpConnectionLayer {
 	}
 	
 	@Override
-	public boolean POST(String url, Map<String, Object> params,
+	public boolean POSTAsync(String url, Map<String, Object> params,
 			IHttpCallback callback) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean GET(String url,Map<String, Object> params, IHttpCallback callback) {
+	public boolean GETAsync(String url,Map<String, Object> params, IHttpCallback callback) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -94,6 +96,28 @@ public class HttpWrapper implements IHttpConnectionLayer {
 		   m_session = false ;
 		   return false ; 
 		  }
+	}
+
+
+	@Override
+	public boolean POSTFileAsync(String url, Map<String, Object> params,
+			Map<String, Object> files, IHttpCallback callback) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	@Override
+	public String POSTSync(String url, Map<String, Object> params) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public String GETSync(String url, Map<String, Object> params) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	// [end]

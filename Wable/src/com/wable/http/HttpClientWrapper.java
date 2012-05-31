@@ -1,11 +1,20 @@
 package com.wable.http;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.http.entity.mime.HttpMultipartMode;
+import org.apache.http.entity.mime.MultipartEntity;
+import org.apache.http.entity.mime.content.ContentBody;
+import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.entity.mime.content.StringBody;
+
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.HttpVersion;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
@@ -15,6 +24,9 @@ import org.apache.http.cookie.Cookie;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.params.CoreProtocolPNames;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
@@ -39,17 +51,16 @@ public class HttpClientWrapper extends HttpWrapper  {
 	
 
 	@Override
-	public boolean POST(String url, Map<String, Object> params,
+	public boolean POSTAsync(String url, Map<String, Object> params,
 			IHttpCallback callback) {
 		try
 		{
 			
-		//타이암웃 걸기
-		//	HttpParams params = http.getParams();
-		//	HttpConnectionparams.setConnectionTimeout(params,5000);
-		// HttpConnectionParams.setSoTimeout(params,5000);
+	
 			
 			HttpPost httpPost = new HttpPost(url);
+			
+			
 			List<NameValuePair> paramList = new ArrayList<NameValuePair>();
 			for(Map.Entry<String,Object> entry:params.entrySet())
 				paramList.add(new BasicNameValuePair(entry.getKey(),entry.getValue().toString()));
@@ -83,18 +94,18 @@ public class HttpClientWrapper extends HttpWrapper  {
 	}
 
 	@Override
-	public boolean GET(String url,Map<String, Object> params, IHttpCallback callback) {
+	public boolean GETAsync(String url,Map<String, Object> params, IHttpCallback callback) {
 		// TODO Auto-generated method stub
 		try
 		{
 			
-		//타이암웃 걸기
-		//	HttpParams params = http.getParams();
-		//	HttpConnectionparams.setConnectionTimeout(params,5000);
-		// HttpConnectionParams.setSoTimeout(params,5000);
+		
+
+			
 			url +="?"+buildParameters(params);
 			
 			HttpGet httpGet = new HttpGet(url);
+			
 			
 			httpGet.setHeader("Location", "ko");
 			HttpResponse responsePost = httpClient.execute(httpGet,httpContext);
@@ -124,6 +135,151 @@ public class HttpClientWrapper extends HttpWrapper  {
 	}
 
 	
+
+	@Override
+	public boolean POSTFileAsync(String url, Map<String, Object> params,
+			Map<String, Object> files, IHttpCallback callback) {
+		
+		 	try
+			{
+				
+			//타이암웃 걸기
+			//	HttpParams params = http.getParams();
+			//	HttpConnectionparams.setConnectionTimeout(params,5000);
+			// HttpConnectionParams.setSoTimeout(params,5000);
+				
+				HttpPost httpPost = new HttpPost(url);
+				
+				MultipartEntity entity = new MultipartEntity(HttpMultipartMode.STRICT); 
+				
+				for(Map.Entry<String,Object> entry:params.entrySet())
+	            {
+					ContentBody cb =  new StringBody(entry.getValue().toString(),"", null);
+	            	 entity.addPart(entry.getKey(),cb); 
+	            }
+				
+				for(Map.Entry<String,Object> entry:files.entrySet())
+	            {
+					 File file = new File(entry.getValue().toString());
+					 ContentBody cbFile = new FileBody(file, "image");
+	            	 entity.addPart(entry.getKey(),cbFile); 
+	            }
+				
+				httpClient.getParams().setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
+				httpPost.setEntity(entity);
+				httpPost.setHeader("Location", "ko");
+				HttpResponse responsePost = httpClient.execute(httpPost,httpContext);
+				HttpEntity resEntity = responsePost.getEntity();
+				
+				List<Cookie> cookies = cookieStore.getCookies();
+				for(int i=0;i<cookies.size();i++)
+					Logger.Instance().Write(url+"  cookie: " + cookies.get(i));
+				
+				if(resEntity !=null)
+				{
+					String line =EntityUtils.toString(resEntity);
+					Logger.Instance().Write(url+"  response: " + line);
+					callback.OnCallback(true,line);
+					return  true;
+					
+				}
+
+			}
+			catch(Exception e){
+				Logger.Instance().Write(e);
+				} finally {
+				}
+			
+			
+			callback.OnCallback(false,null);
+			return false;
+		
+	}
+
+
+	@Override
+	public String POSTSync(String url, Map<String, Object> params) {
+		// TODO Auto-generated method stub
+		
+		try
+		{
+			
+
+			HttpPost httpPost = new HttpPost(url);
+			
+			//타임아웃 걸기
+			HttpParams httpParams = httpPost.getParams();
+			HttpConnectionParams.setConnectionTimeout(httpParams,timeout_ms_syncrequest);
+			HttpConnectionParams.setSoTimeout(httpParams,timeout_ms_syncrequest);
+	
+			
+			List<NameValuePair> paramList = new ArrayList<NameValuePair>();
+			for(Map.Entry<String,Object> entry:params.entrySet())
+				paramList.add(new BasicNameValuePair(entry.getKey(),entry.getValue().toString()));
+			httpPost.setEntity(new UrlEncodedFormEntity(paramList));
+			httpPost.setHeader("Location", "ko");
+			HttpResponse responsePost = httpClient.execute(httpPost,httpContext);
+			HttpEntity resEntity = responsePost.getEntity();
+			
+			List<Cookie> cookies = cookieStore.getCookies();
+			for(int i=0;i<cookies.size();i++)
+				Logger.Instance().Write(url+"  cookie: " + cookies.get(i));
+			
+			if(resEntity !=null)
+			{
+				String line =EntityUtils.toString(resEntity);
+				Logger.Instance().Write(url+"  response: " + line);
+				return  line;
+				
+			}
+			return  "";
+		}
+		catch(Exception e){
+			Logger.Instance().Write(e);
+			
+			} 
+		return null;
+	}
+
+
+	@Override
+	public String GETSync(String url, Map<String, Object> params) {
+		try
+		{
+			url +="?"+buildParameters(params);
+			
+			HttpGet httpGet = new HttpGet(url);
+			
+			//타임아웃 걸기
+			HttpParams httpParams = httpGet.getParams();
+			HttpConnectionParams.setConnectionTimeout(httpParams,timeout_ms_syncrequest);
+			HttpConnectionParams.setSoTimeout(httpParams,timeout_ms_syncrequest);
+	
+			
+			httpGet.setHeader("Location", "ko");
+			HttpResponse responsePost = httpClient.execute(httpGet,httpContext);
+			HttpEntity resEntity = responsePost.getEntity();
+			
+			List<Cookie> cookies = cookieStore.getCookies();
+			for(int i=0;i<cookies.size();i++)
+				Logger.Instance().Write(url+"  cookie: " + cookies.get(i));
+			
+			if(resEntity !=null)
+			{
+				String line =EntityUtils.toString(resEntity);
+				Logger.Instance().Write(url+"  response: " + line);
+				return line;
+				
+			}
+			return "";
+		}
+		catch(Exception e){
+			Logger.Instance().Write(e);
+			}
+		
+		
+		return null;
+	}
 	// [end]
 
 }

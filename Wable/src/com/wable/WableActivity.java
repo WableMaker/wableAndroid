@@ -76,6 +76,7 @@ public class WableActivity extends Activity implements OnClickListener {
         
         APIProxyLayer.Instance().CategoryList(new IAPIProxyCallback() {
 
+<<<<<<< HEAD
         	@Override
         	public void OnCallback(boolean success, JSONObject json) {
 
@@ -172,6 +173,43 @@ public class WableActivity extends Activity implements OnClickListener {
 //				if(success)
 //				{
 //					Logger.Instance().Write(json.toString());
+=======
+			@Override
+			public void OnCallback(boolean success, JSONObject json) {
+				if(success)
+				{
+					Logger.Instance().Write(json.toString());
+					
+					APIProxyLayer.Instance().MyInfo(new IAPIProxyCallback(){
+
+						@Override
+						public void OnCallback(boolean success, JSONObject json) {
+							if(success)
+							{
+								Logger.Instance().Write(json.toString());
+			
+								
+							}
+							else Logger.Instance().Write("Fail to GetMyInfo");
+						}
+						
+					});
+					
+					APIProxyLayer.Instance().MessageSendImage("-9223372036854775805", "/sdcard/koala.jpg", new IAPIProxyCallback(){
+						@Override
+						public void OnCallback(boolean success, JSONObject json) {
+							if(success)
+							{
+								Logger.Instance().Write(json.toString());
+								
+							}
+							else Logger.Instance().Write("Fail to MessageSendImage");
+						}
+					});
+					
+//					long dtMili = System.currentTimeMillis();
+//					Date dt = new Date(dtMili);
+>>>>>>> a758d3c3b4bd94cf4cefc8f0bc133d745b86d8a3
 //					
 //					APIProxyLayer.Instance().MyInfo(new IAPIProxyCallback(){
 //
@@ -234,48 +272,48 @@ public class WableActivity extends Activity implements OnClickListener {
 		
 		case R.id.btnFacebook:
 			
-			facebook = new Facebook("180729825379631");
-	        
-	        pref = getPreferences(MODE_PRIVATE);
-	        String access_token = pref.getString("access_token", null);
-	        long expires = pref.getLong("access_expires", 0);
-	        if(access_token != null) {
-	            facebook.setAccessToken(access_token);
-	        }
-	        if(expires != 0) {
-	            facebook.setAccessExpires(expires);
-	        }
-
-	        
-	        
-			
-			facebook.authorize(WableActivity.this, new DialogListener() {
-		        @Override
-		        public void onComplete(Bundle values) {
-		        	
-		        	Editor editor = pref.edit();
-	                editor.putString("access_token", facebook.getAccessToken());
-	                editor.putLong("access_expires", facebook.getAccessExpires());
-	                editor.commit();
-		        }
-
-		        @Override
-		        public void onFacebookError(FacebookError error) {
-		        	
-		        }
-
-		        @Override
-		        public void onError(DialogError e) {
-		        	
-		        }
-
-		        @Override
-		        public void onCancel() {
-		        	
-		        }
-		    }); 
-			
-			
+//			facebook = new Facebook("180729825379631");
+//	        
+//	        pref = getPreferences(MODE_PRIVATE);
+//	        String access_token = pref.getString("access_token", null);
+//	        long expires = pref.getLong("access_expires", 0);
+//	        if(access_token != null) {
+//	            facebook.setAccessToken(access_token);
+//	        }
+//	        if(expires != 0) {
+//	            facebook.setAccessExpires(expires);
+//	        }
+//
+//	        
+//	        
+//			
+//			facebook.authorize(WableActivity.this, new DialogListener() {
+//		        @Override
+//		        public void onComplete(Bundle values) {
+//		        	
+//		        	Editor editor = pref.edit();
+//	                editor.putString("access_token", facebook.getAccessToken());
+//	                editor.putLong("access_expires", facebook.getAccessExpires());
+//	                editor.commit();
+//		        }
+//
+//		        @Override
+//		        public void onFacebookError(FacebookError error) {
+//		        	
+//		        }
+//
+//		        @Override
+//		        public void onError(DialogError e) {
+//		        	
+//		        }
+//
+//		        @Override
+//		        public void onCancel() {
+//		        	
+//		        }
+//		    }); 
+//			
+//			
 			break;
 			
 		case R.id.btnLoginFind:
