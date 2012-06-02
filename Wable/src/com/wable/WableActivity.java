@@ -15,7 +15,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -26,10 +25,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
-import com.facebook.android.DialogError;
 import com.facebook.android.Facebook;
-import com.facebook.android.Facebook.DialogListener;
-import com.facebook.android.FacebookError;
 import com.wable.adapter.CategoryElement;
 import com.wable.http.apiproxy.APIProxyLayer;
 import com.wable.http.apiproxy.IAPIProxyCallback;
@@ -76,7 +72,6 @@ public class WableActivity extends Activity implements OnClickListener {
         
         APIProxyLayer.Instance().CategoryList(new IAPIProxyCallback() {
 
-<<<<<<< HEAD
         	@Override
         	public void OnCallback(boolean success, JSONObject json) {
 
@@ -166,14 +161,14 @@ public class WableActivity extends Activity implements OnClickListener {
         
 
              
-//        APIProxyLayer.Instance().Login("cc", "111111", new IAPIProxyCallback(){
+        APIProxyLayer.Instance().Login("cc", "111111", new IAPIProxyCallback(){
 //
 //			@Override
 //			public void OnCallback(boolean success, JSONObject json) {
 //				if(success)
 //				{
 //					Logger.Instance().Write(json.toString());
-=======
+
 			@Override
 			public void OnCallback(boolean success, JSONObject json) {
 				if(success)
@@ -209,7 +204,6 @@ public class WableActivity extends Activity implements OnClickListener {
 					
 //					long dtMili = System.currentTimeMillis();
 //					Date dt = new Date(dtMili);
->>>>>>> a758d3c3b4bd94cf4cefc8f0bc133d745b86d8a3
 //					
 //					APIProxyLayer.Instance().MyInfo(new IAPIProxyCallback(){
 //
@@ -255,8 +249,11 @@ public class WableActivity extends Activity implements OnClickListener {
 //			}
 //        	
 //        });
-    }
     
+				}
+			}
+	    });
+    }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
