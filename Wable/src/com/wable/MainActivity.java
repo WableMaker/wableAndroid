@@ -2,6 +2,7 @@ package com.wable;
 
 import android.app.ActivityGroup;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,6 +18,8 @@ import com.wable.tab.setting.SettingActivity;
 public class MainActivity extends ActivityGroup implements OnClickListener {
 
 	private int viewId;
+	Drawable viewImage;
+	private View originView;
 	private View[] views;
 	private LinearLayout container;
 	
@@ -40,8 +43,11 @@ public class MainActivity extends ActivityGroup implements OnClickListener {
 		views[2] = getLocalActivityManager().startActivity("SEARCH", new Intent(this, SearchActivity.class)).getDecorView();
 		views[3] = getLocalActivityManager().startActivity("SETTING", new Intent(this, SettingActivity.class)).getDecorView();
 		
-		viewId = views[0].getId();
-		container.addView(views[0]);
+		viewId = R.id.btnMainMypage;		
+		originView = findViewById(R.id.btnMainMypage);			
+		viewImage = getResources().getDrawable(R.drawable.tab_bar_activity);
+		
+		container.addView(views[0]);	
 		
 		params =  new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT); 
 		paramh =  new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT); 
@@ -61,29 +67,38 @@ public class MainActivity extends ActivityGroup implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		
-		if(viewId == v.getId()) return;
+		if(viewId == v.getId()) return;	
+	
+		originView.setBackgroundDrawable(viewImage);
+		viewImage = v.getBackground();
 		
+			
 		container.removeAllViews();		
 		switch (v.getId()) {
 		
 		case R.id.btnMainMypage:
-			container.addView(views[0]);
+			container.addView(views[0]);			
+			v.setBackgroundResource(R.drawable.tab_bar_activity_selected);
 			break;
 			
 		case R.id.btnMainPost:
 			container.addView(views[1]);
+			v.setBackgroundResource(R.drawable.tab_bar_post_selected);
 			break;
 					
 		case R.id.btnMainSearch:
 			container.addView(views[2]);
+			v.setBackgroundResource(R.drawable.tab_bar_browse_selected);
 			break;
 			
 		case R.id.btnMainSetting:
 			container.addView(views[3]);
+			v.setBackgroundResource(R.drawable.tab_bar_profile_selected);
 			break;
 
 		}		
 		viewId = v.getId();
+		originView = v;
 	}
 	
 	public void hideBottomTab() { container.setLayoutParams(paramh); }

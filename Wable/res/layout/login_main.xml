@@ -3,114 +3,114 @@
     android:id="@+id/RelativeLayout1"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical" android:background="@drawable/login_bg">
 
-    <TextView
-        android:id="@+id/textTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="26dp"
-        android:text="Wable 시작하기"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+   
 
     <Button
         android:id="@+id/btnFacebook"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textTitle"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="17dp"
-        android:text="페이스북으로 로그인 하기" />
-
-    <TextView
-        android:id="@+id/TextView01"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_below="@+id/textTitle"
-        android:layout_centerHorizontal="true"
-        android:background="@android:color/darker_gray" />
+        android:layout_height="44dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="26dp"
+        android:layout_marginRight="26dp"
+        android:layout_marginTop="150dp"
+        android:background="@drawable/facebook_login_btn"
+        android:text="페이스북으로 로그인 하기" >
+      
+    </Button>
 
     <TextView
         android:id="@+id/textLine"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btnFacebook"
+        android:layout_alignRight="@+id/btnFacebook"
         android:layout_below="@+id/btnFacebook"
-        android:layout_centerHorizontal="true"
-        android:background="@android:color/darker_gray" />
+        android:layout_marginTop="16dp"
+        android:background="@drawable/login_form_or" />
 
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
+        android:layout_height="36dp"
+        android:layout_alignLeft="@+id/textLine"
+        android:layout_alignRight="@+id/textLine"
         android:layout_below="@+id/textLine"
-        android:layout_marginTop="14dp"
-        android:text="이메일로 로그인 하기"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:layout_marginTop="16dp"
+        android:background="@drawable/login_form_id" />
 
     <EditText
         android:id="@+id/editLoginEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView1"
-        android:inputType="textEmailAddress" android:hint="이메일" android:layout_marginRight="5dp" android:layout_marginLeft="5dp">
+        android:layout_width="220dp"
+        android:layout_height="36dp"
+        android:layout_alignRight="@+id/textView1"
+        android:layout_alignTop="@+id/textView1"
+        android:background="#00000000"
+        android:ems="10"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:hint="아이디" />
 
-        <requestFocus />
-    </EditText>
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_alignRight="@+id/textView1"
+        android:layout_below="@+id/textView1"
+        android:background="@drawable/login_form_password" />
 
     <EditText
         android:id="@+id/editLoginPass"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/editLoginEmail"
-        android:inputType="textPassword" android:hint="비밀번호" android:layout_marginLeft="5dp" android:layout_marginRight="5dp"/>
-
+        android:layout_height="36dp"
+        android:layout_alignLeft="@+id/editLoginEmail"
+        android:layout_alignRight="@+id/textView2"
+        android:layout_alignTop="@+id/textView2"
+        android:background="#00000000"
+        android:ems="10"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:hint="비밀번호"
+        android:inputType="textPassword" >
+    </EditText>
+
     <Button
         android:id="@+id/btnLoginFind"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/editLoginPass"
-        android:text="비밀번호 찾기" />
-
+        android:layout_height="36dp"
+        android:layout_alignRight="@+id/textView2"
+        android:layout_alignTop="@+id/textView2"
+        android:background="@drawable/login_form" />
+
     <Button
         android:id="@+id/btnLogin"
-        android:layout_width="wrap_content"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/editLoginPass"
-        android:layout_toRightOf="@+id/btnLoginFind"
+        android:layout_alignRight="@+id/textView2"
+        android:layout_below="@+id/textView2"
+        android:layout_marginTop="27dp"
+        android:background="@drawable/login_btn"
         android:text="로그인" />
-
-    <TextView
-        android:id="@+id/TextView02"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/btnLoginFind"
-        android:background="@android:color/darker_gray" />
 
     <Button
         android:id="@+id/btnLoginRegister"
-        android:layout_width="match_parent"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/TextView02"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="21dp"
-        android:text="Wable 회원가입" />
-
+        android:layout_alignBaseline="@+id/btnLogin"
+        android:layout_alignBottom="@+id/btnLogin"
+        android:layout_alignLeft="@+id/textView2"
+        android:background="@drawable/login_form_create_account_btn"
+        android:text="회원가입" />
+
     <ImageView
         android:id="@+id/TestImages"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
+        android:layout_alignLeft="@+id/btnLoginRegister"
         android:layout_below="@+id/btnLoginRegister"
         android:src="@drawable/ic_launcher" />
+            
 
 </RelativeLayout>

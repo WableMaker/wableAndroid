@@ -3,7 +3,7 @@
     android:id="@+id/RelativeLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical" android:background="@drawable/bg">
 
     <RelativeLayout
         android:id="@+id/RelativeLayout2"
@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/RelativeLayout2"
-        android:text="나의 요청사항 1" />
+        android:text="나의 요청사항 1" android:background="@drawable/regist_title"/>
 
     <TextView
         android:id="@+id/textPostSubmitAddr"
@@ -56,7 +56,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:text="Let&apos;s Wable" />
+        android:background="@drawable/green_wable"/>
 
     <Button
         android:id="@+id/POSTbtnSubmitDetail"
@@ -65,22 +65,23 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/POSTbtnSubmitTitle"
         android:text="상세 설명 1" />
-
+
     <Button
         android:id="@+id/POSTbtnService"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/POSTbtnSubmitDetail"
+        android:background="@drawable/regist_price"
         android:text="서비스 비용" />
 
     <Button
         android:id="@+id/POSTbtnTime"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/POSTbtnSubmitDetail"
-        android:text="남은 시간" />
+        android:text="남은 시간" android:background="@drawable/regist_time"/>
 
     <com.google.android.maps.MapView
         android:id="@+id/mapview"
@@ -91,5 +92,15 @@
         android:apiKey="0oqzs7eIvbFX8Faveem2CANcvsCaS5O1nULYH3A"
         android:clickable="true" >
     </com.google.android.maps.MapView>
+
+    <Button
+        android:id="@+id/POSTbtnLoc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/POSTbtnSubmitOk"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="15dp"
+        android:layout_marginRight="14dp"
+        android:background="@drawable/nav_locate_me_button" />
 
 </RelativeLayout>

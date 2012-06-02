@@ -19,9 +19,15 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.Transformation;
+import android.view.animation.TranslateAnimation;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
@@ -40,9 +46,14 @@ public class WableActivity extends Activity implements OnClickListener {
 	private Facebook facebook;
 	private SharedPreferences pref;
 	private Button loginOk;
+	private EditText etUser, etPass;
 	
-	Map<Integer, HashMap<Integer, CategoryElement>> categoriesRequest;
-	Map<Integer, HashMap<Integer, CategoryElement>> categoriesProvide;
+	
+	private RelativeLayout layout;
+	Animation aniUp, aniDown;
+	boolean isUp;
+	
+	private ScrollView sv;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,11 +65,29 @@ public class WableActivity extends Activity implements OnClickListener {
         findViewById(R.id.btnLoginFind).setOnClickListener(this);
         findViewById(R.id.btnLoginRegister).setOnClickListener(this);
         
+        sv = (ScrollView)findViewById(R.id.scrollView1);    
+        layout = (RelativeLayout)findViewById(R.id.RelativeLayout1);
+        aniUp = AnimationUtils.loadAnimation(context, R.anim.layout_up);
+        aniDown = AnimationUtils.loadAnimation(context, R.anim.layout_down);
+        isUp = false;
+        
         loginOk = (Button)findViewById(R.id.btnLogin);
         loginOk.setOnClickListener(this);
         
-        EditText et = (EditText)findViewById(R.id.editLoginPass);
-        et.setOnEditorActionListener(new OnEditorActionListener() {
+        etUser = (EditText)findViewById(R.id.editLoginEmail);
+        etUser.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+				if(!isUp)
+					layout.startAnimation(aniUp);				
+			}
+		});
+        
+        
+        etPass = (EditText)findViewById(R.id.editLoginPass);
+        etPass.setOnEditorActionListener(new OnEditorActionListener() {
 			
 			@Override
 			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -68,99 +97,7 @@ public class WableActivity extends Activity implements OnClickListener {
 		});
         
       
-        categoriesRequest = new HashMap<Integer, HashMap<Integer, CategoryElement>>();
-        
-        APIProxyLayer.Instance().CategoryList(new IAPIProxyCallback() {
-
-        	@Override
-        	public void OnCallback(boolean success, JSONObject json) {
-
-        		if(success)
-        		{
-        			Logger.Instance().Write(json.toString());
-
-        			try {
-
-        				JSONObject obj = new JSONObject(json.getString("data"));
-        				JSONArray request = obj.getJSONArray("request");
-        				JSONArray provide = obj.getJSONArray("provide");
-        				
-        				List<CategoryElement> list = new ArrayList<CategoryElement>();
-        				
-        				 for(int i=0, m=request.length(); i<m; i++) {
-        					 
-        					 CategoryElement element = new CategoryElement();
-        					 
-        					 JSONObject o = request.getJSONObject(i);
-        					 
-        					 element.setId(o.getInt("id"))
-        					 		.setTitle(o.getString("title"))
-        					 		.setPhoto(o.getString("photo"))
-        					 		.setPrice(o.getInt("price"))
-        					 		.setDescription(o.getString("description"))
-        					 		.setType(o.getInt("type"))
-        					 		.setDue_time(o.getString("due_time"))
-        					 		.setOrder(o.getInt("order"))
-        					 		.setParent_id(o.getString("parent_id"));
-        					 
-        					 int p = 0;
-        					 if(element.getParent_id() != "null") {
-        						 p = Integer.parseInt(element.getParent_id());
-        					 }
-        					 
-    						 if(!categoriesRequest.containsKey(p)) {
-    							 categoriesRequest.put(p, new HashMap<Integer, CategoryElement>());
-    						 } 
-    						 categoriesRequest.get(p).put(element.getOrder(), element);       					 
-        				 }
-        				 
-        				 Iterator<Integer> treeMapIter = categoriesRequest.keySet().iterator();
-        				 
-        				 String str ="";
-        				 while( treeMapIter.hasNext()) {
-        					 int key = treeMapIter.next();
-        					 str += key + " / ";
-        				 }
-        				 
-        				 TreeMap<Integer, HashMap<Integer, CategoryElement>> treeMap = new TreeMap( categoriesRequest );
-        				 treeMapIter = treeMap.keySet().iterator();
-        				 
-        				 str ="";
-        				 while( treeMapIter.hasNext()) {
-        					 int key = treeMapIter.next();
-        					 //String value = (String)treeMap.get( key );
-
-        					 str += key + " / ";
-        				 }
-
-
-//        				for(int i=0, m=arr.length(); i<m; i++ ) {
-//
-//        					JSONObject data = arr.getJSONObject(i);
-//
-//        					String str = data.getString("id");
-//        					str = data.getString("title");
-//        					str = data.getString("description");
-//        					str = data.getString("price");
-//        					str = data.getString("photo");
-//        					str = data.getString("type");
-//        					str = data.getString("order");
-//
-//        				}
-
-
-
-
-        			} catch (JSONException e) {
-        				e.printStackTrace();
-        			}	
-
-        		}else 	Logger.Instance().Write("Fail to get Category");
-        	}
-        });
-        
-
-             
+              
         APIProxyLayer.Instance().Login("cc", "111111", new IAPIProxyCallback(){
 //
 //			@Override
@@ -190,17 +127,17 @@ public class WableActivity extends Activity implements OnClickListener {
 						
 					});
 					
-					APIProxyLayer.Instance().MessageSendImage("-9223372036854775805", "/sdcard/koala.jpg", new IAPIProxyCallback(){
-						@Override
-						public void OnCallback(boolean success, JSONObject json) {
-							if(success)
-							{
-								Logger.Instance().Write(json.toString());
-								
-							}
-							else Logger.Instance().Write("Fail to MessageSendImage");
-						}
-					});
+//					APIProxyLayer.Instance().MessageSendImage("-9223372036854775805", "/sdcard/koala.jpg", new IAPIProxyCallback(){
+//						@Override
+//						public void OnCallback(boolean success, JSONObject json) {
+//							if(success)
+//							{
+//								Logger.Instance().Write(json.toString());
+//								
+//							}
+//							else Logger.Instance().Write("Fail to MessageSendImage");
+//						}
+//					});
 					
 //					long dtMili = System.currentTimeMillis();
 //					Date dt = new Date(dtMili);
@@ -263,6 +200,9 @@ public class WableActivity extends Activity implements OnClickListener {
 
 	@Override
 	public void onClick(View v) {
+		
+		if(isUp)
+			layout.startAnimation(aniDown);	
 		
 		Intent intent;
 		switch (v.getId()) {

@@ -3,45 +3,46 @@
     android:id="@+id/RelativeLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical" android:background="@drawable/bg">
 
     <LinearLayout
         android:id="@+id/Containers"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:orientation="vertical">
     </LinearLayout>
-
+
     <LinearLayout
         android:id="@+id/Bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true" >
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/tab_bar_bg" android:gravity="bottom">
 
         <Button
             android:id="@+id/btnMainMypage"
-            android:layout_width="wrap_content"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:text="마이" />
+            android:background="@drawable/tab_bar_activity_selected" />
 
         <Button
             android:id="@+id/btnMainPost"
-            android:layout_width="wrap_content"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:text="등록" />
+            android:background="@drawable/tab_bar_post" />
 
         <Button
             android:id="@+id/btnMainSearch"
-            android:layout_width="wrap_content"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:text="검색" />
+            android:background="@drawable/tab_bar_browse"/>
 
         <Button
             android:id="@+id/btnMainSetting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="설정" />
+            android:background="@drawable/tab_bar_profile"/>
     </LinearLayout>
 
 </RelativeLayout>

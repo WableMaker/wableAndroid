@@ -18,7 +18,7 @@
         
         <activity
             android:name=".WableActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name" android:windowSoftInputMode="stateAlwaysHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
