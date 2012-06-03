@@ -83,4 +83,7 @@ public interface IAPIProxyLayer {
 	
 	// [end]
 	
+	// [start] System
+	boolean SystemAppVersion(IAPIProxyCallback callback);	
+	// [end]
 }

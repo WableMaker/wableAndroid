@@ -1763,6 +1763,44 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		return true;
 	}
 
+
+
+	@Override
+	public boolean SystemAppVersion(final IAPIProxyCallback callback) {
+		
+
+		_httpLayer.GETAsync(_domain+"System/AndroidAppVersion", null, new IHttpCallback(){
+
+			@Override
+			public void OnCallback(boolean success,String result) {
+				// TODO Auto-generated method stub
+				JSONObject obj = null;
+				if(success == true)
+				{
+					try
+					{
+						
+						if(result !=null)
+						{
+							obj = new JSONObject(result);
+							if(true == obj.getBoolean("success"))
+								SessionUpdate("SystemAppVersion");
+						}
+					}
+					catch(Exception e)
+					{
+						Logger.Instance().Write(e);
+						callback.OnCallback(false,null);
+					}
+				}
+				callback.OnCallback(success,obj);
+			}
+		
+		});
+		
+		return true;
+	}
+
 	// [end]
 	
 
