@@ -1,5 +1,8 @@
 package com.wable;
 
+import java.io.ObjectStreamClass;
+import java.util.TreeMap;
+
 import android.app.ActivityGroup;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -60,7 +63,6 @@ public class MainActivity extends ActivityGroup implements OnClickListener {
         paramh.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
         paramh.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
         container.setLayoutParams(params);
-
 		
 	}
 

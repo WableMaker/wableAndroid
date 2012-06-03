@@ -1,28 +1,18 @@
 package com.wable;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import java.io.File;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.animation.Transformation;
-import android.view.animation.TranslateAnimation;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,12 +22,9 @@ import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
 import com.facebook.android.Facebook;
-import com.wable.adapter.CategoryElement;
-import com.wable.http.apiproxy.APIProxyLayer;
-import com.wable.http.apiproxy.IAPIProxyCallback;
 import com.wable.tab.login.PasswordFindActivity;
 import com.wable.tab.login.RegisterActivity;
-import com.wable.util.Logger;
+import com.wable.util.Utils;
 
 public class WableActivity extends Activity implements OnClickListener {
     /** Called when the activity is first created. */
@@ -59,7 +46,17 @@ public class WableActivity extends Activity implements OnClickListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_main);  
-        context = this;
+        context = this;        
+        pref = PreferenceManager.getDefaultSharedPreferences(this);
+        
+//        Editor edit = pref.edit();
+//		edit.putBoolean("categoryUpdate", true);
+//		edit.commit();		
+        
+        String path = context.getFilesDir().getAbsolutePath() + "/cate";
+        Utils.DeleteFolder(path);        
+        File file = new File(path);
+        file.mkdir();
         
         findViewById(R.id.btnFacebook).setOnClickListener(this);
         findViewById(R.id.btnLoginFind).setOnClickListener(this);
@@ -98,49 +95,35 @@ public class WableActivity extends Activity implements OnClickListener {
         
       
               
-        APIProxyLayer.Instance().Login("cc", "111111", new IAPIProxyCallback(){
+//        APIProxyLayer.Instance().Login("cc", "111111", new IAPIProxyCallback(){
+////
+////			@Override
+////			public void OnCallback(boolean success, JSONObject json) {
+////				if(success)
+////				{
+////					Logger.Instance().Write(json.toString());
 //
 //			@Override
 //			public void OnCallback(boolean success, JSONObject json) {
 //				if(success)
 //				{
-//					Logger.Instance().Write(json.toString());
-
-			@Override
-			public void OnCallback(boolean success, JSONObject json) {
-				if(success)
-				{
-					Logger.Instance().Write(json.toString());
-					
-					APIProxyLayer.Instance().MyInfo(new IAPIProxyCallback(){
-
-						@Override
-						public void OnCallback(boolean success, JSONObject json) {
-							if(success)
-							{
-								Logger.Instance().Write(json.toString());
-			
-								
-							}
-							else Logger.Instance().Write("Fail to GetMyInfo");
-						}
-						
-					});
-					
-//					APIProxyLayer.Instance().MessageSendImage("-9223372036854775805", "/sdcard/koala.jpg", new IAPIProxyCallback(){
-//						@Override
-//						public void OnCallback(boolean success, JSONObject json) {
-//							if(success)
-//							{
-//								Logger.Instance().Write(json.toString());
-//								
-//							}
-//							else Logger.Instance().Write("Fail to MessageSendImage");
+//					try {
+//						Logger.Instance().Write(json.toString());						
+//						long category =  pref.getLong("category", 0);
+//						long server = json.getJSONObject("data").getLong("categorytick");
+//						if(category < server) {
+//									
+//							Editor edit = pref.edit();
+//							edit.putLong("category", server );
+//							edit.putBoolean("categoryUpdate", true);
+//							edit.commit();					
+//
 //						}
-//					});
-					
-//					long dtMili = System.currentTimeMillis();
-//					Date dt = new Date(dtMili);
+//						
+//					} catch (JSONException e) {
+//						e.printStackTrace();
+//					}
+//					
 //					
 //					APIProxyLayer.Instance().MyInfo(new IAPIProxyCallback(){
 //
@@ -149,16 +132,7 @@ public class WableActivity extends Activity implements OnClickListener {
 //							if(success)
 //							{
 //								Logger.Instance().Write(json.toString());
-//								try {
-//									JSONObject data = new JSONObject(json.getString("data"));
-//									String str = data.getString("name");
-//									str = data.getString("email");
-//									str = data.getString("phone");
-//									str = data.getString("mobile");
-//									
-//								} catch (JSONException e) {
-//									e.printStackTrace();
-//								}
+//			
 //								
 //							}
 //							else Logger.Instance().Write("Fail to GetMyInfo");
@@ -166,30 +140,69 @@ public class WableActivity extends Activity implements OnClickListener {
 //						
 //					});
 //					
-////					long dtMili = System.currentTimeMillis();
-////					Date dt = new Date(dtMili);
-////					
-////					APIProxyLayer.Instance().AddRequest("android", "android", 123, 0, dt, 36, 127, false, false, false, new IAPIProxyCallback(){
-////
+////					APIProxyLayer.Instance().MessageSendImage("-9223372036854775805", "/sdcard/koala.jpg", new IAPIProxyCallback(){
 ////						@Override
 ////						public void OnCallback(boolean success, JSONObject json) {
-////							// TODO Auto-generated method stub
 ////							if(success)
 ////							{
 ////								Logger.Instance().Write(json.toString());
+////								
 ////							}
-////							else Logger.Instance().Write("Fail to AddRequest");
+////							else Logger.Instance().Write("Fail to MessageSendImage");
+////						}
+////					});
+//					
+////					long dtMili = System.currentTimeMillis();
+////					Date dt = new Date(dtMili);
+////					
+////					APIProxyLayer.Instance().MyInfo(new IAPIProxyCallback(){
+////
+////						@Override
+////						public void OnCallback(boolean success, JSONObject json) {
+////							if(success)
+////							{
+////								Logger.Instance().Write(json.toString());
+////								try {
+////									JSONObject data = new JSONObject(json.getString("data"));
+////									String str = data.getString("name");
+////									str = data.getString("email");
+////									str = data.getString("phone");
+////									str = data.getString("mobile");
+////									
+////								} catch (JSONException e) {
+////									e.printStackTrace();
+////								}
+////								
+////							}
+////							else Logger.Instance().Write("Fail to GetMyInfo");
 ////						}
 ////						
 ////					});
-//				}else 	Logger.Instance().Write("Fail to login");
+////					
+//////					long dtMili = System.currentTimeMillis();
+//////					Date dt = new Date(dtMili);
+//////					
+//////					APIProxyLayer.Instance().AddRequest("android", "android", 123, 0, dt, 36, 127, false, false, false, new IAPIProxyCallback(){
+//////
+//////						@Override
+//////						public void OnCallback(boolean success, JSONObject json) {
+//////							// TODO Auto-generated method stub
+//////							if(success)
+//////							{
+//////								Logger.Instance().Write(json.toString());
+//////							}
+//////							else Logger.Instance().Write("Fail to AddRequest");
+//////						}
+//////						
+//////					});
+////				}else 	Logger.Instance().Write("Fail to login");
+////			}
+////        	
+////        });
+//    
+//				}
 //			}
-//        	
-//        });
-    
-				}
-			}
-	    });
+//	    });
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

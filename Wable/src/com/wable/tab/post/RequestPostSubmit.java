@@ -70,12 +70,10 @@ public class RequestPostSubmit extends MapActivity implements LocationListener, 
 	public void onClick(View v) {
 		
 		Intent i;
-		
 		switch (v.getId()) {
 		
-		
 		case R.id.POSTbtnSubmitTitle:
-			i = new Intent(this, RequestCategory.class);
+			i = new Intent(this, RequestCategory.class);			
 			startActivity(i);
 			break;
 			
