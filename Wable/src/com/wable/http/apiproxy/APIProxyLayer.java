@@ -1141,7 +1141,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 
 	@Override
-	public boolean BiddingOfferAsProvider(String request_id, int price,
+	public boolean BiddingOfferAsProvider(String request_id, String message,
 			final IAPIProxyCallback callback) {
 		
 
@@ -1152,7 +1152,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		}
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("request_id", request_id);
-		params.put("price", price);
+		params.put("message", message);
 		
 		_httpLayer.POSTAsync(_domain+"Bidding/OfferAsProvider", params, new IHttpCallback(){
 
@@ -1189,7 +1189,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 
 	@Override
-	public boolean BiddingOfferAsRequester(String provide_id, int price,
+	public boolean BiddingOfferAsRequester(String provide_id, String message,
 			final IAPIProxyCallback callback) {
 		
 
@@ -1200,7 +1200,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		}
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("provide_id", provide_id);
-		params.put("price", price);
+		params.put("message", message);
 		
 		_httpLayer.POSTAsync(_domain+"Bidding/OfferAsRequester", params, new IHttpCallback(){
 
@@ -1747,6 +1747,44 @@ public class APIProxyLayer implements IAPIProxyLayer {
 							obj = new JSONObject(result);
 							if(true == obj.getBoolean("success"))
 								SessionUpdate("ProvideUpdate");
+						}
+					}
+					catch(Exception e)
+					{
+						Logger.Instance().Write(e);
+						callback.OnCallback(false,null);
+					}
+				}
+				callback.OnCallback(success,obj);
+			}
+		
+		});
+		
+		return true;
+	}
+
+
+
+	@Override
+	public boolean SystemAppVersion(final IAPIProxyCallback callback) {
+		
+
+		_httpLayer.GETAsync(_domain+"System/AndroidAppVersion", null, new IHttpCallback(){
+
+			@Override
+			public void OnCallback(boolean success,String result) {
+				// TODO Auto-generated method stub
+				JSONObject obj = null;
+				if(success == true)
+				{
+					try
+					{
+						
+						if(result !=null)
+						{
+							obj = new JSONObject(result);
+							if(true == obj.getBoolean("success"))
+								SessionUpdate("SystemAppVersion");
 						}
 					}
 					catch(Exception e)
