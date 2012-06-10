@@ -27,7 +27,8 @@ public interface IAPIProxyLayer {
 	// [start] Request
 	
 	boolean RequestOtherList(String userid,String lastid,IAPIProxyCallback callback);//내정보
-	boolean RequestMyList(String lastid,IAPIProxyCallback callback);//내정보
+	boolean RequestMyActiveList(String lastid,IAPIProxyCallback callback);//활성화된 또는 만료된 요청목록
+	boolean RequestMyDoneList(String lastid,IAPIProxyCallback callback);//완료된 요청목록
 	boolean RequestListbyTime(String lastid,String keyword,IAPIProxyCallback callback);//내정보
 	boolean RequestListbyArea(double north,double south,double ease,double west,String keyword,IAPIProxyCallback callback);//내정보
 	boolean RequestListbyDistance(double lat, double lon,double distance,String keyword,IAPIProxyCallback callback);//내정보
@@ -45,7 +46,8 @@ public interface IAPIProxyLayer {
 	// [start] Provide
 	
 	boolean ProvideOtherList(String userid,String lastid,IAPIProxyCallback callback);//내정보
-	boolean ProvideMyList(String lastid,IAPIProxyCallback callback);//내정보
+	boolean ProvideMyActiveList(String lastid,IAPIProxyCallback callback);//활성화된 또는 만료된 제공목록
+	boolean ProvideMyDoneList(String lastid,IAPIProxyCallback callback);//완료된 제공목록
 	boolean ProvideListbyTime(String lastid,String keyword,IAPIProxyCallback callback);//내정보
 	boolean ProvideListbyArea(double north,double south,double ease,double west,String keyword,IAPIProxyCallback callback);//내정보
 	boolean ProvideListbyDistance(double lat, double lon,double distance,String keyword,IAPIProxyCallback callback);//내정보

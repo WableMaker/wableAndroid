@@ -524,7 +524,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 
 	@Override
-	public boolean RequestMyList(String lastid, final IAPIProxyCallback callback) {
+	public boolean RequestMyActiveList(String lastid, final IAPIProxyCallback callback) {
 
 		if(!_httpLayer.IsConnectedSession())
 		{
@@ -535,7 +535,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		if(lastid !=null)
 			params.put("lastid", lastid);
 		
-		_httpLayer.GETAsync(_domain+"Request/MyList", params, new IHttpCallback(){
+		_httpLayer.GETAsync(_domain+"Request/MyActiveList", params, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -550,7 +550,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						{
 							obj = new JSONObject(result);
 							if(true == obj.getBoolean("success"))
-								SessionUpdate("MyRequestList");
+								SessionUpdate("MyActiveRequestList");
 						}
 					}
 					catch(Exception e)
@@ -764,7 +764,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 
 	@Override
-	public boolean ProvideMyList(String lastid, final IAPIProxyCallback callback) {
+	public boolean ProvideMyActiveList(String lastid, final IAPIProxyCallback callback) {
 
 		if(!_httpLayer.IsConnectedSession())
 		{
@@ -775,7 +775,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		if(lastid !=null)
 			params.put("lastid", lastid);
 		
-		_httpLayer.GETAsync(_domain+"Provide/MyList", params, new IHttpCallback(){
+		_httpLayer.GETAsync(_domain+"Provide/MyActiveList", params, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -790,7 +790,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						{
 							obj = new JSONObject(result);
 							if(true == obj.getBoolean("success"))
-								SessionUpdate("MyProvideList");
+								SessionUpdate("MyActiveProvideList");
 						}
 					}
 					catch(Exception e)
@@ -2024,6 +2024,96 @@ public class APIProxyLayer implements IAPIProxyLayer {
 							obj = new JSONObject(result);
 							if(true == obj.getBoolean("success"))
 								SessionUpdate("BiddingListAsRequester");
+						}
+					}
+					catch(Exception e)
+					{
+						Logger.Instance().Write(e);
+						callback.OnCallback(false,null);
+					}
+				}
+				callback.OnCallback(success,obj);
+			}
+		
+		});
+		
+		return true;
+	}
+
+
+
+	@Override
+	public boolean RequestMyDoneList(String lastid, final IAPIProxyCallback callback) {
+		
+
+		if(!_httpLayer.IsConnectedSession())
+		{
+			if(!Relogin())
+				return false;
+		}
+		Map<String,Object> params = new HashMap<String,Object>();
+		params.put("lastid", lastid);
+		
+		_httpLayer.GETAsync(_domain+"Request/MyDoneList", params, new IHttpCallback(){
+
+			@Override
+			public void OnCallback(boolean success,String result) {
+				// TODO Auto-generated method stub
+				JSONObject obj = null;
+				if(success == true)
+				{
+					try
+					{
+						if(result !=null)
+						{
+							obj = new JSONObject(result);
+							if(true == obj.getBoolean("success"))
+								SessionUpdate("RequestMyDoneList");
+						}
+					}
+					catch(Exception e)
+					{
+						Logger.Instance().Write(e);
+						callback.OnCallback(false,null);
+					}
+				}
+				callback.OnCallback(success,obj);
+			}
+		
+		});
+		
+		return true;
+	}
+
+
+
+	@Override
+	public boolean ProvideMyDoneList(String lastid, final IAPIProxyCallback callback) {
+		
+
+		if(!_httpLayer.IsConnectedSession())
+		{
+			if(!Relogin())
+				return false;
+		}
+		Map<String,Object> params = new HashMap<String,Object>();
+		params.put("lastid", lastid);
+		
+		_httpLayer.GETAsync(_domain+"Provide/MyDoneList", params, new IHttpCallback(){
+
+			@Override
+			public void OnCallback(boolean success,String result) {
+				// TODO Auto-generated method stub
+				JSONObject obj = null;
+				if(success == true)
+				{
+					try
+					{
+						if(result !=null)
+						{
+							obj = new JSONObject(result);
+							if(true == obj.getBoolean("success"))
+								SessionUpdate("Provide/MyDoneList");
 						}
 					}
 					catch(Exception e)
