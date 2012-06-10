@@ -20,6 +20,7 @@ public interface IAPIProxyLayer {
 	// [start] User
 	
 	boolean MyInfo(IAPIProxyCallback callback);//내정보
+	boolean UserUpdate(String name,String photo,IAPIProxyCallback callback);
 	
 	// [end]
 		
@@ -70,9 +71,12 @@ public interface IAPIProxyLayer {
 	
 	// [start] Message
 	
-	boolean MessageSendText(String biddingid, String message,IAPIProxyCallback callback);//내정보
-	boolean MessageSendImage(String biddingid, String filepath,IAPIProxyCallback callback);//내정보
-	boolean MessageGet(String biddingid,long tick,IAPIProxyCallback callback);//내정보
+	boolean MessageSendText(String biddingid, String message,double tick,IAPIProxyCallback callback);//내정보
+	boolean MessageSendImage(String biddingid, String filepath,double tick,IAPIProxyCallback callback);//내정보
+	boolean MessageSendAudio(String biddingid, String filepath,double tick,IAPIProxyCallback callback);//내정보
+	boolean MessageSendVideo(String biddingid, String filepath,double tick,IAPIProxyCallback callback);//내정보
+	
+	boolean MessageGet(String biddingid,double tick,IAPIProxyCallback callback);//내정보
 
 	
 	// [end]

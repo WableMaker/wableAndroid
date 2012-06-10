@@ -1235,7 +1235,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	}
 	
 	@Override
-	public boolean MessageSendText(String biddingid, String message,
+	public boolean MessageSendText(String biddingid, String message,double tick,
 			final IAPIProxyCallback callback) {
 		
 
@@ -1247,6 +1247,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("biddingid", biddingid);
 		params.put("message", message);
+		params.put("lastmsgutctick", tick);
 		
 		_httpLayer.POSTAsync(_domain+"Message/SetMessage", params, new IHttpCallback(){
 
@@ -1263,7 +1264,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						{
 							obj = new JSONObject(result);
 							if(true == obj.getBoolean("success"))
-								SessionUpdate("OfferAsRequester");
+								SessionUpdate("Message/SetMessage");
 						}
 					}
 					catch(Exception e)
@@ -1373,7 +1374,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 
 	@Override
-	public boolean MessageGet(String biddingid, long lastmsgutctick,
+	public boolean MessageGet(String biddingid, double lastmsgutctick,
 			final IAPIProxyCallback callback) {
 		
 		if(!_httpLayer.IsConnectedSession())
@@ -1385,7 +1386,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		params.put("biddingid", biddingid);
 		params.put("lastmsgutctick", lastmsgutctick);
 		
-		_httpLayer.GETAsync(_domain+"Message/GetMessageFromApp",params, new IHttpCallback(){
+		_httpLayer.GETAsync(_domain+"Message/GetMessage",params, new IHttpCallback(){
 
 			@Override
 			public void OnCallback(boolean success,String result) {
@@ -1508,7 +1509,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	}
 
 	@Override
-	public boolean MessageSendImage(String biddingid, String filepath,
+	public boolean MessageSendImage(String biddingid, String filepath,double tick,
 			final IAPIProxyCallback callback) {
 		
 		
@@ -1519,6 +1520,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		}
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("biddingid", biddingid);
+		params.put("lastmsgutctick", tick);
 		Map<String,Object> files = new HashMap<String,Object>();
 		files.put("filepath", filepath);
 		
@@ -1536,7 +1538,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						{
 							obj = new JSONObject(result);
 							if(true == obj.getBoolean("success"))
-								SessionUpdate("OfferAsRequester");
+								SessionUpdate("Message/SetImage");
 						}
 					}
 					catch(Exception e)
@@ -1800,6 +1802,153 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		
 		return true;
 	}
+
+
+
+	@Override
+	public boolean UserUpdate(String name, String photo,
+			final IAPIProxyCallback callback) {
+		
+
+		if(!_httpLayer.IsConnectedSession())
+		{
+			if(!Relogin())
+				return false;
+		}
+		Map<String,Object> params = new HashMap<String,Object>();
+		params.put("name", name);
+		Map<String,Object> files = new HashMap<String,Object>();
+		files.put("photo", photo);
+		
+		_httpLayer.POSTFileAsync(_domain+"user/update", params,files, new IHttpCallback(){
+
+			@Override
+			public void OnCallback(boolean success,String result) {
+				// TODO Auto-generated method stub
+				JSONObject obj = null;
+				if(success == true)
+				{
+					try
+					{
+						if(result !=null)
+						{
+							obj = new JSONObject(result);
+							if(true == obj.getBoolean("success"))
+								SessionUpdate("OfferAsRequester");
+						}
+					}
+					catch(Exception e)
+					{
+						Logger.Instance().Write(e);
+						callback.OnCallback(false,null);
+					}
+				}
+				callback.OnCallback(success,obj);
+			}
+		
+		});
+		
+		return true;
+
+	}
+
+
+
+	@Override
+	public boolean MessageSendAudio(String biddingid, String filepath,
+			double tick, final IAPIProxyCallback callback) {
+		
+
+		if(!_httpLayer.IsConnectedSession())
+		{
+			if(!Relogin())
+				return false;
+		}
+		Map<String,Object> params = new HashMap<String,Object>();
+		params.put("biddingid", biddingid);
+		params.put("lastmsgutctick", tick);
+		Map<String,Object> files = new HashMap<String,Object>();
+		files.put("filepath", filepath);
+		
+		_httpLayer.POSTFileAsync(_domain+"Message/SetAudio", params,files, new IHttpCallback(){
+
+			@Override
+			public void OnCallback(boolean success,String result) {
+				// TODO Auto-generated method stub
+				JSONObject obj = null;
+				if(success == true)
+				{
+					try
+					{
+						if(result !=null)
+						{
+							obj = new JSONObject(result);
+							if(true == obj.getBoolean("success"))
+								SessionUpdate("Message/SetAudio");
+						}
+					}
+					catch(Exception e)
+					{
+						Logger.Instance().Write(e);
+						callback.OnCallback(false,null);
+					}
+				}
+				callback.OnCallback(success,obj);
+			}
+		
+		});
+		
+		return true;
+	}
+
+
+
+	@Override
+	public boolean MessageSendVideo(String biddingid, String filepath,
+			double tick, final IAPIProxyCallback callback) {
+		
+		if(!_httpLayer.IsConnectedSession())
+		{
+			if(!Relogin())
+				return false;
+		}
+		Map<String,Object> params = new HashMap<String,Object>();
+		params.put("biddingid", biddingid);
+		params.put("lastmsgutctick", tick);
+		Map<String,Object> files = new HashMap<String,Object>();
+		files.put("filepath", filepath);
+		
+		_httpLayer.POSTFileAsync(_domain+"Message/SetVideo", params,files, new IHttpCallback(){
+
+			@Override
+			public void OnCallback(boolean success,String result) {
+				// TODO Auto-generated method stub
+				JSONObject obj = null;
+				if(success == true)
+				{
+					try
+					{
+						if(result !=null)
+						{
+							obj = new JSONObject(result);
+							if(true == obj.getBoolean("success"))
+								SessionUpdate("Message/SetVideo");
+						}
+					}
+					catch(Exception e)
+					{
+						Logger.Instance().Write(e);
+						callback.OnCallback(false,null);
+					}
+				}
+				callback.OnCallback(success,obj);
+			}
+		
+		});
+		
+		return true;
+	}
+
 
 	// [end]
 	
