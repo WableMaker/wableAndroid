@@ -1,6 +1,10 @@
 package com.wable.adapter;
 
-public class CategoryElement {
+import java.io.Serializable;
+
+import android.graphics.Bitmap;
+
+public class CategoryElement implements Serializable {
 
 	private int id;
 	private String title;
@@ -11,6 +15,7 @@ public class CategoryElement {
 	private int order;
 	private String due_time;
 	private String parent_id;
+	private Bitmap bitmap;
 	
 	
 	public int getId() {
@@ -74,6 +79,13 @@ public class CategoryElement {
 	}
 	public CategoryElement setParent_id(String parent_id) {
 		this.parent_id = parent_id;
+		return this;
+	}
+	public Bitmap getBitmap() {
+		return bitmap;
+	}
+	public CategoryElement setBitmap(Bitmap bitmap) {
+		this.bitmap = bitmap;
 		return this;
 	}
 	

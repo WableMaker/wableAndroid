@@ -22,6 +22,8 @@ public interface IAPIProxyLayer {
 	boolean MyInfo(IAPIProxyCallback callback);//내정보
 	boolean UserUpdate(String name,String photo,IAPIProxyCallback callback);
 	
+	boolean UserUpdate(String name,String introduce,String photo,IAPIProxyCallback callback);//내정보
+	
 	// [end]
 		
 	// [start] Request
@@ -66,6 +68,8 @@ public interface IAPIProxyLayer {
 	boolean BiddingOfferAsProvider(String request_id, String message,IAPIProxyCallback callback);//내정보
 	boolean BiddingOfferAsRequester(String provide_id, String message,IAPIProxyCallback callback);//내정보
 
+	boolean BiddingListAsProvider(String last_bidding_id,IAPIProxyCallback callback);
+	boolean BiddingListAsRequester(String last_bidding_id,IAPIProxyCallback callback);
 	
 	// [end]
 	

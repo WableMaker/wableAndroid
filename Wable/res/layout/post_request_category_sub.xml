@@ -13,15 +13,14 @@
         android:layout_alignParentTop="true" android:background="@drawable/navigation_bar_bg">
 
         <TextView
-            android:id="@+id/TextView01"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:text="필요한 게 있으세요?" android:textColor="#FFFFFF" android:textSize="8pt"/>
+            android:text="무엇을 원하세요?" android:textColor="#FFFFFF" android:textSize="8pt"/>
 
         <Button
-            android:id="@+id/POSTCategoryBtnBack"
+            android:id="@+id/POSTCategoryDBtnBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -38,12 +37,12 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:text="요청사항 직접 작성하기" />
-
+
     <ListView
-        android:id="@+id/POSTCategoryList"
+        android:id="@+id/POSTCategoryDList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/btnPostMakeRequest"
+        android:layout_above="@+id/POSTCategoryBtnWrite"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/RelativeLayout2" >
 
