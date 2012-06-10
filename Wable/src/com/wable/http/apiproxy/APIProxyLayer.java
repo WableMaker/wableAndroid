@@ -1235,7 +1235,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	}
 	
 	@Override
-	public boolean MessageSendText(String biddingid, String message,double tick,
+	public boolean MessageSendText(String biddingid, String message,Double tick,
 			final IAPIProxyCallback callback) {
 		
 
@@ -1374,7 +1374,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 
 	@Override
-	public boolean MessageGet(String biddingid, double lastmsgutctick,
+	public boolean MessageGet(String biddingid, Double lastmsgutctick,
 			final IAPIProxyCallback callback) {
 		
 		if(!_httpLayer.IsConnectedSession())
@@ -1509,7 +1509,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	}
 
 	@Override
-	public boolean MessageSendImage(String biddingid, String filepath,double tick,
+	public boolean MessageSendImage(String biddingid, String filepath,Double tick,
 			final IAPIProxyCallback callback) {
 		
 		
@@ -1803,60 +1803,9 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		return true;
 	}
 
-
-
-	@Override
-	public boolean UserUpdate(String name, String photo,
-			final IAPIProxyCallback callback) {
-		
-
-		if(!_httpLayer.IsConnectedSession())
-		{
-			if(!Relogin())
-				return false;
-		}
-		Map<String,Object> params = new HashMap<String,Object>();
-		params.put("name", name);
-		Map<String,Object> files = new HashMap<String,Object>();
-		files.put("photo", photo);
-		
-		_httpLayer.POSTFileAsync(_domain+"user/update", params,files, new IHttpCallback(){
-
-			@Override
-			public void OnCallback(boolean success,String result) {
-				// TODO Auto-generated method stub
-				JSONObject obj = null;
-				if(success == true)
-				{
-					try
-					{
-						if(result !=null)
-						{
-							obj = new JSONObject(result);
-							if(true == obj.getBoolean("success"))
-								SessionUpdate("OfferAsRequester");
-						}
-					}
-					catch(Exception e)
-					{
-						Logger.Instance().Write(e);
-						callback.OnCallback(false,null);
-					}
-				}
-				callback.OnCallback(success,obj);
-			}
-		
-		});
-		
-		return true;
-
-	}
-
-
-
 	@Override
 	public boolean MessageSendAudio(String biddingid, String filepath,
-			double tick, final IAPIProxyCallback callback) {
+			Double tick, final IAPIProxyCallback callback) {
 		
 
 		if(!_httpLayer.IsConnectedSession())
@@ -1905,7 +1854,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 	@Override
 	public boolean MessageSendVideo(String biddingid, String filepath,
-			double tick, final IAPIProxyCallback callback) {
+			Double tick, final IAPIProxyCallback callback) {
 		
 		if(!_httpLayer.IsConnectedSession())
 		{
