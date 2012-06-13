@@ -72,6 +72,7 @@ public interface IAPIProxyLayer {
 
 	boolean BiddingListAsProvider(String last_bidding_id,IAPIProxyCallback callback);
 	boolean BiddingListAsRequester(String last_bidding_id,IAPIProxyCallback callback);
+	boolean BiddingRating(String bidding_id,String other_id, int rating,String description,IAPIProxyCallback callback);
 	
 	// [end]
 	
@@ -92,6 +93,12 @@ public interface IAPIProxyLayer {
 	// [start] Category
 	boolean CategoryList(IAPIProxyCallback callback);	
 	boolean CategoryUpdatedTime(IAPIProxyCallback callback);
+	
+	// [end]
+	
+	// [start] setting
+	
+	boolean SettingRegisterDevice(String deviceid, int devicetype,IAPIProxyCallback callback);
 	
 	// [end]
 	
