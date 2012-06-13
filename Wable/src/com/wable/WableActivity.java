@@ -77,6 +77,19 @@ public class WableActivity extends Activity implements OnClickListener {
 						
 					});
 					
+					APIProxyLayer.Instance().RequestMyActiveList(null,new IAPIProxyCallback(){
+						@Override
+						public void OnCallback(boolean success, JSONObject json) {
+							if(success)
+							{
+								Logger.Instance().Write(json.toString());
+								
+							}
+							else Logger.Instance().Write("Fail to MessageSendImage");
+						}
+					});
+					
+					
 					APIProxyLayer.Instance().MessageSendImage("-9223372036854775805", "/sdcard/koala.jpg",null, new IAPIProxyCallback(){
 						@Override
 						public void OnCallback(boolean success, JSONObject json) {
