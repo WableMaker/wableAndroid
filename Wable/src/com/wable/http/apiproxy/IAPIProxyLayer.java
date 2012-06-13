@@ -35,7 +35,8 @@ public interface IAPIProxyLayer {
 
 	boolean RequestAdd(String title, String description,int postprice,int category,Date duedate
 			,double lat,double lon,boolean totwitter, boolean tofacebook, IAPIProxyCallback callback);//내정보
-	boolean RequestDelete(String request_id ,IAPIProxyCallback callback);//내정보
+	boolean RequestDelete(String request_id ,IAPIProxyCallback callback);//요청 삭제
+	boolean RequestDone(String request_id ,IAPIProxyCallback callback);//요청 만료
 	
 	boolean RequestMyDetailById(String request_id ,IAPIProxyCallback callback);//내정보
 	boolean RequestOtherDetailById(String request_id ,IAPIProxyCallback callback);
@@ -54,7 +55,8 @@ public interface IAPIProxyLayer {
 
 	boolean ProvideAdd(String title, int minprice,int category
 			,double lat,double lon,int radius, IAPIProxyCallback callback);//내정보
-	boolean ProvideDelete(String provide_id ,IAPIProxyCallback callback);//내정보
+	boolean ProvideDelete(String provide_id ,IAPIProxyCallback callback);//제공 삭제
+	boolean ProvideDone(String provide_id ,IAPIProxyCallback callback);//제공 만료
 	
 	boolean ProvideMyDetailById(String provide_id ,IAPIProxyCallback callback);//내정보
 	
@@ -81,6 +83,8 @@ public interface IAPIProxyLayer {
 	boolean MessageSendVideo(String biddingid, String filepath,Double tick,IAPIProxyCallback callback);//내정보
 	
 	boolean MessageGet(String biddingid,Double tick,IAPIProxyCallback callback);//내정보
+	boolean MessageGetNewMessage(Double tick,IAPIProxyCallback callback);//인자로 넣은 시점이후의 모든 거래메시지 받기
+	
 
 	
 	// [end]

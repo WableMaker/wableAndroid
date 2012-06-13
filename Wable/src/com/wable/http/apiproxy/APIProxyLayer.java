@@ -2130,6 +2130,141 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		return true;
 	}
 
+
+
+	@Override
+	public boolean RequestDone(String request_id, final IAPIProxyCallback callback) {
+		
+		if(!_httpLayer.IsConnectedSession())
+		{
+			if(!Relogin())
+				return false;
+		}
+		Map<String,Object> params = new HashMap<String,Object>();
+		params.put("request_id", request_id);
+		
+		_httpLayer.POSTAsync(_domain+"Request/Done", params, new IHttpCallback(){
+
+			@Override
+			public void OnCallback(boolean success,String result) {
+				// TODO Auto-generated method stub
+				JSONObject obj = null;
+				if(success == true)
+				{
+					try
+					{
+						
+						if(result !=null)
+						{
+							obj = new JSONObject(result);
+							if(true == obj.getBoolean("success"))
+								SessionUpdate("RequestDone");
+						}
+					}
+					catch(Exception e)
+					{
+						Logger.Instance().Write(e);
+						callback.OnCallback(false,null);
+					}
+				}
+				callback.OnCallback(success,obj);
+			}
+		
+		});
+		
+		return true;
+	}
+
+
+
+	@Override
+	public boolean ProvideDone(String provide_id, final IAPIProxyCallback callback) {
+		
+		if(!_httpLayer.IsConnectedSession())
+		{
+			if(!Relogin())
+				return false;
+		}
+		Map<String,Object> params = new HashMap<String,Object>();
+		params.put("provide_id", provide_id);
+		
+		_httpLayer.POSTAsync(_domain+"Provide/Done", params, new IHttpCallback(){
+
+			@Override
+			public void OnCallback(boolean success,String result) {
+				// TODO Auto-generated method stub
+				JSONObject obj = null;
+				if(success == true)
+				{
+					try
+					{
+						
+						if(result !=null)
+						{
+							obj = new JSONObject(result);
+							if(true == obj.getBoolean("success"))
+								SessionUpdate("ProvideDone");
+						}
+					}
+					catch(Exception e)
+					{
+						Logger.Instance().Write(e);
+						callback.OnCallback(false,null);
+					}
+				}
+				callback.OnCallback(success,obj);
+			}
+		
+		});
+		
+		return true;
+	}
+
+
+
+	@Override
+	public boolean MessageGetNewMessage(Double tick, final IAPIProxyCallback callback) {
+		
+
+		if(!_httpLayer.IsConnectedSession())
+		{
+			if(!Relogin())
+				return false;
+		}
+		Map<String,Object> params = new HashMap<String,Object>();
+		params.put("lastmsgutctick", tick);
+		
+		_httpLayer.GETAsync(_domain+"Message/GetNewMessage", params, new IHttpCallback(){
+
+			@Override
+			public void OnCallback(boolean success,String result) {
+				// TODO Auto-generated method stub
+				JSONObject obj = null;
+				if(success == true)
+				{
+					try
+					{
+						if(result !=null)
+						{
+							obj = new JSONObject(result);
+							if(true == obj.getBoolean("success"))
+								SessionUpdate("MessageGetNewMessage");
+						}
+					}
+					catch(Exception e)
+					{
+						Logger.Instance().Write(e);
+						callback.OnCallback(false,null);
+					}
+				}
+				callback.OnCallback(success,obj);
+			}
+		
+		});
+		
+		return true;
+	}
+
 	// [end]
 	
 
