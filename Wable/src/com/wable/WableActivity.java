@@ -1,7 +1,5 @@
 package com.wable;
 
-import java.io.File;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +10,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
@@ -24,7 +23,7 @@ import android.widget.TextView.OnEditorActionListener;
 import com.facebook.android.Facebook;
 import com.wable.tab.login.PasswordFindActivity;
 import com.wable.tab.login.RegisterActivity;
-import com.wable.util.Utils;
+import com.wable.tab.post.PostActivity;
 
 public class WableActivity extends Activity implements OnClickListener {
     /** Called when the activity is first created. */
@@ -53,32 +52,77 @@ public class WableActivity extends Activity implements OnClickListener {
 //		edit.putBoolean("categoryUpdate", true);
 //		edit.commit();		
         
-        String path = context.getFilesDir().getAbsolutePath() + "/cate";
-        Utils.DeleteFolder(path);        
-        File file = new File(path);
-        file.mkdir();
+//        String path = context.getFilesDir().getAbsolutePath() + "/cate";
+//        Utils.DeleteFolder(path);        
+//        File file = new File(path);
+//        file.mkdir();
         
         findViewById(R.id.btnFacebook).setOnClickListener(this);
         findViewById(R.id.btnLoginFind).setOnClickListener(this);
         findViewById(R.id.btnLoginRegister).setOnClickListener(this);
         
         sv = (ScrollView)findViewById(R.id.scrollView1);    
+        
+        
         layout = (RelativeLayout)findViewById(R.id.RelativeLayout1);
         aniUp = AnimationUtils.loadAnimation(context, R.anim.layout_up);
+        aniUp.setFillEnabled(true);
+        aniUp.setAnimationListener(new AnimationListener() {
+			
+			@Override
+			public void onAnimationStart(Animation arg0) {
+				
+			}
+			
+			@Override
+			public void onAnimationRepeat(Animation arg0) {
+				
+			}
+			
+			@Override
+			public void onAnimationEnd(Animation arg0) {
+				
+						
+				
+			}
+		});
+        
+        sv.setEnabled(false);
+        
         aniDown = AnimationUtils.loadAnimation(context, R.anim.layout_down);
         isUp = false;
         
         loginOk = (Button)findViewById(R.id.btnLogin);
         loginOk.setOnClickListener(this);
         
+                
         etUser = (EditText)findViewById(R.id.editLoginEmail);
         etUser.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				
-				if(!isUp)
-					layout.startAnimation(aniUp);				
+				//if(!isUp) {
+					layout.postDelayed(new Runnable() {
+						
+						@Override
+						public void run() {
+							// TODO Auto-generated method stub
+							sv.smoothScrollTo(0, 200);
+						
+						}
+					}, 100); 
+					sv.setScrollContainer(false);
+					//layout.startAnimation(aniUp);
+					//layout.scrollTo(0, 220);
+			
+					//layout.scrollTo(0, 220);
+				//}
+				//	layout.startAnimation(aniUp);
+				
+			   //LayoutParams params = (LayoutParams)layout.getLayoutParams();			
+			
+				
 			}
 		});
         

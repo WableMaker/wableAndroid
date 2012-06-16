@@ -12,12 +12,17 @@ public class Utils {
 	{
 	    File file = new File(path);
 	    File[] childFileList = file.listFiles();
-	    for(File childFile : childFileList)
-	    {
-	        if(childFile.isDirectory()) DeleteFolder(childFile.getAbsolutePath());
-	        else  childFile.delete(); 
-	    }	    
-	    file.delete();  
+	    
+	    if(file.exists()) {
+	    
+		    for(File childFile : childFileList)
+		    {
+		        if(childFile.isDirectory()) DeleteFolder(childFile.getAbsolutePath());
+		        else  childFile.delete(); 
+		    }	    
+		    file.delete();  
+		    
+	    }
 	}
 
 

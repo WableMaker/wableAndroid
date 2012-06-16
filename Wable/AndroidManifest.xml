@@ -19,7 +19,7 @@
         
         <activity
             android:name=".WableActivity"
-            android:label="@string/app_name" android:windowSoftInputMode="stateAlwaysHidden">
+            android:label="@string/app_name" android:windowSoftInputMode="stateAlwaysHidden|adjustUnspecified">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -42,6 +42,8 @@
         <activity android:name=".tab.setting.SettingActivity"></activity>
         <activity android:name=".tab.setting.WebviewActivity"></activity>
         <activity android:name=".tab.setting.PushActivity"></activity>
+        <activity android:name=".tab.search.SearchProviderActivity" android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
+        <activity android:name=".tab.search.SearchRequestActivity"></activity>
     </application>
 
 </manifest>

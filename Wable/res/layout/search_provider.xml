@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    android:orientation="vertical" android:scrollbarAlwaysDrawVerticalTrack="true" android:scrollY="60dp">
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/more_btn"
+        android:text="Button" />
+
+    <Button
+        android:id="@+id/SEARCH_PRObtnDropDown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/nav_bar_search" />
+
+    <LinearLayout
+        android:id="@+id/SEARCH_PROlinear"
+        android:layout_width="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/SEARCH_PRObtnDropDown"
+        android:orientation="vertical" android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/SEARCH_PRObtnSegment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/segment_recent_selected"
+            android:text="거리                         최신                         지도" />
+
+        <EditText
+            android:id="@+id/SEARCH_PROeditSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/search_bar"
+            android:ems="10" >
+
+            <requestFocus />
+        </EditText>
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/SEARCH_PROlist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button4"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/SEARCH_PROlinear" >
+
+    </ListView>
+
+</RelativeLayout>

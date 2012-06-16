@@ -6,21 +6,22 @@
     android:orientation="vertical" >
 
     <Button
-        android:id="@+id/SEbtnRequest"
+        android:id="@+id/SEARCHbtnProvider"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="184dp"
-        android:text="요청자 검색" />
+        android:layout_marginTop="35dp"
+        android:background="@drawable/btn_a"
+        android:text="제공자 검색" />
 
     <Button
-        android:id="@+id/SEbtnOffer"
+        android:id="@+id/SEARCHbtnRequest"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/SEbtnRequest"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="42dp"
-        android:text="제공자 검색" />
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/SEARCHbtnProvider"
+        android:background="@drawable/btn_b"
+        android:text="요청자 검색" />
 
 </RelativeLayout>
