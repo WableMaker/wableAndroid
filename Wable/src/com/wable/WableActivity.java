@@ -6,24 +6,19 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
-import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
-import android.widget.TextView;
-import android.widget.TextView.OnEditorActionListener;
 
 import com.facebook.android.Facebook;
 import com.wable.tab.login.PasswordFindActivity;
 import com.wable.tab.login.RegisterActivity;
-import com.wable.tab.post.PostActivity;
 
 public class WableActivity extends Activity implements OnClickListener {
     /** Called when the activity is first created. */
@@ -127,46 +122,17 @@ public class WableActivity extends Activity implements OnClickListener {
 		});
         
         
-        etPass = (EditText)findViewById(R.id.editLoginPass);
-        etPass.setOnEditorActionListener(new OnEditorActionListener() {
-			
-			@Override
-			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-				if(actionId == EditorInfo.IME_ACTION_DONE) loginOk.performClick();				
-				return false;
-			}
-		});
-        
-      
-              
+//        etPass = (EditText)findViewById(R.id.editLoginPass);
+//        etPass.setOnEditorActionListener(new OnEditorActionListener() {
+//
+//              
 //        APIProxyLayer.Instance().Login("cc", "111111", new IAPIProxyCallback(){
-////
-////			@Override
-////			public void OnCallback(boolean success, JSONObject json) {
-////				if(success)
-////				{
-////					Logger.Instance().Write(json.toString());
 //
 //			@Override
 //			public void OnCallback(boolean success, JSONObject json) {
 //				if(success)
 //				{
-//					try {
-//						Logger.Instance().Write(json.toString());						
-//						long category =  pref.getLong("category", 0);
-//						long server = json.getJSONObject("data").getLong("categorytick");
-//						if(category < server) {
-//									
-//							Editor edit = pref.edit();
-//							edit.putLong("category", server );
-//							edit.putBoolean("categoryUpdate", true);
-//							edit.commit();					
-//
-//						}
-//						
-//					} catch (JSONException e) {
-//						e.printStackTrace();
-//					}
+//					Logger.Instance().Write(json.toString());
 //					
 //					
 //					APIProxyLayer.Instance().MyInfo(new IAPIProxyCallback(){
@@ -184,69 +150,49 @@ public class WableActivity extends Activity implements OnClickListener {
 //						
 //					});
 //					
-////					APIProxyLayer.Instance().MessageSendImage("-9223372036854775805", "/sdcard/koala.jpg", new IAPIProxyCallback(){
-////						@Override
-////						public void OnCallback(boolean success, JSONObject json) {
-////							if(success)
-////							{
-////								Logger.Instance().Write(json.toString());
-////								
-////							}
-////							else Logger.Instance().Write("Fail to MessageSendImage");
-////						}
-////					});
+//					APIProxyLayer.Instance().RequestMyActiveList(null,new IAPIProxyCallback(){
+//						@Override
+//						public void OnCallback(boolean success, JSONObject json) {
+//							if(success)
+//							{
+//								Logger.Instance().Write(json.toString());
+//								
+//							}
+//							else Logger.Instance().Write("Fail to MessageSendImage");
+//						}
+//					});
 //					
-////					long dtMili = System.currentTimeMillis();
-////					Date dt = new Date(dtMili);
-////					
-////					APIProxyLayer.Instance().MyInfo(new IAPIProxyCallback(){
-////
-////						@Override
-////						public void OnCallback(boolean success, JSONObject json) {
-////							if(success)
-////							{
-////								Logger.Instance().Write(json.toString());
-////								try {
-////									JSONObject data = new JSONObject(json.getString("data"));
-////									String str = data.getString("name");
-////									str = data.getString("email");
-////									str = data.getString("phone");
-////									str = data.getString("mobile");
-////									
-////								} catch (JSONException e) {
-////									e.printStackTrace();
-////								}
-////								
-////							}
-////							else Logger.Instance().Write("Fail to GetMyInfo");
-////						}
-////						
-////					});
-////					
-//////					long dtMili = System.currentTimeMillis();
-//////					Date dt = new Date(dtMili);
-//////					
-//////					APIProxyLayer.Instance().AddRequest("android", "android", 123, 0, dt, 36, 127, false, false, false, new IAPIProxyCallback(){
-//////
-//////						@Override
-//////						public void OnCallback(boolean success, JSONObject json) {
-//////							// TODO Auto-generated method stub
-//////							if(success)
-//////							{
-//////								Logger.Instance().Write(json.toString());
-//////							}
-//////							else Logger.Instance().Write("Fail to AddRequest");
-//////						}
-//////						
-//////					});
-////				}else 	Logger.Instance().Write("Fail to login");
-////			}
-////        	
-////        });
-//    
-//				}
+//					
+//					APIProxyLayer.Instance().MessageSendImage("-9223372036854775805", "/sdcard/koala.jpg",null, new IAPIProxyCallback(){
+//						@Override
+//						public void OnCallback(boolean success, JSONObject json) {
+//							if(success)
+//							{
+//								Logger.Instance().Write(json.toString());
+//								
+//							}
+//							else Logger.Instance().Write("Fail to MessageSendImage");
+//						}
+//					});
+//					
+//					APIProxyLayer.Instance().UserUpdate("123","123123", "/sdcard/koala.jpg", new IAPIProxyCallback(){
+//						@Override
+//						public void OnCallback(boolean success, JSONObject json) {
+//							if(success)
+//							{
+//								Logger.Instance().Write(json.toString());
+//								
+//							}
+//							else Logger.Instance().Write("Fail to UserUpdate");
+//						}
+//					});
+//					
+//				
+//				}else 	Logger.Instance().Write("Fail to login");
 //			}
-//	    });
+//        	
+//        });
+    
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
