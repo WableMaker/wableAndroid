@@ -1,6 +1,9 @@
 package com.wable;
 
+import org.json.JSONObject;
+
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
@@ -12,6 +15,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.facebook.android.Facebook;
+import com.wable.http.apiproxy.APIProxyLayer;
+import com.wable.http.apiproxy.IAPIProxyCallback;
 import com.wable.tab.login.PasswordFindActivity;
 import com.wable.tab.login.RegisterActivity;
 
@@ -25,6 +30,7 @@ public class WableActivity extends Activity implements OnClickListener {
 	private EditText etUser, etPass, etUp;
 	private boolean isWork;
 	
+	private ProgressDialog pd;
 	//private SharedPreferences pref;
 	
     @Override
@@ -205,12 +211,47 @@ public class WableActivity extends Activity implements OnClickListener {
 			break;
 			
 		case R.id.LOGINbtnLogin:
+		
+			pd = ProgressDialog.show(context, "로그인", "정보 확인중입니다.", true, false);
+			
+			APIProxyLayer.Instance().Login("cc", "111111", new IAPIProxyCallback(){
+
+				@Override
+				public void OnCallback(boolean success, JSONObject json) {
+					
+					pd.dismiss();
+					
+					if(success)
+					{
+						//Logger.Instance().Write(json.toString());
+						Intent intent = new Intent(context, MainActivity.class);
+						startActivity(intent);			
+						overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+						finish();
+
+
+//						APIProxyLayer.Instance().MyInfo(new IAPIProxyCallback(){
+//
+//							@Override
+//							public void OnCallback(boolean success, JSONObject json) {
+//								if(success)
+//								{
+//									//Logger.Instance().Write(json.toString());
+//
+//
+//								}
+//								else 
+//									Toast.makeText(context, "로그인 정보를 확인하세요", Toast.LENGTH_SHORT).show();
+//								//Logger.Instance().Write("Fail to GetMyInfo");
+//							}
+//
+//						});
+
+					}
+				}
+			});
 			
 			//Toast.makeText(context, "Login OK", Toast.LENGTH_SHORT).show();
-			intent = new Intent(context, MainActivity.class);
-			startActivity(intent);			
-			overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-			finish();
 			break;
 			
 		case R.id.LOGINeditId:
@@ -264,7 +305,7 @@ public class WableActivity extends Activity implements OnClickListener {
     							}
     						}, 200);
     					}
-    				}, 100);
+    				}, 20);
     			}
     		}
 			

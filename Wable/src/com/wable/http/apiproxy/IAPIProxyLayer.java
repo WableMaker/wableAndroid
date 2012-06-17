@@ -33,8 +33,8 @@ public interface IAPIProxyLayer {
 	boolean RequestListbyArea(double north,double south,double ease,double west,String keyword,IAPIProxyCallback callback);//내정보
 	boolean RequestListbyDistance(double lat, double lon,double distance,String keyword,IAPIProxyCallback callback);//내정보
 
-	boolean RequestAdd(String title, String description,int postprice,int category,Date duedate
-			,double lat,double lon,boolean totwitter, boolean tofacebook, IAPIProxyCallback callback);//내정보
+	boolean RequestAdd(String title, String description, int postprice, Integer category, Date duedate
+			,double lat,double lon, Boolean totwitter, Boolean tofacebook, IAPIProxyCallback callback);//내정보
 	boolean RequestDelete(String request_id ,IAPIProxyCallback callback);//요청 삭제
 	boolean RequestDone(String request_id ,IAPIProxyCallback callback);//요청 만료
 	

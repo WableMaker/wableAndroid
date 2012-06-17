@@ -2,8 +2,12 @@ package com.wable.tab.post;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.TimeZone;
+
+import org.json.JSONObject;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -22,13 +26,14 @@ import android.text.InputType;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.inputmethod.EditorInfo;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
+import android.widget.Toast;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
@@ -36,6 +41,8 @@ import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
 import com.google.android.maps.MapView.LayoutParams;
 import com.wable.R;
+import com.wable.http.apiproxy.APIProxyLayer;
+import com.wable.http.apiproxy.IAPIProxyCallback;
 
 public class RequestPostSubmit extends MapActivity implements LocationListener, OnClickListener {
 
@@ -45,31 +52,41 @@ public class RequestPostSubmit extends MapActivity implements LocationListener, 
 	private MapView mapview;
 	private MapController mapCtrl;
 	private ImageView pin;
+	private double lat, lon;
 	
 	private TextView tvAddr;
-	
-	private Button btPrice, btTime;
-	
+	private Button btPrice, btTime, btCategory, btDetail;
 	
 	private Context context;
 	
 	private boolean isLock;	
-	
 	private SharedPreferences pref;
+	
+	Integer category;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.post_request_submit);
 		context = this;
-		findViewById(R.id.POST_RQ_SBbtnCancel).setOnClickListener(this);
-		findViewById(R.id.POST_RQ_SBbtnCategory).setOnClickListener(this);
-		findViewById(R.id.POST_RQ_SBbtnDetail).setOnClickListener(this);
-		findViewById(R.id.POST_RQ_SBbtnLoc).setOnClickListener(this);
-		findViewById(R.id.POST_RQ_SBbtnPrice).setOnClickListener(this);
-		findViewById(R.id.POST_RQ_SBbtnSubmit).setOnClickListener(this);
-		findViewById(R.id.POST_RQ_SBbtnTime).setOnClickListener(this);
 		
+		findViewById(R.id.POST_RQ_SBbtnCancel).setOnClickListener(this);
+		//findViewById(R.id.POST_RQ_SBbtnCategory).setOnClickListener(this);
+		//findViewById(R.id.POST_RQ_SBbtnDetail).setOnClickListener(this);
+		findViewById(R.id.POST_RQ_SBbtnLoc).setOnClickListener(this);
+		//findViewById(R.id.POST_RQ_SBbtnPrice).setOnClickListener(this);
+		findViewById(R.id.POST_RQ_SBbtnSubmit).setOnClickListener(this);
+		//findViewById(R.id.POST_RQ_SBbtnTime).setOnClickListener(this);
+		
+		btPrice = (Button)findViewById(R.id.POST_RQ_SBbtnPrice);
+		btTime = (Button)findViewById(R.id.POST_RQ_SBbtnTime);
+		btCategory = (Button)findViewById(R.id.POST_RQ_SBbtnCategory);
+		btDetail = (Button)findViewById(R.id.POST_RQ_SBbtnDetail);
+		
+		btPrice.setOnClickListener(this);
+		btTime.setOnClickListener(this);
+		btCategory.setOnClickListener(this);
+		btDetail.setOnClickListener(this);
 		
 		mapview = (MapView)findViewById(R.id.mapview);
 		tvAddr = (TextView)findViewById(R.id.textPostSubmitAddr);
@@ -81,21 +98,29 @@ public class RequestPostSubmit extends MapActivity implements LocationListener, 
 		manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
 		manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 0, this);
 		
-		geo = new Geocoder(this, Locale.KOREAN);
-		
+		geo = new Geocoder(this, Locale.KOREAN);		
 		pin = new ImageView(this);
 		isLock = false;
-		
-		btPrice = (Button)findViewById(R.id.POST_RQ_SBbtnPrice);
-		btTime = (Button)findViewById(R.id.POST_RQ_SBbtnTime);
 		
 		pref = PreferenceManager.getDefaultSharedPreferences(this);
 		
 		if(getIntent().getBooleanExtra("FIRST", false)) {
 		
-			btPrice.setText( pref.getString("POST_PRICE", "비용"));
-			btTime.setText(pref.getString("POST_TIME", "시간"));
-		//pref.getString("POST_STR", "상세설명");
+			String price = pref.getString("POST_PRICE", "");
+			String time = pref.getString("POST_TIME", "");
+			
+			btPrice.setText( price + " 원");
+			btTime.setText( time + " 시간");
+			
+			btPrice.setTag( price );
+			btTime.setTag( time );
+			
+			btDetail.setText(pref.getString("POST_STR", "상세설명"));
+			category = pref.getInt("POST_CATE", 0);
+			
+			Editor editor = pref.edit();
+			editor.remove("FIRST");
+			editor.commit();
 		}
 	}
 	
@@ -135,39 +160,27 @@ public class RequestPostSubmit extends MapActivity implements LocationListener, 
 				public boolean onEditorAction(TextView arg0, int arg1, KeyEvent arg2) {
 					
 					if(arg1 == EditorInfo.IME_ACTION_DONE) {
-						
 						btPrice.setText(new DecimalFormat("###,###").format( Long.parseLong(et.getText().toString())) +" 원");
-						
+						btPrice.setTag( et.getText() );
+						d.dismiss();
 					}
 					return false;
 				}
 			});
-			
 			et.setInputType(InputType.TYPE_CLASS_NUMBER);
-			
-			
-//			d = new AlertDialog.Builder(context).setPositiveButton("적용", new DialogInterface.OnClickListener() {
-//				@Override
-//				public void onClick(DialogInterface dialog, int which) {
-//					
-//					btPrice.setText(new DecimalFormat("###,###").format( Long.parseLong(et.getText().toString())) + " 원");
-//					
-//				}
-//
-//			}).setNegativeButton("취소", null).setView(view).setTitle("가격을 입력하세요.").create();
 
 			d.setView(view);
 			d.setButton("적용", new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					btPrice.setText(new DecimalFormat("###,###").format( Long.parseLong(et.getText().toString())) + " 원");
+					btPrice.setTag( et.getText() );
 				}
 			});
 			
 			d.setTitle("가격을 입력하세요.");
 			d.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
 			d.show();
-			
 			break;
 			
 		case R.id.POST_RQ_SBbtnTime:
@@ -180,34 +193,47 @@ public class RequestPostSubmit extends MapActivity implements LocationListener, 
 				public boolean onEditorAction(TextView arg0, int arg1, KeyEvent arg2) {
 					
 					if(arg1 == EditorInfo.IME_ACTION_DONE) {
-						
 						btTime.setText(et.getText() + " 시간");
+						btTime.setTag( et.getText() );
 						d.dismiss();
-						
 					}
 					return false;
 				}
 			});
-			
 			et.setInputType(InputType.TYPE_CLASS_NUMBER);
-//			d = new AlertDialog.Builder(context).setPositiveButton("적용", new DialogInterface.OnClickListener() {
-//				@Override
-//				public void onClick(DialogInterface dialog, int which) {
-//					
-//					btTime.setText(et.getText() +" 시간");
-//					
-//				}
-//
-//			}).setNegativeButton("취소", null).setView(view).setTitle("시간을 입력하세요.").create();
-//
-//			
-//			d.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-//			d.show();
 			
+			d.setView(view);
+			d.setButton("적용", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					btTime.setText(et.getText() +" 시간");
+					btTime.setTag( et.getText() );
+					
+				}
+			});
+			
+			d.setTitle("시간을 입력하세요.");
+			d.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+			d.show();
 			break;
 			
 		case R.id.POST_RQ_SBbtnSubmit:
+			Calendar c = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+			int price = Integer.parseInt(btPrice.getTag().toString());
+			c.add(Calendar.HOUR, Integer.parseInt(btTime.getTag().toString()));
 			
+			APIProxyLayer.Instance().RequestAdd(
+					btCategory.getText().toString(),
+					btDetail.getText().toString(), 
+					price, category, c.getTime(), lat, lon, null, null, 
+					new IAPIProxyCallback() {
+						
+						@Override
+						public void OnCallback(boolean success, JSONObject json) {
+							if(success)
+								Toast.makeText(context, "등록 성공", Toast.LENGTH_SHORT).show();
+						}
+					});
 			break;
 			
 		case R.id.POST_RQ_SBbtnLoc:
@@ -215,11 +241,8 @@ public class RequestPostSubmit extends MapActivity implements LocationListener, 
 			break;
 			
 		case R.id.POST_RQ_SBbtnCancel:
-			//i = new Intent(this, RequestPostList.class);
-			//startActivity(i);
+			finish();
 			break;
-			
-
 		}
 		
 	}
@@ -230,11 +253,10 @@ public class RequestPostSubmit extends MapActivity implements LocationListener, 
 		if(isLock) return;
 		
 		StringBuffer buff = new StringBuffer();
-		double latitude = location.getLatitude();
-		double longitude = location.getLongitude();
+		lat = location.getLatitude();
+		lon = location.getLongitude();
 		
-		
-		GeoPoint gp = new GeoPoint((int)(latitude * 1000000), (int)(longitude*1000000));
+		GeoPoint gp = new GeoPoint((int)(lat * 1000000), (int)(lon*1000000));
 		
 		mapCtrl.animateTo(gp);
 		
@@ -246,7 +268,7 @@ public class RequestPostSubmit extends MapActivity implements LocationListener, 
 		mapview.addView(pin, lp);
 
 		try {
-			List<Address> addr = geo.getFromLocation(latitude, longitude, 1);
+			List<Address> addr = geo.getFromLocation(lat, lon, 1);
 			
 			for(Address a : addr) {
 				

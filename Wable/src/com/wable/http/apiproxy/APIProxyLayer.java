@@ -956,8 +956,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 	@Override
 	public boolean RequestAdd(String title, String description, int postprice,
-			int category, Date duedate, double lat, double lon,
-			boolean totwitter, boolean tofacebook, 
+			Integer category, Date duedate, double lat, double lon,
+			Boolean totwitter, Boolean tofacebook, 
 			final IAPIProxyCallback callback) {
 
 		
@@ -969,7 +969,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("title", title);
 		params.put("description", description);
-		params.put("postprice", postprice);
+		params.put("price", postprice);
 		params.put("category", category);
 		params.put("duedate", ConvertDateToString(duedate));
 		params.put("lat", lat);
