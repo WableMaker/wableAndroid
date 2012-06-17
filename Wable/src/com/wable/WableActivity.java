@@ -3,56 +3,47 @@ package com.wable;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Rect;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 import com.facebook.android.Facebook;
 import com.wable.tab.login.PasswordFindActivity;
 import com.wable.tab.login.RegisterActivity;
-import com.wable.util.KeyboardDetecter;
 
 public class WableActivity extends Activity implements OnClickListener {
     /** Called when the activity is first created. */
 	
 	private Context context;
 	private Facebook facebook;
-	private SharedPreferences pref;
 	private Button loginOk;
-	private RelativeLayout layout;
 	
 	private EditText etUser, etPass, etUp;
+	private boolean isWork;
 	
-	private boolean isUp, isWork;
-	
+	//private SharedPreferences pref;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_main);  
         context = this;        
-        pref = PreferenceManager.getDefaultSharedPreferences(this);
         
+//        pref = PreferenceManager.getDefaultSharedPreferences(this);
+//
 //        Editor edit = pref.edit();
-//		edit.putBoolean("categoryUpdate", true);
-//		edit.commit();		
-        
+//        edit.putBoolean("categoryUpdate", true);
+//        edit.commit();		
+//
 //        String path = context.getFilesDir().getAbsolutePath() + "/cate";
 //        Utils.DeleteFolder(path);        
 //        File file = new File(path);
 //        file.mkdir();
-        
-        layout = (RelativeLayout)findViewById(R.id.RelativeLayout1);
-        
+
         findViewById(R.id.LOGINbtnFb).setOnClickListener(this);
         findViewById(R.id.LOGINbtnRegister).setOnClickListener(this);
         findViewById(R.id.LOGINbtnFind).setOnClickListener(this);
@@ -61,119 +52,15 @@ public class WableActivity extends Activity implements OnClickListener {
         etUser = (EditText)findViewById(R.id.LOGINeditId);
         etPass = (EditText)findViewById(R.id.LOGINeditPass);
         etUp = (EditText)findViewById(R.id.LOGINeditUp);        
+        
         loginOk.setOnClickListener(this);
+        etUser.setOnClickListener(this);
+        etPass.setOnClickListener(this);
         
-        isUp = isWork = false;
+        isWork = false;
         
-        etUser.setOnFocusChangeListener(new OnFocusChangeListener() {
-			
-			@Override
-			public void onFocusChange(View arg0, boolean arg1) {
-			
-				if(arg1 && !isWork) {					
-		  
-					Rect rect = new Rect();         
-					getWindow().getDecorView().getWindowVisibleDisplayFrame(rect);
-					
-					int layoutHeight = rect.height();
-					int screenHeight = getWindowManager().getDefaultDisplay().getHeight();
-					int diff = screenHeight - layoutHeight;
-
-					if(diff < 100) {
-						
-						isWork = true;
-						etUser.postDelayed(new Runnable() {
-			    			@Override
-			    			public void run() {
-			    				etUp.requestFocus();
-			    				etUp.postDelayed(new Runnable() {
-			    					@Override
-			    					public void run() { 
-			    						etUser.requestFocus();
-			    						isWork = false;
-			    						}
-			    					}, 200);
-			    			}
-			    		}, 100);
-					}
-				}
-			}
-		});
-        
-        etPass.setOnFocusChangeListener(new OnFocusChangeListener() {
-
-        	@Override
-        	public void onFocusChange(View arg0, boolean arg1) {
-
-        		if(arg1 && !isWork) {					
-
-        			Rect rect = new Rect();         
-        			getWindow().getDecorView().getWindowVisibleDisplayFrame(rect);
-
-        			int layoutHeight = rect.height();
-        			int screenHeight = getWindowManager().getDefaultDisplay().getHeight();
-        			int diff = screenHeight - layoutHeight;
-
-        			if(diff < 100) {
-
-        				isWork = true;
-        				etPass.postDelayed(new Runnable() {
-        					@Override
-        					public void run() {
-        						etUp.requestFocus();
-        						etUp.postDelayed(new Runnable() {
-        							@Override
-        							public void run() { 
-        								etPass.requestFocus();
-        								isWork = false;
-        							}
-        						}, 200);
-        					}
-        				}, 100);
-        			}
-        		}
-        	}
-        });
-        
-        etUser.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				
-				if(etUser.isFocused()) {
-					isWork = true;
-					etUp.requestFocus();
-					etUp.postDelayed(new Runnable() {
-    					@Override
-    					public void run() { 
-    						etUser.requestFocus();
-    						isWork = false;
-    						}
-    					}, 200);
-				}
-				else 
-					etUser.requestFocus();
-			}
-		});
-        
-        etPass.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				
-				if(etPass.isFocused()) {
-					isWork = true;
-					etUp.requestFocus();
-					etUp.postDelayed(new Runnable() {
-    					@Override
-    					public void run() { 
-    						etPass.requestFocus();
-    						isWork = false;
-    						}
-    					}, 200);
-				}
-				else 
-					etUser.requestFocus();
-			}
-		});
+        etUser.setOnFocusChangeListener(onFocusChangeListner);
+        etPass.setOnFocusChangeListener(onFocusChangeListner);
         
 //        etPass = (EditText)findViewById(R.id.editLoginPass);
 //        etPass.setOnEditorActionListener(new OnEditorActionListener() {
@@ -255,7 +142,7 @@ public class WableActivity extends Activity implements OnClickListener {
     }
 
 	@Override
-	public void onClick(View v) {
+	public void onClick(final View v) {
 		
 		Intent intent;
 		switch (v.getId()) {
@@ -326,23 +213,65 @@ public class WableActivity extends Activity implements OnClickListener {
 			finish();
 			break;
 			
-//		case R.id.LOGINeditId:
-//		case R.id.LOGINeditPass:
-//			
-//			etUser.postDelayed(new Runnable() {
-//    			@Override
-//    			public void run() {
-//    				etUp.requestFocus();
-//    				etUp.postDelayed(new Runnable() {
-//    					@Override
-//    					public void run() { etUser.requestFocus();}}, 200);
-//    			}
-//    		}, 100);
-//			
-//			break;
+		case R.id.LOGINeditId:
+		case R.id.LOGINeditPass:
+			
+			if(v.isFocused()) {
+				isWork = true;
+				etUp.requestFocus();
+				etUp.postDelayed(new Runnable() {
+					@Override
+					public void run() { 
+						v.requestFocus();
+						isWork = false;
+					}
+				}, 200);
+			}
+			else 
+				v.requestFocus();
+			
+			break;
 
 		}
 	}
+	
+	private OnFocusChangeListener onFocusChangeListner = new OnFocusChangeListener() {
+		
+		@Override
+		public void onFocusChange(final View v, boolean hasFocus) {
+			
+			if(hasFocus && !isWork) {					
+
+    			Rect rect = new Rect();         
+    			getWindow().getDecorView().getWindowVisibleDisplayFrame(rect);
+
+    			int layoutHeight = rect.height();
+    			int screenHeight = getWindowManager().getDefaultDisplay().getHeight();
+    			int diff = screenHeight - layoutHeight;
+
+    			if(diff < 100) {
+
+    				isWork = true;
+    				v.postDelayed(new Runnable() {
+    					@Override
+    					public void run() {
+    						etUp.requestFocus();
+    						etUp.postDelayed(new Runnable() {
+    							@Override
+    							public void run() { 
+    								v.requestFocus();
+    								isWork = false;
+    							}
+    						}, 200);
+    					}
+    				}, 100);
+    			}
+    		}
+			
+		}
+	};
+	
+	
 	
 
 }
