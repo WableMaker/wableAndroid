@@ -1,5 +1,8 @@
 package com.wable.tab.search;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -13,14 +16,18 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.wable.R;
+import com.wable.adapter.SearchElement;
+import com.wable.http.apiproxy.APIProxyLayer;
 
 public class SearchProviderActivity extends Activity {
 	
 	private Context context;
 	private LinearLayout searchBox;
+	private EditText searchEdit;
 	private Button segment;
 	private int position;
 	
@@ -58,6 +65,7 @@ public class SearchProviderActivity extends Activity {
 			}
 		});
 		
+		searchEdit = (EditText)findViewById(R.id.SEARCH_PROeditSearch);
 		searchBox = (LinearLayout)findViewById(R.id.SEARCH_PROlinear);
 		
 		Button dropdown = (Button)findViewById(R.id.SEARCH_PRObtnDropDown);
@@ -66,32 +74,29 @@ public class SearchProviderActivity extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				
-				ViewGroup.LayoutParams params = searchBox.getLayoutParams();
+				ViewGroup.LayoutParams params = searchEdit.getLayoutParams();
 				params.height = LayoutParams.WRAP_CONTENT;
-				
-			
-				searchBox.setLayoutParams(params);
-				
-				
-				Animation ani = AnimationUtils.loadAnimation(context, R.anim.searchbox_open);
-				
-				LayoutAnimationController ctrl = new 
-						LayoutAnimationController(ani);
-				
-				
-				//searchBox.setLayoutAnimation(ctrl);
-				searchBox.startAnimation(ani);
-				
-				
-		   
+				searchEdit.setLayoutParams(params);
 				
 			}
 		});
 		
+	}
+	
+	private void getRecent() {
 		
-		
-		
+		List<SearchElement> list = new ArrayList<SearchElement>();
 		
 	}
+	
+	private void getDistance() {
+		
+	}
+
+	private void getMap() {
+		
+	}
+	
+	
 
 }

@@ -33,8 +33,6 @@ public class RequestCategory extends Activity implements OnClickListener {
 		listview.setAdapter(adpater);
 		
 		
-		
-		
 	}
 
 	@Override

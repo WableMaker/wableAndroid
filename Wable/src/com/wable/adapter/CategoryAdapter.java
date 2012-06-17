@@ -109,6 +109,7 @@ public class CategoryAdapter extends BaseAdapter {
 			public void onClick(View v) {
 				
 				Intent i = new Intent(context, RequestCategorySub.class);
+				i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				i.putExtra("ID", list.get(pos).getId());	
 				context.startActivity(i);
 				

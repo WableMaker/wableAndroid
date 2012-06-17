@@ -4,16 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg"
-    android:orientation="vertical" android:scrollbarAlwaysDrawVerticalTrack="true" android:scrollY="60dp">
+    android:orientation="vertical" android:scrollbarAlwaysDrawVerticalTrack="true">
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/SEARCH_PRObtnMore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:background="@drawable/more_btn"
-        android:text="Button" />
+        android:text="더보기" />
 
     <Button
         android:id="@+id/SEARCH_PRObtnDropDown"
@@ -40,21 +40,32 @@
         <EditText
             android:id="@+id/SEARCH_PROeditSearch"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:background="@drawable/search_bar"
-            android:ems="10" >
+            android:ems="10" android:visibility="visible" android:paddingLeft="50dp">
 
             <requestFocus />
         </EditText>
     </LinearLayout>
-
+    
+    <com.google.android.maps.MapView
+        android:id="@+id/mapview"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/SEARCH_PROlinear"
+        android:apiKey="0oqzs7eIvbFX8Faveem2CANcvsCaS5O1nULYH3A"
+        android:clickable="true" 
+        android:visibility="invisible">
+    </com.google.android.maps.MapView>
+
     <ListView
         android:id="@+id/SEARCH_PROlist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/button4"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/SEARCH_PROlinear" >
+        android:layout_below="@+id/SEARCH_PROlinear" android:visibility="invisible">
 
     </ListView>
 

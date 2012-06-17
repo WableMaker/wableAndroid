@@ -156,6 +156,7 @@ public class PostActivity extends Activity implements OnClickListener {
 			//activity.hideBottomTab();			
 			
 			intent = new Intent(this, RequestPostSubmit.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
 			break;
 

@@ -5,110 +5,86 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <ScrollView
-        android:id="@+id/scrollView1"
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true" android:focusableInTouchMode="false" android:focusable="false" android:fadingEdge="none" android:fadeScrollbars="false">
-
-        <RelativeLayout
-            android:id="@+id/RelativeLayout2"
-            android:layout_width="match_parent" android:layout_height="fill_parent">
-            
-                   <Button
-                android:id="@+id/btnFacebook"
-                android:layout_width="wrap_content"
-                android:layout_height="44dp"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="58dp"
-                android:background="@drawable/facebook_login_btn"
-                android:text="페이스북으로 로그인 하기" />
+        android:background="@drawable/log_in_bg" />
 
-            <TextView
-                android:id="@+id/textLine"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@+id/btnFacebook"
-                android:background="@drawable/login_form_or" />
+    <Button
+        android:id="@+id/LOGINbtnFb"
+        android:layout_width="268dp"
+        android:layout_height="46dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="180dp"
+        android:background="@drawable/facebook_login_btn"
+        android:text="페이스북으로 로그인 하기" />
 
-            <TextView
-                android:id="@+id/textView1"
-                android:layout_width="wrap_content"
-                android:layout_height="36dp"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@+id/textLine"
-                android:layout_marginTop="47dp"
-                android:background="@drawable/login_form_id" />
+    <EditText
+        android:id="@+id/LOGINeditId"
+        android:layout_width="220dp"
+        android:layout_height="36dp"
+        android:layout_below="@+id/LOGINbtnFb"
+        android:layout_marginLeft="66dp"
+        android:layout_marginTop="44dp"
+        android:background="#00000000"
+        android:ems="10"
+        android:hint="아이디" android:focusable="true" android:focusableInTouchMode="true" android:clickable="true" android:inputType="textEmailAddress" android:maxLines="1" android:imeOptions="actionNext"/>
 
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="36dp"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@+id/textView1"
-                android:background="@drawable/login_form_password" />
+    <EditText
+        android:id="@+id/LOGINeditPass"
+        android:layout_width="220dp"
+        android:layout_height="36dp"
+        android:layout_alignLeft="@+id/LOGINeditId"
+        android:layout_below="@+id/LOGINeditId"
+        android:layout_marginTop="10dp"
+        android:background="#00000000"
+        android:ems="10"
+        android:hint="비밀번호"
+        android:inputType="textPassword" android:focusable="true" android:imeOptions="actionDone" android:clickable="true" android:maxLines="1">
 
-            <Button
-                android:id="@+id/btnLoginRegister"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_below="@+id/textView2"
-                android:layout_marginTop="28dp"
-                android:background="@drawable/login_form_create_account_btn"
-                android:text="회원가입" />
+        
+    </EditText>
 
-            <Button
-                android:id="@+id/btnLogin"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignTop="@+id/btnLoginRegister"
-                android:background="@drawable/login_btn"
-                android:text="로그인" />
+    <Button
+        android:id="@+id/LOGINbtnFind"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:layout_alignBaseline="@+id/LOGINeditPass"
+        android:layout_alignBottom="@+id/LOGINeditPass"
+        android:layout_alignRight="@+id/LOGINbtnFb"
+        android:layout_marginRight="6dp"
+        android:background="@drawable/forgot_password_btn" />
 
-            <EditText
-                android:id="@+id/editLoginEmail"
-                android:layout_width="220dp"
-                android:layout_height="36dp"
-                android:layout_above="@+id/textView2"
-                android:layout_centerHorizontal="true"
-                android:background="#00000000"
-                android:ems="10"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:hint="아이디" >
+    <Button
+        android:id="@+id/LOGINbtnLogin"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/LOGINbtnFb"
+        android:layout_below="@+id/LOGINbtnFind"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/login_btn"
+        android:text="로그인" />
 
-                <requestFocus />
-            </EditText>
+    <Button
+        android:id="@+id/LOGINbtnRegister"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/LOGINbtnLogin"
+        android:layout_alignBottom="@+id/LOGINbtnLogin"
+        android:layout_alignLeft="@+id/LOGINbtnFb"
+        android:background="@drawable/login_form_create_account_btn"
+        android:text="회원가입" />
 
-            <EditText
-                android:id="@+id/editLoginPass"
-                android:layout_width="220dp"
-                android:layout_height="36dp"
-                android:layout_above="@+id/btnLoginRegister"
-                android:layout_alignLeft="@+id/editLoginEmail"
-                android:background="#00000000"
-                android:ems="10"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:hint="비밀번호"
-                android:inputType="textPassword" />
+    <EditText
+        android:id="@+id/LOGINeditUp"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:layout_alignBottom="@+id/LOGINbtnLogin"
+        android:layout_toLeftOf="@+id/LOGINbtnLogin"
+        android:background="#00000000"
+        android:inputType="textEmailAddress"
+        android:ems="10" >   
 
-            <Button
-                android:id="@+id/btnLoginFind"
-                android:layout_width="wrap_content"
-                android:layout_height="36dp"
-                android:layout_alignBaseline="@+id/editLoginPass"
-                android:layout_alignBottom="@+id/editLoginPass"
-                android:layout_toRightOf="@+id/editLoginPass"
-                android:background="@drawable/login_form" />
-            
-            
-        </RelativeLayout>
-    </ScrollView>
+    </EditText>
 
 </RelativeLayout>

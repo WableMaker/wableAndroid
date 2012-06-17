@@ -4,21 +4,22 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.animation.Animation;
-import android.view.animation.Animation.AnimationListener;
-import android.view.animation.AnimationUtils;
+import android.view.View.OnFocusChangeListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 
 import com.facebook.android.Facebook;
 import com.wable.tab.login.PasswordFindActivity;
 import com.wable.tab.login.RegisterActivity;
+import com.wable.util.KeyboardDetecter;
 
 public class WableActivity extends Activity implements OnClickListener {
     /** Called when the activity is first created. */
@@ -27,14 +28,12 @@ public class WableActivity extends Activity implements OnClickListener {
 	private Facebook facebook;
 	private SharedPreferences pref;
 	private Button loginOk;
-	private EditText etUser, etPass;
-	
-	
 	private RelativeLayout layout;
-	Animation aniUp, aniDown;
-	boolean isUp;
 	
-	private ScrollView sv;
+	private EditText etUser, etPass, etUp;
+	
+	private boolean isUp, isWork;
+	
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,75 +51,129 @@ public class WableActivity extends Activity implements OnClickListener {
 //        File file = new File(path);
 //        file.mkdir();
         
-        findViewById(R.id.btnFacebook).setOnClickListener(this);
-        findViewById(R.id.btnLoginFind).setOnClickListener(this);
-        findViewById(R.id.btnLoginRegister).setOnClickListener(this);
-        
-        sv = (ScrollView)findViewById(R.id.scrollView1);    
-        
-        
         layout = (RelativeLayout)findViewById(R.id.RelativeLayout1);
-        aniUp = AnimationUtils.loadAnimation(context, R.anim.layout_up);
-        aniUp.setFillEnabled(true);
-        aniUp.setAnimationListener(new AnimationListener() {
+        
+        findViewById(R.id.LOGINbtnFb).setOnClickListener(this);
+        findViewById(R.id.LOGINbtnRegister).setOnClickListener(this);
+        findViewById(R.id.LOGINbtnFind).setOnClickListener(this);
+        
+        loginOk = (Button)findViewById(R.id.LOGINbtnLogin);
+        etUser = (EditText)findViewById(R.id.LOGINeditId);
+        etPass = (EditText)findViewById(R.id.LOGINeditPass);
+        etUp = (EditText)findViewById(R.id.LOGINeditUp);        
+        loginOk.setOnClickListener(this);
+        
+        isUp = isWork = false;
+        
+        etUser.setOnFocusChangeListener(new OnFocusChangeListener() {
 			
 			@Override
-			public void onAnimationStart(Animation arg0) {
-				
-			}
+			public void onFocusChange(View arg0, boolean arg1) {
 			
-			@Override
-			public void onAnimationRepeat(Animation arg0) {
-				
-			}
-			
-			@Override
-			public void onAnimationEnd(Animation arg0) {
-				
+				if(arg1 && !isWork) {					
+		  
+					Rect rect = new Rect();         
+					getWindow().getDecorView().getWindowVisibleDisplayFrame(rect);
+					
+					int layoutHeight = rect.height();
+					int screenHeight = getWindowManager().getDefaultDisplay().getHeight();
+					int diff = screenHeight - layoutHeight;
+
+					if(diff < 100) {
 						
-				
+						isWork = true;
+						etUser.postDelayed(new Runnable() {
+			    			@Override
+			    			public void run() {
+			    				etUp.requestFocus();
+			    				etUp.postDelayed(new Runnable() {
+			    					@Override
+			    					public void run() { 
+			    						etUser.requestFocus();
+			    						isWork = false;
+			    						}
+			    					}, 200);
+			    			}
+			    		}, 100);
+					}
+				}
 			}
 		});
         
-        sv.setEnabled(false);
+        etPass.setOnFocusChangeListener(new OnFocusChangeListener() {
+
+        	@Override
+        	public void onFocusChange(View arg0, boolean arg1) {
+
+        		if(arg1 && !isWork) {					
+
+        			Rect rect = new Rect();         
+        			getWindow().getDecorView().getWindowVisibleDisplayFrame(rect);
+
+        			int layoutHeight = rect.height();
+        			int screenHeight = getWindowManager().getDefaultDisplay().getHeight();
+        			int diff = screenHeight - layoutHeight;
+
+        			if(diff < 100) {
+
+        				isWork = true;
+        				etPass.postDelayed(new Runnable() {
+        					@Override
+        					public void run() {
+        						etUp.requestFocus();
+        						etUp.postDelayed(new Runnable() {
+        							@Override
+        							public void run() { 
+        								etPass.requestFocus();
+        								isWork = false;
+        							}
+        						}, 200);
+        					}
+        				}, 100);
+        			}
+        		}
+        	}
+        });
         
-        aniDown = AnimationUtils.loadAnimation(context, R.anim.layout_down);
-        isUp = false;
-        
-        loginOk = (Button)findViewById(R.id.btnLogin);
-        loginOk.setOnClickListener(this);
-        
-                
-        etUser = (EditText)findViewById(R.id.editLoginEmail);
         etUser.setOnClickListener(new OnClickListener() {
-			
 			@Override
 			public void onClick(View v) {
 				
-				//if(!isUp) {
-					layout.postDelayed(new Runnable() {
-						
-						@Override
-						public void run() {
-							// TODO Auto-generated method stub
-							sv.smoothScrollTo(0, 200);
-						
-						}
-					}, 100); 
-					sv.setScrollContainer(false);
-					//layout.startAnimation(aniUp);
-					//layout.scrollTo(0, 220);
-			
-					//layout.scrollTo(0, 220);
-				//}
-				//	layout.startAnimation(aniUp);
-				
-			   //LayoutParams params = (LayoutParams)layout.getLayoutParams();			
-			
-				
+				if(etUser.isFocused()) {
+					isWork = true;
+					etUp.requestFocus();
+					etUp.postDelayed(new Runnable() {
+    					@Override
+    					public void run() { 
+    						etUser.requestFocus();
+    						isWork = false;
+    						}
+    					}, 200);
+				}
+				else 
+					etUser.requestFocus();
 			}
 		});
         
+        etPass.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				
+				if(etPass.isFocused()) {
+					isWork = true;
+					etUp.requestFocus();
+					etUp.postDelayed(new Runnable() {
+    					@Override
+    					public void run() { 
+    						etPass.requestFocus();
+    						isWork = false;
+    						}
+    					}, 200);
+				}
+				else 
+					etUser.requestFocus();
+			}
+		});
         
 //        etPass = (EditText)findViewById(R.id.editLoginPass);
 //        etPass.setOnEditorActionListener(new OnEditorActionListener() {
@@ -204,13 +257,10 @@ public class WableActivity extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		
-		if(isUp)
-			layout.startAnimation(aniDown);	
-		
 		Intent intent;
 		switch (v.getId()) {
 		
-		case R.id.btnFacebook:
+		case R.id.LOGINbtnFb:
 			
 //			facebook = new Facebook("180729825379631");
 //	        
@@ -256,25 +306,43 @@ public class WableActivity extends Activity implements OnClickListener {
 //			
 			break;
 			
-		case R.id.btnLoginFind:
+		case R.id.LOGINbtnRegister:
+			intent = new Intent(context, RegisterActivity.class);
+			startActivity(intent);
+			break;
+			
+			
+		case R.id.LOGINbtnFind:
 			intent = new Intent(context, PasswordFindActivity.class);
 			startActivity(intent);
 			break;
 			
-		case R.id.btnLogin:
+		case R.id.LOGINbtnLogin:
+			
 			//Toast.makeText(context, "Login OK", Toast.LENGTH_SHORT).show();
 			intent = new Intent(context, MainActivity.class);
 			startActivity(intent);			
 			overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 			finish();
-			
 			break;
 			
-		case R.id.btnLoginRegister:
-			intent = new Intent(context, RegisterActivity.class);
-			startActivity(intent);
-			break;
+//		case R.id.LOGINeditId:
+//		case R.id.LOGINeditPass:
+//			
+//			etUser.postDelayed(new Runnable() {
+//    			@Override
+//    			public void run() {
+//    				etUp.requestFocus();
+//    				etUp.postDelayed(new Runnable() {
+//    					@Override
+//    					public void run() { etUser.requestFocus();}}, 200);
+//    			}
+//    		}, 100);
+//			
+//			break;
 
 		}
 	}
+	
+
 }

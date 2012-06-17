@@ -3,12 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     
     android:fromYDelta="0"
-    android:toYDelta="-220" 
+    android:toYDelta="-150" 
     android:duration="300"
-    android:fillAfter="true"
-    
-    >
-    
-</translate>
-    
-
+ />	    
