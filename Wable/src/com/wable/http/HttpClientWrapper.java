@@ -1,6 +1,7 @@
 package com.wable.http;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -51,148 +52,185 @@ public class HttpClientWrapper extends HttpWrapper  {
 	
 
 	@Override
-	public boolean POSTAsync(String url, Map<String, Object> params,
-			IHttpCallback callback) {
-		try
-		{
-			
-	
-			
-			HttpPost httpPost = new HttpPost(url);
-			
-			
-			List<NameValuePair> paramList = new ArrayList<NameValuePair>();
-			for(Map.Entry<String,Object> entry:params.entrySet())
-				paramList.add(new BasicNameValuePair(entry.getKey(),entry.getValue().toString()));
-			httpPost.setEntity(new UrlEncodedFormEntity(paramList));
-			httpPost.setHeader("Location", "ko");
-			HttpResponse responsePost = httpClient.execute(httpPost,httpContext);
-			HttpEntity resEntity = responsePost.getEntity();
-			
-			List<Cookie> cookies = cookieStore.getCookies();
-			for(int i=0;i<cookies.size();i++)
-				Logger.Instance().Write(url+"  cookie: " + cookies.get(i));
-			
-			if(resEntity !=null)
-			{
-				String line =EntityUtils.toString(resEntity);
-				Logger.Instance().Write(url+"  response: " + line);
-				callback.OnCallback(true,line);
-				return  true;
-				
-			}
-
-		}
-		catch(Exception e){
-			Logger.Instance().Write(e);
-			} finally {
-			}
-		
-		
-		callback.OnCallback(false,null);
-		return false;
-	}
-
-	@Override
-	public boolean GETAsync(String url,Map<String, Object> params, IHttpCallback callback) {
-		// TODO Auto-generated method stub
-		try
-		{
-			
+	public boolean POSTAsync(final String url,final Map<String, Object> params,
+			final IHttpCallback callback) {
 		
 
-			
-			url +="?"+buildParameters(params);
-			
-			HttpGet httpGet = new HttpGet(url);
-			
-			
-			httpGet.setHeader("Location", "ko");
-			HttpResponse responsePost = httpClient.execute(httpGet,httpContext);
-			HttpEntity resEntity = responsePost.getEntity();
-			
-			List<Cookie> cookies = cookieStore.getCookies();
-			for(int i=0;i<cookies.size();i++)
-				Logger.Instance().Write(url+"  cookie: " + cookies.get(i));
-			
-			if(resEntity !=null)
-			{
-				String line =EntityUtils.toString(resEntity);
-				Logger.Instance().Write(url+"  response: " + line);
-				callback.OnCallback(true,line);
-				return  true;
-				
-			}
-
-		}
-		catch(Exception e){
-			Logger.Instance().Write(e);
-			}
-		
-		
-		callback.OnCallback(false,null);
-		return false;
-	}
-
-	
-
-	@Override
-	public boolean POSTFileAsync(String url, Map<String, Object> params,
-			Map<String, Object> files, IHttpCallback callback) {
-		
-		 	try
-			{
-				
-			//타이암웃 걸기
-			//	HttpParams params = http.getParams();
-			//	HttpConnectionparams.setConnectionTimeout(params,5000);
-			// HttpConnectionParams.setSoTimeout(params,5000);
-				
-				HttpPost httpPost = new HttpPost(url);
-				
-				MultipartEntity entity = new MultipartEntity(HttpMultipartMode.STRICT); 
-				
-				for(Map.Entry<String,Object> entry:params.entrySet())
-	            {
-					ContentBody cb =  new StringBody(entry.getValue().toString(),"", null);
-	            	 entity.addPart(entry.getKey(),cb); 
-	            }
-				
-				for(Map.Entry<String,Object> entry:files.entrySet())
-	            {
-					 File file = new File(entry.getValue().toString());
-					 ContentBody cbFile = new FileBody(file, "image");
-	            	 entity.addPart(entry.getKey(),cbFile); 
-	            }
-				
-				httpClient.getParams().setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
-				httpPost.setEntity(entity);
-				httpPost.setHeader("Location", "ko");
-				HttpResponse responsePost = httpClient.execute(httpPost,httpContext);
-				HttpEntity resEntity = responsePost.getEntity();
-				
-				List<Cookie> cookies = cookieStore.getCookies();
-				for(int i=0;i<cookies.size();i++)
-					Logger.Instance().Write(url+"  cookie: " + cookies.get(i));
-				
-				if(resEntity !=null)
-				{
-					String line =EntityUtils.toString(resEntity);
-					Logger.Instance().Write(url+"  response: " + line);
-					callback.OnCallback(true,line);
-					return  true;
+			new Thread()
+	 		{
+				@Override
+	 			public void run()
+	 			{
+					try
+					{ 
+					HttpPost httpPost = new HttpPost(url);
 					
-				}
+					
+					List<NameValuePair> paramList = new ArrayList<NameValuePair>();
+					for(Map.Entry<String,Object> entry:params.entrySet())
+						paramList.add(new BasicNameValuePair(entry.getKey(),entry.getValue().toString()));
+					httpPost.setEntity(new UrlEncodedFormEntity(paramList));
+					httpPost.setHeader("Location", "ko");
+					HttpResponse responsePost = httpClient.execute(httpPost,httpContext);
+					HttpEntity resEntity = responsePost.getEntity();
+					
+					List<Cookie> cookies = cookieStore.getCookies();
+					for(int i=0;i<cookies.size();i++)
+						Logger.Instance().Write(url+"  cookie: " + cookies.get(i));
+					
+					if(resEntity !=null)
+					{
+						String line =EntityUtils.toString(resEntity);
+						Logger.Instance().Write(url+"  response: " + line);
+						callback.OnCallback(true,line);
+						
+						
+					}
 
-			}
-			catch(Exception e){
-				Logger.Instance().Write(e);
-				} finally {
 				}
+				catch(Exception e){
+					Logger.Instance().Write(e);
+					} finally {
+					}
+				
+				
+				callback.OnCallback(false,null);
+				
+	 			}
+	 		}.start();
 			
+	
 			
-			callback.OnCallback(false,null);
+	 		return  true;
+	}
+
+	@Override
+	public boolean GETAsync(String url, Map<String, Object> params, final IHttpCallback callback) {
+		// TODO Auto-generated method stub
+		
+		try {
+			final String urls =url + "?"+buildParameters(params);
+			
+			new Thread()
+	 		{
+				@Override
+	 			public void run()
+	 			{
+					try
+					{
+						
+						HttpGet httpGet = new HttpGet(urls);
+						
+						
+						httpGet.setHeader("Location", "ko");
+						HttpResponse responsePost = httpClient.execute(httpGet,httpContext);
+						HttpEntity resEntity = responsePost.getEntity();
+						
+						List<Cookie> cookies = cookieStore.getCookies();
+						for(int i=0;i<cookies.size();i++)
+							Logger.Instance().Write(urls+"  cookie: " + cookies.get(i));
+						
+						if(resEntity !=null)
+						{
+							String line =EntityUtils.toString(resEntity);
+							Logger.Instance().Write(urls+"  response: " + line);
+							callback.OnCallback(true,line);
+							
+							
+						}
+
+					}
+					catch(Exception e){
+						Logger.Instance().Write(e);
+						}
+					
+				
+				callback.OnCallback(false,null);
+				
+	 			}
+	 		}.start();
+
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 			return false;
+		}
+			
+	 		return  true;
+			
+	}
+
+	
+
+	@Override
+	public boolean POSTFileAsync(final String url, final Map<String, Object> params,
+			final Map<String, Object> files, final IHttpCallback callback) {
+		
+
+		 		new Thread()
+		 		{
+		 			@Override
+		 			public void run()
+		 			{
+		 				
+		 				try
+						{
+		 					
+		 				//타이암웃 걸기
+		 				//	HttpParams params = http.getParams();
+		 				//	HttpConnectionparams.setConnectionTimeout(params,5000);
+		 				// HttpConnectionParams.setSoTimeout(params,5000);
+		 					
+		 					HttpPost httpPost = new HttpPost(url);
+		 					
+		 					MultipartEntity entity = new MultipartEntity(HttpMultipartMode.STRICT); 
+		 					
+		 					for(Map.Entry<String,Object> entry:params.entrySet())
+		 		            {
+		 						ContentBody cb =  new StringBody(entry.getValue().toString(),"", null);
+		 		            	 entity.addPart(entry.getKey(),cb); 
+		 		            }
+		 					
+		 					for(Map.Entry<String,Object> entry:files.entrySet())
+		 		            {
+		 						 File file = new File(entry.getValue().toString());
+		 						 ContentBody cbFile = new FileBody(file, "image");
+		 		            	 entity.addPart(entry.getKey(),cbFile); 
+		 		            }
+		 					
+		 					httpClient.getParams().setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
+		 					httpPost.setEntity(entity);
+		 					httpPost.setHeader("Location", "ko");
+		 					HttpResponse responsePost = httpClient.execute(httpPost,httpContext);
+		 					HttpEntity resEntity = responsePost.getEntity();
+		 					
+		 					List<Cookie> cookies = cookieStore.getCookies();
+		 					for(int i=0;i<cookies.size();i++)
+		 						Logger.Instance().Write(url+"  cookie: " + cookies.get(i));
+		 					
+		 					if(resEntity !=null)
+		 					{
+		 						String line =EntityUtils.toString(resEntity);
+		 						Logger.Instance().Write(url+"  response: " + line);
+		 						callback.OnCallback(true,line);
+		 						
+		 						
+		 					}
+
+		 				}
+		 				catch(Exception e){
+		 					Logger.Instance().Write(e);
+		 					} finally {
+		 					}
+		 				
+		 				
+		 				callback.OnCallback(false,null);
+		 				
+		 			}
+		 		
+		 		}.start();
+		 		
+			return true;
 		
 	}
 

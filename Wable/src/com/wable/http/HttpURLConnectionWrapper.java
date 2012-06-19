@@ -246,47 +246,72 @@ public class HttpURLConnectionWrapper extends HttpWrapper {
 
 
 	@Override
-	public boolean POSTAsync(String url, Map<String, Object> params,
-			IHttpCallback callback) {
+	public boolean POSTAsync(final String url, final Map<String, Object> params,
+			final IHttpCallback callback) {
 		// TODO Auto-generated method stub
 		
-		try
+		new Thread()
 		{
-			/// 일단 주소에 데이터랑 보내고
-			//String recv = Request(new URL(url),"POST",params,null);
-			String recv = Request(new URL(url),"POST",params,false);
-			Logger.Instance().Write(recv);
-			callback.OnCallback(true, recv);
-			
-		}
-		catch(Exception e)
-		{
-			Logger.Instance().Write(e);
-			callback.OnCallback(false, null);
-		}
-		
-		return false;
+			@Override
+ 			public void run()
+ 			{
+				try
+				{
+					/// 일단 주소에 데이터랑 보내고
+					//String recv = Request(new URL(url),"POST",params,null);
+					String recv = Request(new URL(url),"POST",params,false);
+					Logger.Instance().Write(recv);
+					callback.OnCallback(true, recv);
+					
+					
+					
+				}
+				catch(Exception e)
+				{
+					Logger.Instance().Write(e);
+					callback.OnCallback(false, null);
+				}
+ 			}
+		}.start();
+		return true;
 	}
 
 	@Override
 	public boolean GETAsync(String url, Map<String, Object> params,
-			IHttpCallback callback) {
-		try
-		{
-			url +="?"+buildParameters(params);
-			/// 일단 주소에 데이터랑 보내고
-			String recv = Request(new URL(url),"GET",null,false);
-			Logger.Instance().Write(recv);
-			callback.OnCallback(true, recv);
-			
-		}
-		catch(Exception e)
-		{
-			Logger.Instance().Write(e);
-			callback.OnCallback(false, null);
+			final IHttpCallback callback) {
+		
+		try {
+			final String urls = url +"?"+buildParameters(params);
+			new Thread()
+			{
+				@Override
+	 			public void run()
+	 			{
+					
+	 			
+					try
+					{
+						
+						/// 일단 주소에 데이터랑 보내고
+						String recv = Request(new URL(urls),"GET",null,false);
+						Logger.Instance().Write(recv);
+						callback.OnCallback(true, recv);
+						
+					}
+					catch(Exception e)
+					{
+						Logger.Instance().Write(e);
+						callback.OnCallback(false, null);
+					}
+	 			}
+			}.start();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
 		
-		return false;
+		
+		return true;
 	}
 
 	
@@ -347,4 +372,5 @@ public class HttpURLConnectionWrapper extends HttpWrapper {
 	// [end]
 	
 
+	
 }
