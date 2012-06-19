@@ -41,22 +41,15 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView3"
         android:layout_centerHorizontal="true" android:text="필요한 서비스를 등록만 하시면 \n실시간으로 제공자들에게서 연락이 옵니다" android:gravity="center"/>
-
-     <com.wable.util.pulltorefresh.PullToRefreshView
-        android:id="@+id/pull_to_refresh"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" android:background="@android:color/black"/>
 
     <ScrollView
         android:id="@+id/ScrollView1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentTop="true" >
+        android:layout_alignParentBottom="true" >
 
         <LinearLayout
-            android:id="@+id/MYPAGE_RQlinear"
+            android:id="@+id/MYPAGE_PVlinear"
             android:layout_width="match_parent"
             android:layout_height="510dp"
             android:orientation="vertical" >

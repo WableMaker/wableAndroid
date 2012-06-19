@@ -28,10 +28,10 @@
         </activity>
         <activity android:name=".tab.login.PasswordFindActivity" android:launchMode="singleTop"></activity>
         <activity android:name=".tab.login.RegisterActivity" android:launchMode="singleTop"></activity>
-        <activity android:name=".tab.mypage.RequestListActivity"></activity>
+        <activity android:name=".tab.mypage.RequestListActivity" android:launchMode="singleTop"></activity>
         <activity android:name=".tab.mypage.MypageActivity" android:launchMode="singleTop"></activity>
         <activity android:name=".tab.mypage.OfferListActivity"></activity>
-        <activity android:name="MainActivity" android:theme="@android:style/Theme.NoTitleBar"></activity>
+        <activity android:name="MainActivity" android:theme="@android:style/Theme.NoTitleBar" android:launchMode="singleTop"></activity>
         <activity android:name=".tab.post.RequestCategory"></activity>
         <activity android:name=".tab.post.PostActivity" android:launchMode="singleTop"></activity>
         <activity android:name=".tab.post.RequestPost"></activity>

@@ -6,27 +6,39 @@
     android:orientation="vertical" >
 
     <Button
-        android:id="@+id/btnMyRequest"
+        android:id="@+id/MYPAGEbtnMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:text="요청하기" />
-
-    <Button
-        android:id="@+id/btnMyOffer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:text="제공하기" />
-
+        android:background="@drawable/buyingtab"/>
+
     <ViewSwitcher
         android:id="@+id/ViewSwitcher1"
         android:layout_width="match_parent"
         android:layout_height="300dp"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/btnMyRequest">
+        android:layout_below="@+id/MYPAGEbtnMenu" >
+
     </ViewSwitcher>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/MYPAGEbtnMenu"
+        android:layout_alignBottom="@+id/MYPAGEbtnMenu"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="70dp"
+        android:text="요청" android:textColor="#FFFFFF"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/MYPAGEbtnMenu"
+        android:layout_alignBottom="@+id/MYPAGEbtnMenu"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="66dp"
+        android:text="제공"
+        android:textColor="#FFFFFF" />
 
 </RelativeLayout>

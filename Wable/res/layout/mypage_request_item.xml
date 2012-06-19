@@ -4,46 +4,76 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-
-    <ImageView
-        android:id="@+id/imageView1"
+
+    <TextView
+        android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:src="@android:drawable/ic_input_get" />
+        android:background="@drawable/table_cell_2" />
 
-    <TextView
-        android:id="@+id/textRequestItemTitle"
+    <ImageView
+        android:id="@+id/MYPAGE_RQimgTag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/imageView1"
+        android:layout_alignBottom="@+id/textView1"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/cell_box_b" />
+
+    <TextView
+        android:id="@+id/MYPAGE_RQtextRecommand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/MYPAGE_RQimgTag"
+        android:layout_alignTop="@+id/MYPAGE_RQimgTag"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="40dp"
+        android:text="1명 추천"
+        android:textColor="#FFFFFF" />
+
+    <TextView
+        android:id="@+id/MYPAGE_RQtextMid"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/MYPAGE_RQimgTag"
+        android:layout_alignTop="@+id/MYPAGE_RQimgTag"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:text="대기중"
+        android:textColor="#FFFFFF"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/MYPAGE_RQtextRq"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/MYPAGE_RQimgTag"
+        android:layout_alignTop="@+id/MYPAGE_RQimgTag"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="22dp"
+        android:text="2명 신청"
+        android:textColor="#FFFFFF" />
+
+    <TextView
+        android:id="@+id/MYAPGE_RQtextTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/MYPAGE_RQimgTag"
+        android:layout_marginLeft="80dp"
         android:text="피아노 레슨"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#000000" android:layout_marginTop="20dp"/>
 
     <TextView
-        android:id="@+id/textRequestItemPrice"
+        android:id="@+id/MYPAGE_RQtextPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textRequestItemTitle"
-        android:layout_below="@+id/textRequestItemTitle"
-        android:text="50,000" />
-
-    <TextView
-        android:id="@+id/textRequestItemSubmit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:text="2명 신청" />
-
-    <TextView
-        android:id="@+id/textRequestItemRecommand"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/textRequestItemSubmit"
-        android:text="1건 추천" />
+        android:layout_alignLeft="@+id/MYAPGE_RQtextTitle"
+        android:layout_below="@+id/MYPAGE_RQtextMid"
+        android:text="15,000원"
+        android:textColor="#0000FF" />
 
 </RelativeLayout>

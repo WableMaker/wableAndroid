@@ -166,4 +166,9 @@ public class PostActivity extends Activity implements OnClickListener {
 		}
 		
 	}
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+	}
 }

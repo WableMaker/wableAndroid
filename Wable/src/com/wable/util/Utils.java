@@ -1,6 +1,7 @@
 package com.wable.util;
 
 import java.io.File;
+import java.text.DecimalFormat;
 
 public class Utils {
 	
@@ -23,6 +24,12 @@ public class Utils {
 		    file.delete();  
 		    
 	    }
+	}
+	
+
+	public static String ConvertStringToMoney(String money) 
+	{
+		return new DecimalFormat("###,###").format(Long.parseLong(money));
 	}
 
 

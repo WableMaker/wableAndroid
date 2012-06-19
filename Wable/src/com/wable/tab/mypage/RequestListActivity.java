@@ -4,11 +4,11 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
-import org.apache.http.client.CircularRedirectException;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import android.content.Context;
+import android.content.Intent;
 import android.location.Address;
-import android.location.Criteria;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
@@ -41,22 +41,43 @@ public class RequestListActivity extends MapActivity implements LocationListener
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.mypage_requestlist);
 	
-		mapview = (MapView)findViewById(R.id.mapview);
-		tvDistance = (TextView)findViewById(R.id.textMapDistance);
-		tvPrice = (TextView)findViewById(R.id.textMapPrice);
-		tvAddr = (TextView)findViewById(R.id.textMapAddr);
-		
+		mapview = (MapView)findViewById(R.id.mapview);		
 		
 		mapCtrl = mapview.getController();
 		mapCtrl.setZoom(16);
 		
-		manager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-		manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
-		manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 0, this);
+		//manager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+		//manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+		//manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 0, this);
 		
-		geo = new Geocoder(this, Locale.KOREAN);
-		
+		geo = new Geocoder(this, Locale.KOREAN);		
 		pin = new ImageView(this);
+		
+		try {
+			JSONObject obj = new JSONObject(getIntent().getStringExtra("JSON"));
+			
+			double lat = obj.getDouble("lat");
+			double lon = obj.getDouble("lon");
+			
+			
+			
+			GeoPoint gp = new GeoPoint((int)(lat * 1000000), (int)(lon * 1000000));		
+			mapCtrl.animateTo(gp);
+			
+			pin.setImageResource(R.drawable.map_pin);
+			MapView.LayoutParams lp = new MapView.LayoutParams
+					(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, gp, LayoutParams.CENTER);
+			
+			mapview.removeView(pin);
+			mapview.addView(pin, lp);
+			
+			
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		
+		
+		
 		
 	}
 	@Override
@@ -104,18 +125,6 @@ public class RequestListActivity extends MapActivity implements LocationListener
 		
 	}
 	
-	@Override
-	protected void onPause() {
-		
-		manager.removeUpdates(this);
-		
-		super.onPause();
-	}
-	
-	@Override
-	protected void onStop() {
-		super.onStop();
-	}
 	
 	@Override
 	public void onProviderDisabled(String provider) {}

@@ -4,43 +4,41 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/map_mask"
+        android:text="TextView" />
 
     <com.google.android.maps.MapView
         android:id="@+id/mapview"
-        android:layout_width="198dp"
-        android:layout_height="285dp"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/textView1"
         android:apiKey="0oqzs7eIvbFX8Faveem2CANcvsCaS5O1nULYH3A"
-        android:clickable="true" />
+        android:background="@drawable/map_mask"
+        android:clickable="true" >
 
-    <TextView
-        android:id="@+id/textMapPrice"
-        android:layout_width="wrap_content"
+    </com.google.android.maps.MapView>
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="15dp"
-        android:text="TextView" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/mapview" >
 
-    <TextView
-        android:id="@+id/textMapDistance"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textMapPrice"
-        android:layout_below="@+id/textMapPrice"
-        android:layout_marginTop="15dp"
-        android:text="TextView" />
-
-    <TextView
-        android:id="@+id/textMapAddr"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/mapview"
-        android:layout_centerHorizontal="true"
-        android:background="@android:color/black"
-        android:layout_marginBottom="16dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" android:orientation="vertical">
+        </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>
