@@ -12,12 +12,15 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.ReentrantLock;
 
+import com.wable.http.apiproxy.APIProxyLayer;
 import com.wable.util.Logger;
 
 public class HttpURLConnectionWrapper extends HttpWrapper {
 
-	// [start] IHttpConnectionLayer 구현
+	// [start] 멤버변수
 	
 	/// 리퀘스트 내용을 통채로 저장할 스트링
 	 public String m_request ;
@@ -28,7 +31,7 @@ public class HttpURLConnectionWrapper extends HttpWrapper {
 	 String lineEnd = "\r\n";
 	 String twoHyphens = "--";
 	 String boundary = "dkjsei40f9844-------djs8dviw--4-s-df-";
-
+	 static ReentrantLock _cookielock = new ReentrantLock();
 	 // [end]
 	 String buildeMultipartNormalParameter(Map<String,Object> params)
 	 {
@@ -107,8 +110,7 @@ public class HttpURLConnectionWrapper extends HttpWrapper {
 					if(imap.containsKey("Set-Cookie"))
 					{
 						List<String> cookie = imap.get("Set-Cookie");
-						for(int i=0;i<cookie.size();i++) m_cookies += cookie.get(i)+";";
-						Logger.Instance().Write(m_cookies);			
+						StoreCookie(cookie);	
 					}
 					
 					return line;
@@ -233,13 +235,37 @@ public class HttpURLConnectionWrapper extends HttpWrapper {
 			if(imap.containsKey("Set-Cookie"))
 			{
 				List<String> cookie = imap.get("Set-Cookie");
-				for(int i=0;i<cookie.size();i++) m_cookies += cookie.get(i)+";";
-				Logger.Instance().Write(m_cookies);			
+				StoreCookie(cookie);
 			}
 			
 			
 		}
 		return line;
+	}
+	
+	private void StoreCookie(List<String> cookie)
+	{
+		try {
+			if(_cookielock.tryLock(2000,TimeUnit.MILLISECONDS))
+			{
+				try
+				{	
+					for(int i=0;i<cookie.size();i++) m_cookies += cookie.get(i)+";";
+					Logger.Instance().Write(m_cookies);		
+				}
+				catch(Exception e)
+				{
+					Logger.Instance().Write(e);
+				}
+				finally
+				{
+					_cookielock.unlock();
+				}
+			}
+		} catch (Exception e) {
+			Logger.Instance().Write(e);
+		}
+		
 	}
 	 
 	// [start] IHttpConnectionLayer 구현
@@ -262,9 +288,7 @@ public class HttpURLConnectionWrapper extends HttpWrapper {
 					String recv = Request(new URL(url),"POST",params,false);
 					Logger.Instance().Write(recv);
 					callback.OnCallback(true, recv);
-					
-					
-					
+
 				}
 				catch(Exception e)
 				{

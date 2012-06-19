@@ -127,25 +127,75 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				
 				params.put("fb_uid", _fb_uid);
 				params.put("oauth_token", _oauth_token);
-				result = _httpLayer.POSTSync(_domain+"account/FBLoginMobile", params);
+				_httpLayer.POSTAsync(_domain+"account/FBLoginMobile", params,new IHttpCallback()
+				{
+					@Override
+					public void OnCallback(boolean success,String result) {
+						JSONObject obj = null;
+						if(success == true)
+						{
+							try
+							{
+								
+								if(result !=null)
+								{
+									obj = new JSONObject(result);
+									if(false == obj.getBoolean("success"))
+										SessionDisconnected("Login");
+									else SessionConnected("Login");
+								}
+							}
+							catch(Exception e)
+							{
+								Logger.Instance().Write("Relogin "+e.toString());
+								
+							}
+						}
+					}
+				});
 
 			}
 			else
 			{
 				params.put("loginid", _loginid);
 				params.put("password", _password);
-				result = _httpLayer.POSTSync(_domain+"account/loginmobile", params);
+				_httpLayer.POSTAsync(_domain+"account/loginmobile", params,new IHttpCallback()
+				{
+					@Override
+					public void OnCallback(boolean success,String result) {
+						JSONObject obj = null;
+						if(success == true)
+						{
+							try
+							{
+								
+								if(result !=null)
+								{
+									obj = new JSONObject(result);
+									if(false == obj.getBoolean("success"))
+										SessionDisconnected("Login");
+									else SessionConnected("Login");
+								}
+							}
+							catch(Exception e)
+							{
+								Logger.Instance().Write("Relogin "+e.toString());
+								
+							}
+						}
+					}
+				});
 			}
 			
-			JSONObject json = new JSONObject(result);
-			boolean blogin= json.getBoolean("success");
-			return blogin;
+//			JSONObject json = new JSONObject(result);
+//			boolean blogin= json.getBoolean("success");
+//			return blogin;
 		}
 		catch(Exception e)
 		{
-			Logger.Instance().Write(e);
+			Logger.Instance().Write("Relogin"+ e.toString());
 		}
-		return false;
+		return true;
 	}
 
 	void SetAccountInfo(String loginid,	String password,String fb_uid ,	String oauth_token)
@@ -277,7 +327,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					}
 					catch(Exception e)
 					{
-						Logger.Instance().Write(e);
+						Logger.Instance().Write("MyInfo "+e.toString());
 						callback.OnCallback(false,null);
 					}
 				}

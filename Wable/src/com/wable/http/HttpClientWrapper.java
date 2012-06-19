@@ -30,6 +30,7 @@ import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
+import org.apache.http.protocol.SyncBasicHttpContext;
 import org.apache.http.util.EntityUtils;
 
 import com.wable.util.Logger;
@@ -39,9 +40,9 @@ public class HttpClientWrapper extends HttpWrapper  {
 	
 	// [start] 멤버변수
 	
-	DefaultHttpClient httpClient = new DefaultHttpClient();
+	
 	BasicCookieStore cookieStore = new  BasicCookieStore();
-	HttpContext httpContext = new BasicHttpContext();	 
+	SyncBasicHttpContext httpContext = new SyncBasicHttpContext(new BasicHttpContext());	 
 	
 	// [end]
 	
@@ -63,9 +64,9 @@ public class HttpClientWrapper extends HttpWrapper  {
 	 			{
 					try
 					{ 
+						DefaultHttpClient httpClient = new DefaultHttpClient();
 					HttpPost httpPost = new HttpPost(url);
-					
-					
+
 					List<NameValuePair> paramList = new ArrayList<NameValuePair>();
 					for(Map.Entry<String,Object> entry:params.entrySet())
 						paramList.add(new BasicNameValuePair(entry.getKey(),entry.getValue().toString()));
@@ -82,20 +83,14 @@ public class HttpClientWrapper extends HttpWrapper  {
 					{
 						String line =EntityUtils.toString(resEntity);
 						Logger.Instance().Write(url+"  response: " + line);
-						callback.OnCallback(true,line);
-						
-						
+						callback.OnCallback(true,line); 
 					}
 
 				}
 				catch(Exception e){
 					Logger.Instance().Write(e);
-					} finally {
-					}
-				
-				
-				callback.OnCallback(false,null);
-				
+					callback.OnCallback(false,null);
+					} 
 	 			}
 	 		}.start();
 			
@@ -118,10 +113,8 @@ public class HttpClientWrapper extends HttpWrapper  {
 	 			{
 					try
 					{
-						
 						HttpGet httpGet = new HttpGet(urls);
-						
-						
+						DefaultHttpClient httpClient = new DefaultHttpClient();
 						httpGet.setHeader("Location", "ko");
 						HttpResponse responsePost = httpClient.execute(httpGet,httpContext);
 						HttpEntity resEntity = responsePost.getEntity();
@@ -141,18 +134,19 @@ public class HttpClientWrapper extends HttpWrapper  {
 
 					}
 					catch(Exception e){
-						Logger.Instance().Write(e);
+						Logger.Instance().Write("GETAsync "+urls+" "+ e.toString());
+						callback.OnCallback(false,null);
 						}
 					
 				
-				callback.OnCallback(false,null);
+				
 				
 	 			}
 	 		}.start();
 
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			Logger.Instance().Write("GETAsync "+url+ " " + e1.toString());
 			return false;
 		}
 			
@@ -175,7 +169,7 @@ public class HttpClientWrapper extends HttpWrapper  {
 		 				
 		 				try
 						{
-		 					
+		 					DefaultHttpClient httpClient = new DefaultHttpClient();
 		 				//타이암웃 걸기
 		 				//	HttpParams params = http.getParams();
 		 				//	HttpConnectionparams.setConnectionTimeout(params,5000);
@@ -220,11 +214,10 @@ public class HttpClientWrapper extends HttpWrapper  {
 		 				}
 		 				catch(Exception e){
 		 					Logger.Instance().Write(e);
-		 					} finally {
+		 					callback.OnCallback(false,null);
 		 					}
 		 				
 		 				
-		 				callback.OnCallback(false,null);
 		 				
 		 			}
 		 		
@@ -242,7 +235,7 @@ public class HttpClientWrapper extends HttpWrapper  {
 		try
 		{
 			
-
+			DefaultHttpClient httpClient = new DefaultHttpClient();
 			HttpPost httpPost = new HttpPost(url);
 			
 			//타임아웃 걸기
@@ -284,6 +277,7 @@ public class HttpClientWrapper extends HttpWrapper  {
 	public String GETSync(String url, Map<String, Object> params) {
 		try
 		{
+			DefaultHttpClient httpClient = new DefaultHttpClient();
 			url +="?"+buildParameters(params);
 			
 			HttpGet httpGet = new HttpGet(url);
