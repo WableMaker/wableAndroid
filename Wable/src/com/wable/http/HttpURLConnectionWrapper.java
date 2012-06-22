@@ -10,6 +10,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -26,12 +28,15 @@ public class HttpURLConnectionWrapper extends HttpWrapper {
 	 public String m_request ;
 	 	 
 	 /// 세션 유지에 필요한 쿠키
-	 String m_cookies = "" ;
 
 	 String lineEnd = "\r\n";
 	 String twoHyphens = "--";
 	 String boundary = "dkjsei40f9844-------djs8dviw--4-s-df-";
-	 static ReentrantLock _cookielock = new ReentrantLock();
+	 
+	 //쿠키저장소
+	 Map<String,String> m = Collections.synchronizedMap(new HashMap<String,String>());
+	 private static final char NAME_VALUE_SEPARATOR = '=';
+	 
 	 // [end]
 	 String buildeMultipartNormalParameter(Map<String,Object> params)
 	 {
@@ -71,7 +76,7 @@ public class HttpURLConnectionWrapper extends HttpWrapper {
 					httpcon.setReadTimeout(timeout_ms_syncrequest);
 				}
 				httpcon.setDoInput(true);//인풋스트림 사용여부
-				if(m_session) httpcon.setRequestProperty("cookie", m_cookies);
+				if(m_session) httpcon.setRequestProperty("cookie",  GetCookies());
 				if(method.equals("POST"))
 				{
 					httpcon.setDoOutput(true);//post는 데이터를 주소와 별개로 보냄 즉 바디에 넣어서..
@@ -84,7 +89,6 @@ public class HttpURLConnectionWrapper extends HttpWrapper {
 					out.flush();
 					out.close();
 				}
-				Logger.Instance().Write(url.toString()+  " Request success "+  m_cookies);
 				long start = System.currentTimeMillis();
 				
 				int response =httpcon.getResponseCode();
@@ -165,7 +169,7 @@ public class HttpURLConnectionWrapper extends HttpWrapper {
 
 		//POST타입으로 설정
 		conn.setRequestMethod("POST"); 
-		if(m_session) conn.setRequestProperty("cookie", m_cookies);
+		if(m_session) conn.setRequestProperty("cookie", GetCookies());
 		//헤더 설정
 
 		conn.setRequestProperty("Connection","Keep-Alive"); 
@@ -209,7 +213,7 @@ public class HttpURLConnectionWrapper extends HttpWrapper {
 		}
 		
 
-		Logger.Instance().Write(url.toString()+  " Request success "+  m_cookies);
+		Logger.Instance().Write(url.toString()+  " Request success "+  GetCookies());
 		long start = System.currentTimeMillis();
 		
 		int response =conn.getResponseCode();
@@ -243,25 +247,53 @@ public class HttpURLConnectionWrapper extends HttpWrapper {
 		return line;
 	}
 	
+	private String GetCookies()
+	{
+		String result="";
+		synchronized(m)
+		{
+			
+			for (Map.Entry entry : m.entrySet()) {
+			    Object key = entry.getKey();
+			    Object value = entry.getValue();
+			    result+=key.toString()+"="+value.toString()+";";
+			    
+			}
+		}
+		Logger.Instance().Write("all cookie "+result);
+		return result;
+	}
+	
 	private void StoreCookie(List<String> cookie)
 	{
 		try {
-			if(_cookielock.tryLock(2000,TimeUnit.MILLISECONDS))
+			synchronized(m)
 			{
 				try
 				{	
-					for(int i=0;i<cookie.size();i++) m_cookies += cookie.get(i)+";";
-					Logger.Instance().Write(m_cookies);		
+					for(int i=0;i<cookie.size();i++)
+					{
+						
+						String name = cookie.get(i).substring(0, cookie.get(i).indexOf(NAME_VALUE_SEPARATOR));
+						String value = cookie.get(i).substring(cookie.get(i).indexOf(NAME_VALUE_SEPARATOR) + 1, cookie.get(i).length());
+						
+						if(m.containsKey(name))
+						{
+							Logger.Instance().Write("duplicate cookie "+name);
+							m.remove(name);
+							
+						}
+						m.put(name, value);
+						
+						Logger.Instance().Write("cookie "+value);		
+					}
 				}
 				catch(Exception e)
 				{
 					Logger.Instance().Write(e);
 				}
-				finally
-				{
-					_cookielock.unlock();
-				}
 			}
+		
 		} catch (Exception e) {
 			Logger.Instance().Write(e);
 		}
