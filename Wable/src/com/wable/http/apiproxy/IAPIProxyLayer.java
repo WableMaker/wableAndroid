@@ -2,6 +2,8 @@ package com.wable.http.apiproxy;
 
 import java.util.Date;
 
+import android.text.format.Time;
+
 
 public interface IAPIProxyLayer {
 	
@@ -22,6 +24,9 @@ public interface IAPIProxyLayer {
 	boolean MyInfo(IAPIProxyCallback callback);//내정보	
 	boolean UserUpdate(String name,String introduce,String photo,IAPIProxyCallback callback);//내정보
 	
+	boolean UserEnablePushNotify(Time starttime, Time endtime,IAPIProxyCallback callback);//푸쉬받을 시간
+	boolean UserResetBadgeCount(IAPIProxyCallback callback);//푸쉬받을 시간
+	
 	// [end]
 		
 	// [start] Request
@@ -31,16 +36,16 @@ public interface IAPIProxyLayer {
 	boolean RequestMyDoneList(String lastid,IAPIProxyCallback callback);//완료된 요청목록
 	boolean RequestListbyTime(String lastid,String keyword,IAPIProxyCallback callback);//내정보
 	boolean RequestListbyArea(double north,double south,double ease,double west,String keyword,IAPIProxyCallback callback);//내정보
-	boolean RequestListbyDistance(double lat, double lon,double distance,String keyword,IAPIProxyCallback callback);//내정보
+	boolean RequestListbyDistance(double lat, double lon,double mindistance,String keyword,IAPIProxyCallback callback);//내정보
 
-	boolean RequestAdd(String title, String description, int postprice, Integer category, Date duedate
+	boolean RequestAdd(String title, String description, int price, Integer category, Date duedate
 			,double lat,double lon, Boolean totwitter, Boolean tofacebook, IAPIProxyCallback callback);//내정보
 	boolean RequestDelete(String request_id ,IAPIProxyCallback callback);//요청 삭제
 	boolean RequestDone(String request_id ,IAPIProxyCallback callback);//요청 만료
 	
 	boolean RequestMyDetailById(String request_id ,IAPIProxyCallback callback);//내정보
 	boolean RequestOtherDetailById(String request_id ,IAPIProxyCallback callback);
-	boolean RequestUpdate(String request_id,String title, String description,int postprice,int category,Date duedate
+	boolean RequestUpdate(String request_id,String title, String description,int price,int category,Date duedate
 			,double lat,double lon,boolean totwitter, boolean tofacebook, IAPIProxyCallback callback);//내정보
 	// [end]
 	
@@ -51,9 +56,9 @@ public interface IAPIProxyLayer {
 	boolean ProvideMyDoneList(String lastid,IAPIProxyCallback callback);//완료된 제공목록
 	boolean ProvideListbyTime(String lastid,String keyword,IAPIProxyCallback callback);//내정보
 	boolean ProvideListbyArea(double north,double south,double ease,double west,String keyword,IAPIProxyCallback callback);//내정보
-	boolean ProvideListbyDistance(double lat, double lon,double distance,String keyword,IAPIProxyCallback callback);//내정보
+	boolean ProvideListbyDistance(double lat, double lon,double mindistance,String keyword,IAPIProxyCallback callback);//내정보
 
-	boolean ProvideAdd(String title, int minprice,int category
+	boolean ProvideAdd(String title,String description, int minprice,int category
 			,double lat,double lon,int radius, IAPIProxyCallback callback);//내정보
 	boolean ProvideDelete(String provide_id ,IAPIProxyCallback callback);//제공 삭제
 	boolean ProvideDone(String provide_id ,IAPIProxyCallback callback);//제공 만료
@@ -61,11 +66,18 @@ public interface IAPIProxyLayer {
 	boolean ProvideMyDetailById(String provide_id ,IAPIProxyCallback callback);//내정보
 	
 	boolean ProvideOtherDetailById(String provide_id ,IAPIProxyCallback callback);
-	boolean ProvideUpdate(String provide_id,String title, int minprice,int category
+	boolean ProvideUpdate(String provide_id,String title, String description, int minprice,int category
 			,double lat,double lon,int radius, IAPIProxyCallback callback);//내정보
 	// [end]
 	
 	// [start] Bidding
+
+	//제공자를 선택한다
+	boolean BiddingDecideProvider(String biddingid,IAPIProxyCallback callback);
+	
+	//요청자의 선택을 수락한다
+	boolean BiddingDecideRequester(String biddingid,IAPIProxyCallback callback);
+	
 	
 	boolean BiddingOfferAsProvider(String request_id, String message,IAPIProxyCallback callback);//내정보
 	boolean BiddingOfferAsRequester(String provide_id, String message,IAPIProxyCallback callback);//내정보
@@ -73,6 +85,9 @@ public interface IAPIProxyLayer {
 	boolean BiddingListAsProvider(String last_bidding_id,IAPIProxyCallback callback);
 	boolean BiddingListAsRequester(String last_bidding_id,IAPIProxyCallback callback);
 	boolean BiddingRating(String bidding_id,String other_id, int rating,String description,IAPIProxyCallback callback);
+	
+	//거래 삭제
+	boolean BiddingDelete(String biddingid, IAPIProxyCallback callback);
 	
 	// [end]
 	
