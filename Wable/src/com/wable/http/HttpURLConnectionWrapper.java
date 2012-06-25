@@ -17,7 +17,6 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 
-import com.wable.http.apiproxy.APIProxyLayer;
 import com.wable.util.Logger;
 
 public class HttpURLConnectionWrapper extends HttpWrapper {
