@@ -17,6 +17,10 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 
+import android.app.Activity;
+import android.content.Context;
+
+import com.wable.MainActivity;
 import com.wable.util.Logger;
 
 public class HttpURLConnectionWrapper extends HttpWrapper {
@@ -350,11 +354,13 @@ public class HttpURLConnectionWrapper extends HttpWrapper {
 						/// 일단 주소에 데이터랑 보내고
 						String recv = Request(new URL(urls),"GET",null,false);
 						Logger.Instance().Write(recv);
+						
 						callback.OnCallback(true, recv);
 						
 					}
 					catch(Exception e)
 					{
+						e.printStackTrace();
 						Logger.Instance().Write(e);
 						callback.OnCallback(false, null);
 					}

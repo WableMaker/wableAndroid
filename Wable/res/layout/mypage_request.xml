@@ -6,6 +6,17 @@
     android:background="@drawable/app_bg"
     android:orientation="vertical" >
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/MYPAGE_RQlist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </ListView>
+
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
@@ -41,12 +52,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView3"
         android:layout_centerHorizontal="true" android:text="필요한 서비스를 등록만 하시면 \n실시간으로 제공자들에게서 연락이 옵니다" android:gravity="center"/>
-
-     <com.wable.util.pulltorefresh.PullToRefreshView
-        android:id="@+id/pull_to_refresh"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" android:background="@android:color/black"/>
 
     <ScrollView
         android:id="@+id/ScrollView1"

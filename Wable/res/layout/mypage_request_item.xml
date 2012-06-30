@@ -76,4 +76,13 @@
         android:text="15,000원"
         android:textColor="#0000FF" />
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/MYPAGE_RQtextPrice"
+        android:layout_marginRight="28dp"
+        android:text="TextView" />
+
 </RelativeLayout>

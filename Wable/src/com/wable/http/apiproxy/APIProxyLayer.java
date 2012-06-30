@@ -590,7 +590,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 			@Override
 			public void OnCallback(boolean success,String result) {
-				// TODO Auto-generated method stub
+
 				JSONObject obj = null;
 				if(success == true)
 				{
