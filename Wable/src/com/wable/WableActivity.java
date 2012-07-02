@@ -19,7 +19,6 @@ import com.wable.http.apiproxy.APIProxyLayer;
 import com.wable.http.apiproxy.IAPIProxyCallback;
 import com.wable.tab.login.PasswordFindActivity;
 import com.wable.tab.login.RegisterActivity;
-import com.wable.util.Logger;
 
 public class WableActivity extends Activity implements OnClickListener {
     /** Called when the activity is first created. */
@@ -50,7 +49,7 @@ public class WableActivity extends Activity implements OnClickListener {
 //        Utils.DeleteFolder(path);        
 //        File file = new File(path);
 //        file.mkdir();
-
+ 
         findViewById(R.id.LOGINbtnFb).setOnClickListener(this);
         findViewById(R.id.LOGINbtnRegister).setOnClickListener(this);
         findViewById(R.id.LOGINbtnFind).setOnClickListener(this);
@@ -69,33 +68,34 @@ public class WableActivity extends Activity implements OnClickListener {
         etUser.setOnFocusChangeListener(onFocusChangeListner);
         etPass.setOnFocusChangeListener(onFocusChangeListner);
         
-       
-
-              
-        APIProxyLayer.Instance().Login("cc", "111111", new IAPIProxyCallback(){
-
-			@Override
-			public void OnCallback(boolean success, JSONObject json) {
-				if(success)
-				{
-					Logger.Instance().Write(json.toString());
-					
-					
-					APIProxyLayer.Instance().MyInfo(new IAPIProxyCallback(){
-
-						@Override
-						public void OnCallback(boolean success, JSONObject json) {
-							if(success)
-							{
-								Logger.Instance().Write(json.toString());
-			
-								
-							}
-							else Logger.Instance().Write("Fail to GetMyInfo");
-						}
-						
-					});
-					
+//        etPass = (EditText)findViewById(R.id.editLoginPass);
+//        etPass.setOnEditorActionListener(new OnEditorActionListener() {
+//
+//              
+//        APIProxyLayer.Instance().Login("cc", "111111", new IAPIProxyCallback(){
+//
+//			@Override
+//			public void OnCallback(boolean success, JSONObject json) {
+//				if(success)
+//				{
+//					Logger.Instance().Write(json.toString());
+//					
+//					
+//					APIProxyLayer.Instance().MyInfo(new IAPIProxyCallback(){
+//
+//						@Override
+//						public void OnCallback(boolean success, JSONObject json) {
+//							if(success)
+//							{
+//								Logger.Instance().Write(json.toString());
+//			
+//								
+//							}
+//							else Logger.Instance().Write("Fail to GetMyInfo");
+//						}
+//						
+//					});
+//					
 //					APIProxyLayer.Instance().RequestMyActiveList(null,new IAPIProxyCallback(){
 //						@Override
 //						public void OnCallback(boolean success, JSONObject json) {
@@ -134,10 +134,10 @@ public class WableActivity extends Activity implements OnClickListener {
 //					});
 //					
 //				
-				}else 	Logger.Instance().Write("Fail to login");
-			}
-        	
-        });
+//				}else 	Logger.Instance().Write("Fail to login");
+//			}
+//        	
+//        });
     
     }
     @Override
@@ -212,7 +212,7 @@ public class WableActivity extends Activity implements OnClickListener {
 			
 		case R.id.LOGINbtnLogin:
 		
-			pd = ProgressDialog.show(context, "·Î±×ÀÎ", "Á¤º¸ È®ÀÎÁßÀÔ´Ï´Ù.", true, false);
+			pd = ProgressDialog.show(context, "ï¿½Î±ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.", true, false);
 			
 			APIProxyLayer.Instance().Login("cc", "111111", new IAPIProxyCallback(){
 
@@ -241,7 +241,7 @@ public class WableActivity extends Activity implements OnClickListener {
 //
 //								}
 //								else 
-//									Toast.makeText(context, "·Î±×ÀÎ Á¤º¸¸¦ È®ÀÎÇÏ¼¼¿ä", Toast.LENGTH_SHORT).show();
+//									Toast.makeText(context, "ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½", Toast.LENGTH_SHORT).show();
 //								//Logger.Instance().Write("Fail to GetMyInfo");
 //							}
 //
