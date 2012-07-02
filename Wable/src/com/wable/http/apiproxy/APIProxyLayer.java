@@ -113,92 +113,6 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		return result;
 	}
 	
-	boolean Relogin()
-	{
-		try
-		{
-			Map<String,Object> params = new HashMap<String,Object>();
-			String result;
-			if(_loginid==null || _password ==null)//로그인 계정정보 없는경우
-			{
-				if(_oauth_token==null || _fb_uid ==null)//페북계겅정보 없는 경우
-				{
-					return false;
-				}				
-				
-				params.put("fb_uid", _fb_uid);
-				params.put("oauth_token", _oauth_token);
-				_httpLayer.POSTAsync(_domain+"account/FBLoginMobile", params,new IHttpCallback()
-				{
-					@Override
-					public void OnCallback(boolean success,String result) {
-						JSONObject obj = null;
-						if(success == true)
-						{
-							try
-							{
-								
-								if(result !=null)
-								{
-									obj = new JSONObject(result);
-									if(false == obj.getBoolean("success"))
-										SessionDisconnected("Login");
-									else SessionConnected("Login");
-								}
-							}
-							catch(Exception e)
-							{
-								Logger.Instance().Write("Relogin "+e.toString());
-								
-							}
-						}
-					}
-				});
-
-			}
-			else
-			{
-				params.put("loginid", _loginid);
-				params.put("password", _password);
-				_httpLayer.POSTAsync(_domain+"account/loginmobile", params,new IHttpCallback()
-				{
-					@Override
-					public void OnCallback(boolean success,String result) {
-						JSONObject obj = null;
-						if(success == true)
-						{
-							try
-							{
-								
-								if(result !=null)
-								{
-									obj = new JSONObject(result);
-									if(false == obj.getBoolean("success"))
-										SessionDisconnected("Login");
-									else SessionConnected("Login");
-								}
-							}
-							catch(Exception e)
-							{
-								Logger.Instance().Write("Relogin "+e.toString());
-								
-							}
-						}
-					}
-				});
-			}
-			
-//			JSONObject json = new JSONObject(result);
-//			boolean blogin= json.getBoolean("success");
-//			return blogin;
-		}
-		catch(Exception e)
-		{
-			Logger.Instance().Write("Relogin"+ e.toString());
-		}
-		return true;
-	}
-
 	void SetAccountInfo(String loginid,	String password,String fb_uid ,	String oauth_token)
 	{
 		
@@ -214,8 +128,63 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		}
 		
 	}
-
 	
+	boolean Relogin()
+	{
+		try
+		{
+			Map<String,Object> params = new HashMap<String,Object>();
+			String result;
+			if(_loginid==null || _password ==null)//로그인 계정정보 없는경우
+			{
+				if(_oauth_token==null || _fb_uid ==null)//페북계겅정보 없는 경우
+				{
+					return false;
+				}				
+				
+				params.put("fb_uid", _fb_uid);
+				params.put("oauth_token", _oauth_token);
+				result = _httpLayer.POSTSync(_domain+"account/FBLoginMobile", params);
+
+			}
+			else
+			{
+				params.put("loginid", _loginid);
+				params.put("password", _password);
+				result = _httpLayer.POSTSync(_domain+"account/loginmobile", params);
+			}
+
+			JSONObject obj = null;
+			if(result != null)
+			{
+				try
+				{
+
+					obj = new JSONObject(result);
+					if(false == obj.getBoolean("success")) SessionDisconnected("Login");
+					else 
+					{
+						SessionConnected("Login");
+						return true;
+					}
+				}
+				catch(Exception e)
+				{
+					Logger.Instance().Write("Relogin "+e.toString());
+					
+				}
+			}
+
+		}
+		catch(Exception e)
+		{
+			Logger.Instance().Write("Relogin"+ e.toString());
+		}
+		
+		return false;
+		
+	}
+
 	// [end]
 	
 	// [start] IAPIProxyLayer 구현
@@ -225,39 +194,48 @@ public class APIProxyLayer implements IAPIProxyLayer {
 			final IAPIProxyCallback callback) {
 
 		SetAccountInfo(loginid,password,null,null);
-		Map<String,Object> params = new HashMap<String,Object>();
+		final Map<String,Object> params = new HashMap<String,Object>();
 		params.put("loginid", loginid);
 		params.put("password", password);
 		
-		_httpLayer.POSTAsync(_domain+"account/loginmobile", params, new IHttpCallback(){
-
+		new Thread()
+		{
 			@Override
-			public void OnCallback(boolean success,String result) {
-				// TODO Auto-generated method stub
-				JSONObject obj = null;
-				if(success == true)
+ 			public void run()
+ 			{
+				try
 				{
-					try
-					{
-						
-						if(result !=null)
+						String result = _httpLayer.POSTSync(_domain+"account/loginmobile", params);
+						// TODO Auto-generated method stub
+						JSONObject obj = null;
+						if(result != null)
 						{
-							obj = new JSONObject(result);
-							if(false == obj.getBoolean("success"))
-								SessionDisconnected("Login");
-							else SessionConnected("Login");
+							try
+							{
+								obj = new JSONObject(result);
+								if(false == obj.getBoolean("success"))
+									SessionDisconnected("Login");
+								else SessionConnected("Login");
+								callback.OnCallback(true,obj);
+							}
+							catch(Exception e)
+							{
+								Logger.Instance().Write(e);
+								
+							}
 						}
-					}
-					catch(Exception e)
-					{
-						Logger.Instance().Write(e);
-						callback.OnCallback(false,null);
-					}
 				}
-				callback.OnCallback(success,obj);
-			}
+				catch(Exception e)
+				{
+					Logger.Instance().Write(e);
+					
+				}
+				callback.OnCallback(false,null);
+
+ 			}
+		}.start();
 		
-		});
+		
 		
 		return true;
 
@@ -268,34 +246,46 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		SetAccountInfo(null,null,null,null);
 		if(!_httpLayer.IsConnectedSession())
 			return true;
-		_httpLayer.POSTAsync(_domain+"account/LogOffMobile", null, new IHttpCallback(){
-
+		
+		
+		new Thread()
+		{
 			@Override
-			public void OnCallback(boolean success,String result) {
-				// TODO Auto-generated method stub
-				JSONObject obj = null;
-				if(success == true)
+ 			public void run()
+ 			{
+				try
 				{
-					try
+					String result = _httpLayer.POSTSync(_domain+"account/LogOffMobile", null);
+					// TODO Auto-generated method stub
+					JSONObject obj = null;
+					if(result != null)
 					{
-						
-						if(result !=null)
+						try
 						{
 							obj = new JSONObject(result);
 							if(true == obj.getBoolean("success"))
 								SessionDisconnected("Logout");
+							callback.OnCallback(true,obj);
+						}
+						catch(Exception e)
+						{
+							Logger.Instance().Write(e);
+							
 						}
 					}
-					catch(Exception e)
-					{
-						Logger.Instance().Write(e);
-						callback.OnCallback(false,null);
-					}
 				}
-				callback.OnCallback(success,obj);
-			}
+				catch(Exception e)
+				{
+					Logger.Instance().Write(e);
+					
+				}
+				callback.OnCallback(false,null);
+				
+
+ 			}
+		}.start();
 		
-		});
+		
 		
 		return true;
 	}
@@ -303,39 +293,43 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	@Override
 	public boolean MyInfo(final IAPIProxyCallback callback) {
 		
-		if(!_httpLayer.IsConnectedSession())
+		new Thread()
 		{
-			if(!Relogin())
-				return false;
-		}
-		_httpLayer.GETAsync(_domain+"user/myinfo",null, new IHttpCallback(){
-
 			@Override
-			public void OnCallback(boolean success,String result) {
-				// TODO Auto-generated method stub
-				JSONObject obj = null;
-				if(success == true)
+ 			public void run()
+ 			{
+				if(!_httpLayer.IsConnectedSession())
 				{
-					try
+					if(Relogin())	
 					{
-						
-						if(result !=null)
+						String result = _httpLayer.GETSync(_domain+"user/myinfo", null);
+						// TODO Auto-generated method stub
+						JSONObject obj = null;
+						if(result != null)
 						{
-							obj = new JSONObject(result);
-							if(true == obj.getBoolean("success"))
-								SessionUpdate("MyInfo");
+							try
+							{
+								obj = new JSONObject(result);
+								if(true == obj.getBoolean("success"))
+									SessionDisconnected("Logout");
+								callback.OnCallback(true,obj);
+							}
+							catch(Exception e)
+							{
+								Logger.Instance().Write(e);
+								
+							}
 						}
-					}
-					catch(Exception e)
-					{
-						Logger.Instance().Write("MyInfo "+e.toString());
-						callback.OnCallback(false,null);
+						
 					}
 				}
-				callback.OnCallback(success,obj);
-			}
+				
+				callback.OnCallback(false,null);
+ 			}
+			
+		}.start();
 		
-		});
+		
 		
 		return true;
 	}

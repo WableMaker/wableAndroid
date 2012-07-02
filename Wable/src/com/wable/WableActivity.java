@@ -19,6 +19,7 @@ import com.wable.http.apiproxy.APIProxyLayer;
 import com.wable.http.apiproxy.IAPIProxyCallback;
 import com.wable.tab.login.PasswordFindActivity;
 import com.wable.tab.login.RegisterActivity;
+import com.wable.util.Logger;
 
 public class WableActivity extends Activity implements OnClickListener {
     /** Called when the activity is first created. */
@@ -68,34 +69,33 @@ public class WableActivity extends Activity implements OnClickListener {
         etUser.setOnFocusChangeListener(onFocusChangeListner);
         etPass.setOnFocusChangeListener(onFocusChangeListner);
         
-//        etPass = (EditText)findViewById(R.id.editLoginPass);
-//        etPass.setOnEditorActionListener(new OnEditorActionListener() {
-//
-//              
-//        APIProxyLayer.Instance().Login("cc", "111111", new IAPIProxyCallback(){
-//
-//			@Override
-//			public void OnCallback(boolean success, JSONObject json) {
-//				if(success)
-//				{
-//					Logger.Instance().Write(json.toString());
-//					
-//					
-//					APIProxyLayer.Instance().MyInfo(new IAPIProxyCallback(){
-//
-//						@Override
-//						public void OnCallback(boolean success, JSONObject json) {
-//							if(success)
-//							{
-//								Logger.Instance().Write(json.toString());
-//			
-//								
-//							}
-//							else Logger.Instance().Write("Fail to GetMyInfo");
-//						}
-//						
-//					});
-//					
+       
+
+              
+        APIProxyLayer.Instance().Login("cc", "111111", new IAPIProxyCallback(){
+
+			@Override
+			public void OnCallback(boolean success, JSONObject json) {
+				if(success)
+				{
+					Logger.Instance().Write(json.toString());
+					
+					
+					APIProxyLayer.Instance().MyInfo(new IAPIProxyCallback(){
+
+						@Override
+						public void OnCallback(boolean success, JSONObject json) {
+							if(success)
+							{
+								Logger.Instance().Write(json.toString());
+			
+								
+							}
+							else Logger.Instance().Write("Fail to GetMyInfo");
+						}
+						
+					});
+					
 //					APIProxyLayer.Instance().RequestMyActiveList(null,new IAPIProxyCallback(){
 //						@Override
 //						public void OnCallback(boolean success, JSONObject json) {
@@ -134,10 +134,10 @@ public class WableActivity extends Activity implements OnClickListener {
 //					});
 //					
 //				
-//				}else 	Logger.Instance().Write("Fail to login");
-//			}
-//        	
-//        });
+				}else 	Logger.Instance().Write("Fail to login");
+			}
+        	
+        });
     
     }
     @Override
