@@ -20,7 +20,7 @@ import com.wable.util.Logger;
 
 public class APIProxyLayer implements IAPIProxyLayer {
 
-	// [start] ½Ì±ÛÅæ
+	// [start] ï¿½Ì±ï¿½ï¿½ï¿½
 	
 
 	static ReentrantLock _lock = new ReentrantLock();
@@ -71,7 +71,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	
 	// [end]
 		
-	// [start] ¸â¹ö º¯¼ö
+	// [start] ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	
 	IHttpConnectionLayer _httpLayer;
 	
@@ -83,7 +83,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	String _fb_uid;
 	// [end]
 		
-	// [Start] ¸â¹ö ÇÔ¼ö
+	// [Start] ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
 	
 	void SessionDisconnected(String function)
 	{
@@ -135,9 +135,9 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		{
 			Map<String,Object> params = new HashMap<String,Object>();
 			String result;
-			if(_loginid==null || _password ==null)//·Î±×ÀÎ °èÁ¤Á¤º¸ ¾ø´Â°æ¿ì
+			if(_loginid==null || _password ==null)//ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Â°ï¿½ï¿½
 			{
-				if(_oauth_token==null || _fb_uid ==null)//ÆäºÏ°è°ÏÁ¤º¸ ¾ø´Â °æ¿ì
+				if(_oauth_token==null || _fb_uid ==null)//ï¿½ï¿½Ï°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 				{
 					return false;
 				}				
@@ -187,7 +187,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 	// [end]
 	
-	// [start] IAPIProxyLayer ±¸Çö
+	// [start] IAPIProxyLayer ï¿½ï¿½ï¿½ï¿½
 	
 	@Override
 	public boolean Login(String loginid, String password,
@@ -1187,7 +1187,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 
 	@Override
-	public boolean BiddingOfferAsProvider(String request_id, String message,
+	public boolean BiddingOfferAsProvider(String request_id, 
 			final IAPIProxyCallback callback) {
 		
 
@@ -1198,7 +1198,6 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		}
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("request_id", request_id);
-		params.put("message", message);
 		
 		_httpLayer.POSTAsync(_domain+"Bidding/OfferAsProvider", params, new IHttpCallback(){
 
@@ -1235,7 +1234,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 
 	@Override
-	public boolean BiddingOfferAsRequester(String provide_id, String message,
+	public boolean BiddingOfferAsRequester(String provide_id, 
 			final IAPIProxyCallback callback) {
 		
 
@@ -1246,7 +1245,6 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		}
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("provide_id", provide_id);
-		params.put("message", message);
 		
 		_httpLayer.POSTAsync(_domain+"Bidding/OfferAsRequester", params, new IHttpCallback(){
 

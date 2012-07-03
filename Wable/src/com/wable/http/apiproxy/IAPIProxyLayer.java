@@ -9,97 +9,97 @@ public interface IAPIProxyLayer {
 	
 	// [start] Account
 	
-	boolean Login(String loginid,String password, IAPIProxyCallback callback);//·Î±×ÀÎ ½Ãµµ
-	boolean Logout(IAPIProxyCallback callback);//·Î±×ÀÎ ½Ãµµ
-	boolean Register(String loginid,String email,String username,String password, IAPIProxyCallback callback);//·Î±×ÀÎ ½Ãµµ
+	boolean Login(String loginid,String password, IAPIProxyCallback callback);//ï¿½Î±ï¿½ï¿½ï¿½ ï¿½Ãµï¿½
+	boolean Logout(IAPIProxyCallback callback);//ï¿½Î±ï¿½ï¿½ï¿½ ï¿½Ãµï¿½
+	boolean Register(String loginid,String email,String username,String password, IAPIProxyCallback callback);//ï¿½Î±ï¿½ï¿½ï¿½ ï¿½Ãµï¿½
 	
-	boolean FBlogin(String fb_uid,String oauth_token, IAPIProxyCallback callback);//·Î±×ÀÎ ½Ãµµ
-	boolean FBregister(String fb_uid,String oauth_token, IAPIProxyCallback callback);//·Î±×ÀÎ ½Ãµµ
-	boolean FBconnect(String fb_uid,String oauth_token, IAPIProxyCallback callback);//·Î±×ÀÎ ½Ãµµ
+	boolean FBlogin(String fb_uid,String oauth_token, IAPIProxyCallback callback);//ï¿½Î±ï¿½ï¿½ï¿½ ï¿½Ãµï¿½
+	boolean FBregister(String fb_uid,String oauth_token, IAPIProxyCallback callback);//ï¿½Î±ï¿½ï¿½ï¿½ ï¿½Ãµï¿½
+	boolean FBconnect(String fb_uid,String oauth_token, IAPIProxyCallback callback);//ï¿½Î±ï¿½ï¿½ï¿½ ï¿½Ãµï¿½
 	
 	// [end]
 	
 	// [start] User
 	
-	boolean MyInfo(IAPIProxyCallback callback);//³»Á¤º¸	
-	boolean UserUpdate(String name,String introduce,String photo,IAPIProxyCallback callback);//³»Á¤º¸
+	boolean MyInfo(IAPIProxyCallback callback);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½	
+	boolean UserUpdate(String name,String introduce,String photo,IAPIProxyCallback callback);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	
-	boolean UserEnablePushNotify(Time starttime, Time endtime,IAPIProxyCallback callback);//Çª½¬¹ÞÀ» ½Ã°£
-	boolean UserResetBadgeCount(IAPIProxyCallback callback);//Çª½¬¹ÞÀ» ½Ã°£
+	boolean UserEnablePushNotify(Time starttime, Time endtime,IAPIProxyCallback callback);//Çªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½
+	boolean UserResetBadgeCount(IAPIProxyCallback callback);//Çªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½
 	
 	// [end]
 		
 	// [start] Request
 	
-	boolean RequestOtherList(String userid,String lastid,IAPIProxyCallback callback);//³»Á¤º¸
-	boolean RequestMyActiveList(String lastid,IAPIProxyCallback callback);//È°¼ºÈ­µÈ ¶Ç´Â ¸¸·áµÈ ¿äÃ»¸ñ·Ï
-	boolean RequestMyDoneList(String lastid,IAPIProxyCallback callback);//¿Ï·áµÈ ¿äÃ»¸ñ·Ï
-	boolean RequestListbyTime(String lastid,String keyword,IAPIProxyCallback callback);//³»Á¤º¸
-	boolean RequestListbyArea(double north,double south,double ease,double west,String keyword,IAPIProxyCallback callback);//³»Á¤º¸
-	boolean RequestListbyDistance(double lat, double lon,double mindistance,String keyword,IAPIProxyCallback callback);//³»Á¤º¸
+	boolean RequestOtherList(String userid,String lastid,IAPIProxyCallback callback);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	boolean RequestMyActiveList(String lastid,IAPIProxyCallback callback);//È°ï¿½ï¿½È­ï¿½ï¿½ ï¿½Ç´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã»ï¿½ï¿½ï¿½
+	boolean RequestMyDoneList(String lastid,IAPIProxyCallback callback);//ï¿½Ï·ï¿½ï¿½ ï¿½ï¿½Ã»ï¿½ï¿½ï¿½
+	boolean RequestListbyTime(String lastid,String keyword,IAPIProxyCallback callback);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	boolean RequestListbyArea(double north,double south,double ease,double west,String keyword,IAPIProxyCallback callback);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	boolean RequestListbyDistance(double lat, double lon,double mindistance,String keyword,IAPIProxyCallback callback);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	boolean RequestAdd(String title, String description, int price, Integer category, Date duedate
-			,double lat,double lon, Boolean totwitter, Boolean tofacebook, IAPIProxyCallback callback);//³»Á¤º¸
-	boolean RequestDelete(String request_id ,IAPIProxyCallback callback);//¿äÃ» »èÁ¦
-	boolean RequestDone(String request_id ,IAPIProxyCallback callback);//¿äÃ» ¸¸·á
+			,double lat,double lon, Boolean totwitter, Boolean tofacebook, IAPIProxyCallback callback);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	boolean RequestDelete(String request_id ,IAPIProxyCallback callback);//ï¿½ï¿½Ã» ï¿½ï¿½ï¿½ï¿½
+	boolean RequestDone(String request_id ,IAPIProxyCallback callback);//ï¿½ï¿½Ã» ï¿½ï¿½ï¿½ï¿½
 	
-	boolean RequestMyDetailById(String request_id ,IAPIProxyCallback callback);//³»Á¤º¸
+	boolean RequestMyDetailById(String request_id ,IAPIProxyCallback callback);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	boolean RequestOtherDetailById(String request_id ,IAPIProxyCallback callback);
 	boolean RequestUpdate(String request_id,String title, String description,int price,int category,Date duedate
-			,double lat,double lon,boolean totwitter, boolean tofacebook, IAPIProxyCallback callback);//³»Á¤º¸
+			,double lat,double lon,boolean totwitter, boolean tofacebook, IAPIProxyCallback callback);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	// [end]
 	
 	// [start] Provide
 	
-	boolean ProvideOtherList(String userid,String lastid,IAPIProxyCallback callback);//³»Á¤º¸
-	boolean ProvideMyActiveList(String lastid,IAPIProxyCallback callback);//È°¼ºÈ­µÈ ¶Ç´Â ¸¸·áµÈ Á¦°ø¸ñ·Ï
-	boolean ProvideMyDoneList(String lastid,IAPIProxyCallback callback);//¿Ï·áµÈ Á¦°ø¸ñ·Ï
-	boolean ProvideListbyTime(String lastid,String keyword,IAPIProxyCallback callback);//³»Á¤º¸
-	boolean ProvideListbyArea(double north,double south,double ease,double west,String keyword,IAPIProxyCallback callback);//³»Á¤º¸
-	boolean ProvideListbyDistance(double lat, double lon,double mindistance,String keyword,IAPIProxyCallback callback);//³»Á¤º¸
+	boolean ProvideOtherList(String userid,String lastid,IAPIProxyCallback callback);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	boolean ProvideMyActiveList(String lastid,IAPIProxyCallback callback);//È°ï¿½ï¿½È­ï¿½ï¿½ ï¿½Ç´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	boolean ProvideMyDoneList(String lastid,IAPIProxyCallback callback);//ï¿½Ï·ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	boolean ProvideListbyTime(String lastid,String keyword,IAPIProxyCallback callback);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	boolean ProvideListbyArea(double north,double south,double ease,double west,String keyword,IAPIProxyCallback callback);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	boolean ProvideListbyDistance(double lat, double lon,double mindistance,String keyword,IAPIProxyCallback callback);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	boolean ProvideAdd(String title,String description, int minprice,int category
-			,double lat,double lon,int radius, IAPIProxyCallback callback);//³»Á¤º¸
-	boolean ProvideDelete(String provide_id ,IAPIProxyCallback callback);//Á¦°ø »èÁ¦
-	boolean ProvideDone(String provide_id ,IAPIProxyCallback callback);//Á¦°ø ¸¸·á
+			,double lat,double lon,int radius, IAPIProxyCallback callback);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	boolean ProvideDelete(String provide_id ,IAPIProxyCallback callback);//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	boolean ProvideDone(String provide_id ,IAPIProxyCallback callback);//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	
-	boolean ProvideMyDetailById(String provide_id ,IAPIProxyCallback callback);//³»Á¤º¸
+	boolean ProvideMyDetailById(String provide_id ,IAPIProxyCallback callback);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	
 	boolean ProvideOtherDetailById(String provide_id ,IAPIProxyCallback callback);
 	boolean ProvideUpdate(String provide_id,String title, String description, int minprice,int category
-			,double lat,double lon,int radius, IAPIProxyCallback callback);//³»Á¤º¸
+			,double lat,double lon,int radius, IAPIProxyCallback callback);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	// [end]
 	
 	// [start] Bidding
 
-	//Á¦°øÀÚ¸¦ ¼±ÅÃÇÑ´Ù
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½
 	boolean BiddingDecideProvider(String biddingid,IAPIProxyCallback callback);
 	
-	//¿äÃ»ÀÚÀÇ ¼±ÅÃÀ» ¼ö¶ôÇÑ´Ù
+	//ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½
 	boolean BiddingDecideRequester(String biddingid,IAPIProxyCallback callback);
 	
 	
-	boolean BiddingOfferAsProvider(String request_id, String message,IAPIProxyCallback callback);//³»Á¤º¸
-	boolean BiddingOfferAsRequester(String provide_id, String message,IAPIProxyCallback callback);//³»Á¤º¸
+	boolean BiddingOfferAsProvider(String request_id, IAPIProxyCallback callback);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	boolean BiddingOfferAsRequester(String provide_id, IAPIProxyCallback callback);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	boolean BiddingListAsProvider(String last_bidding_id,IAPIProxyCallback callback);
 	boolean BiddingListAsRequester(String last_bidding_id,IAPIProxyCallback callback);
 	boolean BiddingRating(String bidding_id,String other_id, int rating,String description,IAPIProxyCallback callback);
 	
-	//°Å·¡ »èÁ¦
+	//ï¿½Å·ï¿½ ï¿½ï¿½ï¿½ï¿½
 	boolean BiddingDelete(String biddingid, IAPIProxyCallback callback);
 	
 	// [end]
 	
 	// [start] Message
 	
-	boolean MessageSendText(String biddingid, String message,Double tick,IAPIProxyCallback callback);//³»Á¤º¸
-	boolean MessageSendImage(String biddingid, String filepath,Double tick,IAPIProxyCallback callback);//³»Á¤º¸
-	boolean MessageSendAudio(String biddingid, String filepath,Double tick,IAPIProxyCallback callback);//³»Á¤º¸
-	boolean MessageSendVideo(String biddingid, String filepath,Double tick,IAPIProxyCallback callback);//³»Á¤º¸
+	boolean MessageSendText(String biddingid, String message,Double tick,IAPIProxyCallback callback);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	boolean MessageSendImage(String biddingid, String filepath,Double tick,IAPIProxyCallback callback);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	boolean MessageSendAudio(String biddingid, String filepath,Double tick,IAPIProxyCallback callback);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	boolean MessageSendVideo(String biddingid, String filepath,Double tick,IAPIProxyCallback callback);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	
-	boolean MessageGet(String biddingid,Double tick,IAPIProxyCallback callback);//³»Á¤º¸
-	boolean MessageGetNewMessage(Double tick,IAPIProxyCallback callback);//ÀÎÀÚ·Î ³ÖÀº ½ÃÁ¡ÀÌÈÄÀÇ ¸ðµç °Å·¡¸Þ½ÃÁö ¹Þ±â
+	boolean MessageGet(String biddingid,Double tick,IAPIProxyCallback callback);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	boolean MessageGetNewMessage(Double tick,IAPIProxyCallback callback);//ï¿½ï¿½ï¿½Ú·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Å·ï¿½ï¿½Þ½ï¿½ï¿½ï¿½ ï¿½Þ±ï¿½
 	
 
 	
