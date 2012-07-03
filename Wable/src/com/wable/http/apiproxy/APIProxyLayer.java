@@ -1187,7 +1187,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 
 	@Override
-	public boolean BiddingOfferAsProvider(String request_id, 
+	public boolean BiddingOfferAsProvider(String provide_id,String request_id, 
 			final IAPIProxyCallback callback) {
 		
 
@@ -1234,7 +1234,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 
 	@Override
-	public boolean BiddingOfferAsRequester(String provide_id, 
+	public boolean BiddingOfferAsRequester(String request_id,String provide_id, 
 			final IAPIProxyCallback callback) {
 		
 

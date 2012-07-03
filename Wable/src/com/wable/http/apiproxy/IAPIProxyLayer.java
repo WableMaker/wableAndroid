@@ -79,8 +79,8 @@ public interface IAPIProxyLayer {
 	boolean BiddingDecideRequester(String biddingid,IAPIProxyCallback callback);
 	
 	
-	boolean BiddingOfferAsProvider(String request_id, IAPIProxyCallback callback);//������
-	boolean BiddingOfferAsRequester(String provide_id, IAPIProxyCallback callback);//������
+	boolean BiddingOfferAsProvider(String provide_id,String request_id, IAPIProxyCallback callback);//������
+	boolean BiddingOfferAsRequester(String request_id,String provide_id, IAPIProxyCallback callback);//������
 
 	boolean BiddingListAsProvider(String last_bidding_id,IAPIProxyCallback callback);
 	boolean BiddingListAsRequester(String last_bidding_id,IAPIProxyCallback callback);
