@@ -1,8 +1,5 @@
 package com.wable;
 
-import java.io.ObjectStreamClass;
-import java.util.TreeMap;
-
 import android.app.ActivityGroup;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;

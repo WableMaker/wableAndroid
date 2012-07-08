@@ -5,12 +5,22 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/nav_bar_bg"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="My Wable"
+        android:textColor="#FFFFFF" />
+
     <Button
         android:id="@+id/MYPAGEbtnMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/buyingtab"/>
+        android:layout_alignParentTop="false"
+        android:layout_below="@id/textView1"
+        android:background="@drawable/tab1_buying" />
 
     <ViewSwitcher
         android:id="@+id/ViewSwitcher1"

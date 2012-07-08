@@ -4,16 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-
+
     <TextView
         android:id="@+id/textView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:background="@drawable/map_mask"
         android:text="TextView" />
-
+
     <com.google.android.maps.MapView
         android:id="@+id/mapview"
         android:layout_width="match_parent"
@@ -22,7 +21,6 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/textView1"
         android:apiKey="0oqzs7eIvbFX8Faveem2CANcvsCaS5O1nULYH3A"
-        android:background="@drawable/map_mask"
         android:clickable="true" >
 
     </com.google.android.maps.MapView>

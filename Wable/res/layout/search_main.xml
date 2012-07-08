@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-
+
     <Button
         android:id="@+id/SEARCHbtnProvider"
         android:layout_width="match_parent"
@@ -12,16 +12,16 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="35dp"
-        android:background="@drawable/btn_a"
+        android:background="@drawable/search_provider_btn"
         android:text="제공자 검색" />
-
+
     <Button
         android:id="@+id/SEARCHbtnRequest"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/SEARCHbtnProvider"
-        android:background="@drawable/btn_b"
+        android:background="@drawable/search_request_btn"
         android:text="요청자 검색" />
 
 </RelativeLayout>

@@ -50,13 +50,13 @@ public class SearchProviderActivity extends Activity {
 					switch(position) {
 					
 					case 0:
-						segment.setBackgroundResource(R.drawable.segment_recent_selected);
+						segment.setBackgroundResource(R.drawable.search_segment_distance_selected);
 						break;
 					case 1:
-						segment.setBackgroundResource(R.drawable.segment_distance_selceted);
+						segment.setBackgroundResource(R.drawable.search_segment_recent_selceted);
 						break;
 					case 2:
-						segment.setBackgroundResource(R.drawable.segment_map_selected);
+						segment.setBackgroundResource(R.drawable.search_segment_map_selected);
 						break;
 					
 					}

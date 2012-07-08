@@ -4,85 +4,102 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/MYPAGE_RQtextUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        and=""
+        android:height="4dp"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/table_cell_2" />
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/MYPAGE_RQtextUp"
+        android:background="@drawable/tab1_table_cell" />
+
+    <TextView
+        android:id="@+id/MYPAGE_RQtextBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView1"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="-10dp"
+        android:background="@drawable/tab1_table_cell_b"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/textView1"
+        android:layout_marginBottom="2dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="2dp"
+        android:background="@drawable/tab1_mask"
+        android:padding="4dp"
+        android:src="@drawable/tab1_img" />
 
     <ImageView
         android:id="@+id/MYPAGE_RQimgTag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView1"
         android:layout_alignParentRight="true"
-        android:src="@drawable/cell_box_b" />
-
-    <TextView
-        android:id="@+id/MYPAGE_RQtextRecommand"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/MYPAGE_RQimgTag"
-        android:layout_alignTop="@+id/MYPAGE_RQimgTag"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="40dp"
-        android:text="1명 추천"
-        android:textColor="#FFFFFF" />
-
-    <TextView
-        android:id="@+id/MYPAGE_RQtextMid"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/MYPAGE_RQimgTag"
-        android:layout_alignTop="@+id/MYPAGE_RQimgTag"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="30dp"
-        android:gravity="center"
-        android:text="대기중"
-        android:textColor="#FFFFFF"
-        android:visibility="invisible" />
-
-    <TextView
-        android:id="@+id/MYPAGE_RQtextRq"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/MYPAGE_RQimgTag"
-        android:layout_alignTop="@+id/MYPAGE_RQimgTag"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="22dp"
-        android:text="2명 신청"
-        android:textColor="#FFFFFF" />
+        android:layout_alignTop="@+id/textView1"
+        android:paddingRight="1.5dp"
+        android:src="@drawable/tab1_cell_box_b" />
 
     <TextView
         android:id="@+id/MYAPGE_RQtextTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignTop="@+id/MYPAGE_RQimgTag"
-        android:layout_marginLeft="80dp"
+        android:layout_below="@+id/MYPAGE_RQtextUp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="2dp"
+        android:layout_toRightOf="@+id/imageView1"
         android:text="피아노 레슨"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="#000000" android:layout_marginTop="20dp"/>
+        android:textColor="#000000" />
+
+    <TextView
+        android:id="@+id/MYPAGE_RQtextDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/MYAPGE_RQtextTitle"
+        android:layout_below="@+id/MYAPGE_RQtextTitle"
+        android:layout_toLeftOf="@+id/MYPAGE_RQimgTag"
+        android:singleLine="true"
+        android:text="TextView" />
 
     <TextView
         android:id="@+id/MYPAGE_RQtextPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/MYAPGE_RQtextTitle"
-        android:layout_below="@+id/MYPAGE_RQtextMid"
+        android:layout_alignLeft="@+id/MYPAGE_RQtextDesc"
+        android:layout_below="@+id/MYPAGE_RQtextDesc"
         android:text="15,000원"
         android:textColor="#0000FF" />
-
+
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/MYPAGE_RQtextMid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/MYPAGE_RQtextPrice"
-        android:layout_marginRight="28dp"
-        android:text="TextView" />
+        android:layout_alignBottom="@+id/textView1"
+        android:layout_alignLeft="@+id/MYPAGE_RQimgTag"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/MYAPGE_RQtextTitle"
+        android:layout_marginLeft="10dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="대기중"
+        android:textColor="#FFFFFF"
+        android:visibility="visible" />
 
 </RelativeLayout>

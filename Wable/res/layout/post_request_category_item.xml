@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-
+
     <ImageView
         android:id="@+id/POSTCategoryItemImage"
         android:layout_width="wrap_content"
@@ -12,7 +12,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:src="@drawable/regist_price_highlight" />
+        android:src="@drawable/post_regist_time_highlight" />
 
     <TextView
         android:id="@+id/POSTCategoryItemText"

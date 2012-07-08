@@ -19,7 +19,6 @@ import android.view.SoundEffectConstants;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
-import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -31,22 +30,18 @@ import com.wable.R;
 import com.wable.http.apiproxy.APIProxyLayer;
 import com.wable.http.apiproxy.IAPIProxyCallback;
 import com.wable.util.Utils;
-import com.wable.util.pulltorefresh.PullToRefreshView;
 
 public class MypageActivity extends Activity implements OnClickListener {
 
 	private Context context;
 	
-	private int indexView;
-	private View v1, v2;
+	private View v1, v2, relRQ, relPV;
 	private ViewSwitcher vs;
-	private Animation aniLeft;
-	private Animation aniRight;
 	
 	private int position = 0;
 	private Button menu;
 	
-	private PullToRefreshView pullView = null;
+
 	
 	LayoutInflater inflater;
 	LinearLayout container, container2;
@@ -58,7 +53,7 @@ public class MypageActivity extends Activity implements OnClickListener {
 		public void handleMessage(Message msg) {           
 			switch(msg.what) {          
 			case 0: 
-				pd = ProgressDialog.show(context, "MYActivity", "¡§∫∏∏¶ ∞°¡Æø¿∞Ì ¿÷Ω¿¥œ¥Ÿ", true, false);			
+				pd = ProgressDialog.show(context, "MYActivity", "Î°úÎî©Ï§ëÏûÖÎãàÎã§..", true, false);			
 				
 				break;        
 			case 1:             
@@ -86,8 +81,11 @@ public class MypageActivity extends Activity implements OnClickListener {
 		container = (LinearLayout)v1.findViewById(R.id.MYPAGE_RQlinear);
 		container2 = (LinearLayout)v2.findViewById(R.id.MYPAGE_PVlinear);
 		
+		relRQ = findViewById(R.id.MYPAGE_RQrelNoitem);
+		relPV = findViewById(R.id.MYPAGE_PVrelNoitem);
 			
 		mHandler.sendEmptyMessage(0);
+	
 		
 		
 		APIProxyLayer.Instance().RequestMyActiveList("", new IAPIProxyCallback() {
@@ -111,34 +109,36 @@ public class MypageActivity extends Activity implements OnClickListener {
 							cnt = suggests.length() + requests.length();
 
 							if(cnt == 0) return;
+							relRQ.setVisibility(View.INVISIBLE);
 
-							/* ø‰√ª πﬁ¿∫Ω≈√ª  */
+							/* ÏöîÏ≤≠  */
 							TextView tv = new TextView(context);
-							tv.setBackgroundResource(R.drawable.table_header_cell);
+							tv.setBackgroundResource(R.drawable.tab1_table_header_cell);
 							tv.setGravity(Gravity.CENTER_VERTICAL);
 							tv.setTextColor(Color.WHITE);
-							tv.setText("  πﬁ¿∫Ω≈√ª");
+							tv.setText("  Î∞õÏùÄÏã†Ï≤≠");
 
-							//Message msg = mHandler.obtainMessage(0, tv);
-							//mHandler.sendMessage(msg);
 							container.addView(tv);	
 
-							/* πﬁ¿∫Ω≈√ª æ∆¿Ã≈€ */
 							for(int i=0, m=suggests.length(); i<m; i++) {			
 
 								View requestItem = inflater.inflate(R.layout.mypage_request_item, null);
+								
+								if(i==0)
+								requestItem.findViewById(R.id.MYPAGE_RQtextUp).setVisibility(View.VISIBLE);
+								
 								ImageView image = (ImageView)requestItem.findViewById(R.id.MYPAGE_RQimgTag);
 								TextView tvTitle = (TextView)requestItem.findViewById(R.id.MYAPGE_RQtextTitle);
 								TextView tvPrice = (TextView)requestItem.findViewById(R.id.MYPAGE_RQtextPrice);
-								TextView tvRq = (TextView)requestItem.findViewById(R.id.MYPAGE_RQtextRq);
-								TextView tvRe = (TextView)requestItem.findViewById(R.id.MYPAGE_RQtextRecommand);
 								TextView tvMid = (TextView)requestItem.findViewById(R.id.MYPAGE_RQtextMid);
+								TextView tvDesc = (TextView)requestItem.findViewById(R.id.MYPAGE_RQtextDesc);
 
 								JSONObject o = suggests.getJSONObject(i);
 
 								tvTitle.setText(o.getString("provide_title"));
-								tvPrice.setText(Utils.ConvertStringToMoney(o.getString("provide_min_price")) + "ø¯");
-
+								tvPrice.setText(Utils.ConvertStringToMoney(o.getString("provide_min_price")) + "ÔøΩÔøΩ");
+								tvDesc.setText(o.getString("description"));
+								
 								requestItem.setTag(o.getString("provider_id"));
 								requestItem.setOnClickListener(new OnClickListener() {
 
@@ -150,55 +150,66 @@ public class MypageActivity extends Activity implements OnClickListener {
 										Toast.makeText(context, v.getTag().toString(), Toast.LENGTH_SHORT).show();
 									}
 								});
+								
+								if(i+1 == m)
+								requestItem.findViewById(R.id.MYPAGE_RQtextBottom).setVisibility(View.VISIBLE);								
 								container.addView(requestItem);
 							}
-
-							/* ∫∏≥ΩΩ≈√ª */
+							
 							tv = new TextView(context);
-							tv.setBackgroundResource(R.drawable.table_header_cell);
+							tv.setBackgroundResource(R.drawable.tab1_table_header_cell);
 							tv.setGravity(Gravity.CENTER_VERTICAL);
 							tv.setTextColor(Color.WHITE);
-							tv.setText("  ∫∏≥ΩΩ≈√ª");
+							tv.setText("  Î≥¥ÎÇ∏Ïã†Ï≤≠");
 
 							container.addView(tv);	
 
 
-							/* ∫∏≥ΩΩ≈√ª æ∆¿Ã≈€ */
 							for(int i=0, m=requests.length(); i<m; i++) {			
 
 								View requestItem = inflater.inflate(R.layout.mypage_request_item, null);
+								
+								if(i==0)
+									requestItem.findViewById(R.id.MYPAGE_RQtextUp).setVisibility(View.VISIBLE);
+								
 								ImageView image = (ImageView)requestItem.findViewById(R.id.MYPAGE_RQimgTag);
 								TextView tvTitle = (TextView)requestItem.findViewById(R.id.MYAPGE_RQtextTitle);
 								TextView tvPrice = (TextView)requestItem.findViewById(R.id.MYPAGE_RQtextPrice);
-								TextView tvRq = (TextView)requestItem.findViewById(R.id.MYPAGE_RQtextRq);
-								TextView tvRe = (TextView)requestItem.findViewById(R.id.MYPAGE_RQtextRecommand);
 								TextView tvMid = (TextView)requestItem.findViewById(R.id.MYPAGE_RQtextMid);
+								TextView tvDesc = (TextView)requestItem.findViewById(R.id.MYPAGE_RQtextDesc);
 
 								final JSONObject o = requests.getJSONObject(i);
 
 								tvTitle.setText(o.getString("title"));
-								tvPrice.setText(Utils.ConvertStringToMoney(o.getString("price")) + "ø¯");
+								tvPrice.setText(Utils.ConvertStringToMoney(o.getString("price")) + "Ïõê");
+								tvDesc.setText(o.getString("description"));
 
-								tvRq.setText(o.getInt("bidding_count") + "∏Ì Ω≈√ª");
-								tvRe.setText(o.getInt("matching_count") + "∏Ì Ω≈√ª");
-
+								//0:Ï†úÏïà, 1:Í≤∞Ï†ï, 2:Í≤∞Ï†ú, 3:ÏôÑÎ£å, 4:Ï∑®ÏÜå
 								switch (o.getInt("status")) {
+//								case 0:
+//									image.setImageResource(R.drawable.tab1_cell_box_a);
+//									tvMid.setText(o.getInt("bidding_count") +"Î™Ö Ïã†Ï≤≠\n"+o.getInt("matching_count") + "Î™Ö Ï∂îÏ≤ú");
+//									break;
 								case 0:
-									image.setImageResource(R.drawable.cell_box_b);
+									tvMid.setText("ÎåÄÍ∏∞Ï§ë");
+									image.setImageResource(R.drawable.tab1_cell_box_b);
 									break;
 								case 1:
-									tvRq.setVisibility(View.INVISIBLE);
-									tvRe.setVisibility(View.INVISIBLE);
-									tvMid.setVisibility(View.VISIBLE);
-									tvMid.setText("¥Î±‚¡ﬂ");
-									image.setImageResource(R.drawable.cell_box_y);
+									tvMid.setText("Í∏∞ÌïúÎßåÎ£å");
+									image.setImageResource(R.drawable.tab1_cell_box_c);
 									break;
 								case 2:
-									tvRq.setVisibility(View.INVISIBLE);
-									tvRe.setVisibility(View.INVISIBLE);
-									tvMid.setVisibility(View.VISIBLE);
-									tvMid.setText("∞≈∑°øœ∑·");
-									image.setImageResource(R.drawable.cell_box_r);
+									tvMid.setText("2");
+									image.setImageResource(R.drawable.tab1_cell_box_b);
+									break;
+								
+								case 3:
+									tvMid.setText("3");
+									image.setImageResource(R.drawable.tab1_cell_box_c);
+									break;
+								case 4:
+									tvMid.setText("4");
+									image.setImageResource(R.drawable.tab1_cell_box_c);
 									break;
 								}
 
@@ -213,6 +224,9 @@ public class MypageActivity extends Activity implements OnClickListener {
 										//Toast.makeText(context, v.getTag().toString(), Toast.LENGTH_SHORT).show();
 									}
 								});
+								
+								if(i+1 == m)
+								requestItem.findViewById(R.id.MYPAGE_RQtextBottom).setVisibility(View.VISIBLE);
 								container.addView(requestItem);
 							}
 
@@ -230,6 +244,7 @@ public class MypageActivity extends Activity implements OnClickListener {
 			}
 		});
 		
+		/* Ï†úÍ≥µ */
 		APIProxyLayer.Instance().ProvideMyActiveList("", new IAPIProxyCallback() {
 			
 			@Override
@@ -247,30 +262,34 @@ public class MypageActivity extends Activity implements OnClickListener {
 					cnt = suggests.length() + provides.length();
 					
 					if(cnt == 0) return;
+					relPV.setVisibility(View.INVISIBLE);
 					
-					/* ø‰√ª πﬁ¿∫Ω≈√ª  */
+					
 					TextView tv = new TextView(context);
-					tv.setBackgroundResource(R.drawable.table_header_cell);
+					tv.setBackgroundResource(R.drawable.tab1_table_header_cell);
 					tv.setGravity(Gravity.CENTER_VERTICAL);
 					tv.setTextColor(Color.WHITE);
-					tv.setText("  πﬁ¿∫Ω≈√ª");
+					tv.setText("  Î∞õÏùÄÏã†Ï≤≠");
 					container2.addView(tv);	
 				
-					/* πﬁ¿∫Ω≈√ª æ∆¿Ã≈€ */
 					for(int i=0, m=suggests.length(); i<m; i++) {			
 						
 						View requestItem = inflater.inflate(R.layout.mypage_request_item, null);
+						
+						if(i==0)
+							requestItem.findViewById(R.id.MYPAGE_RQtextUp).setVisibility(View.VISIBLE);
+						
 						ImageView image = (ImageView)requestItem.findViewById(R.id.MYPAGE_RQimgTag);
 						TextView tvTitle = (TextView)requestItem.findViewById(R.id.MYAPGE_RQtextTitle);
 						TextView tvPrice = (TextView)requestItem.findViewById(R.id.MYPAGE_RQtextPrice);
-						TextView tvRq = (TextView)requestItem.findViewById(R.id.MYPAGE_RQtextRq);
-						TextView tvRe = (TextView)requestItem.findViewById(R.id.MYPAGE_RQtextRecommand);
 						TextView tvMid = (TextView)requestItem.findViewById(R.id.MYPAGE_RQtextMid);
+						TextView tvDesc = (TextView)requestItem.findViewById(R.id.MYPAGE_RQtextDesc);
 						
 						JSONObject o = suggests.getJSONObject(i);
 						
-						tvTitle.setText(o.getString("title"));
-						tvPrice.setText(Utils.ConvertStringToMoney(o.getString("request_price")) + "ø¯");
+						tvTitle.setText(o.getString("request_title"));
+						tvPrice.setText(Utils.ConvertStringToMoney(o.getString("request_price")) + "Ïõê");
+						tvDesc.setText(o.getString("request_description"));
 						
 						requestItem.setOnClickListener(new OnClickListener() {
 							
@@ -282,55 +301,62 @@ public class MypageActivity extends Activity implements OnClickListener {
 								//Toast.makeText(context, v.getTag().toString(), Toast.LENGTH_SHORT).show();
 							}
 						});
+						
+						if(i+1 == m)
+						requestItem.findViewById(R.id.MYPAGE_RQtextBottom).setVisibility(View.VISIBLE);
 						container2.addView(requestItem);
 					}
 					
-					/* ∫∏≥ΩΩ≈√ª */
 					tv = new TextView(context);
-					tv.setBackgroundResource(R.drawable.table_header_cell);
+					tv.setBackgroundResource(R.drawable.tab1_table_header_cell);
 					tv.setGravity(Gravity.CENTER_VERTICAL);
 					tv.setTextColor(Color.WHITE);
-					tv.setText("  ∫∏≥ΩΩ≈√ª");
+					tv.setText("  Î≥¥ÎÇ∏Ïã†Ï≤≠");
 					
 					container2.addView(tv);	
 					
 					
-					/* ∫∏≥ΩΩ≈√ª æ∆¿Ã≈€ */
 					for(int i=0, m=provides.length(); i<m; i++) {			
 						
 						View requestItem = inflater.inflate(R.layout.mypage_request_item, null);
+						
+						if(i==0)
+							requestItem.findViewById(R.id.MYPAGE_RQtextUp).setVisibility(View.VISIBLE);
+						
 						ImageView image = (ImageView)requestItem.findViewById(R.id.MYPAGE_RQimgTag);
 						TextView tvTitle = (TextView)requestItem.findViewById(R.id.MYAPGE_RQtextTitle);
-						TextView tvPrice = (TextView)requestItem.findViewById(R.id.MYPAGE_RQtextPrice);
-						TextView tvRq = (TextView)requestItem.findViewById(R.id.MYPAGE_RQtextRq);
-						TextView tvRe = (TextView)requestItem.findViewById(R.id.MYPAGE_RQtextRecommand);
+						TextView tvPrice = (TextView)requestItem.findViewById(R.id.MYPAGE_RQtextPrice);		
 						TextView tvMid = (TextView)requestItem.findViewById(R.id.MYPAGE_RQtextMid);
+						TextView tvDesc = (TextView)requestItem.findViewById(R.id.MYPAGE_RQtextDesc);
 						
 						final JSONObject o = provides.getJSONObject(i);
 						
 						tvTitle.setText(o.getString("title"));
-						tvPrice.setText(Utils.ConvertStringToMoney(o.getString("min_price")) + "ø¯");
+						tvPrice.setText(Utils.ConvertStringToMoney(o.getString("min_price")) + "Ïõê");
+						tvDesc.setText(o.getString("description"));
 						
-						tvRq.setText(o.getInt("bidding_count") + "∏Ì Ω≈√ª");
-						tvRe.setText(o.getInt("matching_count") + "∏Ì Ω≈√ª");
 						
 						switch (o.getInt("status")) {
 						case 0:
-							image.setImageResource(R.drawable.cell_box_b);
+							tvMid.setText("ÎåÄÍ∏∞Ï§ë");
+							image.setImageResource(R.drawable.tab1_cell_box_b);
 							break;
 						case 1:
-							tvRq.setVisibility(View.INVISIBLE);
-							tvRe.setVisibility(View.INVISIBLE);
-							tvMid.setVisibility(View.VISIBLE);
-							tvMid.setText("¥Î±‚¡ﬂ");
-							image.setImageResource(R.drawable.cell_box_y);
+							tvMid.setText("Í∏∞ÌïúÎßåÎ£å");
+							image.setImageResource(R.drawable.tab1_cell_box_c);
 							break;
 						case 2:
-							tvRq.setVisibility(View.INVISIBLE);
-							tvRe.setVisibility(View.INVISIBLE);
-							tvMid.setVisibility(View.VISIBLE);
-							tvMid.setText("∞≈∑°øœ∑·");
-							image.setImageResource(R.drawable.cell_box_r);
+							tvMid.setText("2");
+							image.setImageResource(R.drawable.tab1_cell_box_b);
+							break;
+						
+						case 3:
+							tvMid.setText("3");
+							image.setImageResource(R.drawable.tab1_cell_box_c);
+							break;
+						case 4:
+							tvMid.setText("4");
+							image.setImageResource(R.drawable.tab1_cell_box_c);
 							break;
 						}
 						
@@ -345,6 +371,9 @@ public class MypageActivity extends Activity implements OnClickListener {
 								//Toast.makeText(context, v.getTag().toString(), Toast.LENGTH_SHORT).show();
 							}
 						});
+						
+						if(i+1 == m)
+						requestItem.findViewById(R.id.MYPAGE_RQtextBottom).setVisibility(View.VISIBLE);
 						container2.addView(requestItem);
 					}
 					
@@ -354,8 +383,7 @@ public class MypageActivity extends Activity implements OnClickListener {
 		
 			
 			}
-		});
-		
+		});		
 		
 		
 		menu = (Button)findViewById(R.id.MYPAGEbtnMenu);
@@ -375,18 +403,12 @@ public class MypageActivity extends Activity implements OnClickListener {
 						switch(pos) {
 						
 						case 0:
-							menu.setBackgroundResource(R.drawable.buyingtab);
+							menu.setBackgroundResource(R.drawable.tab1_buying);
 							vs.showNext();
-							
-							
-							
-							
-							
-							
 							
 							break;
 						case 1:
-							menu.setBackgroundResource(R.drawable.sellingtab);
+							menu.setBackgroundResource(R.drawable.tab1_selling);
 							vs.showNext();
 							break;
 						

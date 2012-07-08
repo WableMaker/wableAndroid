@@ -3,20 +3,21 @@
     android:id="@+id/RelativeLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg01_patten"
     android:orientation="vertical" >
-
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/log_in_bg" />
-
+        android:background="@drawable/login_bg" />
+
     <Button
         android:id="@+id/LOGINbtnFb"
         android:layout_width="268dp"
         android:layout_height="46dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="180dp"
-        android:background="@drawable/facebook_login_btn"
+        android:background="@drawable/selector_login_facebook_btn"
         android:text="페이스북으로 로그인 하기" />
 
     <EditText
@@ -44,17 +45,17 @@
 
         
     </EditText>
-
+
     <Button
         android:id="@+id/LOGINbtnFind"
         android:layout_width="wrap_content"
-        android:layout_height="36dp"
-        android:layout_alignBaseline="@+id/LOGINeditPass"
+        android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/LOGINeditPass"
         android:layout_alignRight="@+id/LOGINbtnFb"
-        android:layout_marginRight="6dp"
-        android:background="@drawable/forgot_password_btn" />
-
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="7dp"
+        android:background="@drawable/selector_login_password_btn" />
+
     <Button
         android:id="@+id/LOGINbtnLogin"
         android:layout_width="120dp"
@@ -62,9 +63,9 @@
         android:layout_alignRight="@+id/LOGINbtnFb"
         android:layout_below="@+id/LOGINbtnFind"
         android:layout_marginTop="32dp"
-        android:background="@drawable/login_btn"
+        android:background="@drawable/selector_login_signin_btn"
         android:text="로그인" />
-
+
     <Button
         android:id="@+id/LOGINbtnRegister"
         android:layout_width="120dp"
@@ -72,7 +73,7 @@
         android:layout_alignBaseline="@+id/LOGINbtnLogin"
         android:layout_alignBottom="@+id/LOGINbtnLogin"
         android:layout_alignLeft="@+id/LOGINbtnFb"
-        android:background="@drawable/login_form_create_account_btn"
+        android:background="@drawable/selector_login_signup_btn"
         android:text="회원가입" />
 
     <EditText

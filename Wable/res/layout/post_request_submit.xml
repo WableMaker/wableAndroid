@@ -3,7 +3,6 @@
     android:id="@+id/RelativeLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg"
     android:orientation="vertical" >
 
     <RelativeLayout
@@ -18,7 +17,7 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:text="요청사항" />
-
+
         <Button
             android:id="@+id/POST_RQ_SBbtnCancel"
             android:layout_width="wrap_content"
@@ -26,6 +25,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:text="취소" />
+
     </RelativeLayout>
 
     <TextView
@@ -34,14 +34,14 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:text="서울시 강남구 근처" />
-
+
     <Button
         android:id="@+id/POST_RQ_SBbtnSubmit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:background="@drawable/green_wable" />
+        android:background="@drawable/post_green_wable" />
 
     <com.google.android.maps.MapView
         android:id="@+id/mapview"
@@ -52,16 +52,16 @@
         android:apiKey="0oqzs7eIvbFX8Faveem2CANcvsCaS5O1nULYH3A"
         android:clickable="true" >
     </com.google.android.maps.MapView>
-
+
     <Button
         android:id="@+id/POST_RQ_SBbtnPrice"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_above="@+id/mapview"
         android:layout_alignParentLeft="true"
-        android:background="@drawable/regist_price"
+        android:background="@drawable/post_regist_price"
         android:text="서비스 비용" />
-
+
     <Button
         android:id="@+id/POST_RQ_SBbtnTime"
         android:layout_width="150dp"
@@ -69,16 +69,16 @@
         android:layout_alignBaseline="@+id/POST_RQ_SBbtnPrice"
         android:layout_alignBottom="@+id/POST_RQ_SBbtnPrice"
         android:layout_alignParentRight="true"
-        android:background="@drawable/regist_time"
+        android:background="@drawable/post_regist_time"
         android:text="남은 시간" />
-
+
     <Button
         android:id="@+id/POST_RQ_SBbtnCategory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/RelativeLayout2"
-        android:background="@drawable/regist_title"
+        android:background="@drawable/post_regist_title"
         android:text="나의 요청사항 1" />
 
     <Button
@@ -88,7 +88,7 @@
         android:layout_above="@+id/POST_RQ_SBbtnPrice"
         android:layout_alignParentLeft="true"
         android:text="상세 설명 1" />
-
+
     <Button
         android:id="@+id/POST_RQ_SBbtnLoc"
         android:layout_width="wrap_content"
@@ -97,6 +97,6 @@
         android:layout_alignParentRight="true"
         android:layout_marginBottom="14dp"
         android:layout_marginRight="16dp"
-        android:background="@drawable/nav_locate_me_button" />
+        android:background="@drawable/map_locate_me_button" />
 
 </RelativeLayout>

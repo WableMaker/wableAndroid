@@ -3,10 +3,15 @@
     android:id="@+id/RelativeLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/app_bg"
+    android:background="@drawable/bg01_patten"
     android:orientation="vertical" >
-
-    <TextView
+
+    <RelativeLayout
+        android:id="@+id/MYPAGE_PVrelNoitem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+        
+        <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -15,32 +20,38 @@
         android:layout_marginTop="57dp"
         android:gravity="center"
         android:text="내가 요청한 내역이 보이는 곳이에요. \n제공자들과 채팅하며 가격이나 \n서비스 내용에 대해 얘기해 보세요." />
-
+
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/MYPAGE_PVbtnPost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="73dp"
-        android:background="@drawable/request_btn"
-        android:text="요청 등록하기" />
-
+        android:background="@drawable/tab1_request_btn"
+        android:text="제공 등록하기" />
+
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/button1"
+        android:layout_below="@id/MYPAGE_PVbtnPost"
         android:layout_marginRight="28dp"
         android:layout_marginTop="24dp"
-        android:background="@drawable/arrow" />
+        android:background="@drawable/tab1_arrow" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView3"
-        android:layout_centerHorizontal="true" android:text="필요한 서비스를 등록만 하시면 \n실시간으로 제공자들에게서 연락이 옵니다" android:gravity="center"/>
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="필요한 서비스를 등록만 하시면 \n실시간으로 제공자들에게서 연락이 옵니다" />
+        
+    </RelativeLayout>
+
+    
 
     <ScrollView
         android:id="@+id/ScrollView1"
