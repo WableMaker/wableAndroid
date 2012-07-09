@@ -18,18 +18,18 @@ import com.wable.util.Logger;
 
 public class HttpURLConnectionWrapper extends HttpWrapper {
 
-	// [start] ¸â¹öº¯¼ö
+	// [start] ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	
-	/// ¸®Äù½ºÆ® ³»¿ëÀ» ÅëÃ¤·Î ÀúÀåÇÒ ½ºÆ®¸µ
+	/// ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¤ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½
 	 public String m_request ;
 	 	 
-	 /// ¼¼¼Ç À¯Áö¿¡ ÇÊ¿äÇÑ ÄíÅ°
+	 /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½ï¿½ ï¿½ï¿½Å°
 
 	 String lineEnd = "\r\n";
 	 String twoHyphens = "--";
 	 String boundary = "dkjsei40f9844-------djs8dviw--4-s-df-";
 	 
-	 //ÄíÅ°ÀúÀå¼Ò
+	 //ï¿½ï¿½Å°ï¿½ï¿½ï¿½ï¿½ï¿½
 	 Map<String,String> m = Collections.synchronizedMap(new HashMap<String,String>());
 	 private static final char NAME_VALUE_SEPARATOR = '=';
 	 
@@ -62,20 +62,20 @@ public class HttpURLConnectionWrapper extends HttpWrapper {
 				
 				httpcon = (HttpURLConnection) url.openConnection();
 				httpcon.setUseCaches(false);
-				httpcon.setRequestMethod(method);//POST³Ä GETÀÌ³Ä
-				httpcon.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");//ÀÎÄÚµù¹æ½Ä
-				httpcon.setRequestProperty("Language", "ko");//¾ð¾î
+				httpcon.setRequestMethod(method);//POSTï¿½ï¿½ GETï¿½Ì³ï¿½
+				httpcon.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");//ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½
+				httpcon.setRequestProperty("Language", "ko");//ï¿½ï¿½ï¿½
 				
 				if(timeout)
 				{
 					httpcon.setConnectTimeout(timeout_ms_syncrequest);
 					httpcon.setReadTimeout(timeout_ms_syncrequest);
 				}
-				httpcon.setDoInput(true);//ÀÎÇ²½ºÆ®¸² »ç¿ë¿©ºÎ
+				httpcon.setDoInput(true);//ï¿½ï¿½Ç²ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ë¿©ï¿½ï¿½
 				if(m_session) httpcon.setRequestProperty("cookie",  GetCookies());
 				if(method.equals("POST"))
 				{
-					httpcon.setDoOutput(true);//post´Â µ¥ÀÌÅÍ¸¦ ÁÖ¼Ò¿Í º°°³·Î º¸³¿ Áï ¹Ùµð¿¡ ³Ö¾î¼­..
+					httpcon.setDoOutput(true);//postï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½Ö¼Ò¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ùµï¿½ ï¿½Ö¾î¼­..
 
 					String paramstr =buildParameters(params);
 					Logger.Instance().Write(url.toString()+" parameter " +paramstr);
@@ -91,9 +91,9 @@ public class HttpURLConnectionWrapper extends HttpWrapper {
 				
 				Logger.Instance().Write(url.toString()+" recv elapsed time  "+(System.currentTimeMillis()-start) );
 				
-				// °¶·°½Ã S¿¡¼­ ¾î¶²¾ÛÀº WebView¶ó´ø°¡ HttpÅë½Å¿¡¼­ 15ÃÊÀÎ°¡ ³Ñ¾î°¡¸é ¼¼¼Ç ²÷±â´Â
-                /// ¿øÀÎÀ» ¾Ë ¼ö ¾ø´Â °æ¿ìµµ ÀÖ¾úÀ½ ´Ù¸¥±â±â ´Ù ÀßµÇ´Âµ¥ ¿À·ÎÁö °¶·°½Ã S¸¸!!! ±×·¨À½ Âü°í ¹Ù¶÷¿ä
-				/// ·çÇÁ¸¦ µ¹¸é¼­ ¸®Äù½ºÆ®·Î ¹ÞÀº³»¿ëÀ» ÀúÀåÇÑ´Ù.
+				// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Sï¿½ï¿½ï¿½ï¿½ ï¿½î¶²ï¿½ï¿½ï¿½ï¿½ WebViewï¿½ï¿½ï¿½ Httpï¿½ï¿½Å¿ï¿½ï¿½ï¿½ 15ï¿½ï¿½ï¿½Î°ï¿½ ï¿½Ñ¾î°¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
+                /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ìµµ ï¿½Ö¾ï¿½ï¿½ï¿½ ï¿½Ù¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ßµÇ´Âµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Sï¿½ï¿½!!! ï¿½×·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ù¶ï¿½ï¿½ï¿½
+				/// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½é¼­ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 				
 				if(response == HttpURLConnection.HTTP_OK)
 				{
@@ -120,10 +120,10 @@ public class HttpURLConnectionWrapper extends HttpWrapper {
 			}
 			catch (IOException e) 
 			{
-				/// ¸®Äù½ºÆ® ¹Þ´Ù°¡ ¿¡·¯°¡ ³ª¸é ¿¡·¯³ª¸é¼­ ¹ÞÀº ¸Þ¼¼Áö¸¦ ÀÐ´Â´Ù.
+				/// ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Þ´Ù°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é¼­ ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
 				   if (httpcon.getResponseCode() == 500) 
 				   {
-				    /// ¹öÆÛ ¸®¼ÂÇÏ°í ¿¡·¯°ª ¹ÞÀ» ÀÎÇ²½ºÆ®¸² »ý¼ºÇØ¼­ ·¹¾î¸Þ¼¼Áö ¾ò±â
+				    /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç²ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½Þ¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 					BufferedReader br = new BufferedReader(new InputStreamReader(httpcon.getInputStream()));
 						
 				    String line="";
@@ -153,25 +153,25 @@ public class HttpURLConnectionWrapper extends HttpWrapper {
 	protected String RequestWithFiles(URL url,Map<String,Object> params,  Map<String,Object> files) throws IOException
 	{
 
-		//»õ·Î¿î Á¢¼ÓÀ» ¿¬´Ù.
+		//ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 		HttpURLConnection conn = (HttpURLConnection)url.openConnection(); 
 		String bd= "dkjsei40f9844-------djs8dviw--4-s-df-";
-		//ÀÐ±â¿Í ¾²±â ¸ðµÎ °¡´ÉÇÏ°Ô ¼³Á¤
+		//ï¿½Ð±ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½
 		conn.setDoInput(true);
 		conn.setDoOutput(true);
 
-		//Ä³½Ã¸¦ »ç¿ëÇÏÁö ¾Ê°Ô ¼³Á¤
+		//Ä³ï¿½Ã¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê°ï¿½ ï¿½ï¿½ï¿½ï¿½
 		conn.setUseCaches(false); 
 
-		//POSTÅ¸ÀÔÀ¸·Î ¼³Á¤
+		//POSTÅ¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		conn.setRequestMethod("POST"); 
 		if(m_session) conn.setRequestProperty("cookie", GetCookies());
-		//Çì´õ ¼³Á¤
+		//ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
 		conn.setRequestProperty("Connection","Keep-Alive"); 
 		conn.setRequestProperty("Content-Type","multipart/form-data;boundary=" + bd); 
 
-		//Output½ºÆ®¸²À» ¿­¾î
+		//Outputï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		DataOutputStream dos = new DataOutputStream(conn.getOutputStream()); 
 		dos.write(buildeMultipartNormalParameter(params).getBytes());
 		
@@ -184,13 +184,13 @@ public class HttpURLConnectionWrapper extends HttpWrapper {
 			dos.writeBytes("Content-Disposition: form-data; name=\"asd\";filename=\""+ file.getName() +"\"" + "\r\n"); 
 			dos.writeBytes("\r\n"); 
 
-			//¹öÆÛ»çÀÌÁî¸¦ ¼³Á¤ÇÏ¿© bufferÇÒ´ç
+			//ï¿½ï¿½ï¿½Û»ï¿½ï¿½ï¿½ï¿½î¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ bufferï¿½Ò´ï¿½
 			int bytesAvailable = fileInputStream.available(); 
 			int maxBufferSize = 1024;
 			int bufferSize = Math.min(bytesAvailable, maxBufferSize); 
 			byte[] buffer = new byte[bufferSize];
 			 
-			//½ºÆ®¸²¿¡ ÀÛ¼º
+			//ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½
 			int bytesRead = fileInputStream.read(buffer, 0, bufferSize); 
 			while (bytesRead > 0) 
 			{ 
@@ -204,7 +204,7 @@ public class HttpURLConnectionWrapper extends HttpWrapper {
 			dos.writeBytes("--" + bd + "--" + "\r\n"); 
 			fileInputStream.close();
 
-			//½áÁø ¹öÆÛ¸¦ stream¿¡ Ãâ·Â.  
+			//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Û¸ï¿½ streamï¿½ï¿½ ï¿½ï¿½ï¿½.  
 			dos.flush(); 
 		}
 		
@@ -216,9 +216,9 @@ public class HttpURLConnectionWrapper extends HttpWrapper {
 		
 		Logger.Instance().Write(url.toString()+" recv elapsed time  "+(System.currentTimeMillis()-start) );
 		
-		// °¶·°½Ã S¿¡¼­ ¾î¶²¾ÛÀº WebView¶ó´ø°¡ HttpÅë½Å¿¡¼­ 15ÃÊÀÎ°¡ ³Ñ¾î°¡¸é ¼¼¼Ç ²÷±â´Â
-        /// ¿øÀÎÀ» ¾Ë ¼ö ¾ø´Â °æ¿ìµµ ÀÖ¾úÀ½ ´Ù¸¥±â±â ´Ù ÀßµÇ´Âµ¥ ¿À·ÎÁö °¶·°½Ã S¸¸!!! ±×·¨À½ Âü°í ¹Ù¶÷¿ä
-		/// ·çÇÁ¸¦ µ¹¸é¼­ ¸®Äù½ºÆ®·Î ¹ÞÀº³»¿ëÀ» ÀúÀåÇÑ´Ù.
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Sï¿½ï¿½ï¿½ï¿½ ï¿½î¶²ï¿½ï¿½ï¿½ï¿½ WebViewï¿½ï¿½ï¿½ Httpï¿½ï¿½Å¿ï¿½ï¿½ï¿½ 15ï¿½ï¿½ï¿½Î°ï¿½ ï¿½Ñ¾î°¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
+        /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ìµµ ï¿½Ö¾ï¿½ï¿½ï¿½ ï¿½Ù¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ßµÇ´Âµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Sï¿½ï¿½!!! ï¿½×·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ù¶ï¿½ï¿½ï¿½
+		/// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½é¼­ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 		String line="";
 		if(response == HttpURLConnection.HTTP_OK)
 		{
@@ -296,7 +296,7 @@ public class HttpURLConnectionWrapper extends HttpWrapper {
 		
 	}
 	 
-	// [start] IHttpConnectionLayer ±¸Çö
+	// [start] IHttpConnectionLayer ï¿½ï¿½ï¿½ï¿½
 
 
 	@Override
@@ -311,7 +311,7 @@ public class HttpURLConnectionWrapper extends HttpWrapper {
  			{
 				try
 				{
-					/// ÀÏ´Ü ÁÖ¼Ò¿¡ µ¥ÀÌÅÍ¶û º¸³»°í
+					/// ï¿½Ï´ï¿½ ï¿½Ö¼Ò¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¶ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 					//String recv = Request(new URL(url),"POST",params,null);
 					String recv = Request(new URL(url),"POST",params,false);
 					Logger.Instance().Write(recv);
@@ -344,7 +344,7 @@ public class HttpURLConnectionWrapper extends HttpWrapper {
 					try
 					{
 						
-						/// ÀÏ´Ü ÁÖ¼Ò¿¡ µ¥ÀÌÅÍ¶û º¸³»°í
+						/// ï¿½Ï´ï¿½ ï¿½Ö¼Ò¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¶ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 						String recv = Request(new URL(urls),"GET",null,false);
 						Logger.Instance().Write(recv);
 						
@@ -375,7 +375,7 @@ public class HttpURLConnectionWrapper extends HttpWrapper {
 			Map<String, Object> files, IHttpCallback callback) {
 		try
 		{
-			/// ÀÏ´Ü ÁÖ¼Ò¿¡ µ¥ÀÌÅÍ¶û º¸³»°í
+			/// ï¿½Ï´ï¿½ ï¿½Ö¼Ò¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¶ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			String recv = RequestWithFiles(new URL(url),params,files);
 			Logger.Instance().Write(recv);
 			callback.OnCallback(true, recv);
@@ -425,6 +425,23 @@ public class HttpURLConnectionWrapper extends HttpWrapper {
 	}
 	// [end]
 	
-
+	@Override
+	public String POSTFileSync(String url, Map<String, Object> params,
+			Map<String, Object> files) {
+		try
+		{
+			
+			String recv = RequestWithFiles(new URL(url),params,files);
+			Logger.Instance().Write(recv);
+			return recv;
+			
+		}
+		catch(Exception e)
+		{
+			Logger.Instance().Write(e);
+		}
+		
+		return null;
+	}
 	
 }

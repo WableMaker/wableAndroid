@@ -2,6 +2,7 @@ package com.wable.http;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -38,7 +39,7 @@ import com.wable.util.Logger;
 public class HttpClientWrapper extends HttpWrapper  {
 
 	
-	// [start] ¸â¹öº¯¼ö
+	// [start] ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	
 	
 	BasicCookieStore cookieStore = new  BasicCookieStore();
@@ -170,7 +171,7 @@ public class HttpClientWrapper extends HttpWrapper  {
 		 				try
 						{
 		 					DefaultHttpClient httpClient = new DefaultHttpClient();
-		 				//Å¸ÀÌ¾Ï¿ô °É±â
+		 				//Å¸ï¿½Ì¾Ï¿ï¿½ ï¿½É±ï¿½
 		 				//	HttpParams params = http.getParams();
 		 				//	HttpConnectionparams.setConnectionTimeout(params,5000);
 		 				// HttpConnectionParams.setSoTimeout(params,5000);
@@ -238,7 +239,7 @@ public class HttpClientWrapper extends HttpWrapper  {
 			DefaultHttpClient httpClient = new DefaultHttpClient();
 			HttpPost httpPost = new HttpPost(url);
 			
-			//Å¸ÀÓ¾Æ¿ô °É±â
+			//Å¸ï¿½Ó¾Æ¿ï¿½ ï¿½É±ï¿½
 			HttpParams httpParams = httpPost.getParams();
 			HttpConnectionParams.setConnectionTimeout(httpParams,timeout_ms_syncrequest);
 			HttpConnectionParams.setSoTimeout(httpParams,timeout_ms_syncrequest);
@@ -282,7 +283,7 @@ public class HttpClientWrapper extends HttpWrapper  {
 			
 			HttpGet httpGet = new HttpGet(url);
 			
-			//Å¸ÀÓ¾Æ¿ô °É±â
+			//Å¸ï¿½Ó¾Æ¿ï¿½ ï¿½É±ï¿½
 			HttpParams httpParams = httpGet.getParams();
 			HttpConnectionParams.setConnectionTimeout(httpParams,timeout_ms_syncrequest);
 			HttpConnectionParams.setSoTimeout(httpParams,timeout_ms_syncrequest);
@@ -312,6 +313,65 @@ public class HttpClientWrapper extends HttpWrapper  {
 		
 		return null;
 	}
+	
+	
+	@Override
+	public String POSTFileSync(String url, Map<String, Object> params,
+			Map<String, Object> files) {
+		try
+		{
+			
+			DefaultHttpClient httpClient = new DefaultHttpClient();
+			//Å¸ï¿½Ì¾Ï¿ï¿½ ï¿½É±ï¿½
+			//	HttpParams params = http.getParams();
+			//	HttpConnectionparams.setConnectionTimeout(params,5000);
+			// HttpConnectionParams.setSoTimeout(params,5000);
+				
+			HttpPost httpPost = new HttpPost(url);
+			
+			MultipartEntity entity = new MultipartEntity(HttpMultipartMode.STRICT); 
+			
+			for(Map.Entry<String,Object> entry:params.entrySet())
+            {
+				ContentBody cb =  new StringBody(entry.getValue().toString(),"", null);
+            	 entity.addPart(entry.getKey(),cb); 
+            }
+			
+			for(Map.Entry<String,Object> entry:files.entrySet())
+            {
+				 File file = new File(entry.getValue().toString());
+				 ContentBody cbFile = new FileBody(file, "image");
+            	 entity.addPart(entry.getKey(),cbFile); 
+            }
+			
+			httpClient.getParams().setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
+			httpPost.setEntity(entity);
+			httpPost.setHeader("Location", "ko");
+			HttpResponse responsePost = httpClient.execute(httpPost,httpContext);
+			HttpEntity resEntity = responsePost.getEntity();
+			
+			List<Cookie> cookies = cookieStore.getCookies();
+			for(int i=0;i<cookies.size();i++)
+				Logger.Instance().Write(url+"  cookie: " + cookies.get(i));
+			
+			if(resEntity !=null)
+			{
+				String line =EntityUtils.toString(resEntity);
+				Logger.Instance().Write(url+"  response: " + line);
+				return line;
+				
+				
+			}
+			
+		}
+		catch(Exception e)
+		{
+			Logger.Instance().Write(e);
+		}
+		
+		return null;
+	}
+	
 	// [end]
 
 }

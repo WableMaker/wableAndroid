@@ -5,23 +5,23 @@ import java.net.URLEncoder;
 import java.util.Iterator;
 import java.util.Map;
 
-//IHttpConnectionLayer¸¦ ±¸ÇöÇÏ´Â HttpClientWrapper¿Í HttpURLConnectionWrapperºÎ¸ð Å¬·¡½º
+//IHttpConnectionLayerï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ HttpClientWrapperï¿½ï¿½ HttpURLConnectionWrapperï¿½Î¸ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½
 public class HttpWrapper implements IHttpConnectionLayer {
 	
-	// [start] ¸â¹ö º¯¼ö
+	// [start] ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	
-	/// ·Î±×ÀÎ ÇØ¼­ ¼¼¼Ç °¡Áö°í ÀÖ´ÂÁö ¿©ºÎ
+	/// ï¿½Î±ï¿½ï¿½ï¿½ ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	
 	boolean m_session = false ;
 	 
-	long m_sessionLimitTime = 600000 ;  /// ¼¼¼Ç ½Ã°£Á¦ÇÑ (¹Ð¸®¼¼ÄÁµå)
-	long m_sessionTime = 0 ;    /// ¼¼¼ÇÀ» ¾òÀº ½Ã°£
+	long m_sessionLimitTime = 600000 ;  /// ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ï¿½ï¿½ (ï¿½Ð¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
+	long m_sessionTime = 0 ;    /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½
 	
 	protected int timeout_ms_syncrequest = 5000;//ms
 	
 	// [end]
 	
-	// [start] ¸â¹ö ÇÔ¼ö
+	// [start] ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
 	
 	protected String buildParameters(Map<String,Object> params) throws IOException
 	{
@@ -43,7 +43,7 @@ public class HttpWrapper implements IHttpConnectionLayer {
 	// [end]
 	 
 	 
-	// [start] IHttpConnectionLayer ±¸Çö
+	// [start] IHttpConnectionLayer ï¿½ï¿½ï¿½ï¿½
 	 
 	@Override
 	public void SessionEstablished() {
@@ -92,7 +92,7 @@ public class HttpWrapper implements IHttpConnectionLayer {
 		  }
 		  else
 		  {
-		   /// Á¦ÇÑ½Ã°£À» ³Ñ°åÀ½ ¼¼¼ÇÀ» Á¦°ÅÇÔ
+		   /// ï¿½ï¿½ï¿½Ñ½Ã°ï¿½ï¿½ï¿½ ï¿½Ñ°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		   m_session = false ;
 		   return false ; 
 		  }
@@ -116,6 +116,14 @@ public class HttpWrapper implements IHttpConnectionLayer {
 
 	@Override
 	public String GETSync(String url, Map<String, Object> params) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public String POSTFileSync(String url, Map<String, Object> params,
+			Map<String, Object> files) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -10,9 +10,11 @@ public interface IHttpConnectionLayer {
 	
 	boolean POSTFileAsync(String url, Map<String,Object> params, Map<String,Object> files, IHttpCallback callback);
 	
-	//¸®ÅÏÀÌ nullÀÌ¸é ½ÇÆÐÇÑ°ÍÀÓ nullÀÌ ¾Æ´Ï°í ºó¹®ÀÚ¿­ÀÌ³ª ¾î¶² ³»¿ëÀÌ ÀÖ´Ù¸é ¼º°øÀÓ
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ nullï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ°ï¿½ï¿½ï¿½ nullï¿½ï¿½ ï¿½Æ´Ï°ï¿½ ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½Ì³ï¿½ ï¿½î¶² ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	String POSTSync(String url, Map<String,Object> params);
 	String GETSync(String url,Map<String, Object> params);
+	String POSTFileSync(String url, Map<String,Object> params, Map<String,Object> files);
+	
 	
 	void SessionEstablished();
 	void SessionClosed();
