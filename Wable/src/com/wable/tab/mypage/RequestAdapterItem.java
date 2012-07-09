@@ -2,49 +2,76 @@ package com.wable.tab.mypage;
 
 public class RequestAdapterItem {
 	
-	private int callCode;
-	private int revcCode;
-	
-	private String time;
-	private String tel;
+	private String title;
+	private String desc;
+	private String price;
+	private String recommand;
+	private String request;
+	private String status;
 	
 	private int image;
+	private String url;
 	
-	public int getCallCode() {
-		return callCode;
+	private int type;
+	
+	public String getTitle() {
+		return title;
 	}
-	public RequestAdapterItem setCallCode(int callCode) {
-		this.callCode = callCode;
-		return this;
+	public void setTitle(String title) {
+		this.title = title;
 	}
-	public int getRevcCode() {
-		return revcCode;
+	public String getDesc() {
+		return desc;
 	}
-	public RequestAdapterItem setRevcCode(int revcCode) {
-		this.revcCode = revcCode;
-		return this;
+	public void setDesc(String desc) {
+		this.desc = desc;
 	}
-	public String getTime() {
-		return time;
+	public String getPrice() {
+		return price;
 	}
-	public RequestAdapterItem setTime(String time) {
-		this.time = time;
-		return this;
+	public void setPrice(String price) {
+		this.price = price;
 	}
-	public String getTel() {
-		return tel;
+	public String getRecommand() {
+		return recommand;
 	}
-	public RequestAdapterItem setTel(String tel) {
-		this.tel = tel;
-		return this;
+	public void setRecommand(String recommand) {
+		this.recommand = recommand;
+	}
+	public String getRequest() {
+		return request;
+	}
+	public void setRequest(String request) {
+		this.request = request;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	public int getImage() {
 		return image;
 	}
-	public RequestAdapterItem setImage(int image) {
+	public void setImage(int image) {
 		this.image = image;
-		return this;
 	}
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	public int getType() {
+		return type;
+	}
+	public void setType(int type) {
+		this.type = type;
+	}
+	
+	
+	
+
 
 
 }

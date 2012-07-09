@@ -41,6 +41,10 @@ public class RequestAdapter extends BaseAdapter {
 	
 		return view;
 	}
+	
+	
+	
 
 	
 }
+

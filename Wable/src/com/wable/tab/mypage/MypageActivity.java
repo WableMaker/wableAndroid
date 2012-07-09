@@ -1,5 +1,8 @@
 package com.wable.tab.mypage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,6 +25,7 @@ import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
@@ -42,6 +46,8 @@ public class MypageActivity extends Activity implements OnClickListener {
 	private Button menu;
 	
 
+	private ListView listview1, listview2;
+	private List<RequestAdapterItem> list1;
 	
 	LayoutInflater inflater;
 	LinearLayout container, container2;
@@ -58,7 +64,7 @@ public class MypageActivity extends Activity implements OnClickListener {
 				break;        
 			case 1:             
 				if(pd != null && pd.isShowing()) pd.dismiss();
-				break;        
+				break;
 			}       
 		}     
 	}; 
@@ -86,6 +92,10 @@ public class MypageActivity extends Activity implements OnClickListener {
 			
 		mHandler.sendEmptyMessage(0);
 	
+
+		listview1 = (ListView)findViewById(R.id.MYPAGE_RQlist);
+		list1 = new ArrayList<RequestAdapterItem>();
+		
 		
 		
 		APIProxyLayer.Instance().RequestMyActiveList("", new IAPIProxyCallback() {
@@ -95,6 +105,7 @@ public class MypageActivity extends Activity implements OnClickListener {
 			public void OnCallback(boolean success, final JSONObject json) {
 			
 				if(!success) return;
+				
 
 				runOnUiThread(new Runnable() {
 					public void run() {
@@ -122,6 +133,9 @@ public class MypageActivity extends Activity implements OnClickListener {
 
 							for(int i=0, m=suggests.length(); i<m; i++) {			
 
+								RequestAdapterItem item = new RequestAdapterItem();
+								
+								
 								View requestItem = inflater.inflate(R.layout.mypage_request_item, null);
 								
 								if(i==0)
