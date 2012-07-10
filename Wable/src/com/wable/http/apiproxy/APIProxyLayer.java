@@ -2225,41 +2225,47 @@ public class APIProxyLayer implements IAPIProxyLayer {
 			final IAPIProxyCallback callback) {
 		
 
-		if(!_httpLayer.IsConnectedSession())
-		{
-			if(!Relogin())
-				return false;
-		}
-		Map<String,Object> params = new HashMap<String,Object>();
+		
+		final Map<String,Object> params = new HashMap<String,Object>();
 		params.put("last_bidding_id", last_bidding_id);
 		
-		_httpLayer.GETAsync(_domain+"Bidding/ListAsRequester", params, new IHttpCallback(){
-
+		
+		new Thread()
+		{
 			@Override
-			public void OnCallback(boolean success,String result) {
+ 			public void run()
+ 			{
+				if(!_httpLayer.IsConnectedSession())
+				{
+					if(!Relogin())
+						return;
+				}
+				
+				String result = _httpLayer.GETSync(_domain+"Bidding/ListAsRequester", params);
 				// TODO Auto-generated method stub
 				JSONObject obj = null;
-				if(success == true)
+				
+				try
 				{
-					try
+					if(result !=null)
 					{
-						if(result !=null)
-						{
-							obj = new JSONObject(result);
-							if(true == obj.getBoolean("success"))
-								SessionUpdate("BiddingListAsRequester");
-						}
+						obj = new JSONObject(result);
+						if(true == obj.getBoolean("success"))
+							SessionUpdate("BiddingListAsRequester");
+						callback.OnCallback(true,obj);
 					}
-					catch(Exception e)
-					{
-						Logger.Instance().Write(e);
-						callback.OnCallback(false,null);
-					}
+					
 				}
-				callback.OnCallback(success,obj);
-			}
-		
-		});
+				catch(Exception e)
+				{
+					Logger.Instance().Write(e);
+					
+				}
+				
+				callback.OnCallback(false,null);
+ 			}
+			
+		}.start();
 		
 		return true;
 	}
