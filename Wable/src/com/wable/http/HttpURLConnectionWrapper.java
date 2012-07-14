@@ -14,6 +14,11 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLSession;
+
 import com.wable.util.Logger;
 
 public class HttpURLConnectionWrapper extends HttpWrapper {
@@ -52,195 +57,253 @@ public class HttpURLConnectionWrapper extends HttpWrapper {
 			return sb.toString();
 	 }
 
+	 final static HostnameVerifier DO_NOT_VERIFY = new HostnameVerifier() { 
+	        
+			@Override
+			public boolean verify(String arg0, SSLSession arg1) {
+				// TODO Auto-generated method stub
+				return true;
+			} 
+	    };
+	 
 	protected String Request(URL url,String method, Map<String,Object> params,boolean timeout) throws IOException
+	{
+		InputStream in = null;
+		OutputStream out = null;
+		HttpURLConnection httpcon = null;
+		try
 		{
-			InputStream in = null;
-			OutputStream out = null;
-			HttpURLConnection httpcon = null;
-			try
+			
+			if (url.getProtocol().toLowerCase().equals("https")) { 
+	               // trustAllHosts(); 
+	                HttpsURLConnection https = (HttpsURLConnection) url.openConnection(); 
+	                https.setHostnameVerifier(DO_NOT_VERIFY); 
+	                httpcon = https; 
+            } else { 
+            	httpcon = (HttpURLConnection) url.openConnection();
+            } 
+			
+			
+			httpcon.setUseCaches(false);
+			httpcon.setRequestMethod(method);//POST�� GET�̳�
+			httpcon.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");//���ڵ���
+			httpcon.setRequestProperty("Language", "ko");//���
+			
+			if(timeout)
 			{
-				
-				httpcon = (HttpURLConnection) url.openConnection();
-				httpcon.setUseCaches(false);
-				httpcon.setRequestMethod(method);//POST�� GET�̳�
-				httpcon.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");//���ڵ���
-				httpcon.setRequestProperty("Language", "ko");//���
-				
-				if(timeout)
-				{
-					httpcon.setConnectTimeout(timeout_ms_syncrequest);
-					httpcon.setReadTimeout(timeout_ms_syncrequest);
-				}
-				httpcon.setDoInput(true);//��ǲ��Ʈ�� ��뿩��
-				if(m_session) httpcon.setRequestProperty("cookie",  GetCookies());
-				if(method.equals("POST"))
-				{
-					httpcon.setDoOutput(true);//post�� �����͸� �ּҿ� ������ ���� �� �ٵ� �־..
+				httpcon.setConnectTimeout(timeout_ms_syncrequest);
+				httpcon.setReadTimeout(timeout_ms_syncrequest);
+			}
+			httpcon.setDoInput(true);//��ǲ��Ʈ�� ��뿩��
+			if(m_session) httpcon.setRequestProperty("cookie",  GetCookies());
+			if(method.equals("POST"))
+			{
+				httpcon.setDoOutput(true);//post�� �����͸� �ּҿ� ������ ���� �� �ٵ� �־..
 
-					String paramstr =buildParameters(params);
-					Logger.Instance().Write(url.toString()+" parameter " +paramstr);
-					out = httpcon.getOutputStream();
-					out.write(paramstr.getBytes("UTF-8"));
-					
-					out.flush();
-					out.close();
-				}
-				long start = System.currentTimeMillis();
+				String paramstr =buildParameters(params);
+				Logger.Instance().Write(url.toString()+" parameter " +paramstr);
+				out = httpcon.getOutputStream();
+				out.write(paramstr.getBytes("UTF-8"));
 				
-				int response =httpcon.getResponseCode();
-				
-				Logger.Instance().Write(url.toString()+" recv elapsed time  "+(System.currentTimeMillis()-start) );
-				
-				// ������ S���� ����� WebView��� Http��ſ��� 15���ΰ� �Ѿ�� ���� �����
-                /// ������ �� �� ��� ��쵵 �־��� �ٸ���� �� �ߵǴµ� ������ ������ S��!!! �׷��� ��� �ٶ���
-				/// ������ ���鼭 ����Ʈ�� ���������� �����Ѵ�.
-				
-				if(response == HttpURLConnection.HTTP_OK)
+				out.flush();
+				out.close();
+			}
+			long start = System.currentTimeMillis();
+			
+			int response =httpcon.getResponseCode();
+			
+			Logger.Instance().Write(url.toString()+" recv elapsed time  "+(System.currentTimeMillis()-start) );
+			
+			// ������ S���� ����� WebView��� Http��ſ��� 15���ΰ� �Ѿ�� ���� �����
+            /// ������ �� �� ��� ��쵵 �־��� �ٸ���� �� �ߵǴµ� ������ ������ S��!!! �׷��� ��� �ٶ���
+			/// ������ ���鼭 ����Ʈ�� ���������� �����Ѵ�.
+			
+			if(response == HttpURLConnection.HTTP_OK)
+			{
+				BufferedReader br = new BufferedReader(new InputStreamReader(httpcon.getInputStream()));
+				String line="";
+				while(true)
 				{
-					BufferedReader br = new BufferedReader(new InputStreamReader(httpcon.getInputStream()));
-					String line="";
-					while(true)
-					{
-						String r = br.readLine();
-						if(null == r) break;
-						line +=r;
-					}
-					br.close();
-					Map<String,List<String>> imap = httpcon.getHeaderFields();
-					if(imap.containsKey("Set-Cookie"))
-					{
-						List<String> cookie = imap.get("Set-Cookie");
-						StoreCookie(cookie);	
-					}
-					
-					return line;
+					String r = br.readLine();
+					if(null == r) break;
+					line +=r;
+				}
+				br.close();
+				Map<String,List<String>> imap = httpcon.getHeaderFields();
+				if(imap.containsKey("Set-Cookie"))
+				{
+					List<String> cookie = imap.get("Set-Cookie");
+					StoreCookie(cookie);	
 				}
 				
-				
+				return line;
 			}
-			catch (IOException e) 
-			{
-				/// ����Ʈ �޴ٰ� ������ ���� �������鼭 ���� �޼����� �д´�.
-				   if (httpcon.getResponseCode() == 500) 
-				   {
-				    /// ���� �����ϰ� ������ ���� ��ǲ��Ʈ�� ���ؼ� ����޼��� ���
-					BufferedReader br = new BufferedReader(new InputStreamReader(httpcon.getInputStream()));
-						
-				    String line="";
-				    while (true) 
-				    {
-				    	String r = br.readLine();
-						if(null == r) break;
-						line +=r;
-				    }
-				    br.close();
-
-				    Logger.Instance().Write(line);
-				   }
-				   throw e;
-			}
-			finally
-			{
-				if(in !=null) in.close();
-				if(httpcon !=null) httpcon.disconnect();
-			}
-			return null;
 			
 			
 		}
+		catch (IOException e) 
+		{
+			/// ����Ʈ �޴ٰ� ������ ���� �������鼭 ���� �޼����� �д´�.
+			   if (httpcon.getResponseCode() == 500) 
+			   {
+			    /// ���� �����ϰ� ������ ���� ��ǲ��Ʈ�� ���ؼ� ����޼��� ���
+				BufferedReader br = new BufferedReader(new InputStreamReader(httpcon.getInputStream()));
+					
+			    String line="";
+			    while (true) 
+			    {
+			    	String r = br.readLine();
+					if(null == r) break;
+					line +=r;
+			    }
+			    br.close();
+
+			    Logger.Instance().Write(line);
+			   }
+			   throw e;
+		}
+		finally
+		{
+			if(in !=null) in.close();
+			if(httpcon !=null) httpcon.disconnect();
+		}
+		return null;
+		
+		
+	}
 		
 		
 	protected String RequestWithFiles(URL url,Map<String,Object> params,  Map<String,Object> files) throws IOException
 	{
-
-		//���ο� ������ ����.
-		HttpURLConnection conn = (HttpURLConnection)url.openConnection(); 
-		String bd= "dkjsei40f9844-------djs8dviw--4-s-df-";
-		//�б�� ���� ��� �����ϰ� ����
-		conn.setDoInput(true);
-		conn.setDoOutput(true);
-
-		//ĳ�ø� ������� �ʰ� ����
-		conn.setUseCaches(false); 
-
-		//POSTŸ������ ����
-		conn.setRequestMethod("POST"); 
-		if(m_session) conn.setRequestProperty("cookie", GetCookies());
-		//��� ����
-
-		conn.setRequestProperty("Connection","Keep-Alive"); 
-		conn.setRequestProperty("Content-Type","multipart/form-data;boundary=" + bd); 
-
-		//Output��Ʈ���� ����
-		DataOutputStream dos = new DataOutputStream(conn.getOutputStream()); 
-		dos.write(buildeMultipartNormalParameter(params).getBytes());
-		
-
-		for(Map.Entry<String,Object> entry:files.entrySet())
+		HttpURLConnection conn=null;
+		FileInputStream fileInputStream=null;
+		try
 		{
-			File file = new File(entry.getValue().toString());
-			FileInputStream fileInputStream = new FileInputStream(file);
-			dos.writeBytes("--" + bd + "\r\n"); 
-			dos.writeBytes("Content-Disposition: form-data; name=\"asd\";filename=\""+ file.getName() +"\"" + "\r\n"); 
-			dos.writeBytes("\r\n"); 
-
-			//���ۻ���� �����Ͽ� buffer�Ҵ�
-			int bytesAvailable = fileInputStream.available(); 
-			int maxBufferSize = 1024;
-			int bufferSize = Math.min(bytesAvailable, maxBufferSize); 
-			byte[] buffer = new byte[bufferSize];
-			 
-			//��Ʈ���� �ۼ�
-			int bytesRead = fileInputStream.read(buffer, 0, bufferSize); 
-			while (bytesRead > 0) 
-			{ 
-				// Upload file part(s) 
-				dos.write(buffer, 0, bufferSize); 
-				bytesAvailable = fileInputStream.available(); 
-				bufferSize = Math.min(bytesAvailable, maxBufferSize); 
-				bytesRead = fileInputStream.read(buffer, 0, bufferSize); 
-			} 
-			dos.writeBytes("\r\n"); 
-			dos.writeBytes("--" + bd + "--" + "\r\n"); 
-			fileInputStream.close();
-
-			//���� ���۸� stream�� ���.  
-			dos.flush(); 
-		}
-		
-
-		Logger.Instance().Write(url.toString()+  " Request success "+  GetCookies());
-		long start = System.currentTimeMillis();
-		
-		int response =conn.getResponseCode();
-		
-		Logger.Instance().Write(url.toString()+" recv elapsed time  "+(System.currentTimeMillis()-start) );
-		
-		// ������ S���� ����� WebView��� Http��ſ��� 15���ΰ� �Ѿ�� ���� �����
-        /// ������ �� �� ��� ��쵵 �־��� �ٸ���� �� �ߵǴµ� ������ ������ S��!!! �׷��� ��� �ٶ���
-		/// ������ ���鼭 ����Ʈ�� ���������� �����Ѵ�.
-		String line="";
-		if(response == HttpURLConnection.HTTP_OK)
-		{
-			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			
-			while(true)
+			if (url.getProtocol().toLowerCase().equals("https")) { 
+	            // trustAllHosts(); 
+	             HttpsURLConnection https = (HttpsURLConnection) url.openConnection(); 
+	             https.setHostnameVerifier(DO_NOT_VERIFY); 
+	             conn = https; 
+		     } else { 
+		    	 conn = (HttpURLConnection)url.openConnection(); 
+		 		
+		     } 
+			//���ο� ������ ����.
+			String bd= "dkjsei40f9844-------djs8dviw--4-s-df-";
+			//�б�� ���� ��� �����ϰ� ����
+			conn.setDoInput(true);
+			conn.setDoOutput(true);
+	
+			//ĳ�ø� ������� �ʰ� ����
+			conn.setUseCaches(false); 
+	
+			//POSTŸ������ ����
+			conn.setRequestMethod("POST"); 
+			if(m_session) conn.setRequestProperty("cookie", GetCookies());
+			//��� ����
+	
+			conn.setRequestProperty("Connection","Keep-Alive"); 
+			conn.setRequestProperty("Content-Type","multipart/form-data;boundary=" + bd); 
+	
+			//Output��Ʈ���� ����
+			DataOutputStream dos = new DataOutputStream(conn.getOutputStream()); 
+			dos.write(buildeMultipartNormalParameter(params).getBytes());
+			
+	
+			for(Map.Entry<String,Object> entry:files.entrySet())
 			{
-				String r = br.readLine();
-				if(null == r) break;
-				line +=r;
-			}
-			br.close();
-			Map<String,List<String>> imap = conn.getHeaderFields();
-			if(imap.containsKey("Set-Cookie"))
-			{
-				List<String> cookie = imap.get("Set-Cookie");
-				StoreCookie(cookie);
+				File file = new File(entry.getValue().toString());
+				fileInputStream = new FileInputStream(file);
+				dos.writeBytes("--" + bd + "\r\n"); 
+				dos.writeBytes("Content-Disposition: form-data; name=\"asd\";filename=\""+ file.getName() +"\"" + "\r\n"); 
+				dos.writeBytes("\r\n"); 
+	
+				//���ۻ���� �����Ͽ� buffer�Ҵ�
+				int bytesAvailable = fileInputStream.available(); 
+				int maxBufferSize = 1024;
+				int bufferSize = Math.min(bytesAvailable, maxBufferSize); 
+				byte[] buffer = new byte[bufferSize];
+				 
+				//��Ʈ���� �ۼ�
+				int bytesRead = fileInputStream.read(buffer, 0, bufferSize); 
+				while (bytesRead > 0) 
+				{ 
+					// Upload file part(s) 
+					dos.write(buffer, 0, bufferSize); 
+					bytesAvailable = fileInputStream.available(); 
+					bufferSize = Math.min(bytesAvailable, maxBufferSize); 
+					bytesRead = fileInputStream.read(buffer, 0, bufferSize); 
+				} 
+				dos.writeBytes("\r\n"); 
+				dos.writeBytes("--" + bd + "--" + "\r\n"); 
+				fileInputStream.close();
+	
+				//���� ���۸� stream�� ���.  
+				dos.flush(); 
 			}
 			
+	
+			Logger.Instance().Write(url.toString()+  " Request success "+  GetCookies());
+			long start = System.currentTimeMillis();
+			
+			int response =conn.getResponseCode();
+			
+			Logger.Instance().Write(url.toString()+" recv elapsed time  "+(System.currentTimeMillis()-start) );
+			
+			// ������ S���� ����� WebView��� Http��ſ��� 15���ΰ� �Ѿ�� ���� �����
+	        /// ������ �� �� ��� ��쵵 �־��� �ٸ���� �� �ߵǴµ� ������ ������ S��!!! �׷��� ��� �ٶ���
+			/// ������ ���鼭 ����Ʈ�� ���������� �����Ѵ�.
+			String line="";
+			if(response == HttpURLConnection.HTTP_OK)
+			{
+				BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+				
+				while(true)
+				{
+					String r = br.readLine();
+					if(null == r) break;
+					line +=r;
+				}
+				br.close();
+				Map<String,List<String>> imap = conn.getHeaderFields();
+				if(imap.containsKey("Set-Cookie"))
+				{
+					List<String> cookie = imap.get("Set-Cookie");
+					StoreCookie(cookie);
+				}
+				
+				return line;
+			}
 			
 		}
-		return line;
+		catch (IOException e) 
+		{
+			/// ����Ʈ �޴ٰ� ������ ���� �������鼭 ���� �޼����� �д´�.
+			   if (conn!=null && conn.getResponseCode() == 500) 
+			   {
+			    /// ���� �����ϰ� ������ ���� ��ǲ��Ʈ�� ���ؼ� ����޼��� ���
+				BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+					
+			    String line="";
+			    while (true) 
+			    {
+			    	String r = br.readLine();
+					if(null == r) break;
+					line +=r;
+			    }
+			    br.close();
+
+			    Logger.Instance().Write(line);
+			   }
+			   throw e;
+		}
+		finally
+		{
+			if(fileInputStream !=null) fileInputStream.close();
+			if(conn !=null) conn.disconnect();
+		}
+		return null;
 	}
 	
 	private String GetCookies()

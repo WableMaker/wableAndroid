@@ -76,6 +76,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	IHttpConnectionLayer _httpLayer;
 	
 	String _domain= "http://wable.co.kr/";
+	String _domainSSL= "https://wable.co.kr/";
 	
 	String _loginid;
 	String _password;
@@ -144,14 +145,14 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				
 				params.put("fb_uid", _fb_uid);
 				params.put("oauth_token", _oauth_token);
-				result = _httpLayer.POSTSync(_domain+"account/FBLoginMobile", params);
+				result = _httpLayer.POSTSync(_domainSSL+"account/FBLoginMobile", params);
 
 			}
 			else
 			{
 				params.put("loginid", _loginid);
 				params.put("password", _password);
-				result = _httpLayer.POSTSync(_domain+"account/loginmobile", params);
+				result = _httpLayer.POSTSync(_domainSSL+"account/loginmobile", params);
 			}
 
 			JSONObject obj = null;
@@ -205,7 +206,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
  			{
 				try
 				{
-						String result = _httpLayer.POSTSync(_domain+"account/loginmobile", params);
+						String result = _httpLayer.POSTSync(_domainSSL+"account/loginmobile", params);
 						// TODO Auto-generated method stub
 						JSONObject obj = null;
 						if(result != null)
@@ -354,7 +355,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 			@Override
  			public void run()
  			{
-				String result = _httpLayer.POSTSync(_domain+"account/RegisterMobile", params);
+				String result = _httpLayer.POSTSync(_domainSSL+"account/RegisterMobile", params);
 				// TODO Auto-generated method stub
 				JSONObject obj = null;
 				
@@ -403,7 +404,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 			@Override
  			public void run()
  			{
-				String result = _httpLayer.POSTSync(_domain+"account/FBLoginMobile", params);
+				String result = _httpLayer.POSTSync(_domainSSL+"account/FBLoginMobile", params);
 				// TODO Auto-generated method stub
 				JSONObject obj = null;
 				
@@ -441,40 +442,45 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		
 		SetAccountInfo(null,null,fb_uid,oauth_token);
 		
-		Map<String,Object> params = new HashMap<String,Object>();
+		final Map<String,Object> params = new HashMap<String,Object>();
 		params.put("oauth_token", oauth_token);
 		params.put("fb_uid", fb_uid);
 		
-		_httpLayer.POSTAsync(_domain+"account/FBRegisterMobile", params, new IHttpCallback(){
-
+		
+		
+		new Thread()
+		{
 			@Override
-			public void OnCallback(boolean success,String result) {
+ 			public void run()
+ 			{
+				String result = _httpLayer.POSTSync(_domainSSL+"account/FBRegisterMobile", params);
 				// TODO Auto-generated method stub
 				JSONObject obj = null;
-				if(success == true)
+				
+				try
 				{
-					try
+					
+					if(result !=null)
 					{
+						obj = new JSONObject(result);
+						if(false == obj.getBoolean("success"))
+							SessionDisconnected("FBregister");
+						else SessionConnected("FBregister");
 						
-						if(result !=null)
-						{
-							obj = new JSONObject(result);
-							if(false == obj.getBoolean("success"))
-								SessionDisconnected("FBregister");
-							else SessionConnected("FBregister");
-						}
-					}
-					catch(Exception e)
-					{
-						Logger.Instance().Write(e);
-						callback.OnCallback(false,null);
+						callback.OnCallback(true,obj);
 					}
 				}
-				callback.OnCallback(success,obj);
-			}
-		
-		});
-		
+				catch(Exception e)
+				{
+					Logger.Instance().Write(e);
+					
+				}
+				
+				callback.OnCallback(false,null);
+ 			}
+			
+		}.start();
+				
 		return true;
 	}
 
@@ -502,7 +508,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					}
 				}
 
-				String result = _httpLayer.GETSync(_domain+"account/FBConnectMobile", params);
+				String result = _httpLayer.GETSync(_domainSSL+"account/FBConnectMobile", params);
 				// TODO Auto-generated method stub
 				JSONObject obj = null;
 				
