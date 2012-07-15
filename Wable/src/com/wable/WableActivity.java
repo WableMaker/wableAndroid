@@ -214,7 +214,7 @@ public class WableActivity extends Activity implements OnClickListener {
 		
 			pd = ProgressDialog.show(context, "로그인", "사용자 정보 조회중입니다...", true, false);
 			
-			APIProxyLayer.Instance().Login("cc", "111111", new IAPIProxyCallback(){
+			APIProxyLayer.Instance().Login(etUser.getText().toString(), etPass.getText().toString(), new IAPIProxyCallback(){
 
 				@Override
 				public void OnCallback(boolean success, JSONObject json) {

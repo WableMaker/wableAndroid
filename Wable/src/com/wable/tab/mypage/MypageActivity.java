@@ -277,8 +277,7 @@ public class MypageActivity extends Activity implements OnClickListener {
 					
 					if(cnt == 0) return;
 					relPV.setVisibility(View.INVISIBLE);
-					
-					
+			
 					TextView tv = new TextView(context);
 					tv.setBackgroundResource(R.drawable.tab1_table_header_cell);
 					tv.setGravity(Gravity.CENTER_VERTICAL);

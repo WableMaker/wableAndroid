@@ -2888,7 +2888,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 	@Override
 	public boolean UserSendSMSAuthCode(String mobile, String code,
-			IAPIProxyCallback callback) {
+			final IAPIProxyCallback callback) {
 		final Map<String,Object> params = new HashMap<String,Object>();
 		params.put("mobile", mobile);
 		params.put("code", code);
@@ -2939,7 +2939,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 	@Override
 	public boolean UserAuthorizedMobile(String mobile,
-			IAPIProxyCallback callback) {
+			final IAPIProxyCallback callback) {
 		final Map<String,Object> params = new HashMap<String,Object>();
 		params.put("mobile", mobile);
 		
@@ -2977,9 +2977,11 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				}
 				
 				callback.OnCallback(false,null);
+				
  			}
 			
 		}.start();
+		return true;
 	}
 
 	// [end]
