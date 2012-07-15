@@ -26,6 +26,8 @@ public interface IAPIProxyLayer {
 	
 	boolean UserEnablePushNotify(Time starttime, Time endtime,IAPIProxyCallback callback);//Ǫ������ �ð�
 	boolean UserResetBadgeCount(IAPIProxyCallback callback);//Ǫ������ �ð�
+	boolean UserSendSMSAuthCode(String mobile, String code,IAPIProxyCallback callback);
+	boolean UserAuthorizedMobile(String mobile, IAPIProxyCallback callback);
 	
 	// [end]
 		

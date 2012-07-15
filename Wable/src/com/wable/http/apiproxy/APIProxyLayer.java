@@ -2884,6 +2884,104 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		return true;
 	}
 
+
+
+	@Override
+	public boolean UserSendSMSAuthCode(String mobile, String code,
+			IAPIProxyCallback callback) {
+		final Map<String,Object> params = new HashMap<String,Object>();
+		params.put("mobile", mobile);
+		params.put("code", code);
+		
+		
+		new Thread()
+		{
+			@Override
+ 			public void run()
+ 			{
+				if(!_httpLayer.IsConnectedSession())
+				{
+					if(!Relogin())
+						return;
+				}
+				
+				String result = _httpLayer.POSTSync(_domain+"User/SendSMSAuthCode", params);
+				// TODO Auto-generated method stub
+				JSONObject obj = null;
+				
+				try
+				{
+					if(result !=null)
+					{
+						obj = new JSONObject(result);
+						if(true == obj.getBoolean("success"))
+							SessionUpdate("UserSendSMSAuthCode");
+						callback.OnCallback(true,obj);
+					}
+					
+				}
+				catch(Exception e)
+				{
+					Logger.Instance().Write(e);
+					
+				}
+				
+				callback.OnCallback(false,null);
+ 			}
+			
+		}.start();
+		
+		
+		return true;
+	}
+
+
+
+	@Override
+	public boolean UserAuthorizedMobile(String mobile,
+			IAPIProxyCallback callback) {
+		final Map<String,Object> params = new HashMap<String,Object>();
+		params.put("mobile", mobile);
+		
+		
+		new Thread()
+		{
+			@Override
+ 			public void run()
+ 			{
+				if(!_httpLayer.IsConnectedSession())
+				{
+					if(!Relogin())
+						return;
+				}
+				
+				String result = _httpLayer.POSTSync(_domain+"User/AuthorizedMobile", params);
+				// TODO Auto-generated method stub
+				JSONObject obj = null;
+				
+				try
+				{
+					if(result !=null)
+					{
+						obj = new JSONObject(result);
+						if(true == obj.getBoolean("success"))
+							SessionUpdate("UserAuthorizedMobile");
+						callback.OnCallback(true,obj);
+					}
+					
+				}
+				catch(Exception e)
+				{
+					Logger.Instance().Write(e);
+					
+				}
+				
+				callback.OnCallback(false,null);
+ 			}
+			
+		}.start();
+	}
+
 	// [end]
 	
 
