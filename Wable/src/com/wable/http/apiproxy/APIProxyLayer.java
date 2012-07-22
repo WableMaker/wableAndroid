@@ -1099,7 +1099,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	@Override
 	public boolean RequestAdd(String title, String description, int price,
 			Integer category, Date duedate, double lat, double lon,
-			Boolean totwitter, Boolean tofacebook, 
+			boolean totwitter, boolean tofacebook, 
 			final IAPIProxyCallback callback) {
 
 		
@@ -1161,7 +1161,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 	@Override
 	public boolean ProvideAdd(String title,String description, int minprice, int category,
-			double lat, double lon, int radius,  
+			double lat, double lon, int radius, boolean totwitter, boolean tofacebook, 
 			final IAPIProxyCallback callback) {
 
 
@@ -1173,6 +1173,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		params.put("radius", radius);
 		params.put("lat", lat);
 		params.put("lon", lon);
+		params.put("totwitter", totwitter);
+		params.put("tofacebook", tofacebook);
 		
 		
 		new Thread()
@@ -1919,7 +1921,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 	@Override
 	public boolean ProvideUpdate(String provide_id, String title, String description, int minprice,
-			int category, double lat, double lon, int radius,
+			int category, double lat, double lon, int radius,boolean totwitter, boolean tofacebook, 
 			final IAPIProxyCallback callback) {
 		
 
@@ -1933,6 +1935,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		params.put("radius", radius);
 		params.put("lat", lat);
 		params.put("lon", lon);
+		params.put("totwitter", totwitter);
+		params.put("tofacebook", tofacebook);
 		
 		new Thread()
 		{

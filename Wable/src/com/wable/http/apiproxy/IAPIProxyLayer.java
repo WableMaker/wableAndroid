@@ -41,7 +41,7 @@ public interface IAPIProxyLayer {
 	boolean RequestListbyDistance(double lat, double lon,double mindistance,String keyword,IAPIProxyCallback callback);//������
 
 	boolean RequestAdd(String title, String description, int price, Integer category, Date duedate
-			,double lat,double lon, Boolean totwitter, Boolean tofacebook, IAPIProxyCallback callback);//������
+			,double lat,double lon, boolean totwitter, boolean tofacebook, IAPIProxyCallback callback);//������
 	boolean RequestDelete(String request_id ,IAPIProxyCallback callback);//��û ����
 	boolean RequestDone(String request_id ,IAPIProxyCallback callback);//��û ����
 	
@@ -61,7 +61,7 @@ public interface IAPIProxyLayer {
 	boolean ProvideListbyDistance(double lat, double lon,double mindistance,String keyword,IAPIProxyCallback callback);//������
 
 	boolean ProvideAdd(String title,String description, int minprice,int category
-			,double lat,double lon,int radius, IAPIProxyCallback callback);//������
+			,double lat,double lon,int radius,boolean totwitter, boolean tofacebook, IAPIProxyCallback callback);//������
 	boolean ProvideDelete(String provide_id ,IAPIProxyCallback callback);//���� ����
 	boolean ProvideDone(String provide_id ,IAPIProxyCallback callback);//���� ����
 	
@@ -69,7 +69,7 @@ public interface IAPIProxyLayer {
 	
 	boolean ProvideOtherDetailById(String provide_id ,IAPIProxyCallback callback);
 	boolean ProvideUpdate(String provide_id,String title, String description, int minprice,int category
-			,double lat,double lon,int radius, IAPIProxyCallback callback);//������
+			,double lat,double lon,int radius,boolean totwitter, boolean tofacebook, IAPIProxyCallback callback);//������
 	// [end]
 	
 	// [start] Bidding
