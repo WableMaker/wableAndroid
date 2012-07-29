@@ -1406,13 +1406,13 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	}
 	
 	@Override
-	public boolean MessageSendText(String biddingid, String message,Double tick,
+	public boolean MessageSendText(String biddingid, String message,String lastmsgutctime,
 			final IAPIProxyCallback callback) {
 		
 		final Map<String,Object> params = new HashMap<String,Object>();
 		params.put("biddingid", biddingid);
 		params.put("message", message);
-		params.put("lastmsgutctick", tick);
+		params.put("lastmsgutctime", lastmsgutctime);
 		
 		
 		new Thread()
@@ -1560,13 +1560,13 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 
 	@Override
-	public boolean MessageGet(String biddingid, Double lastmsgutctick,
+	public boolean MessageGet(String biddingid, String lastmsgutctime,
 			final IAPIProxyCallback callback) {
 		
 		
 		final Map<String,Object> params = new HashMap<String,Object>();
 		params.put("biddingid", biddingid);
-		params.put("lastmsgutctick", lastmsgutctick);
+		params.put("lastmsgutctime", lastmsgutctime);
 		
 		new Thread()
 		{
@@ -1708,13 +1708,13 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	}
 
 	@Override
-	public boolean MessageSendImage(String biddingid, String filepath,Double tick,
+	public boolean MessageSendImage(String biddingid, String filepath,String lastmsgutctime,
 			final IAPIProxyCallback callback) {
 		
 		
 		final Map<String,Object> params = new HashMap<String,Object>();
 		params.put("biddingid", biddingid);
-		params.put("lastmsgutctick", tick);
+		params.put("lastmsgutctime", lastmsgutctime);
 		final Map<String,Object> files = new HashMap<String,Object>();
 		files.put("filepath", filepath);
 		
@@ -2025,11 +2025,11 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 	@Override
 	public boolean MessageSendAudio(String biddingid, String filepath,
-			Double tick, final IAPIProxyCallback callback) {
+			String lastmsgutctime, final IAPIProxyCallback callback) {
 		
 		final Map<String,Object> params = new HashMap<String,Object>();
 		params.put("biddingid", biddingid);
-		params.put("lastmsgutctick", tick);
+		params.put("lastmsgutctime", lastmsgutctime);
 		final Map<String,Object> files = new HashMap<String,Object>();
 		files.put("filepath", filepath);
 		
@@ -2077,12 +2077,12 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 	@Override
 	public boolean MessageSendVideo(String biddingid, String filepath,
-			Double tick, final IAPIProxyCallback callback) {
+			String lastmsgutctime, final IAPIProxyCallback callback) {
 		
 
 		final Map<String,Object> params = new HashMap<String,Object>();
 		params.put("biddingid", biddingid);
-		params.put("lastmsgutctick", tick);
+		params.put("lastmsgutctime", lastmsgutctime);
 		final Map<String,Object> files = new HashMap<String,Object>();
 		files.put("filepath", filepath);
 		
@@ -2484,11 +2484,11 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 
 	@Override
-	public boolean MessageGetNewMessage(Double tick, final IAPIProxyCallback callback) {
+	public boolean MessageGetNewMessage(String lastmsgutctime, final IAPIProxyCallback callback) {
 		
 
 		final Map<String,Object> params = new HashMap<String,Object>();
-		params.put("lastmsgutctick", tick);
+		params.put("lastmsgutctime", lastmsgutctime);
 		
 		new Thread()
 		{

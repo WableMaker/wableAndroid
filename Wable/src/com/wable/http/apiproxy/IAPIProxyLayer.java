@@ -95,13 +95,13 @@ public interface IAPIProxyLayer {
 	
 	// [start] Message
 	
-	boolean MessageSendText(String biddingid, String message,Double tick,IAPIProxyCallback callback);//������
-	boolean MessageSendImage(String biddingid, String filepath,Double tick,IAPIProxyCallback callback);//������
-	boolean MessageSendAudio(String biddingid, String filepath,Double tick,IAPIProxyCallback callback);//������
-	boolean MessageSendVideo(String biddingid, String filepath,Double tick,IAPIProxyCallback callback);//������
+	boolean MessageSendText(String biddingid, String message,String lastmsgutctime,IAPIProxyCallback callback);//������
+	boolean MessageSendImage(String biddingid, String filepath,String lastmsgutctime,IAPIProxyCallback callback);//������
+	boolean MessageSendAudio(String biddingid, String filepath,String lastmsgutctime,IAPIProxyCallback callback);//������
+	boolean MessageSendVideo(String biddingid, String filepath,String lastmsgutctime,IAPIProxyCallback callback);//������
 	
-	boolean MessageGet(String biddingid,Double tick,IAPIProxyCallback callback);//������
-	boolean MessageGetNewMessage(Double tick,IAPIProxyCallback callback);//���ڷ� ���� ���������� ��� �ŷ��޽��� �ޱ�
+	boolean MessageGet(String biddingid,String lastmsgutctime,IAPIProxyCallback callback);//������
+	boolean MessageGetNewMessage(String lastmsgutctime,IAPIProxyCallback callback);//���ڷ� ���� ���������� ��� �ŷ��޽��� �ޱ�
 	
 
 	
