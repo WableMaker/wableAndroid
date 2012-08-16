@@ -4,48 +4,120 @@ import java.util.Date;
 
 import android.text.format.Time;
 
-////////////////////////////////
-//------ APIProxy 인터페이스------//
-//-----최종 수정일 2012.07.08------//
-//------수정자 : 백두산------------//
-//------버전 : 0.87-------------//
-////////////////////////////////
+
 public interface IAPIProxyLayer {
 	
 	// [start] Account
 	
-	boolean Login(String loginid,String password, IAPIProxyCallback callback);//로그인
-	boolean Logout(IAPIProxyCallback callback);//로그아웃
-	boolean Register(String loginid,String email,String username,String password, IAPIProxyCallback callback);//회원가입
+	boolean Login(String loginid,String password, IAPIProxyCallback callback);//�α��� �õ�
+	boolean Logout(IAPIProxyCallback callback);//�α��� �õ�
+	boolean Register(String loginid,String email,String username,String password, IAPIProxyCallback callback);//�α��� �õ�
 	
-	boolean FBlogin(String fb_uid,String oauth_token, IAPIProxyCallback callback);//페이스북 계정으로 로그인
-	boolean FBregister(String fb_uid,String oauth_token, IAPIProxyCallback callback);//페이스북 계정으로 가입
-	boolean FBconnect(String fb_uid,String oauth_token, IAPIProxyCallback callback);//페이스북 계정을 현재 계정과 연결, 로그인 필요
+	boolean FBlogin(String fb_uid,String oauth_token, IAPIProxyCallback callback);//�α��� �õ�
+	boolean FBregister(String fb_uid,String oauth_token, IAPIProxyCallback callback);//�α��� �õ�
+	boolean FBconnect(String fb_uid,String oauth_token, IAPIProxyCallback callback);//�α��� �õ�
 	
 	// [end]
 	
 	// [start] User
 	
-	boolean MyInfo(IAPIProxyCallback callback);//내정보 획득
-	boolean UserUpdate(String name,String introduce,String photo,IAPIProxyCallback callback);//내정보 업데이트
+	boolean MyInfo(IAPIProxyCallback callback);//������	
+	boolean UserUpdate(String name,String introduce,String photo,IAPIProxyCallback callback);//������
 	
-	boolean UserEnablePushNotify(Time starttime, Time endtime,IAPIProxyCallback callback);//푸쉬통보 가능 시간 설정
-	boolean UserResetBadgeCount(IAPIProxyCallback callback);//푸쉬서비스의 배지카운트 초기화
-	boolean UserSendSMSAuthCode(String mobile, String code,IAPIProxyCallback callback);//SMS 인증코드 전송
-	boolean UserAuthorizedMobile(String mobile, IAPIProxyCallback callback);//인증된 모바일번호 입력
+	boolean UserEnablePushNotify(Time starttime, Time endtime,IAPIProxyCallback callback);//Ǫ������ �ð�
+	boolean UserResetBadgeCount(IAPIProxyCallback callback);//Ǫ������ �ð�
+	boolean UserSendSMSAuthCode(String mobile, String code,IAPIProxyCallback callback);
+	boolean UserAuthorizedMobile(String mobile, IAPIProxyCallback callback);
 	
 	// [end]
 		
 	// [start] Request
 	
-	boolean RequestOtherList(String userid,String lastid,IAPIProxyCallback callback);//다른 사용자의 요청목록 획득
-	boolean RequestMyActiveList(String lastid,IAPIProxyCallback callback);//나의 요청목록 획득
-	boolean RequestMyDoneList(String lastid,IAPIProxyCallback callback);//나의 완료된 요청 목록
-	boolean RequestListbyTime(String lastid,String keyword,IAPIProxyCallback callback);//시간별 요청목록 검색
-	boolean RequestListbyArea(double north,double south,double ease,double west,String keyword,IAPIProxyCallback callback);//특정 지역내 요청목록 검색
-	boolean RequestListbyDistance(double lat, double lon,double mindistance,String keyword,IAPIProxyCallback callback);//현재 자신의 위치에서 거리별 요청목록 검색
+	boolean RequestOtherList(String userid,String lastid,IAPIProxyCallback callback);//������
+	boolean RequestMyActiveList(String lastid,IAPIProxyCallback callback);//Ȱ��ȭ�� �Ǵ� �������û���	boolean RequestMyDoneList(String lastid,IAPIProxyCallback callback);//�Ϸ����û���	boolean RequestListbyTime(String lastid,String keyword,IAPIProxyCallback callback);//������
+	boolean RequestListbyArea(double north,double south,double ease,double west,String keyword,IAPIProxyCallback callback);//������
+	boolean RequestListbyDistance(double lat, double lon,double mindistance,String keyword,IAPIProxyCallback callback);//������
 
+	boolean RequestAdd(String title, String description, int price, Integer category, Date duedate
+			,double lat,double lon, boolean totwitter, boolean tofacebook, IAPIProxyCallback callback);//������
+	boolean RequestDelete(String request_id ,IAPIProxyCallback callback);//��û ����
+	boolean RequestDone(String request_id ,IAPIProxyCallback callback);//��û ����
+	
+	boolean RequestMyDetailById(String request_id ,IAPIProxyCallback callback);//������
+	boolean RequestOtherDetailById(String request_id ,IAPIProxyCallback callback);
+	boolean RequestUpdate(String request_id,String title, String description,int price,int category,Date duedate
+			,double lat,double lon,boolean totwitter, boolean tofacebook, IAPIProxyCallback callback);//������
 	// [end]
 	
+	// [start] Provide
+	
+	boolean ProvideOtherList(String userid,String lastid,IAPIProxyCallback callback);//������
+	boolean ProvideMyActiveList(String lastid,IAPIProxyCallback callback);//Ȱ��ȭ�� �Ǵ� �����������
+	boolean ProvideMyDoneList(String lastid,IAPIProxyCallback callback);//�Ϸ��������
+	boolean ProvideListbyTime(String lastid,String keyword,IAPIProxyCallback callback);//������
+	boolean ProvideListbyArea(double north,double south,double ease,double west,String keyword,IAPIProxyCallback callback);//������
+	boolean ProvideListbyDistance(double lat, double lon,double mindistance,String keyword,IAPIProxyCallback callback);//������
 
+	boolean ProvideAdd(String title,String description, int minprice,int category
+			,double lat,double lon,int radius,boolean totwitter, boolean tofacebook, IAPIProxyCallback callback);//������
+	boolean ProvideDelete(String provide_id ,IAPIProxyCallback callback);//���� ����
+	boolean ProvideDone(String provide_id ,IAPIProxyCallback callback);//���� ����
+	
+	boolean ProvideMyDetailById(String provide_id ,IAPIProxyCallback callback);//������
+	
+	boolean ProvideOtherDetailById(String provide_id ,IAPIProxyCallback callback);
+	boolean ProvideUpdate(String provide_id,String title, String description, int minprice,int category
+			,double lat,double lon,int radius,boolean totwitter, boolean tofacebook, IAPIProxyCallback callback);//������
+	// [end]
+	
+	// [start] Bidding
+
+	//�����ڸ� �����Ѵ�
+	boolean BiddingDecideProvider(String biddingid,IAPIProxyCallback callback);
+	
+	//��û���� ������ �����Ѵ�
+	boolean BiddingDecideRequester(String biddingid,IAPIProxyCallback callback);
+	
+	
+	boolean BiddingOfferAsProvider(String provide_id,String request_id, IAPIProxyCallback callback);//������
+	boolean BiddingOfferAsRequester(String request_id,String provide_id, IAPIProxyCallback callback);//������
+
+	boolean BiddingListAsProvider(String last_bidding_id,IAPIProxyCallback callback);
+	boolean BiddingListAsRequester(String last_bidding_id,IAPIProxyCallback callback);
+	boolean BiddingRating(String bidding_id,String other_id, int rating,String description,IAPIProxyCallback callback);
+	
+	//�ŷ� ����
+	boolean BiddingDelete(String biddingid, IAPIProxyCallback callback);
+	
+	// [end]
+	
+	// [start] Message
+	
+	boolean MessageSendText(String biddingid, String message,String lastmsgutctime,IAPIProxyCallback callback);//������
+	boolean MessageSendImage(String biddingid, String filepath,String lastmsgutctime,IAPIProxyCallback callback);//������
+	boolean MessageSendAudio(String biddingid, String filepath,String lastmsgutctime,IAPIProxyCallback callback);//������
+	boolean MessageSendVideo(String biddingid, String filepath,String lastmsgutctime,IAPIProxyCallback callback);//������
+	
+	boolean MessageGet(String biddingid,String lastmsgutctime,IAPIProxyCallback callback);//������
+	boolean MessageGetNewMessage(String lastmsgutctime,IAPIProxyCallback callback);//���ڷ� ���� ���������� ����ŷ��޽��� �ޱ�
+	
+
+	
+	// [end]
+	
+	// [start] Category
+	boolean CategoryList(IAPIProxyCallback callback);	
+	boolean CategoryUpdatedTime(IAPIProxyCallback callback);
+	
+	// [end]
+	
+	// [start] setting
+	
+	boolean SettingRegisterDevice(String deviceid, int devicetype,IAPIProxyCallback callback);
+	
+	// [end]
+	
+	// [start] System
+	boolean SystemAppVersion(IAPIProxyCallback callback);	
+	// [end]
 }
