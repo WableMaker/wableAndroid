@@ -71,7 +71,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	
 	// [end]
 		
-	// [start] ï¿½ï¿½ï¿ï¿½ï¿½ï¿½ï¿½
+	// [start] ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	
 	IHttpConnectionLayer _httpLayer;
 	
@@ -84,7 +84,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	String _fb_uid;
 	// [end]
 		
-	// [Start] ï¿½ï¿½ï¿ï¿½Ô¼ï¿½
+	// [Start] ï¿½ï¿½ï¿½ï¿½Ô¼ï¿½
 	
 	void SessionDisconnected(String function)
 	{
@@ -138,9 +138,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 			String result;
 			if(_loginid==null || _password ==null)//ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Â°ï¿½ï¿½
 			{
-				if(_oauth_token==null || _fb_uid ==null)//ï¿½ï¿½Ï°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿ï¿½ï¿½ï¿				{
-					return false;
-				}				
+				if(_oauth_token==null || _fb_uid ==null)//ï¿½ï¿½Ï°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½				
+					return false;			
 				
 				params.put("fb_uid", _fb_uid);
 				params.put("oauth_token", _oauth_token);
@@ -217,6 +216,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 									SessionDisconnected("Login");
 								else SessionConnected("Login");
 								callback.OnCallback(true,obj);
+								return;
 							}
 							catch(Exception e)
 							{
@@ -266,6 +266,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 							if(true == obj.getBoolean("success"))
 								SessionDisconnected("Logout");
 							callback.OnCallback(true,obj);
+							return;
 						}
 						catch(Exception e)
 						{
@@ -318,6 +319,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						if(true == obj.getBoolean("success"))
 							SessionDisconnected("Logout");
 						callback.OnCallback(true,obj);
+						return;
 					}
 					catch(Exception e)
 					{
@@ -369,6 +371,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						else SessionConnected("Register");
 						
 						callback.OnCallback(true,obj);
+						return;
 					}
 				}
 				catch(Exception e)
@@ -418,6 +421,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						else SessionConnected("FBlogin");
 						
 						callback.OnCallback(true,obj);
+						return;
 					}
 				}
 				catch(Exception e)
@@ -467,6 +471,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						else SessionConnected("FBregister");
 						
 						callback.OnCallback(true,obj);
+						return;
 					}
 				}
 				catch(Exception e)
@@ -521,6 +526,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 							SessionUpdate("FBconnect");
 						
 						callback.OnCallback(true,obj);
+						return;
 					}
 				}
 				catch(Exception e)
@@ -574,6 +580,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 							SessionUpdate("OtherRequestList");
 						
 						callback.OnCallback(true,obj);
+						return;
 					}
 				}
 				catch(Exception e)
@@ -629,6 +636,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 							SessionUpdate("MyActiveRequestList");
 						
 						callback.OnCallback(true,obj);
+						return;
 					}
 				}
 				catch(Exception e)
@@ -684,6 +692,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 							SessionUpdate("RequestListbyTime");
 						
 						callback.OnCallback(true,obj);
+						return;
 					}
 				}
 				catch(Exception e)
@@ -743,6 +752,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 							SessionUpdate("RequestListbyArea");
 						
 						callback.OnCallback(true,obj);
+						return;
 					}
 				}
 				catch(Exception e)
@@ -800,6 +810,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 							SessionUpdate("RequestListbyDistance");
 						
 						callback.OnCallback(true,obj);
+						return;
 					}
 				}
 				catch(Exception e)
@@ -855,6 +866,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("OtherProvideList");
 						callback.OnCallback(true,obj);
+						return;
 					}
 				}
 				catch(Exception e)
@@ -908,6 +920,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("MyActiveProvideList");
 						callback.OnCallback(true,obj);
+						return;
 					}
 					
 				}
@@ -963,6 +976,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("ProvideListbyTime");
 						callback.OnCallback(true,obj);
+						return;
 					}
 					
 				}
@@ -1021,6 +1035,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("ProvideListbyArea");
 						callback.OnCallback(true,obj);
+						return;
 					}
 					
 				}
@@ -1075,6 +1090,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("ProvideListbyDistance");
 						callback.OnCallback(true,obj);
+						return;
 					}
 					
 				}
@@ -1139,6 +1155,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("AddRequest");
 						callback.OnCallback(true,obj);
+						return;
 					}
 					
 				}
@@ -1202,6 +1219,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("AddProvide");
 						callback.OnCallback(true,obj);
+						return;
 					}
 					
 				}
@@ -1242,6 +1260,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("Category");
 						callback.OnCallback(true,obj);
+						return;
 					}
 					
 				}
@@ -1281,6 +1300,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("Category");
 						callback.OnCallback(true,obj);
+						return;
 					}
 					
 				}
@@ -1333,6 +1353,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("OfferAsProvider");
 						callback.OnCallback(true,obj);
+						return;
 					}
 					
 				}
@@ -1386,6 +1407,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("OfferAsRequester");
 						callback.OnCallback(true,obj);
+						return;
 					}
 					
 				}
@@ -1437,6 +1459,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("Message/SetMessage");
 						callback.OnCallback(true,obj);
+						return;
 					}
 					
 				}
@@ -1488,6 +1511,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("RequestDelete");
 						callback.OnCallback(true,obj);
+						return;
 					}
 					
 				}
@@ -1538,6 +1562,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("ProvideDelete");
 						callback.OnCallback(true,obj);
+						return;
 					}
 					
 				}
@@ -1590,6 +1615,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("MessageGet");
 						callback.OnCallback(true,obj);
+						return;
 					}
 					
 				}
@@ -1640,6 +1666,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("RequestMyDetailById");
 						callback.OnCallback(true,obj);
+						return;
 					}
 					
 				}
@@ -1689,6 +1716,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("ProvideMyDetailById");
 						callback.OnCallback(true,obj);
+						return;
 					}
 					
 				}
@@ -1741,6 +1769,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("Message/SetImage");
 						callback.OnCallback(true,obj);
+						return;
 					}
 					
 				}
@@ -1789,6 +1818,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("RequestOtherDetailById");
 						callback.OnCallback(true,obj);
+						return;
 					}
 					
 				}
@@ -1838,6 +1868,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("ProvideOtherDetailById");
 						callback.OnCallback(true,obj);
+						return;
 					}
 					
 				}
@@ -1899,6 +1930,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("RequestUpdate");
 						callback.OnCallback(true,obj);
+						return;
 					}
 					
 				}
@@ -1960,6 +1992,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("ProvideUpdate");
 						callback.OnCallback(true,obj);
+						return;
 					}
 					
 				}
@@ -2005,6 +2038,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("SystemAppVersion");
 						callback.OnCallback(true,obj);
+						return;
 					}
 					
 				}
@@ -2056,6 +2090,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("Message/SetAudio");
 						callback.OnCallback(true,obj);
+						return;
 					}
 					
 				}
@@ -2109,6 +2144,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("Message/SetVideo");
 						callback.OnCallback(true,obj);
+						return;
 					}
 					
 				}
@@ -2161,6 +2197,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("UserUpdate");
 						callback.OnCallback(true,obj);
+						return;
 					}
 					
 				}
@@ -2210,6 +2247,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("BiddingListAsProvider");
 						callback.OnCallback(true,obj);
+						return;
 					}
 					
 				}
@@ -2262,6 +2300,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("BiddingListAsRequester");
 						callback.OnCallback(true,obj);
+						return;
 					}
 					
 				}
@@ -2313,6 +2352,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("RequestMyDoneList");
 						callback.OnCallback(true,obj);
+						return;
 					}
 					
 				}
@@ -2365,6 +2405,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("Provide/MyDoneList");
 						callback.OnCallback(true,obj);
+						return;
 					}
 					
 				}
@@ -2414,6 +2455,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("RequestDone");
 						callback.OnCallback(true,obj);
+						return;
 					}
 					
 				}
@@ -2463,6 +2505,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("ProvideDone");
 						callback.OnCallback(true,obj);
+						return;
 					}
 					
 				}
@@ -2512,6 +2555,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("MessageGetNewMessage");
 						callback.OnCallback(true,obj);
+						return;
 					}
 					
 				}
@@ -2564,6 +2608,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("SettingRegisterDevice");
 						callback.OnCallback(true,obj);
+						return;
 					}
 					
 				}
@@ -2617,6 +2662,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("BiddingRating");
 						callback.OnCallback(true,obj);
+						return;
 					}
 					
 				}
@@ -2667,6 +2713,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("BiddingDecideProvider");
 						callback.OnCallback(true,obj);
+						return;
 					}
 					
 				}
@@ -2719,6 +2766,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("BiddingDecideRequester");
 						callback.OnCallback(true,obj);
+						return;
 					}
 					
 				}
@@ -2770,6 +2818,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("BiddingDelete");
 						callback.OnCallback(true,obj);
+						return;
 					}
 					
 				}
@@ -2822,6 +2871,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("UserEnablePushNotify");
 						callback.OnCallback(true,obj);
+						return;
 					}
 					
 				}
@@ -2869,6 +2919,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("UserResetBadgeCount");
 						callback.OnCallback(true,obj);
+						return;
 					}
 					
 				}
@@ -2920,6 +2971,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("UserSendSMSAuthCode");
 						callback.OnCallback(true,obj);
+						return;
 					}
 					
 				}
@@ -2970,6 +3022,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("UserAuthorizedMobile");
 						callback.OnCallback(true,obj);
+						return;
 					}
 					
 				}
@@ -2984,6 +3037,56 @@ public class APIProxyLayer implements IAPIProxyLayer {
  			}
 			
 		}.start();
+		return true;
+	}
+
+
+
+	@Override
+	public boolean UserGetUpdatedContents(final IAPIProxyCallback callback) {
+		// TODO Auto-generated method stub
+			
+		
+		new Thread()
+		{
+			@Override
+ 			public void run()
+ 			{
+				if(!_httpLayer.IsConnectedSession())
+				{
+					if(!Relogin())	
+					{
+						callback.OnCallback(false,null);
+						return;
+					}
+				}
+
+				String result = _httpLayer.GETSync(_domain+"User/GetUpdatedContents", null);
+				// TODO Auto-generated method stub
+				JSONObject obj = null;
+				
+				try
+				{
+					if(result !=null)
+					{
+						obj = new JSONObject(result);
+						if(true == obj.getBoolean("success"))
+							SessionUpdate("GetUpdatedContents");
+						callback.OnCallback(true,obj);
+						return;
+					}
+				}
+				catch(Exception e)
+				{
+					Logger.Instance().Write(e);
+					
+				}
+				
+				callback.OnCallback(false,null);
+ 			}
+			
+		}.start();
+		
 		return true;
 	}
 
