@@ -2319,61 +2319,6 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	}
 
 
-
-	@Override
-	public boolean RequestMyDoneList(String lastid, final IAPIProxyCallback callback) {
-		
-
-		
-		final Map<String,Object> params = new HashMap<String,Object>();
-		params.put("lastid", lastid);
-		
-		
-		new Thread()
-		{
-			@Override
- 			public void run()
- 			{
-				if(!_httpLayer.IsConnectedSession())
-				{
-					if(!Relogin())
-						return;
-				}
-				
-				String result = _httpLayer.GETSync(_domain+"Request/MyDoneList", params);
-				// TODO Auto-generated method stub
-				JSONObject obj = null;
-				
-				try
-				{
-					if(result !=null)
-					{
-						obj = new JSONObject(result);
-						if(true == obj.getBoolean("success"))
-							SessionUpdate("RequestMyDoneList");
-						callback.OnCallback(true,obj);
-						return;
-					}
-					
-				}
-				catch(Exception e)
-				{
-					Logger.Instance().Write(e);
-					
-				}
-				
-				callback.OnCallback(false,null);
- 			}
-			
-		}.start();
-		
-		
-		
-		return true;
-	}
-
-
-
 	@Override
 	public boolean ProvideMyDoneList(String lastid, final IAPIProxyCallback callback) {
 		
@@ -3043,9 +2988,24 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 
 	@Override
-	public boolean UserGetUpdatedContents(final IAPIProxyCallback callback) {
+	public boolean UserGetUpdatedContents(String RequestRecentSyncTime
+            , String ProvideRecentSyncTime
+            , String MatchRecentSyncTime
+            , String BiddingRecentSyncTime
+            , String BiddingMessageRecentSyncTime
+            , String EndBiddingRecentSyncTime
+            , String EndBiddingMessageRecentSyncTime,final IAPIProxyCallback callback) {
 		// TODO Auto-generated method stub
 			
+		final Map<String,Object> params = new HashMap<String,Object>();
+		params.put("RequestRecentSyncTime", RequestRecentSyncTime);
+		params.put("ProvideRecentSyncTime", ProvideRecentSyncTime);
+		params.put("MatchRecentSyncTime", MatchRecentSyncTime);
+		params.put("BiddingRecentSyncTime", BiddingRecentSyncTime);
+		params.put("BiddingMessageRecentSyncTime", BiddingMessageRecentSyncTime);
+		params.put("EndBiddingRecentSyncTime", EndBiddingRecentSyncTime);
+		params.put("EndBiddingMessageRecentSyncTime", EndBiddingMessageRecentSyncTime);
+		
 		
 		new Thread()
 		{
@@ -3061,7 +3021,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					}
 				}
 
-				String result = _httpLayer.GETSync(_domain+"User/GetUpdatedContents", null);
+				String result = _httpLayer.GETSync(_domain+"User/GetUpdatedContents", params);
 				// TODO Auto-generated method stub
 				JSONObject obj = null;
 				
@@ -3089,6 +3049,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		
 		return true;
 	}
+
 
 	// [end]
 	

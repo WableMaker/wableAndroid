@@ -28,13 +28,20 @@ public interface IAPIProxyLayer {
 	boolean UserResetBadgeCount(IAPIProxyCallback callback);//Ǫ������ �ð�
 	boolean UserSendSMSAuthCode(String mobile, String code,IAPIProxyCallback callback);
 	boolean UserAuthorizedMobile(String mobile, IAPIProxyCallback callback);
+	boolean UserGetUpdatedContents(String RequestRecentSyncTime
+            , String ProvideRecentSyncTime
+            , String MatchRecentSyncTime
+            , String BiddingRecentSyncTime
+            , String BiddingMessageRecentSyncTime
+            , String EndBiddingRecentSyncTime
+            , String EndBiddingMessageRecentSyncTime, IAPIProxyCallback callback);
 	
 	// [end]
 		
 	// [start] Request
 	
 	boolean RequestOtherList(String userid,String lastid,IAPIProxyCallback callback);//������
-	boolean RequestMyActiveList(String lastid,IAPIProxyCallback callback);//Ȱ��ȭ�� �Ǵ� �������û���	boolean RequestMyDoneList(String lastid,IAPIProxyCallback callback);//�Ϸ����û���	boolean RequestListbyTime(String lastid,String keyword,IAPIProxyCallback callback);//������
+	boolean RequestMyActiveList(String lastid,IAPIProxyCallback callback);//Ȱ��ȭ�� �Ǵ� �������û���	boolean RequestMyDoneList(String lastid,IAPIProxyCallback callback);//�Ϸ����û���	boolean RequestListbyTime(String lastid,String keyword,IAPIProxyCallback callback);//������
 	boolean RequestListbyArea(double north,double south,double ease,double west,String keyword,IAPIProxyCallback callback);//������
 	boolean RequestListbyDistance(double lat, double lon,double mindistance,String keyword,IAPIProxyCallback callback);//������
 
@@ -47,13 +54,15 @@ public interface IAPIProxyLayer {
 	boolean RequestOtherDetailById(String request_id ,IAPIProxyCallback callback);
 	boolean RequestUpdate(String request_id,String title, String description,int price,int category,Date duedate
 			,double lat,double lon,boolean totwitter, boolean tofacebook, IAPIProxyCallback callback);//������
+	
+	boolean RequestListbyTime(String lastid, String keyword,IAPIProxyCallback callback);
 	// [end]
 	
 	// [start] Provide
 	
 	boolean ProvideOtherList(String userid,String lastid,IAPIProxyCallback callback);//������
-	boolean ProvideMyActiveList(String lastid,IAPIProxyCallback callback);//Ȱ��ȭ�� �Ǵ� �����������
-	boolean ProvideMyDoneList(String lastid,IAPIProxyCallback callback);//�Ϸ��������
+	boolean ProvideMyActiveList(String lastid,IAPIProxyCallback callback);//Ȱ��ȭ�� �Ǵ� �����������
+	boolean ProvideMyDoneList(String lastid,IAPIProxyCallback callback);//�Ϸ��������
 	boolean ProvideListbyTime(String lastid,String keyword,IAPIProxyCallback callback);//������
 	boolean ProvideListbyArea(double north,double south,double ease,double west,String keyword,IAPIProxyCallback callback);//������
 	boolean ProvideListbyDistance(double lat, double lon,double mindistance,String keyword,IAPIProxyCallback callback);//������
@@ -99,7 +108,7 @@ public interface IAPIProxyLayer {
 	boolean MessageSendVideo(String biddingid, String filepath,String lastmsgutctime,IAPIProxyCallback callback);//������
 	
 	boolean MessageGet(String biddingid,String lastmsgutctime,IAPIProxyCallback callback);//������
-	boolean MessageGetNewMessage(String lastmsgutctime,IAPIProxyCallback callback);//���ڷ� ���� ���������� ����ŷ��޽��� �ޱ�
+	boolean MessageGetNewMessage(String lastmsgutctime,IAPIProxyCallback callback);//���ڷ� ���� ���������� ����ŷ��޽��� �ޱ�
 	
 
 	
