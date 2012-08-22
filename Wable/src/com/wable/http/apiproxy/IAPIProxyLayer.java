@@ -22,7 +22,8 @@ public interface IAPIProxyLayer {
 	// [start] User
 	
 	boolean MyInfo(IAPIProxyCallback callback);//������	
-	boolean UserUpdate(String name,String introduce,String photo,IAPIProxyCallback callback);//������
+	boolean UserUpdate(String name, String introduce,String photo, Boolean publicfb, Boolean publictwitter,
+			Boolean publicemail, Boolean publicmobile, Boolean publicphone,IAPIProxyCallback callback);//������
 	
 	boolean UserEnablePushNotify(Time starttime, Time endtime,IAPIProxyCallback callback);//Ǫ������ �ð�
 	boolean UserResetBadgeCount(IAPIProxyCallback callback);//Ǫ������ �ð�

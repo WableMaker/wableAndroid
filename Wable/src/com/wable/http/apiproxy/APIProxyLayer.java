@@ -2163,7 +2163,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	}
 
 	@Override
-	public boolean UserUpdate(String name, String introduce, String photo,
+	public boolean UserUpdate(String name, String introduce,String photo, Boolean publicfb, Boolean publictwitter,
+			Boolean publicemail, Boolean publicmobile, Boolean publicphone,
 			final IAPIProxyCallback callback) {
 		
 
@@ -2171,6 +2172,11 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		final Map<String,Object> params = new HashMap<String,Object>();
 		params.put("name", name);
 		params.put("introduce", introduce);
+		params.put("publicfb", publicfb);
+		params.put("publictwitter", publictwitter);
+		params.put("publicemail", publicemail);
+		params.put("publicmobile", publicmobile);
+		params.put("publicphone", publicphone);
 		final Map<String,Object> files = new HashMap<String,Object>();
 		files.put("photo", photo);
 		
