@@ -1114,7 +1114,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	@Override
 	public boolean RequestAdd(String title, String description, int price,
 			Integer category, Date duedate, double lat, double lon,
-			boolean totwitter, boolean tofacebook, 
+			Boolean totwitter, Boolean tofacebook, 
 			final IAPIProxyCallback callback) {
 
 		

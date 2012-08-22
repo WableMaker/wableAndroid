@@ -47,7 +47,7 @@ public interface IAPIProxyLayer {
 	boolean RequestListbyDistance(double lat, double lon,double mindistance,String keyword,IAPIProxyCallback callback);//������
 
 	boolean RequestAdd(String title, String description, int price, Integer category, Date duedate
-			,double lat,double lon, boolean totwitter, boolean tofacebook, IAPIProxyCallback callback);//������
+			,double lat,double lon, Boolean totwitter, Boolean tofacebook, IAPIProxyCallback callback);//������
 	boolean RequestDelete(String request_id ,IAPIProxyCallback callback);//��û ����
 	boolean RequestDone(String request_id ,IAPIProxyCallback callback);//��û ����
 	
