@@ -3057,6 +3057,57 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	}
 
 
+
+	@Override
+	public boolean AccountResetPassword(String loginid, String email,
+			final IAPIProxyCallback callback) {
+		// TODO Auto-generated method stub
+		final Map<String,Object> params = new HashMap<String,Object>();
+		params.put("loginid", loginid);
+		params.put("email", email);
+		
+		new Thread()
+		{
+			@Override
+ 			public void run()
+ 			{
+				if(!_httpLayer.IsConnectedSession())
+				{
+					if(!Relogin())
+						return;
+				}
+				
+				String result = _httpLayer.POSTSync(_domain+"Account/ResetPassword", params);
+				// TODO Auto-generated method stub
+				JSONObject obj = null;
+				
+				try
+				{
+					if(result !=null)
+					{
+						obj = new JSONObject(result);
+						if(true == obj.getBoolean("success"))
+							SessionUpdate("Account/ResetPassword");
+						callback.OnCallback(true,obj);
+						return;
+					}
+					
+				}
+				catch(Exception e)
+				{
+					Logger.Instance().Write(e);
+					
+				}
+				
+				callback.OnCallback(false,null);
+				
+ 			}
+			
+		}.start();
+		return true;
+	}
+
+
 	// [end]
 	
 

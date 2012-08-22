@@ -16,7 +16,7 @@ public interface IAPIProxyLayer {
 	boolean FBlogin(String fb_uid,String oauth_token, IAPIProxyCallback callback);//�α��� �õ�
 	boolean FBregister(String fb_uid,String oauth_token, IAPIProxyCallback callback);//�α��� �õ�
 	boolean FBconnect(String fb_uid,String oauth_token, IAPIProxyCallback callback);//�α��� �õ�
-	
+	boolean AccountResetPassword(String loginid, String email, IAPIProxyCallback callback);//패스워드 초기화
 	// [end]
 	
 	// [start] User
