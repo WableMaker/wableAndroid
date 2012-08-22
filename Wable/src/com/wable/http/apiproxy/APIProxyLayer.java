@@ -3108,6 +3108,53 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	}
 
 
+
+	@Override
+	public boolean AccountResendActivation(final IAPIProxyCallback callback) {
+		// TODO Auto-generated method stub
+		
+		new Thread()
+		{
+			@Override
+ 			public void run()
+ 			{
+				if(!_httpLayer.IsConnectedSession())
+				{
+					if(!Relogin())
+						return;
+				}
+				
+				String result = _httpLayer.POSTSync(_domain+"Account/ResendActivation", null);
+				// TODO Auto-generated method stub
+				JSONObject obj = null;
+				
+				try
+				{
+					if(result !=null)
+					{
+						obj = new JSONObject(result);
+						if(true == obj.getBoolean("success"))
+							SessionUpdate("AccountResendActivation");
+						callback.OnCallback(true,obj);
+						return;
+					}
+					
+				}
+				catch(Exception e)
+				{
+					Logger.Instance().Write(e);
+					
+				}
+				
+				callback.OnCallback(false,null);
+				
+ 			}
+			
+		}.start();
+		return true;
+	}
+
+
 	// [end]
 	
 
