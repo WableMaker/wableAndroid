@@ -1,10 +1,14 @@
 package com.wable.http.apiproxy.JSONParser;
 
-import org.json.JSONObject;
 import org.json.JSONException;
+import org.json.JSONObject;
 
-public class sp_GetRequestsByTime_Result
+
+
+
+class sp_GetRequestsByTime_Item
 {
+	
     public String id;
     public String title;
     public String photo;
@@ -15,7 +19,7 @@ public class sp_GetRequestsByTime_Result
     public String name;
     public String description;
     public String user_id;
-	public sp_GetRequestsByTime_Result(JSONObject obj)
+	public sp_GetRequestsByTime_Item(JSONObject obj)
 	{
 		try {
 
@@ -57,3 +61,11 @@ public class sp_GetRequestsByTime_Result
 	
 }
 
+public class sp_GetRequestsByTime_Result 
+{
+	public sp_GetRequestsByTime_Item[] requestsItem = null;
+	public boolean bsuccess = false;
+	
+	public sp_GetRequestsByTime_Result(){}
+	
+}
