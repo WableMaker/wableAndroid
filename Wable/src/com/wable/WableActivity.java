@@ -1,5 +1,7 @@
 package com.wable;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
@@ -18,6 +20,8 @@ import android.widget.Toast;
 import com.facebook.android.Facebook;
 import com.wable.http.apiproxy.APIProxyLayer;
 import com.wable.http.apiproxy.IAPIProxyCallback;
+import com.wable.http.apiproxy.JSONParser.JSONParser;
+import com.wable.http.apiproxy.JSONParser.sp_GetRequestsByTime_Result;
 import com.wable.tab.login.PasswordFindActivity;
 import com.wable.tab.login.RegisterActivity;
 import com.wable.util.Logger;
@@ -73,74 +77,83 @@ public class WableActivity extends Activity implements OnClickListener {
 //        etPass = (EditText)findViewById(R.id.editLoginPass);
 //        etPass.setOnEditorActionListener(new OnEditorActionListener() {
 //
-//              
-//        APIProxyLayer.Instance().Login("cc", "111111", new IAPIProxyCallback(){
-//
-//			@Override
-//			public void OnCallback(boolean success, JSONObject json) {
-//				if(success)
-//				{
-//					Logger.Instance().Write(json.toString());
-//					
-//					
-//					APIProxyLayer.Instance().MyInfo(new IAPIProxyCallback(){
-//
-//						@Override
-//						public void OnCallback(boolean success, JSONObject json) {
-//							if(success)
-//							{
-//								Logger.Instance().Write(json.toString());
-//			
-//								
-//							}
-//							else Logger.Instance().Write("Fail to GetMyInfo");
-//						}
-//						
-//					});
-//					
-//					APIProxyLayer.Instance().RequestMyActiveList(null,new IAPIProxyCallback(){
-//						@Override
-//						public void OnCallback(boolean success, JSONObject json) {
-//							if(success)
-//							{
-//								Logger.Instance().Write(json.toString());
-//								
-//							}
-//							else Logger.Instance().Write("Fail to MessageSendImage");
-//						}
-//					});
-//					
-//					
-//					APIProxyLayer.Instance().MessageSendImage("-9223372036854775805", "/sdcard/koala.jpg",null, new IAPIProxyCallback(){
-//						@Override
-//						public void OnCallback(boolean success, JSONObject json) {
-//							if(success)
-//							{
-//								Logger.Instance().Write(json.toString());
-//								
-//							}
-//							else Logger.Instance().Write("Fail to MessageSendImage");
-//						}
-//					});
-//					
-//					APIProxyLayer.Instance().UserUpdate("123","123123", "/sdcard/koala.jpg", new IAPIProxyCallback(){
-//						@Override
-//						public void OnCallback(boolean success, JSONObject json) {
-//							if(success)
-//							{
-//								Logger.Instance().Write(json.toString());
-//								
-//							}
-//							else Logger.Instance().Write("Fail to UserUpdate");
-//						}
-//					});
-//					
-//				
-//				}else 	Logger.Instance().Write("Fail to login");
-//			}
-//        	
-//        });
-    
+//    
+        /*
+        APIProxyLayer.Instance().Login("cc", "111111", new IAPIProxyCallback(){
+
+			@Override
+			public void OnCallback(boolean success, JSONObject json) {
+				if(success)
+				{
+					Logger.Instance().Write(json.toString());
+					
+					APIProxyLayer.Instance().RequestListbyTime(null, null,new IAPIProxyCallback(){
+
+						@Override
+						public void OnCallback(boolean success, JSONObject json) {
+							if(success)
+							{
+								sp_GetRequestsByTime_Result[] result=  JSONParser.RequestListByTimeSarser(json);
+								if(result != null){
+									
+								}
+							}
+							else Logger.Instance().Write("Fail to GetMyInfo");
+							
+						}
+						
+					});
+					
+					
+					APIProxyLayer.Instance().MyInfo(new IAPIProxyCallback(){
+
+						@Override
+						public void OnCallback(boolean success, JSONObject json) {
+							if(success)
+							{
+								Logger.Instance().Write(json.toString());
+			
+								
+							}
+							else Logger.Instance().Write("Fail to GetMyInfo");
+						}
+						
+					});
+					
+					APIProxyLayer.Instance().RequestMyActiveList(null,new IAPIProxyCallback(){
+						@Override
+						public void OnCallback(boolean success, JSONObject json) {
+							if(success)
+							{
+								Logger.Instance().Write(json.toString());
+								
+							}
+							else Logger.Instance().Write("Fail to MessageSendImage");
+						}
+					});
+					
+					
+					APIProxyLayer.Instance().MessageSendImage("-9223372036854775805", "/sdcard/koala.jpg",null, new IAPIProxyCallback(){
+						@Override
+						public void OnCallback(boolean success, JSONObject json) {
+							if(success)
+							{
+								Logger.Instance().Write(json.toString());
+								
+							}
+							else Logger.Instance().Write("Fail to MessageSendImage");
+						}
+					});
+					
+					
+					
+				
+				}else 	Logger.Instance().Write("Fail to login");
+			}
+			
+        	
+        });
+    	*/
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
