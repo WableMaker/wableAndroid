@@ -8,18 +8,21 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.facebook.android.Facebook;
 import com.wable.http.apiproxy.APIProxyLayer;
 import com.wable.http.apiproxy.IAPIProxyCallback;
 import com.wable.tab.login.PasswordFindActivity;
 import com.wable.tab.login.RegisterActivity;
+import com.wable.util.Logger;
 
 public class WableActivity extends Activity implements OnClickListener {
     /** Called when the activity is first created. */
@@ -34,7 +37,7 @@ public class WableActivity extends Activity implements OnClickListener {
 	private ProgressDialog pd;
 	//private SharedPreferences pref;
 	
-    @Override
+     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_main);  
@@ -212,19 +215,21 @@ public class WableActivity extends Activity implements OnClickListener {
 			break;
 			
 		case R.id.LOGINbtnLogin:
-			
-			//HIDE Keyboard
-			InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);  
-			imm.hideSoftInputFromWindow(etPass.getWindowToken(),0); 
+
+			if (etUser.getText().toString().length() == 0) {
+				Toast.makeText(context, "아이디를 입력해주세요", Toast.LENGTH_SHORT).show();
+				break;
+			} else if (etPass.getText().toString().length() == 0) {
+				Toast.makeText(context, "비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show();
+				break;
+			}
 			
 			pd = ProgressDialog.show(context, "로그인", "사용자 정보 조회중입니다...", true, false);
 			
-			//APIProxyLayer.Instance().Login(etUser.getText().toString(), etPass.getText().toString(), new IAPIProxyCallback(){
-			APIProxyLayer.Instance().Login("cc", "111111", new IAPIProxyCallback(){
+			APIProxyLayer.Instance().Login(etUser.getText().toString(), etPass.getText().toString(), new IAPIProxyCallback(){
 
 				@Override
-				public void OnCallback(boolean success, JSONObject json) {
-					
+				public void OnCallback(boolean success, JSONObject json) {		
 					pd.dismiss();
 					
 					if(success)
@@ -235,34 +240,21 @@ public class WableActivity extends Activity implements OnClickListener {
 						overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 						finish();
 
+					} else { 
 
-//						APIProxyLayer.Instance().MyInfo(new IAPIProxyCallback(){
-//
-//							@Override
-//							public void OnCallback(boolean success, JSONObject json) {
-//								if(success)
-//								{
-//									//Logger.Instance().Write(json.toString());
-//
-//
-//								}
-//								else 
-//									Toast.makeText(context, "�α��� ������ Ȯ���ϼ���", Toast.LENGTH_SHORT).show();
-//								//Logger.Instance().Write("Fail to GetMyInfo");
-//							}
-//
-//						});
-
+						handler.sendEmptyMessage(500);
+						Logger.Instance().Write("login fail");
 					}
 				}
 			});
+			//Toast.makeText(context, "아이디 또는 비밀번호를 확인해주세요", Toast.LENGTH_SHORT).show();
 			
 			//Toast.makeText(context, "Login OK", Toast.LENGTH_SHORT).show();
 			break;
 			
 		case R.id.LOGINeditId:
 		case R.id.LOGINeditPass:
-			
+
 			if(v.isFocused()) {
 				isWork = true;
 				etUp.requestFocus();
@@ -281,6 +273,23 @@ public class WableActivity extends Activity implements OnClickListener {
 
 		}
 	}
+	
+	private Handler handler = new Handler() {
+		
+		@Override
+		public void handleMessage(Message msg) {
+
+			switch (msg.what) {
+			
+			// Password Not matching
+			case 500:
+				Toast.makeText(context, "아이디 또는 비밀번호를 확인해주세요", Toast.LENGTH_SHORT).show();
+				break;
+			}
+			
+			super.handleMessage(msg);
+		}
+	};
 	
 	private OnFocusChangeListener onFocusChangeListner = new OnFocusChangeListener() {
 		

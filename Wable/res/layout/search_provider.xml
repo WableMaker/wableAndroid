@@ -4,70 +4,49 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/bg01_patten"
     android:scrollbarAlwaysDrawVerticalTrack="true" >
-
+
     <Button
         android:id="@+id/SEARCH_PRObtnMore"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:background="@drawable/search_more_btn"
         android:text="더보기" />
-
+
     <Button
         android:id="@+id/SEARCH_PRObtnDropDown"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentTop="true" 
+        android:visibility="invisible"/>
 
     <LinearLayout
-        android:id="@+id/SEARCH_PROlinear"
-        android:layout_width="wrap_content"
+        android:id="@+id/SEARCH_PROtab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/SEARCH_PRObtnDropDown"
-        android:orientation="vertical" android:layout_height="wrap_content">
-
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
+
         <Button
             android:id="@+id/SEARCH_PRObtnSegment"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/search_segment_distance_selected"
             android:text="거리                         최신                         지도" />
-
-        <EditText
-            android:id="@+id/SEARCH_PROeditSearch"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:background="@drawable/search_bar"
-            android:ems="10"
-            android:paddingLeft="50dp"
-            android:visibility="visible" >
-
-            <requestFocus />
-        </EditText>
     </LinearLayout>
     
-    <com.google.android.maps.MapView
-        android:id="@+id/mapview"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/SEARCH_PROlinear"
-        android:apiKey="0oqzs7eIvbFX8Faveem2CANcvsCaS5O1nULYH3A"
-        android:clickable="true" 
-        android:visibility="invisible">
-    </com.google.android.maps.MapView>
-
-    <ListView
+    <LinearLayout
         android:id="@+id/SEARCH_PROlist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button4"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/SEARCH_PROlinear" android:visibility="invisible">
-
-    </ListView>
+        android:layout_above="@id/SEARCH_PRObtnMore"
+        android:layout_below="@id/SEARCH_PROtab">
+    </LinearLayout>
 
 </RelativeLayout>
