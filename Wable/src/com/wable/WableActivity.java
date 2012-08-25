@@ -13,12 +13,14 @@ import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.facebook.android.Facebook;
 import com.wable.http.apiproxy.APIProxyLayer;
 import com.wable.http.apiproxy.IAPIProxyCallback;
 import com.wable.tab.login.PasswordFindActivity;
 import com.wable.tab.login.RegisterActivity;
+import com.wable.util.Logger;
 
 public class WableActivity extends Activity implements OnClickListener {
     /** Called when the activity is first created. */
@@ -211,14 +213,20 @@ public class WableActivity extends Activity implements OnClickListener {
 			break;
 			
 		case R.id.LOGINbtnLogin:
-		
+			if (etUser.getText().toString().length() == 0) {
+				Toast.makeText(context, "아이디를 입력해주세요", Toast.LENGTH_SHORT).show();
+				break;
+			} else if (etPass.getText().toString().length() == 0) {
+				Toast.makeText(context, "비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show();
+				break;
+			}
+			
+			
 			pd = ProgressDialog.show(context, "로그인", "사용자 정보 조회중입니다...", true, false);
 			
 			APIProxyLayer.Instance().Login(etUser.getText().toString(), etPass.getText().toString(), new IAPIProxyCallback(){
-
 				@Override
-				public void OnCallback(boolean success, JSONObject json) {
-					
+				public void OnCallback(boolean success, JSONObject json) {		
 					pd.dismiss();
 					
 					if(success)
@@ -228,7 +236,6 @@ public class WableActivity extends Activity implements OnClickListener {
 						startActivity(intent);			
 						overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 						finish();
-
 
 //						APIProxyLayer.Instance().MyInfo(new IAPIProxyCallback(){
 //
@@ -247,16 +254,20 @@ public class WableActivity extends Activity implements OnClickListener {
 //
 //						});
 
+					} else { // fail to login.
+						//Toast.makeText(context, "아이디 또는 비밀번호를 확인해주세요", Toast.LENGTH_SHORT).show();
+						Logger.Instance().Write("login fail");
 					}
 				}
 			});
+			//Toast.makeText(context, "아이디 또는 비밀번호를 확인해주세요", Toast.LENGTH_SHORT).show();
 			
 			//Toast.makeText(context, "Login OK", Toast.LENGTH_SHORT).show();
 			break;
 			
 		case R.id.LOGINeditId:
 		case R.id.LOGINeditPass:
-			
+
 			if(v.isFocused()) {
 				isWork = true;
 				etUp.requestFocus();

@@ -214,9 +214,11 @@ public class APIProxyLayer implements IAPIProxyLayer {
 								obj = new JSONObject(result);
 								if(false == obj.getBoolean("success"))
 									SessionDisconnected("Login");
-								else SessionConnected("Login");
-								callback.OnCallback(true,obj);
-								return;
+								else {
+									SessionConnected("Login");
+									callback.OnCallback(true,obj);
+									return;
+								}
 							}
 							catch(Exception e)
 							{
