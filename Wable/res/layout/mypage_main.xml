@@ -7,12 +7,12 @@
 
     <TextView
         android:id="@+id/textView1"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/nav_bar_bg"
         android:gravity="center_vertical|center_horizontal"
         android:text="My Wable"
-        android:textColor="#FFFFFF" />
+        android:textColor="#FFFFFF" android:textSize="20dp"/>
 
     <Button
         android:id="@+id/MYPAGEbtnMenu"

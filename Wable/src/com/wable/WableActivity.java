@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -211,10 +212,15 @@ public class WableActivity extends Activity implements OnClickListener {
 			break;
 			
 		case R.id.LOGINbtnLogin:
-		
+			
+			//HIDE Keyboard
+			InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);  
+			imm.hideSoftInputFromWindow(etPass.getWindowToken(),0); 
+			
 			pd = ProgressDialog.show(context, "로그인", "사용자 정보 조회중입니다...", true, false);
 			
-			APIProxyLayer.Instance().Login(etUser.getText().toString(), etPass.getText().toString(), new IAPIProxyCallback(){
+			//APIProxyLayer.Instance().Login(etUser.getText().toString(), etPass.getText().toString(), new IAPIProxyCallback(){
+			APIProxyLayer.Instance().Login("cc", "111111", new IAPIProxyCallback(){
 
 				@Override
 				public void OnCallback(boolean success, JSONObject json) {
