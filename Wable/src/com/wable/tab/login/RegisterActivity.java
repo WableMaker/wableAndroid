@@ -5,19 +5,15 @@ import java.util.regex.Pattern;
 import org.json.JSONObject;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.wable.MainActivity;
 import com.wable.R;
 import com.wable.http.apiproxy.APIProxyLayer;
 import com.wable.http.apiproxy.IAPIProxyCallback;
-import com.wable.util.Logger;
 
 public class RegisterActivity extends Activity implements OnClickListener{
 	private Pattern pattern_email = Pattern.compile(
