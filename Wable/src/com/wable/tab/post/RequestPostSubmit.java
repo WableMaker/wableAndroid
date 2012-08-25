@@ -9,7 +9,10 @@ import java.util.TimeZone;
 
 import org.json.JSONObject;
 
+import android.R.style;
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -54,8 +57,8 @@ public class RequestPostSubmit extends MapActivity implements LocationListener, 
 	private ImageView pin;
 	private double lat, lon;
 	
-	private TextView tvAddr;
-	private Button btPrice, btTime, btCategory, btDetail;
+	private TextView tvAddr, tvDetail;
+	private Button btPrice, btTime, btCategory;
 	
 	private Context context;
 	
@@ -81,12 +84,12 @@ public class RequestPostSubmit extends MapActivity implements LocationListener, 
 		btPrice = (Button)findViewById(R.id.POST_RQ_SBbtnPrice);
 		btTime = (Button)findViewById(R.id.POST_RQ_SBbtnTime);
 		btCategory = (Button)findViewById(R.id.POST_RQ_SBbtnCategory);
-		btDetail = (Button)findViewById(R.id.POST_RQ_SBbtnDetail);
+		tvDetail = (TextView)findViewById(R.id.POST_RQ_SBbtnDetail);
 		
 		btPrice.setOnClickListener(this);
 		btTime.setOnClickListener(this);
 		btCategory.setOnClickListener(this);
-		btDetail.setOnClickListener(this);
+		tvDetail.setOnClickListener(this);
 		
 		mapview = (MapView)findViewById(R.id.mapview);
 		tvAddr = (TextView)findViewById(R.id.textPostSubmitAddr);
@@ -109,13 +112,13 @@ public class RequestPostSubmit extends MapActivity implements LocationListener, 
 			String price = pref.getString("POST_PRICE", "");
 			String time = pref.getString("POST_TIME", "");
 			
-			btPrice.setText( price + " ø¯");
-			btTime.setText( time + " Ω√∞£");
+			btPrice.setText( price + " Ïõê");
+			btTime.setText( time + " ÏãúÍ∞Ñ");
 			
 			btPrice.setTag( price );
 			btTime.setTag( time );
 			
-			btDetail.setText(pref.getString("POST_STR", "ªÛººº≥∏Ì"));
+			tvDetail.setText(pref.getString("POST_STR", "Ï†úÍ≥µÎì±Î°ù"));
 			category = pref.getInt("POST_CATE", 0);
 			
 			Editor editor = pref.edit();
@@ -127,15 +130,17 @@ public class RequestPostSubmit extends MapActivity implements LocationListener, 
 	@Override
 	public void onClick(View v) {
 		
-		Intent i;
+		Intent data;
 		View view;
 		final EditText et;
-		final AlertDialog d = new AlertDialog.Builder(context).setNegativeButton("√Îº“", null).create();
+		//final AlertDialog d = new AlertDialog.Builder(context).setNegativeButton("ÔøΩÔøΩÔøΩ", null).create();
 		
 		switch (v.getId()) {
 		
 		case R.id.POST_RQ_SBbtnCategory:
-			i = new Intent(this, RequestCategory.class);			
+			
+			
+			data = new Intent(this, RequestCategory.class);			
 			
 			Editor editor = pref.edit();
 			editor.putString("POST_PRICE", btPrice.getText().toString());
@@ -143,78 +148,63 @@ public class RequestPostSubmit extends MapActivity implements LocationListener, 
 			editor.putString("POST_STR", "");
 			editor.commit();
 
-			startActivity(i);
+			startActivity(data);
 			break;
 			
 		case R.id.POST_RQ_SBbtnDetail:
 			
+			data = new Intent(this, RequestSubmitPopup.class);
+			startActivity(data);
+			
 			break;
 			
 		case R.id.POST_RQ_SBbtnPrice:
-			
-			view = getLayoutInflater().inflate(R.layout.post_request_dialog, null); 
-			et = (EditText)view.findViewById(R.id.POST_RQ_DIALedit);
-			et.setOnEditorActionListener(new OnEditorActionListener() {
-				
-				@Override
-				public boolean onEditorAction(TextView arg0, int arg1, KeyEvent arg2) {
-					
-					if(arg1 == EditorInfo.IME_ACTION_DONE) {
-						btPrice.setText(new DecimalFormat("###,###").format( Long.parseLong(et.getText().toString())) +" ø¯");
-						btPrice.setTag( et.getText() );
-						d.dismiss();
-					}
-					return false;
-				}
-			});
-			et.setInputType(InputType.TYPE_CLASS_NUMBER);
 
-			d.setView(view);
-			d.setButton("¿˚øÎ", new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					btPrice.setText(new DecimalFormat("###,###").format( Long.parseLong(et.getText().toString())) + " ø¯");
-					btPrice.setTag( et.getText() );
-				}
-			});
+			//data = new Intent(this, RequestSubmitPopup.class);			
+			//startActivity(data);
 			
-			d.setTitle("∞°∞›¿ª ¿‘∑¬«œººø‰.");
-			d.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+			RequestSubmitPopup d = new RequestSubmitPopup(context, style.Theme_Dialog);
+			d.setTitle("");
 			d.show();
+			
 			break;
 			
 		case R.id.POST_RQ_SBbtnTime:
 			
-			view = getLayoutInflater().inflate(R.layout.post_request_dialog, null); 
-			et = (EditText)view.findViewById(R.id.POST_RQ_DIALedit);
-			et.setOnEditorActionListener(new OnEditorActionListener() {
-				
-				@Override
-				public boolean onEditorAction(TextView arg0, int arg1, KeyEvent arg2) {
-					
-					if(arg1 == EditorInfo.IME_ACTION_DONE) {
-						btTime.setText(et.getText() + " Ω√∞£");
-						btTime.setTag( et.getText() );
-						d.dismiss();
-					}
-					return false;
-				}
-			});
-			et.setInputType(InputType.TYPE_CLASS_NUMBER);
+			data = new Intent(this, RequestSubmitPopup.class);
+			startActivity(data);
 			
-			d.setView(view);
-			d.setButton("¿˚øÎ", new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					btTime.setText(et.getText() +" Ω√∞£");
-					btTime.setTag( et.getText() );
-					
-				}
-			});
+//			view = getLayoutInflater().inflate(R.layout.post_request_dialog, null); 
+//			et = (EditText)view.findViewById(R.id.POST_RQ_DIALedit);
+//			et.setOnEditorActionListener(new OnEditorActionListener() {
+//				
+//				@Override
+//				public boolean onEditorAction(TextView arg0, int arg1, KeyEvent arg2) {
+//					
+//					if(arg1 == EditorInfo.IME_ACTION_DONE) {
+//						btTime.setText(et.getText() + " ÔøΩ√∞ÔøΩ");
+//						btTime.setTag( et.getText() );
+//						d.dismiss();
+//					}
+//					return false;
+//				}
+//			});
+//			et.setInputType(InputType.TYPE_CLASS_NUMBER);
+//			
+//			d.setView(view);
+//			d.setButton("ÔøΩÔøΩÔøΩ", new DialogInterface.OnClickListener() {
+//				@Override
+//				public void onClick(DialogInterface dialog, int which) {
+//					btTime.setText(et.getText() +" ÔøΩ√∞ÔøΩ");
+//					btTime.setTag( et.getText() );
+//					
+//				}
+//			});
+//			
+//			d.setTitle("ÔøΩ√∞ÔøΩÔøΩÔøΩ ÔøΩ‘∑ÔøΩÔøΩœºÔøΩÔøΩÔøΩ.");
+//			d.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+//			d.show();
 			
-			d.setTitle("Ω√∞£¿ª ¿‘∑¬«œººø‰.");
-			d.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-			d.show();
 			break;
 			
 		case R.id.POST_RQ_SBbtnSubmit:
@@ -224,14 +214,14 @@ public class RequestPostSubmit extends MapActivity implements LocationListener, 
 			
 			APIProxyLayer.Instance().RequestAdd(
 					btCategory.getText().toString(),
-					btDetail.getText().toString(), 
-					price, category, c.getTime(), lat, lon, null, null, 
+					tvDetail.getText().toString(), 
+					price, category, c.getTime(), lat, lon, false, false, 
 					new IAPIProxyCallback() {
 						
 						@Override
 						public void OnCallback(boolean success, JSONObject json) {
 							if(success)
-								Toast.makeText(context, "µÓ∑œ º∫∞¯", Toast.LENGTH_SHORT).show();
+								Toast.makeText(context, "Ï†úÍ≥µ Îì±Î°ùÏôÑÎ£å", Toast.LENGTH_SHORT).show();
 						}
 					});
 			break;
@@ -246,6 +236,13 @@ public class RequestPostSubmit extends MapActivity implements LocationListener, 
 		}
 		
 	}
+	
+	
+	
+	
+	
+	
+	
 	
 	@Override
 	public void onLocationChanged(Location location) {
@@ -273,7 +270,7 @@ public class RequestPostSubmit extends MapActivity implements LocationListener, 
 			for(Address a : addr) {
 				
 				buff.append(a.getLocality() + " ");
-				buff.append(a.getSubLocality() + " ±Ÿ√≥");
+				buff.append(a.getSubLocality() + " ÔøΩÔøΩ√≥");
 				
 			}
 			

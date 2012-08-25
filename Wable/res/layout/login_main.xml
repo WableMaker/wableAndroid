@@ -9,31 +9,33 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/login_bg" />
+         android:background="@drawable/log_in_bg"/>
 
     <Button
         android:id="@+id/LOGINbtnFb"
         android:layout_width="268dp"
         android:layout_height="46dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="180dp"
+        android:layout_marginTop="195dp"
         android:background="@drawable/selector_login_facebook_btn"
         android:text="페이스북으로 로그인 하기" />
 
     <EditText
         android:id="@+id/LOGINeditId"
-        android:layout_width="220dp"
+        android:layout_width="180dp"
         android:layout_height="36dp"
         android:layout_below="@+id/LOGINbtnFb"
-        android:layout_marginLeft="66dp"
+        android:layout_marginLeft="86dp"
         android:layout_marginTop="44dp"
         android:background="#00000000"
         android:ems="10"
-        android:hint="아이디" android:focusable="true" android:focusableInTouchMode="true" android:clickable="true" android:inputType="textEmailAddress" android:maxLines="1" android:imeOptions="actionNext"/>
+        android:hint="아이디" android:focusable="true" android:focusableInTouchMode="true" android:clickable="true" android:inputType="textEmailAddress" android:maxLines="1" android:imeOptions="actionNext" android:layout_centerHorizontal="true">
+        <requestFocus />
+    </EditText>
 
     <EditText
         android:id="@+id/LOGINeditPass"
-        android:layout_width="220dp"
+        android:layout_width="180dp"
         android:layout_height="36dp"
         android:layout_alignLeft="@+id/LOGINeditId"
         android:layout_below="@+id/LOGINeditId"
@@ -41,7 +43,7 @@
         android:background="#00000000"
         android:ems="10"
         android:hint="비밀번호"
-        android:inputType="textPassword" android:focusable="true" android:imeOptions="actionDone" android:clickable="true" android:maxLines="1">
+        android:inputType="textPassword" android:focusable="true" android:imeOptions="actionDone" android:clickable="true" android:maxLines="1" android:layout_centerHorizontal="true">
 
         
     </EditText>
@@ -87,5 +89,13 @@
         android:ems="10" >   
 
     </EditText>
+
+    <EditText
+        android:id="@+id/editText1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:ems="10" />
 
 </RelativeLayout>
