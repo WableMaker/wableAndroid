@@ -221,7 +221,7 @@ public class WableActivity extends Activity implements OnClickListener {
 				break;
 			}
 			
-			
+			final Activity activity = this;
 			pd = ProgressDialog.show(context, "로그인", "사용자 정보 조회중입니다...", true, false);
 			
 			APIProxyLayer.Instance().Login(etUser.getText().toString(), etPass.getText().toString(), new IAPIProxyCallback(){
@@ -256,6 +256,11 @@ public class WableActivity extends Activity implements OnClickListener {
 
 					} else { // fail to login.
 						//Toast.makeText(context, "아이디 또는 비밀번호를 확인해주세요", Toast.LENGTH_SHORT).show();
+						activity.runOnUiThread(new Runnable() {
+						    public void run() {
+						        Toast.makeText(activity, "아이디 또는 비밀번호를 확인해주세요", Toast.LENGTH_SHORT).show();
+						    }
+						});
 						Logger.Instance().Write("login fail");
 					}
 				}
