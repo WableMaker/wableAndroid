@@ -8,6 +8,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:text="Search Provider Distance"
+    android:id="@+id/SEARCH_PRO_DIStxt"
      >
 </TextView>
 </LinearLayout>

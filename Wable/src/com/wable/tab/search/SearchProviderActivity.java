@@ -4,16 +4,20 @@ import android.app.ActivityGroup;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.wable.R;
 
-public class SearchProviderActivity extends ActivityGroup implements OnTouchListener{
+public class SearchProviderActivity extends ActivityGroup implements OnTouchListener, OnClickListener{
 
 	private Context context;
 	private LinearLayout searchBox;
@@ -41,6 +45,9 @@ public class SearchProviderActivity extends ActivityGroup implements OnTouchList
 		
 		container = (LinearLayout) findViewById (R.id.SEARCH_PROlist);
 		container.addView(views[viewId]);
+		
+		findViewById(R.id.SEARCH_PRObtnSearch).setOnClickListener(this);
+		
 	}
 
 	@Override
@@ -72,5 +79,42 @@ public class SearchProviderActivity extends ActivityGroup implements OnTouchList
 		}
 		return false;	
 	}
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		switch(v.getId()) {
+		
+		case R.id.SEARCH_PRObtnSearch :
+			
+			handler.sendEmptyMessage(500);
+			
+			
+			
+			break;
+		}
+		
+		return;
+	}
+	
+	private Handler handler = new Handler() {
+		@Override
+		public void handleMessage(Message msg) {
+			switch (msg.what) {
+			
+			// Refresh Query statement. 
+			case 500:
+				String search_query = ((EditText) findViewById(R.id.SEARCH_PROqueryTxt)).getText().toString();
+				if (position == 0){
+					TextView tv = (TextView) views[position].findViewById(R.id.SEARCH_PRO_DIStxt);
+					tv.setText(search_query);
+				}
+				
+				break;
+			}
+			
+			super.handleMessage(msg);
+		}
+	};
 	
 }
