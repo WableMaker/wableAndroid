@@ -11,4 +11,11 @@
     android:id="@+id/SEARCH_PRO_DIStxt"
      >
 </TextView>
+
+<ListView 
+    android:id="@+id/SEARCH_PRO_DIS_listview"
+    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    >
+</ListView>
 </LinearLayout>
