@@ -248,8 +248,10 @@ public class WableActivity extends Activity implements OnClickListener {
 		case R.id.LOGINbtnLogin:
 
 			if (etUser.getText().toString().length() == 0) {
-				Toast.makeText(context, "아이디를 입력해주세요", Toast.LENGTH_SHORT).show();
-				break;
+				//Toast.makeText(context, "아이디를 입력해주세요", Toast.LENGTH_SHORT).show();
+				//break;
+				etUser.setText("test1111");
+				etPass.setText("1111111");
 			} else if (etPass.getText().toString().length() == 0) {
 				Toast.makeText(context, "비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show();
 				break;
@@ -257,6 +259,7 @@ public class WableActivity extends Activity implements OnClickListener {
 			
 			pd = ProgressDialog.show(context, "로그인", "사용자 정보 조회중입니다...", true, false);
 			
+					
 			APIProxyLayer.Instance().Login(etUser.getText().toString(), etPass.getText().toString(), new IAPIProxyCallback(){
 
 				@Override
