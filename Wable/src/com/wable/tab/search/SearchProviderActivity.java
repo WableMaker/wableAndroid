@@ -1,5 +1,6 @@
 package com.wable.tab.search;
 
+import android.app.Activity;
 import android.app.ActivityGroup;
 import android.content.Context;
 import android.content.Intent;
@@ -38,6 +39,7 @@ public class SearchProviderActivity extends ActivityGroup implements OnTouchList
 		segment.setOnTouchListener(this);
 		
 		views = new View[3];
+		
 		views[0] = getLocalActivityManager().startActivity("DISTANCE", new Intent(this, SearchProvideDistance.class)).getDecorView();
 		views[1] = getLocalActivityManager().startActivity("TIME", new Intent(this, SearchProvideTime.class)).getDecorView();
 		views[2] = getLocalActivityManager().startActivity("MAP", new Intent(this, SearchProvideMap.class)).getDecorView();
@@ -106,8 +108,12 @@ public class SearchProviderActivity extends ActivityGroup implements OnTouchList
 			case 500:
 				String search_query = ((EditText) findViewById(R.id.SEARCH_PROqueryTxt)).getText().toString();
 				if (position == 0){
-					TextView tv = (TextView) views[position].findViewById(R.id.SEARCH_PRO_DIStxt);
-					tv.setText(search_query);
+					SearchProvideDistance host = (SearchProvideDistance) views[position].getContext();
+					host.addString(search_query);
+					
+					
+				//	TextView tv = (TextView) views[position].findViewById(R.id.SEARCH_PRO_DIStxt);
+				//	tv.setText(search_query);
 				}
 				
 				break;
