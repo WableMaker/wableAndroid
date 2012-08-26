@@ -13,6 +13,8 @@ public class sp_GetOtherProvides_Result
     public String title;
     public String description;
     public String bidding_id;
+    public long user_id;
+    public String photo;
 	public sp_GetOtherProvides_Result(JSONObject obj)
 	{
 		try {
@@ -40,6 +42,12 @@ public class sp_GetOtherProvides_Result
 
 	if(!obj.isNull("bidding_id"))
 		bidding_id= obj.getString("bidding_id");
+
+	if(!obj.isNull("user_id"))
+		user_id= obj.getLong("user_id");
+
+	if(!obj.isNull("photo"))
+		photo= obj.getString("photo");
 
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block

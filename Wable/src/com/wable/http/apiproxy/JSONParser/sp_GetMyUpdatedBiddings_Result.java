@@ -29,6 +29,10 @@ public class sp_GetMyUpdatedBiddings_Result
     public String other_description;
     public Integer other_price;
     public String other_user_photo;
+    public Integer provide_status;
+    public Boolean provide_deleted;
+    public Integer request_status;
+    public Boolean request_deleted;
 	public sp_GetMyUpdatedBiddings_Result(JSONObject obj)
 	{
 		try {
@@ -104,6 +108,18 @@ public class sp_GetMyUpdatedBiddings_Result
 
 	if(!obj.isNull("other_user_photo"))
 		other_user_photo= obj.getString("other_user_photo");
+
+	if(!obj.isNull("provide_status"))
+		provide_status= obj.getInt("provide_status");
+
+	if(!obj.isNull("provide_deleted"))
+		provide_deleted= obj.getBoolean("provide_deleted");
+
+	if(!obj.isNull("request_status"))
+		request_status= obj.getInt("request_status");
+
+	if(!obj.isNull("request_deleted"))
+		request_deleted= obj.getBoolean("request_deleted");
 
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
