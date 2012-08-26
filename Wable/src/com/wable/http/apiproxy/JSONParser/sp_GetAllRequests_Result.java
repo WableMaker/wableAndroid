@@ -11,16 +11,16 @@ public class sp_GetAllRequests_Result
 	{
 		try {
 
-	if(!obj.isNull("id"))
-		id= obj.getLong("id");
-
-	if(!obj.isNull("user_id"))
-		user_id= obj.getLong("user_id");
-
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			if(!obj.isNull("id"))
+				id= obj.getLong("id");
+		
+			if(!obj.isNull("user_id"))
+				user_id= obj.getLong("user_id");
+		
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 	}
 	
 }
