@@ -1,5 +1,8 @@
 package com.wable.http.apiproxy.JSONParser;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.json.JSONObject;
 import org.json.JSONException;
 
@@ -59,7 +62,9 @@ class sp_GetRequestsByTime_Item
 
 public class sp_GetRequestsByTime_Result 
 {
-	public sp_GetRequestsByTime_Item[] requestsItem = null;
+	//public sp_GetRequestsByTime_Item[] requestsItem = null;
+	public List<sp_GetRequestsByTime_Item> requestsItem = new ArrayList<sp_GetRequestsByTime_Item>();
+	//List<string> mList = new ArrayList<string>();
 	public boolean bsuccess = false;
 	
 	public sp_GetRequestsByTime_Result(){}

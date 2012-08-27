@@ -9,7 +9,6 @@ public class JSONParser {
 	public static sp_GetRequestsByTime_Result RequestListByTimeParser(JSONObject json)
 	{
 		sp_GetRequestsByTime_Result results = new sp_GetRequestsByTime_Result();
-		//sp_GetRequestsByTime_Item[] results = null;
 		try 
 		{
 			results.bsuccess = json.getBoolean("success");
@@ -17,11 +16,12 @@ public class JSONParser {
 			if(results.bsuccess)
 			{
 				JSONArray array= json.getJSONArray("data");
-				results.requestsItem = new sp_GetRequestsByTime_Item[array.length()];
+				//results.requestsItem = new sp_GetRequestsByTime_Item[array.length()];
 				
 				for(int i=0;i<array.length();i++)
 				{
-					results.requestsItem[i] = new sp_GetRequestsByTime_Item( array.getJSONObject(i));
+					results.requestsItem.add(new sp_GetRequestsByTime_Item( array.getJSONObject(i)));
+					//results.requestsItem[i] = new sp_GetRequestsByTime_Item( array.getJSONObject(i));
 				}
 				return results;
 			}
