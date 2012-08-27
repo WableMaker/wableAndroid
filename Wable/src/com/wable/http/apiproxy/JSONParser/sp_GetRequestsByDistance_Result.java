@@ -1,9 +1,12 @@
 package com.wable.http.apiproxy.JSONParser;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.json.JSONObject;
 import org.json.JSONException;
 
-public class sp_GetRequestsByDistance_Result
+class sp_GetRequestsByDistance_Item
 {
     public String id;
     public String title;
@@ -15,7 +18,7 @@ public class sp_GetRequestsByDistance_Result
     public String name;
     public String description;
     public String user_id;
-	public sp_GetRequestsByDistance_Result(JSONObject obj)
+	public sp_GetRequestsByDistance_Item(JSONObject obj)
 	{
 		try {
 
@@ -57,3 +60,10 @@ public class sp_GetRequestsByDistance_Result
 	
 }
 
+public class sp_GetRequestsByDistance_Result
+{
+	public List<sp_GetRequestsByDistance_Item> requestsItem = new ArrayList<sp_GetRequestsByDistance_Item>();
+	public boolean bsuccess = false;
+	
+	public sp_GetRequestsByDistance_Result(){}
+}
