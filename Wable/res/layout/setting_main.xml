@@ -13,12 +13,12 @@
         android:layout_alignParentTop="true" >
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:text="로그인" />
+            android:text="@string/setting_logout" />
 
         <TextView
             android:id="@+id/textView1"
@@ -26,13 +26,13 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:text="설정" />
+            android:text="@string/setting" />
     </RelativeLayout>
 
     <ScrollView
         android:id="@+id/scrollView1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/RelativeLayout2" >
@@ -40,68 +40,62 @@
         <LinearLayout
             android:id="@+id/LinearLayout1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical" >
 
             <Button
                 android:id="@+id/STbtnNotice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="공지사항" />
+                android:text="@string/setting_notice" />
 
             <Button
-                android:id="@+id/STbtnPrivacy"
+                android:id="@+id/STbtnNotify"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="알림설정" />
+                android:text="@string/setting_notify" />
 
             <Button
-                android:id="@+id/STbtnLocation"
+                android:id="@+id/STbtnIntro"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="소개동영상" />
+                android:text="@string/setting_intro_movie" />
 
             <Button
                 android:id="@+id/STbtnPush"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="이용방법" />
+                android:text="@string/setting_howtouse" />
 
             <Button
-                android:id="@+id/Button03"
+                android:id="@+id/STbtnFaq"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="FAQ" />
+                android:text="@string/setting_faq" />
 
             <Button
-                android:id="@+id/Button02"
+                android:id="@+id/STbtnVersion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="버전정보" />
+                android:text="@string/setting_version" />
 
             <Button
-                android:id="@+id/Button01"
+                android:id="@+id/STbtnTerms"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="앱공유" />
+                android:text="와블 이용약관" />
 
             <Button
-                android:id="@+id/button1"
+                android:id="@+id/STbtnPrivacy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="아이튠스 리뷰남기기" />
+                android:text="개인정보취급방침 및 청소년 보호정책" />
 
             <Button
-                android:id="@+id/Button08"
+                android:id="@+id/STbtnLocation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="페이스북 좋아요하기" />
-
-            <Button
-                android:id="@+id/Button09"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="트위터 팔로잉하기" />
+                android:text="위치기반서비스 이용약관" />
 
         </LinearLayout>
     </ScrollView>
