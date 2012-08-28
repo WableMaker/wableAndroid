@@ -3061,13 +3061,13 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 
 	@Override
-	public boolean AccountResetPassword(String loginid, String email,
-			final IAPIProxyCallback callback) {
+	public boolean AccountResetPassword(String loginid, String email
+			,String mobile,final IAPIProxyCallback callback) {
 		// TODO Auto-generated method stub
 		final Map<String,Object> params = new HashMap<String,Object>();
 		params.put("loginid", loginid);
 		params.put("email", email);
-		
+		params.put("mobile", mobile);
 		new Thread()
 		{
 			@Override
@@ -3156,7 +3156,108 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		return true;
 	}
 
+	@Override
+	public boolean AccountEmailAuthorize(String email,final IAPIProxyCallback callback) {
+		// TODO Auto-generated method stub
+		
+		final Map<String,Object> params = new HashMap<String,Object>();
+		params.put("email", email);
+		
+		new Thread()
+		{
+			@Override
+ 			public void run()
+ 			{
+				if(!_httpLayer.IsConnectedSession())
+				{
+					if(!Relogin())
+						return;
+				}
+				
+				String result = _httpLayer.POSTSync(_domain+"Account/EmailAuthorize", params);
+				// TODO Auto-generated method stub
+				JSONObject obj = null;
+				
+				try
+				{
+					if(result !=null)
+					{
+						obj = new JSONObject(result);
+						if(true == obj.getBoolean("success"))
+							SessionUpdate("AccountEmailAuthorize");
+						callback.OnCallback(true,obj);
+						return;
+					}
+					
+				}
+				catch(Exception e)
+				{
+					Logger.Instance().Write(e);
+					
+				}
+				
+				callback.OnCallback(false,null);
+				
+ 			}
+			
+		}.start();
+		return true;
+	}
 
+
+
+	@Override
+	public boolean AccountChangePassword(String loginid, String oldpassword,
+			String newpassword, final IAPIProxyCallback callback) {
+		// TODO Auto-generated method stub
+		final Map<String,Object> params = new HashMap<String,Object>();
+		params.put("loginid", loginid);
+		params.put("oldpassword", oldpassword);
+		params.put("newpassword", newpassword);
+		
+		new Thread()
+		{
+			@Override
+ 			public void run()
+ 			{
+				if(!_httpLayer.IsConnectedSession())
+				{
+					if(!Relogin())
+						return;
+				}
+				
+				String result = _httpLayer.POSTSync(_domain+"Account/ChangePassword", params);
+				// TODO Auto-generated method stub
+				JSONObject obj = null;
+				
+				try
+				{
+					if(result !=null)
+					{
+						obj = new JSONObject(result);
+						if(true == obj.getBoolean("success"))
+							SessionUpdate("AccountChangePassword");
+						callback.OnCallback(true,obj);
+						return;
+					}
+					
+				}
+				catch(Exception e)
+				{
+					Logger.Instance().Write(e);
+					
+				}
+				
+				callback.OnCallback(false,null);
+				
+ 			}
+			
+		}.start();
+		return true;
+	}
+
+
+	
 	// [end]
 	
 
