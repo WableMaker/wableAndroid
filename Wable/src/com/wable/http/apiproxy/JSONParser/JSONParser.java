@@ -54,6 +54,30 @@ public class JSONParser {
 		return null;	
 	}
 	
+	//RequestListbyArea
+	public static sp_GetRequestsByDistance_Result RequestListByAreaParser(JSONObject json)
+	{
+		sp_GetRequestsByDistance_Result results = new sp_GetRequestsByDistance_Result();
+		
+		try 
+		{
+			results.bsuccess = json.getBoolean("success");
+			
+			if(results.bsuccess)
+			{
+				JSONArray array= json.getJSONArray("data");
+				
+				for(int i=0;i<array.length();i++)
+				{
+					results.requestsItem.add(new sp_GetRequestsByDistance_Item( array.getJSONObject(i)));
+				}
+				return results;
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return null;	
+	}
 	
 	
 	public static UserGetUpdatedContents_Result  UserGetUpdatedContents(JSONObject json)
