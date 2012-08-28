@@ -12,6 +12,7 @@ public class sp_GetNewMessage_Result
     public String video_path;
     public String written_time;
     public long writer_id;
+    public String read_time;
 	public sp_GetNewMessage_Result(JSONObject obj)
 	{
 		try {
@@ -36,6 +37,9 @@ public class sp_GetNewMessage_Result
 
 	if(!obj.isNull("writer_id"))
 		writer_id= obj.getLong("writer_id");
+
+	if(!obj.isNull("read_time"))
+		read_time= obj.getString("read_time");
 
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
