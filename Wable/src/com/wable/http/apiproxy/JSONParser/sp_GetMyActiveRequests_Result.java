@@ -1,9 +1,12 @@
 package com.wable.http.apiproxy.JSONParser;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.json.JSONObject;
 import org.json.JSONException;
 
-public class sp_GetMyActiveRequests_Result
+class sp_GetMyActiveRequests_Item
 {
     public String request_id;
     public String title;
@@ -15,7 +18,7 @@ public class sp_GetMyActiveRequests_Result
     public Integer bidding_count;
     public int price;
     public Integer matching_count;
-	public sp_GetMyActiveRequests_Result(JSONObject obj)
+	public sp_GetMyActiveRequests_Item(JSONObject obj)
 	{
 		try {
 
@@ -57,3 +60,10 @@ public class sp_GetMyActiveRequests_Result
 	
 }
 
+public class sp_GetMyActiveRequests_Result 
+{
+	public List<sp_GetMyActiveRequests_Item> requestsItem = new ArrayList<sp_GetMyActiveRequests_Item>();
+	public boolean bsuccess = false;
+	
+	public sp_GetMyActiveRequests_Result(){}
+}

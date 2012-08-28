@@ -6,6 +6,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class JSONParser {
+	
+	
 	public static sp_GetRequestsByTime_Result RequestListByTimeParser(JSONObject json)
 	{
 		sp_GetRequestsByTime_Result results = new sp_GetRequestsByTime_Result();
@@ -79,6 +81,30 @@ public class JSONParser {
 	}
 	
 	
+	//
+	public static sp_GetMyActiveRequests_Result RequestMyActiveListParser(JSONObject json)
+	{
+		sp_GetMyActiveRequests_Result results = new sp_GetMyActiveRequests_Result();
+		
+		try 
+		{
+			results.bsuccess = json.getBoolean("success");
+			
+			if(results.bsuccess)
+			{
+				JSONArray array= json.getJSONArray("data");
+				
+				for(int i=0;i<array.length();i++)
+				{
+					results.requestsItem.add(new sp_GetMyActiveRequests_Item( array.getJSONObject(i)));
+				}
+				return results;
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return null;	
+	}
 	public static UserGetUpdatedContents_Result  UserGetUpdatedContents(JSONObject json)
 	{
 		try {
@@ -99,4 +125,6 @@ public class JSONParser {
 		
 		return null;
 	}
+	
+	
 }
