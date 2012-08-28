@@ -62,7 +62,6 @@ class sp_GetRequestsByTime_Item
 
 public class sp_GetRequestsByTime_Result 
 {
-	//public sp_GetRequestsByTime_Item[] requestsItem = null;
 	public List<sp_GetRequestsByTime_Item> requestsItem = new ArrayList<sp_GetRequestsByTime_Item>();
 	public boolean bsuccess = false;
 	

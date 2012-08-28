@@ -91,7 +91,8 @@ public class WableActivity extends Activity implements OnClickListener {
 				{
 					Logger.Instance().Write(json.toString());
 					
-					APIProxyLayer.Instance().RequestListbyTime(null, null,new IAPIProxyCallback()
+					//APIProxyLayer.Instance().RequestListbyTime(null, null,new IAPIProxyCallback()
+					APIProxyLayer.Instance().RequestListbyArea(0,0,0,0,null,new IAPIProxyCallback()
 					{
 						@Override
 						public void OnCallback(boolean success, JSONObject json) {
@@ -108,24 +109,7 @@ public class WableActivity extends Activity implements OnClickListener {
 						
 					});
 					 				
-//					APIProxyLayer.Instance().RequestListbyTime(null, null,new IAPIProxyCallback()
-//					{
-//						@Override
-//						public void OnCallback(boolean success, JSONObject json) {
-//							if(success)
-//							{
-//								sp_GetRequestsByTime_Result[] result=  JSONParser.RequestListByTimeParser(json);
-//								if(result != null){
-//									
-//								}
-//							}
-//							else Logger.Instance().Write("Fail to GetMyInfo");
-//							
-//						}
-//						
-//					});
-					
-					
+			
 					APIProxyLayer.Instance().MyInfo(new IAPIProxyCallback(){
 
 						@Override
@@ -174,7 +158,7 @@ public class WableActivity extends Activity implements OnClickListener {
 			
         	
         });
-    	  */   // JSON Parser TEST code
+    	    */ // JSON Parser TEST code
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
