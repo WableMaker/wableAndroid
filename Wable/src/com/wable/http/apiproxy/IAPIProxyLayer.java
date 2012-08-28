@@ -40,7 +40,7 @@ public interface IAPIProxyLayer {
             , String BiddingMessageRecentSyncTime
             , String EndBiddingRecentSyncTime
             , String EndBiddingMessageRecentSyncTime, IAPIProxyCallback callback);
-	
+	boolean UserDeletePhoto(IAPIProxyCallback callback);
 	// [end]
 		
 	// [start] Request
@@ -115,7 +115,7 @@ public interface IAPIProxyLayer {
 	boolean MessageSendAudio(String biddingid, String filepath,String lastmsgutctime,IAPIProxyCallback callback);//������
 	boolean MessageSendVideo(String biddingid, String filepath,String lastmsgutctime,IAPIProxyCallback callback);//������
 	
-	boolean MessageGet(String biddingid,String lastmsgutctime,IAPIProxyCallback callback);//������
+	boolean MessageGet(String biddingid,String lastmsgutctick,IAPIProxyCallback callback);//������
 	boolean MessageGetNewMessage(String lastmsgutctime,IAPIProxyCallback callback);//���ڷ� ���� ���������� ����ŷ��޽��� �ޱ�
 	
 

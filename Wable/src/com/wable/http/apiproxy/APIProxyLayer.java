@@ -1586,13 +1586,13 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 
 	@Override
-	public boolean MessageGet(String biddingid, String lastmsgutctime,
+	public boolean MessageGet(String biddingid, String lastmsgutctick,
 			final IAPIProxyCallback callback) {
 		
 		
 		final Map<String,Object> params = new HashMap<String,Object>();
 		params.put("biddingid", biddingid);
-		params.put("lastmsgutctime", lastmsgutctime);
+		params.put("lastmsgutctick", lastmsgutctick);
 		
 		new Thread()
 		{
@@ -3337,6 +3337,54 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("BiddingSendSMSOfferAsRequester");
+						callback.OnCallback(true,obj);
+						return;
+					}
+					
+				}
+				catch(Exception e)
+				{
+					Logger.Instance().Write(e);
+					
+				}
+				
+				callback.OnCallback(false,null);
+				
+ 			}
+			
+		}.start();
+		return true;
+	}
+
+
+
+	@Override
+	public boolean UserDeletePhoto(final IAPIProxyCallback callback) {
+		// TODO Auto-generated method stub
+		
+		
+		new Thread()
+		{
+			@Override
+ 			public void run()
+ 			{
+				if(!_httpLayer.IsConnectedSession())
+				{
+					if(!Relogin())
+						return;
+				}
+				
+				String result = _httpLayer.POSTSync(_domain+"User/DeletePhoto", null);
+				// TODO Auto-generated method stub
+				JSONObject obj = null;
+				
+				try
+				{
+					if(result !=null)
+					{
+						obj = new JSONObject(result);
+						if(true == obj.getBoolean("success"))
+							SessionUpdate("UserDeletePhoto");
 						callback.OnCallback(true,obj);
 						return;
 					}
