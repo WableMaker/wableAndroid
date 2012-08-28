@@ -103,6 +103,9 @@ public interface IAPIProxyLayer {
 	//�ŷ� ����
 	boolean BiddingDelete(String biddingid, IAPIProxyCallback callback);
 	
+	boolean BiddingSendSMSOfferAsProvider(String request_id, IAPIProxyCallback callback);
+	boolean BiddingSendSMSOfferAsRequester(String provide_id, IAPIProxyCallback callback);
+	
 	// [end]
 	
 	// [start] Message
