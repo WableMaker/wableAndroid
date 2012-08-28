@@ -50,7 +50,7 @@
                 android:text="@string/setting_notice" />
 
             <Button
-                android:id="@+id/STbtnNotify"
+                android:id="@+id/STbtnPush"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/setting_notify" />
@@ -62,7 +62,7 @@
                 android:text="@string/setting_intro_movie" />
 
             <Button
-                android:id="@+id/STbtnPush"
+                android:id="@+id/STbtnHowtouse"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/setting_howtouse" />
