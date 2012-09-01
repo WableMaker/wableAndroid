@@ -36,11 +36,11 @@ public class JSONParser {
 		return null;
 	}
 	
-	/*
+
 	
-	public static sp_GetRequestsByDistance_Result RequestListByDistanceParser(JSONObject json)
+	public static sp_GetRequestsByDistance_Items RequestListByDistanceParser(JSONObject json)
 	{
-		sp_GetRequestsByDistance_Result results = new sp_GetRequestsByDistance_Result();
+		sp_GetRequestsByDistance_Items results = new sp_GetRequestsByDistance_Items();
 		
 		try 
 		{
@@ -52,7 +52,7 @@ public class JSONParser {
 				
 				for(int i=0;i<array.length();i++)
 				{
-					//results.requestsItem.add(new sp_GetRequestsByDistance_Item( array.getJSONObject(i)));
+					results.requestsItem.add(new sp_GetRequestsByDistance_Result( array.getJSONObject(i)));
 				}
 				return results;
 			}
@@ -61,7 +61,7 @@ public class JSONParser {
 		}
 		return null;	
 	}
-	
+	/*
 	public static sp_GetRequestsByArea_Result RequestListByAreaParser(JSONObject json)
 	{
 		sp_GetRequestsByArea_Result results = new sp_GetRequestsByArea_Result();

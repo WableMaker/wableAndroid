@@ -53,7 +53,6 @@ public class sp_GetRequestsByDistance_Result
 		user_id= obj.getString("user_id");
 
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
