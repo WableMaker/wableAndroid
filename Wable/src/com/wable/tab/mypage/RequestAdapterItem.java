@@ -68,10 +68,4 @@ public class RequestAdapterItem {
 	public void setType(int type) {
 		this.type = type;
 	}
-	
-	
-	
-
-
-
 }

@@ -42,6 +42,7 @@
         <activity android:name=".tab.setting.SettingActivity"></activity>
         <activity android:name=".tab.setting.WebviewActivity"></activity>
         <activity android:name=".tab.setting.PushActivity"></activity>
+        <activity android:name=".tab.setting.VersionActivity"></activity>
         <activity android:name=".tab.search.SearchProviderActivity" android:windowSoftInputMode="stateAlwaysHidden|adjustPan" android:theme="@android:style/Theme.NoTitleBar"></activity>
         <activity android:name=".tab.search.SearchProvideTime" android:theme="@android:style/Theme.NoTitleBar"></activity>
         <activity android:name=".tab.search.SearchProvideDistance" android:theme="@android:style/Theme.NoTitleBar"></activity>

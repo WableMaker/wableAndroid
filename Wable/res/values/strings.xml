@@ -3,5 +3,14 @@
 
     <string name="hello">Hello World, WableActivity!</string>
     <string name="app_name">Wable</string>
-
+    
+    <string name="setting">설정</string>
+    <string name="setting_faq">FAQ</string>
+    <string name="setting_howtouse">Wable 이용방법</string>
+    <string name="setting_intro_movie">소개동영상</string>
+    <string name="setting_logout">로그아웃</string>
+    <string name="setting_myinfo">내 정보</string>
+    <string name="setting_notice">공지사항</string>
+    <string name="setting_notify">알림설정</string>
+    <string name="setting_version">버전정보</string>
 </resources>
