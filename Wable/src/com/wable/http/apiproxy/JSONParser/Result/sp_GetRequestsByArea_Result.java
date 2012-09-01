@@ -1,12 +1,9 @@
 package com.wable.http.apiproxy.JSONParser.Result;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.json.JSONObject;
 import org.json.JSONException;
 
-class sp_GetRequestsByArea_Item
+public class sp_GetRequestsByArea_Result
 {
     public String id;
     public String title;
@@ -19,7 +16,7 @@ class sp_GetRequestsByArea_Item
     public String name;
     public String description;
     public String user_id;
-	public sp_GetRequestsByArea_Item(JSONObject obj)
+	public sp_GetRequestsByArea_Result(JSONObject obj)
 	{
 		try {
 
@@ -63,10 +60,3 @@ class sp_GetRequestsByArea_Item
 }
 
 
-public class sp_GetRequestsByArea_Result 
-{
-	public List<sp_GetRequestsByArea_Item> requestsItem = new ArrayList<sp_GetRequestsByArea_Item>();
-	public boolean bsuccess = false;
-	
-	public sp_GetRequestsByArea_Result(){}
-}

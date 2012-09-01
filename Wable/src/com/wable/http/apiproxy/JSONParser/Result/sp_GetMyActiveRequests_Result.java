@@ -6,7 +6,7 @@ import java.util.List;
 import org.json.JSONObject;
 import org.json.JSONException;
 
-class sp_GetMyActiveRequests_Item
+public class sp_GetMyActiveRequests_Result
 {
     public String request_id;
     public String title;
@@ -18,7 +18,7 @@ class sp_GetMyActiveRequests_Item
     public Integer bidding_count;
     public int price;
     public Integer matching_count;
-	public sp_GetMyActiveRequests_Item(JSONObject obj)
+	public sp_GetMyActiveRequests_Result(JSONObject obj)
 	{
 		try {
 
@@ -53,17 +53,10 @@ class sp_GetMyActiveRequests_Item
 		matching_count= obj.getInt("matching_count");
 
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
 }
 
-public class sp_GetMyActiveRequests_Result 
-{
-	public List<sp_GetMyActiveRequests_Item> requestsItem = new ArrayList<sp_GetMyActiveRequests_Item>();
-	public boolean bsuccess = false;
-	
-	public sp_GetMyActiveRequests_Result(){}
-}
+

@@ -61,10 +61,10 @@ public class JSONParser {
 		}
 		return null;	
 	}
-	/*
-	public static sp_GetRequestsByArea_Result RequestListByAreaParser(JSONObject json)
+	
+	public static sp_GetRequestsByArea_Items RequestListByAreaParser(JSONObject json)
 	{
-		sp_GetRequestsByArea_Result results = new sp_GetRequestsByArea_Result();
+		sp_GetRequestsByArea_Items results = new sp_GetRequestsByArea_Items();
 		
 		try 
 		{
@@ -76,7 +76,7 @@ public class JSONParser {
 				
 				for(int i=0;i<array.length();i++)
 				{
-					//results.requestsItem.add(new sp_GetRequestsByArea_Item( array.getJSONObject(i)));
+					results.requestsItem.add(new sp_GetRequestsByArea_Result( array.getJSONObject(i)));
 				}
 				return results;
 			}
@@ -87,10 +87,10 @@ public class JSONParser {
 	}
 	
 	
-	//
-	public static sp_GetMyActiveRequests_Result RequestMyActiveListParser(JSONObject json)
+	
+	public static sp_GetMyActiveRequests_Items RequestMyActiveListParser(JSONObject json)
 	{
-		sp_GetMyActiveRequests_Result results = new sp_GetMyActiveRequests_Result();
+		sp_GetMyActiveRequests_Items results = new sp_GetMyActiveRequests_Items();
 		
 		try 
 		{
@@ -102,7 +102,7 @@ public class JSONParser {
 				
 				for(int i=0;i<array.length();i++)
 				{
-					//results.requestsItem.add(new sp_GetMyActiveRequests_Item( array.getJSONObject(i)));
+					results.requestsItem.add(new sp_GetMyActiveRequests_Result( array.getJSONObject(i)));
 				}
 				return results;
 			}
@@ -111,6 +111,8 @@ public class JSONParser {
 		}
 		return null;	
 	}
+	
+	/*//
 	public static UserGetUpdatedContents_Result  UserGetUpdatedContents(JSONObject json)
 	{
 		try {
