@@ -105,7 +105,7 @@ public class SettingActivity extends Activity implements OnClickListener {
 	
 		case R.id.STbtnPush:
 			i = new Intent(this, PushActivity.class);
-			
+			i.putExtra("title", "푸쉬 알림 설정");
 			startActivity(i);
 		
 		break;

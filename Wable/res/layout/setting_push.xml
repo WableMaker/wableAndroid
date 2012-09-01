@@ -8,7 +8,7 @@
     <include layout="@layout/setting_main_header"/>
 
     <ToggleButton
-        android:id="@+id/toggleButton1"
+        android:id="@+id/STbtnPushToggle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
@@ -20,7 +20,7 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/toggleButton1"
+        android:layout_alignBottom="@id/STbtnPushToggle"
         android:layout_alignParentLeft="true"
         android:text="푸시알림"
         android:textAppearance="?android:attr/textAppearanceLarge" />
@@ -38,39 +38,39 @@
         android:id="@+id/checkBox1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView3"
-        android:layout_alignBottom="@+id/textView3"
-        android:layout_alignRight="@+id/toggleButton1"/>
+        android:layout_alignBaseline="@id/textView3"
+        android:layout_alignBottom="@id/textView3"
+        android:layout_alignRight="@id/STbtnPushToggle"/>
 
     <TextView
         android:id="@+id/TextView01"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/toggleButton1"
+        android:layout_below="@+id/STbtnPushToggle"
         android:layout_marginTop="44dp"
-        android:layout_toLeftOf="@+id/toggleButton1"
+        android:layout_toLeftOf="@+id/STbtnPushToggle"
         android:text="하루종일" />
 
     <EditText
-        android:id="@+id/editText1"
+        android:id="@+id/STetStarttime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignRight="@+id/textView3"
-        android:layout_below="@+id/checkBox1"
+        android:layout_alignRight="@id/textView3"
+        android:layout_below="@id/checkBox1"
         android:ems="10"
         android:inputType="time" android:saveEnabled="false">
 
         <requestFocus />
     </EditText>
-
+ 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/STetEndtime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/TextView01"
-        android:layout_alignRight="@+id/checkBox1"
-        android:layout_below="@+id/checkBox1"
+        android:layout_alignLeft="@id/TextView01"
+        android:layout_alignRight="@id/checkBox1"
+        android:layout_below="@id/checkBox1"
         android:ems="10"
         android:inputType="time" />
 
@@ -78,10 +78,17 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/editText2"
-        android:layout_alignBottom="@+id/editText2"
+        android:layout_alignBaseline="@id/STetEndtime"
+        android:layout_alignBottom="@id/STetEndtime"
         android:layout_marginRight="17dp"
-        android:layout_toLeftOf="@+id/editText2"
+        android:layout_toLeftOf="@id/STetEndtime"
         android:text="~" />
-
+
+    <TimePicker
+        android:id="@+id/timePicker1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/STetStarttime" 
+        />
+ 
 </RelativeLayout>
