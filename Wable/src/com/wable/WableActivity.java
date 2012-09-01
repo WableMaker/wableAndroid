@@ -23,9 +23,10 @@ import com.facebook.android.Facebook;
 import com.wable.http.apiproxy.APIProxyLayer;
 import com.wable.http.apiproxy.IAPIProxyCallback;
 import com.wable.http.apiproxy.JSONParser.JSONParser;
-import com.wable.http.apiproxy.JSONParser.sp_GetRequestsByDistance_Result;
 //import com.wable.http.apiproxy.JSONParser.sp_GetRequestsByTime_Item;
-import com.wable.http.apiproxy.JSONParser.sp_GetRequestsByTime_Result;
+import com.wable.http.apiproxy.JSONParser.Result.sp_GetMyActiveRequests_Result;
+import com.wable.http.apiproxy.JSONParser.Result.sp_GetRequestsByDistance_Result;
+import com.wable.http.apiproxy.JSONParser.Result.sp_GetRequestsByTime_Result;
 import com.wable.tab.login.PasswordFindActivity;
 import com.wable.tab.login.RegisterActivity;
 import com.wable.util.Logger;
@@ -82,8 +83,8 @@ public class WableActivity extends Activity implements OnClickListener {
 //        etPass.setOnEditorActionListener(new OnEditorActionListener() {
 //
 //    
-          // JSON Parser TEST code
-      /* APIProxyLayer.Instance().Login("cc", "111111", new IAPIProxyCallback(){
+       /*   // JSON Parser TEST code
+       APIProxyLayer.Instance().Login("cc", "111111", new IAPIProxyCallback(){
 
 			@Override
 			public void OnCallback(boolean success, JSONObject json) {
@@ -91,13 +92,15 @@ public class WableActivity extends Activity implements OnClickListener {
 				{
 					Logger.Instance().Write(json.toString());
 					
-					APIProxyLayer.Instance().RequestListbyTime(null, null,new IAPIProxyCallback()
+					//APIProxyLayer.Instance().RequestListbyTime(null, null,new IAPIProxyCallback()
+					//APIProxyLayer.Instance().RequestListbyArea(0,0,0,0,null,new IAPIProxyCallback()
+					APIProxyLayer.Instance().RequestMyActiveList(null,new IAPIProxyCallback()
 					{
 						@Override
 						public void OnCallback(boolean success, JSONObject json) {
 							if(success)
 							{
-								sp_GetRequestsByDistance_Result result=  JSONParser.RequestListByDistanceParser(json);
+								sp_GetMyActiveRequests_Result result=  JSONParser.RequestMyActiveListParser(json);
 								if(result != null){
 									int i = 0;
 								}
@@ -108,24 +111,7 @@ public class WableActivity extends Activity implements OnClickListener {
 						
 					});
 					 				
-//					APIProxyLayer.Instance().RequestListbyTime(null, null,new IAPIProxyCallback()
-//					{
-//						@Override
-//						public void OnCallback(boolean success, JSONObject json) {
-//							if(success)
-//							{
-//								sp_GetRequestsByTime_Result[] result=  JSONParser.RequestListByTimeParser(json);
-//								if(result != null){
-//									
-//								}
-//							}
-//							else Logger.Instance().Write("Fail to GetMyInfo");
-//							
-//						}
-//						
-//					});
-					
-					
+			
 					APIProxyLayer.Instance().MyInfo(new IAPIProxyCallback(){
 
 						@Override

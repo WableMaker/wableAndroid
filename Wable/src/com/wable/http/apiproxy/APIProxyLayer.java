@@ -1586,13 +1586,13 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 
 	@Override
-	public boolean MessageGet(String biddingid, String lastmsgutctime,
+	public boolean MessageGet(String biddingid, String lastmsgutctick,
 			final IAPIProxyCallback callback) {
 		
 		
 		final Map<String,Object> params = new HashMap<String,Object>();
 		params.put("biddingid", biddingid);
-		params.put("lastmsgutctime", lastmsgutctime);
+		params.put("lastmsgutctick", lastmsgutctick);
 		
 		new Thread()
 		{
@@ -3237,6 +3237,154 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("AccountChangePassword");
+						callback.OnCallback(true,obj);
+						return;
+					}
+					
+				}
+				catch(Exception e)
+				{
+					Logger.Instance().Write(e);
+					
+				}
+				
+				callback.OnCallback(false,null);
+				
+ 			}
+			
+		}.start();
+		return true;
+	}
+
+
+
+	@Override
+	public boolean BiddingSendSMSOfferAsProvider(String request_id,
+			final IAPIProxyCallback callback) {
+		// TODO Auto-generated method stub
+		final Map<String,Object> params = new HashMap<String,Object>();
+		params.put("request_id", request_id);
+		
+		new Thread()
+		{
+			@Override
+ 			public void run()
+ 			{
+				if(!_httpLayer.IsConnectedSession())
+				{
+					if(!Relogin())
+						return;
+				}
+				
+				String result = _httpLayer.POSTSync(_domain+"Bidding/SendSMSOfferAsProvider", params);
+				// TODO Auto-generated method stub
+				JSONObject obj = null;
+				
+				try
+				{
+					if(result !=null)
+					{
+						obj = new JSONObject(result);
+						if(true == obj.getBoolean("success"))
+							SessionUpdate("BiddingSendSMSOfferAsProvider");
+						callback.OnCallback(true,obj);
+						return;
+					}
+					
+				}
+				catch(Exception e)
+				{
+					Logger.Instance().Write(e);
+					
+				}
+				
+				callback.OnCallback(false,null);
+				
+ 			}
+			
+		}.start();
+		return true;
+	}
+
+
+
+	@Override
+	public boolean BiddingSendSMSOfferAsRequester(String provide_id,
+			final IAPIProxyCallback callback) {
+		// TODO Auto-generated method stub
+		final Map<String,Object> params = new HashMap<String,Object>();
+		params.put("provide_id", provide_id);
+		
+		new Thread()
+		{
+			@Override
+ 			public void run()
+ 			{
+				if(!_httpLayer.IsConnectedSession())
+				{
+					if(!Relogin())
+						return;
+				}
+				
+				String result = _httpLayer.POSTSync(_domain+"Bidding/SendSMSOfferAsRequester", params);
+				// TODO Auto-generated method stub
+				JSONObject obj = null;
+				
+				try
+				{
+					if(result !=null)
+					{
+						obj = new JSONObject(result);
+						if(true == obj.getBoolean("success"))
+							SessionUpdate("BiddingSendSMSOfferAsRequester");
+						callback.OnCallback(true,obj);
+						return;
+					}
+					
+				}
+				catch(Exception e)
+				{
+					Logger.Instance().Write(e);
+					
+				}
+				
+				callback.OnCallback(false,null);
+				
+ 			}
+			
+		}.start();
+		return true;
+	}
+
+
+
+	@Override
+	public boolean UserDeletePhoto(final IAPIProxyCallback callback) {
+		// TODO Auto-generated method stub
+		
+		
+		new Thread()
+		{
+			@Override
+ 			public void run()
+ 			{
+				if(!_httpLayer.IsConnectedSession())
+				{
+					if(!Relogin())
+						return;
+				}
+				
+				String result = _httpLayer.POSTSync(_domain+"User/DeletePhoto", null);
+				// TODO Auto-generated method stub
+				JSONObject obj = null;
+				
+				try
+				{
+					if(result !=null)
+					{
+						obj = new JSONObject(result);
+						if(true == obj.getBoolean("success"))
+							SessionUpdate("UserDeletePhoto");
 						callback.OnCallback(true,obj);
 						return;
 					}
