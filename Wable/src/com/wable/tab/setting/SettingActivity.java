@@ -20,6 +20,8 @@ public class SettingActivity extends Activity implements OnClickListener {
 		findViewById(R.id.STbtnTerms).setOnClickListener(this);
 		findViewById(R.id.STbtnPrivacy).setOnClickListener(this);
 		findViewById(R.id.STbtnLocation).setOnClickListener(this);
+		findViewById(R.id.STbtnLogout).setOnClickListener(this);
+		findViewById(R.id.STbtnProfile).setOnClickListener(this);
 		findViewById(R.id.STbtnPush).setOnClickListener(this);
 		findViewById(R.id.STbtnIntro).setOnClickListener(this);
 		findViewById(R.id.STbtnNotice).setOnClickListener(this);
@@ -32,6 +34,17 @@ public class SettingActivity extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		Intent i;
 		switch (v.getId()) {
+		// 내 정보
+		case R.id.STbtnProfile:
+		
+		break;
+		
+		// 로그아웃
+		case R.id.STbtnLogout:
+		
+		
+		break;
+		
 		// 소개동영상
 		case R.id.STbtnIntro:
 			
