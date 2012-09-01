@@ -5,12 +5,17 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.wable.http.apiproxy.JSONParser.Result.UserGetUpdatedContents_Result;
+import com.wable.http.apiproxy.JSONParser.Result.sp_GetMyActiveRequests_Result;
+import com.wable.http.apiproxy.JSONParser.Result.sp_GetRequestsByArea_Result;
+import com.wable.http.apiproxy.JSONParser.Result.sp_GetRequestsByDistance_Result;
+import com.wable.http.apiproxy.JSONParser.Result.sp_GetRequestsByTime_Result;
+
 public class JSONParser {
-	
-	
-	public static sp_GetRequestsByTime_Result RequestListByTimeParser(JSONObject json)
+
+	public static sp_GetRequestsByTime_Items RequestListByTimeParser(JSONObject json)
 	{
-		sp_GetRequestsByTime_Result results = new sp_GetRequestsByTime_Result();
+		sp_GetRequestsByTime_Items results = new sp_GetRequestsByTime_Items();
 		try 
 		{
 			results.bsuccess = json.getBoolean("success");
@@ -21,7 +26,7 @@ public class JSONParser {
 					
 				for(int i=0;i<array.length();i++)
 				{
-					results.requestsItem.add(new sp_GetRequestsByTime_Item( array.getJSONObject(i)));
+					results.requestsItem.add(new sp_GetRequestsByTime_Result( array.getJSONObject(i)));
 				}
 				return results;
 			}
@@ -30,7 +35,8 @@ public class JSONParser {
 		}
 		return null;
 	}
-
+	
+	/*
 	
 	public static sp_GetRequestsByDistance_Result RequestListByDistanceParser(JSONObject json)
 	{
@@ -46,7 +52,7 @@ public class JSONParser {
 				
 				for(int i=0;i<array.length();i++)
 				{
-					results.requestsItem.add(new sp_GetRequestsByDistance_Item( array.getJSONObject(i)));
+					//results.requestsItem.add(new sp_GetRequestsByDistance_Item( array.getJSONObject(i)));
 				}
 				return results;
 			}
@@ -70,7 +76,7 @@ public class JSONParser {
 				
 				for(int i=0;i<array.length();i++)
 				{
-					results.requestsItem.add(new sp_GetRequestsByArea_Item( array.getJSONObject(i)));
+					//results.requestsItem.add(new sp_GetRequestsByArea_Item( array.getJSONObject(i)));
 				}
 				return results;
 			}
@@ -96,7 +102,7 @@ public class JSONParser {
 				
 				for(int i=0;i<array.length();i++)
 				{
-					results.requestsItem.add(new sp_GetMyActiveRequests_Item( array.getJSONObject(i)));
+					//results.requestsItem.add(new sp_GetMyActiveRequests_Item( array.getJSONObject(i)));
 				}
 				return results;
 			}
@@ -125,6 +131,6 @@ public class JSONParser {
 		
 		return null;
 	}
-	
+	*/
 	
 }
