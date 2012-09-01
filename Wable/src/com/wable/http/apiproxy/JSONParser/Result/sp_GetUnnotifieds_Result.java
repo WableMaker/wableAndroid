@@ -58,7 +58,6 @@ public class sp_GetUnnotifieds_Result
 		request_id= obj.getLong("request_id");
 
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
