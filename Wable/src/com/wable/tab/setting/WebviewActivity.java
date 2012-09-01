@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.TextView;
 
@@ -28,6 +29,8 @@ public class WebviewActivity extends Activity {
 		});
 		
 		WebView web = (WebView)findViewById(R.id.webView1);
+		WebSettings webSettings = web.getSettings();
+		webSettings.setJavaScriptEnabled(true);
 		web.loadUrl(url);
 	}
 }
