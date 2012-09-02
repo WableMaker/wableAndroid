@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <include layout="@layout/setting_main_header"/>
+    
+    
+    <LinearLayout 
+        android:id="@+id/STmypageProfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        
+        <ImageView 
+            android:id="@+id/STimageProfile"
+            android:layout_width="100dp"
+            android:layout_height="100dp" />
+
+        <LinearLayout
+            android:id="@+id/STmypageCertification"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/STbtnPhone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="phone" />
+
+            <Button
+                android:id="@+id/STbtnFacebook"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" 
+                android:text="fb"/>
+
+            <Button
+                android:id="@+id/STbtnEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" 
+                android:text="email"/>
+        </LinearLayout>
+      
+    </LinearLayout>
+
+            
+  
+  <TextView
+      android:id="@+id/STtvName"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content" 
+      android:text="name"/>
+  
+  
+  <TextView 
+      android:id="@+id/STtvProfile"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="my profile"
+      />  
+
+	    
+</LinearLayout>

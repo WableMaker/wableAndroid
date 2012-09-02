@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <include layout="@layout/setting_main_header"/>
+   
+    <!-- 휴대폰 인증 -->
+    <TextView
+        android:text="@string/setting_cert_phone"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent" />
+    
+    <CheckBox 
+        android:id="@+id/STcbPublicPhone"
+        android:text="phone"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content" />
+    
+    <Button 
+        android:text="010"
+        android:id="@+id/STtvCertPhone"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent" />
+    
+    
+    <!-- 페이스북 인증 -->
+    <TextView
+        android:text="@string/setting_cert_facebook"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent" />
+
+    <CheckBox 
+        android:id="@+id/STcbPublicFacebook"
+        android:text="facebook"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content" />
+    
+     <Button 
+        android:id="@+id/STtvCertFacebook"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="인증하기"
+        />   
+    
+    
+    
+    <!-- 이메일 인증 -->   
+    <TextView
+        android:text="@string/setting_cert_email"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent" />    
+    <CheckBox
+        android:id="@+id/STcbPublicEmail"
+        android:text="email"
+        android:layout_width="229dp"
+        android:layout_height="wrap_content" />
+
+    <Button 
+        android:id="@+id/STtvCertEmail"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="인증하기"
+        />
+
+    
+    <!--  footer  -->
+    <TextView
+        android:text="@string/setting_myinfo_footer"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        />
+    
+    
+    
+</LinearLayout>

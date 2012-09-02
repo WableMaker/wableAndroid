@@ -6,7 +6,7 @@
         android:layout_height="wrap_content" >
 
         <TextView
-            android:id="@+id/STtxtTitle"
+            android:id="@+id/STtvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -20,5 +20,15 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:text="이전" />
-
+        
+	    <Button
+	        android:id="@+id/STbtnConfirm"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentRight="true"
+	        android:layout_alignParentTop="true"
+	        android:visibility="gone"
+	        android:text="수정"
+	        />
+	    
     </RelativeLayout>

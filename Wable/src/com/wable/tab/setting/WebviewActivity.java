@@ -18,7 +18,7 @@ public class WebviewActivity extends Activity {
 		setContentView(R.layout.setting_webview);
 		String url = getIntent().getStringExtra("URL");
 		String title = getIntent().getStringExtra("title");
-		TextView title_view = (TextView) findViewById(R.id.STtxtTitle);
+		TextView title_view = (TextView) findViewById(R.id.STtvTitle);
 		title_view.setText(title);
 		
 		findViewById(R.id.STbtnBack).setOnClickListener(new OnClickListener() {
