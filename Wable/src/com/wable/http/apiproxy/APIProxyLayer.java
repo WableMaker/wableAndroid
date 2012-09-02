@@ -1430,13 +1430,13 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	}
 	
 	@Override
-	public boolean MessageSendText(String biddingid, String message,String lastmsgutctime,
+	public boolean MessageSendText(String biddingid, String message,String lastmsgutctick,
 			final IAPIProxyCallback callback) {
 		
 		final Map<String,Object> params = new HashMap<String,Object>();
 		params.put("biddingid", biddingid);
 		params.put("message", message);
-		params.put("lastmsgutctime", lastmsgutctime);
+		params.put("lastmsgutctick", lastmsgutctick);
 		
 		
 		new Thread()
@@ -1738,13 +1738,13 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	}
 
 	@Override
-	public boolean MessageSendImage(String biddingid, String filepath,String lastmsgutctime,
+	public boolean MessageSendImage(String biddingid, String filepath,String lastmsgutctick,
 			final IAPIProxyCallback callback) {
 		
 		
 		final Map<String,Object> params = new HashMap<String,Object>();
 		params.put("biddingid", biddingid);
-		params.put("lastmsgutctime", lastmsgutctime);
+		params.put("lastmsgutctick", lastmsgutctick);
 		final Map<String,Object> files = new HashMap<String,Object>();
 		files.put("filepath", filepath);
 		
@@ -2061,11 +2061,11 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 	@Override
 	public boolean MessageSendAudio(String biddingid, String filepath,
-			String lastmsgutctime, final IAPIProxyCallback callback) {
+			String lastmsgutctick, final IAPIProxyCallback callback) {
 		
 		final Map<String,Object> params = new HashMap<String,Object>();
 		params.put("biddingid", biddingid);
-		params.put("lastmsgutctime", lastmsgutctime);
+		params.put("lastmsgutctick", lastmsgutctick);
 		final Map<String,Object> files = new HashMap<String,Object>();
 		files.put("filepath", filepath);
 		
@@ -2114,12 +2114,12 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 	@Override
 	public boolean MessageSendVideo(String biddingid, String filepath,
-			String lastmsgutctime, final IAPIProxyCallback callback) {
+			String lastmsgutctick, final IAPIProxyCallback callback) {
 		
 
 		final Map<String,Object> params = new HashMap<String,Object>();
 		params.put("biddingid", biddingid);
-		params.put("lastmsgutctime", lastmsgutctime);
+		params.put("lastmsgutctick", lastmsgutctick);
 		final Map<String,Object> files = new HashMap<String,Object>();
 		files.put("filepath", filepath);
 		
