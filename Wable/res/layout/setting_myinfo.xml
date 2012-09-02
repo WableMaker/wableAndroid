@@ -27,33 +27,40 @@
 
             <Button
                 android:id="@+id/STbtnPhone"
-                android:layout_width="30dp"
-                android:layout_height="30dp" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="phone" />
 
             <Button
                 android:id="@+id/STbtnFacebook"
-                android:layout_width="30dp"
-                android:layout_height="30dp" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" 
+                android:text="fb"/>
 
             <Button
                 android:id="@+id/STbtnEmail"
-                android:layout_width="30dp"
-                android:layout_height="30dp" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" 
+                android:text="email"/>
         </LinearLayout>
-        
-        <TextView
-            android:id="@+id/STtxtName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        
-        
-        <TextView android:id="@+id/STtxtProfile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />        
+      
     </LinearLayout>
 
-    
+            
+  
+  <TextView
+      android:id="@+id/STtvName"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content" 
+      android:text="name"/>
+  
+  
+  <TextView 
+      android:id="@+id/STtvProfile"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="my profile"
+      />  
 
-    
+	    
 </LinearLayout>

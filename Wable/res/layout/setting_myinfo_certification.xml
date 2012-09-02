@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    
+    <include layout="@layout/setting_main_header"/>
+   
     <!-- 휴대폰 인증 -->
     <TextView
         android:text="@string/setting_cert_phone"
@@ -11,7 +12,7 @@
         android:layout_width="fill_parent" />
     
     <CheckBox 
-        android:id="@+id/STbtnCertPhone"
+        android:id="@+id/STcbPublicPhone"
         android:text="phone"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content" />
@@ -30,7 +31,7 @@
         android:layout_width="fill_parent" />
 
     <CheckBox 
-        android:id="@+id/STbtnCertFacebook"
+        android:id="@+id/STcbPublicFacebook"
         android:text="facebook"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content" />
@@ -50,7 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_width="fill_parent" />    
     <CheckBox
-        android:id="@+id/STcbPublishFacebook"
+        android:id="@+id/STcbPublicEmail"
         android:text="email"
         android:layout_width="229dp"
         android:layout_height="wrap_content" />
