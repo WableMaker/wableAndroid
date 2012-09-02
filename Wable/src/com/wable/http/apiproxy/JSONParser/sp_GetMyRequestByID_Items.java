@@ -8,6 +8,7 @@ import com.wable.http.apiproxy.JSONParser.Result.sp_GetMyRequestByID_Result;
 public class sp_GetMyRequestByID_Items {
 	public List<sp_GetMyRequestByID_Result> requestsItem = new ArrayList<sp_GetMyRequestByID_Result>();
 	public boolean bsuccess = false;
+	public ResultCode resultCode;
 	public sp_GetMyRequestByID_Items() {
 	}
 

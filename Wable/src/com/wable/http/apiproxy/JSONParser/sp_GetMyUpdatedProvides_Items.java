@@ -8,6 +8,7 @@ import com.wable.http.apiproxy.JSONParser.Result.sp_GetMyUpdatedProvides_Result;
 public class sp_GetMyUpdatedProvides_Items {
 	public List<sp_GetMyUpdatedProvides_Result> requestsItem = new ArrayList<sp_GetMyUpdatedProvides_Result>();
 	public boolean bsuccess = false;
+	public ResultCode resultCode;
 	public sp_GetMyUpdatedProvides_Items() {
 	}
 

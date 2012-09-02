@@ -9,6 +9,7 @@ public class sp_GetRequestsByDistance_Items {
 
 	public List<sp_GetRequestsByDistance_Result> requestsItem = new ArrayList<sp_GetRequestsByDistance_Result>();
 	public boolean bsuccess = false;
+	public ResultCode resultCode;
 	public sp_GetRequestsByDistance_Items() {
 	}
 

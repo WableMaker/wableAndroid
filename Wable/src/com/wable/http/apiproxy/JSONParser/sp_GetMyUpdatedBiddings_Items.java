@@ -9,6 +9,7 @@ public class sp_GetMyUpdatedBiddings_Items {
 
 	public List<sp_GetMyUpdatedBiddings_Result> requestsItem = new ArrayList<sp_GetMyUpdatedBiddings_Result>();
 	public boolean bsuccess = false;
+	public ResultCode resultCode;
 	public sp_GetMyUpdatedBiddings_Items() {
 	}
 
