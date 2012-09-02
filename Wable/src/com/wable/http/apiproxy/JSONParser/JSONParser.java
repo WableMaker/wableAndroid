@@ -132,6 +132,11 @@ public class JSONParser {
 				}
 				return results;
 			}
+			else
+			{
+				//results.resultCode = json.getJSONObject("data")
+				
+			}
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}

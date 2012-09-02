@@ -680,9 +680,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						return;
 					}
 				}
-
 				String result = _httpLayer.GETSync(_domain+"Request/ListbyTime", params);
-				// TODO Auto-generated method stub
 				JSONObject obj = null;
 				
 				try
