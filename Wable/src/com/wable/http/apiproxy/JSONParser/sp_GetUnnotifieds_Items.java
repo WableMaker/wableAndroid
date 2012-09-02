@@ -9,6 +9,7 @@ import com.wable.http.apiproxy.JSONParser.Result.sp_GetUnnotifieds_Result;
 public class sp_GetUnnotifieds_Items {
 	public List<sp_GetUnnotifieds_Result> requestsItem = new ArrayList<sp_GetUnnotifieds_Result>();
 	public boolean bsuccess = false;
+	public ResultCode resultCode;
 	public sp_GetUnnotifieds_Items() {
 	}
 

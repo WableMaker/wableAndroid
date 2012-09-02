@@ -24,6 +24,8 @@ import com.wable.http.apiproxy.APIProxyLayer;
 import com.wable.http.apiproxy.IAPIProxyCallback;
 import com.wable.http.apiproxy.JSONParser.JSONParser;
 import com.wable.http.apiproxy.JSONParser.sp_GetMyActiveRequests_Items;
+import com.wable.http.apiproxy.JSONParser.sp_GetOtherRequests_Items;
+import com.wable.http.apiproxy.JSONParser.sp_GetRequestsByArea_Items;
 //import com.wable.http.apiproxy.JSONParser.sp_GetRequestsByTime_Item;
 import com.wable.http.apiproxy.JSONParser.Result.sp_GetMyActiveRequests_Result;
 import com.wable.http.apiproxy.JSONParser.Result.sp_GetRequestsByDistance_Result;
@@ -85,7 +87,7 @@ public class WableActivity extends Activity implements OnClickListener {
 //
 //    
        // JSON Parser TEST code
-      /* APIProxyLayer.Instance().Login("cc", "111111", new IAPIProxyCallback(){
+/*       APIProxyLayer.Instance().Login("cc", "111111", new IAPIProxyCallback(){
 
 			@Override
 			public void OnCallback(boolean success, JSONObject json) {
@@ -95,15 +97,20 @@ public class WableActivity extends Activity implements OnClickListener {
 					
 					//APIProxyLayer.Instance().RequestListbyTime(null, null,new IAPIProxyCallback()
 					//APIProxyLayer.Instance().RequestListbyArea(0,0,0,0,null,new IAPIProxyCallback()
-					APIProxyLayer.Instance().RequestMyActiveList(null,new IAPIProxyCallback()
+					//APIProxyLayer.Instance().RequestMyActiveList(null,new IAPIProxyCallback()
+					APIProxyLayer.Instance().RequestOtherList("-9223372036854775806",null,new IAPIProxyCallback()
 					{
 						@Override
 						public void OnCallback(boolean success, JSONObject json) {
 							if(success)
 							{
-								sp_GetMyActiveRequests_Items result=  JSONParser.RequestMyActiveListParser(json);
-								if(result != null){
-									int i = 0;
+								//sp_GetMyActiveRequests_Items result=  JSONParser.RequestMyActiveListParser(json);
+								//sp_GetRequestsByArea_Items result = JSONParser.RequestListByAreaParser(json);
+								sp_GetOtherRequests_Items result = JSONParser.RequestOtherListParser(json);
+								int ii = 0;
+								if(ii == 0)
+								{
+									
 								}
 							}
 							else Logger.Instance().Write("Fail to GetMyInfo");
@@ -161,7 +168,7 @@ public class WableActivity extends Activity implements OnClickListener {
 			
         	
         });
-    	*/     // JSON Parser TEST code
+    	 */    // JSON Parser TEST code
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

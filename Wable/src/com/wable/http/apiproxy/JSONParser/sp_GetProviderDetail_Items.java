@@ -8,6 +8,7 @@ import com.wable.http.apiproxy.JSONParser.Result.sp_GetProviderDetail_Result;
 public class sp_GetProviderDetail_Items {
 	public List<sp_GetProviderDetail_Result> requestsItem = new ArrayList<sp_GetProviderDetail_Result>();
 	public boolean bsuccess = false;
+	public ResultCode resultCode;
 	public sp_GetProviderDetail_Items() {
 	}
 
