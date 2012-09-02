@@ -212,13 +212,14 @@ public class APIProxyLayer implements IAPIProxyLayer {
 							try
 							{
 								obj = new JSONObject(result);
-								if(false == obj.getBoolean("success"))
+								boolean success = obj.getBoolean("success");
+								if(false == success)
 									SessionDisconnected("Login");
 								else {
 									SessionConnected("Login");
-									callback.OnCallback(true,obj);
-									return;
 								}
+								callback.OnCallback(true,obj);
+								return;
 							}
 							catch(Exception e)
 							{
@@ -679,9 +680,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						return;
 					}
 				}
-
 				String result = _httpLayer.GETSync(_domain+"Request/ListbyTime", params);
-				// TODO Auto-generated method stub
 				JSONObject obj = null;
 				
 				try
