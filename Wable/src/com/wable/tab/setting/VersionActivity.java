@@ -29,7 +29,7 @@ public class VersionActivity extends Activity{
 		TextView curr = (TextView) findViewById(R.id.STtxtCurrVer);
 		curr.setText("현재 버젼 : " + version);
 		
-		TextView tv_title = (TextView) findViewById(R.id.STtxtTitle);
+		TextView tv_title = (TextView) findViewById(R.id.STtvTitle);
 		tv_title.setText(getIntent().getStringExtra("title"));
 		
 		findViewById(R.id.STbtnBack).setOnClickListener(new OnClickListener() {

@@ -36,6 +36,9 @@ public class SettingActivity extends Activity implements OnClickListener {
 		switch (v.getId()) {
 		// 내 정보
 		case R.id.STbtnProfile:
+			i = new Intent(this, SettingMyinfoActivity.class);
+			i.putExtra("title", "나의 정보");
+			startActivity(i);
 		
 		break;
 		
@@ -111,7 +114,6 @@ public class SettingActivity extends Activity implements OnClickListener {
 		break;
 
 		}
-	}
-	
+	}	
 
 }

@@ -51,7 +51,7 @@ public class PushActivity extends Activity implements OnClickListener{
 					   Integer.parseInt(ed_time.split(":")[1]), 0, 0, 0);
 		
 		
-		TextView tv_title = (TextView) findViewById(R.id.STtxtTitle);
+		TextView tv_title = (TextView) findViewById(R.id.STtvTitle);
 		tv_title.setText(getIntent().getStringExtra("title"));
 		
 		findViewById(R.id.STbtnBack).setOnClickListener(this);
