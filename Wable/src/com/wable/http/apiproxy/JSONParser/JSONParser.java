@@ -8,13 +8,41 @@ import org.json.JSONObject;
 import com.wable.http.apiproxy.JSONParser.Result.UserGetUpdatedContents_Result;
 import com.wable.http.apiproxy.JSONParser.Result.sp_GetAllRequests_Result;
 import com.wable.http.apiproxy.JSONParser.Result.sp_GetMyActiveRequests_Result;
+import com.wable.http.apiproxy.JSONParser.Result.sp_GetOtherRequests_Result;
 import com.wable.http.apiproxy.JSONParser.Result.sp_GetRequestsByArea_Result;
 import com.wable.http.apiproxy.JSONParser.Result.sp_GetRequestsByDistance_Result;
 import com.wable.http.apiproxy.JSONParser.Result.sp_GetRequestsByTime_Result;
 
 public class JSONParser {
 
-
+	public static sp_GetOtherRequests_Items RequestOtherListParser(JSONObject json)
+	{
+		sp_GetOtherRequests_Items results = new sp_GetOtherRequests_Items();
+		try 
+		{
+			results.bsuccess = json.getBoolean("success");
+			
+			if(results.bsuccess)
+			{
+				JSONArray array= json.getJSONArray("data");
+					
+				for(int i=0;i<array.length();i++)
+				{
+					results.requestsItem.add(new sp_GetOtherRequests_Result( array.getJSONObject(i)));
+				}
+				results.resultCode = ResultCode.SUCCESS;
+				return results;
+			}
+			else
+			{
+				results.resultCode = ResultCode.valueOf(json.getString("data"));
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	public static sp_GetAllRequests_Items RequestListAllParser(JSONObject json)
 	{
 		sp_GetAllRequests_Items results = new sp_GetAllRequests_Items();
@@ -30,7 +58,12 @@ public class JSONParser {
 				{
 					results.requestsItem.add(new sp_GetAllRequests_Result( array.getJSONObject(i)));
 				}
+				results.resultCode = ResultCode.SUCCESS;
 				return results;
+			}
+			else
+			{
+				results.resultCode = ResultCode.valueOf(json.getString("data"));
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -54,7 +87,12 @@ public class JSONParser {
 				{
 					results.requestsItem.add(new sp_GetRequestsByTime_Result( array.getJSONObject(i)));
 				}
+				results.resultCode = ResultCode.SUCCESS;
 				return results;
+			}
+			else
+			{
+				results.resultCode = ResultCode.valueOf(json.getString("data"));
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -80,7 +118,12 @@ public class JSONParser {
 				{
 					results.requestsItem.add(new sp_GetRequestsByDistance_Result( array.getJSONObject(i)));
 				}
+				results.resultCode = ResultCode.SUCCESS;
 				return results;
+			}
+			else
+			{
+				results.resultCode = ResultCode.valueOf(json.getString("data"));
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -138,8 +181,7 @@ public class JSONParser {
 			}
 			else
 			{
-				//results.resultCode = json.getJSONObject("data")
-				
+				results.resultCode = ResultCode.valueOf(json.getString("data"));
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();
