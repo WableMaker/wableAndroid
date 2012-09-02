@@ -721,7 +721,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		params.put("north", north);
 		params.put("south", south);
 		params.put("east", east);
-		params.put("west", west);
+		//test params.put("west", west);
 		if(keyword !=null)params.put("keyword", keyword);
 		
 		
@@ -740,7 +740,6 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				}
 
 				String result = _httpLayer.GETSync(_domain+"Request/ListbyArea", params);
-				// TODO Auto-generated method stub
 				JSONObject obj = null;
 				
 				try

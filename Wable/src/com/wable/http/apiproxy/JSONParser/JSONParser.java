@@ -101,10 +101,13 @@ public class JSONParser {
 				JSONArray array= json.getJSONArray("data");
 				
 				for(int i=0;i<array.length();i++)
-				{
 					results.requestsItem.add(new sp_GetRequestsByArea_Result( array.getJSONObject(i)));
-				}
+				results.resultCode = ResultCode.SUCCESS;
 				return results;
+			}
+			else
+			{
+				results.resultCode = ResultCode.valueOf(json.getString("data"));
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -130,6 +133,7 @@ public class JSONParser {
 				{
 					results.requestsItem.add(new sp_GetMyActiveRequests_Result( array.getJSONObject(i)));
 				}
+				results.resultCode = ResultCode.SUCCESS;
 				return results;
 			}
 			else
