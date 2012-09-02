@@ -10,7 +10,13 @@
     <string name="setting_intro_movie">소개동영상</string>
     <string name="setting_logout">로그아웃</string>
     <string name="setting_myinfo">내 정보</string>
+    <string name="setting_myinfo_footer">대학교 이메일로 인증시 학교로고가 상대방에게 보여집니다.</string>
     <string name="setting_notice">공지사항</string>
     <string name="setting_notify">알림설정</string>
     <string name="setting_version">버전정보</string>
+    
+    <string name="setting_cert_email">이메일 인증</string>
+    <string name="setting_cert_facebook">페이스북 인증</string>
+    <string name="setting_cert_phone">휴대폰 인증</string>
+    
 </resources>

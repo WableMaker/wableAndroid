@@ -20,5 +20,15 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:text="이전" />
-
+        
+	    <Button
+	        android:id="@+id/STbtnConfirm"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentRight="true"
+	        android:lyaout_alignParnetTop="true"
+	        android:visibility="gone"
+	        android:text="수정"
+	        />
+	    
     </RelativeLayout>
