@@ -9,7 +9,7 @@ public class sp_GetProvidesByTime_Items {
 	public List<sp_GetProvidesByTime_Result> requestsItem = new ArrayList<sp_GetProvidesByTime_Result>();
 	public boolean bsuccess = false;
 	public ResultCode resultCode;
-	public sp_GetProvidesByTime_Items() {
+	public sp_GetProvidesByTime_Items() { 
 	}
 
 }

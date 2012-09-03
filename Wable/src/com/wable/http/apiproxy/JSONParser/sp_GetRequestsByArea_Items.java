@@ -10,7 +10,7 @@ public class sp_GetRequestsByArea_Items {
 	public List<sp_GetRequestsByArea_Result> requestsItem = new ArrayList<sp_GetRequestsByArea_Result>();
 	public boolean bsuccess = false;
 	public ResultCode resultCode;
-	public sp_GetRequestsByArea_Items() {
+	public sp_GetRequestsByArea_Items() { 
 	}
 
 }
