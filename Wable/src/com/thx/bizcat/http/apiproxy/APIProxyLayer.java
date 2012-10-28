@@ -10,11 +10,11 @@ import java.util.concurrent.locks.ReentrantLock;
 import org.json.JSONObject;
 
 import android.os.Build;
+import android.os.Handler;
 import android.text.format.Time;
 
 import com.thx.bizcat.http.HttpClientWrapper;
 import com.thx.bizcat.http.HttpURLConnectionWrapper;
-import com.thx.bizcat.http.IHttpCallback;
 import com.thx.bizcat.http.IHttpConnectionLayer;
 import com.thx.bizcat.util.Logger;
 
@@ -190,8 +190,10 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	
 	@Override
 	public boolean Login(String loginid, String password,
-			final IAPIProxyCallback callback) {
+			//final IAPIProxyCallback callback) {
 
+			final Handler callback) {
+			
 		SetAccountInfo(loginid,password,null,null);
 		final Map<String,Object> params = new HashMap<String,Object>();
 		params.put("loginid", loginid);
@@ -218,7 +220,9 @@ public class APIProxyLayer implements IAPIProxyLayer {
 								else {
 									SessionConnected("Login");
 								}
-								callback.OnCallback(true,obj);
+								//callback.OnCallback(true,obj);
+								
+								//callback.sendMessage(callback.obtainMessage((int)WHAT.aeh, obj));
 								return;
 							}
 							catch(Exception e)
@@ -233,7 +237,9 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					Logger.Instance().Write(e);
 					
 				}
-				callback.OnCallback(false,null);
+				
+				//callback.sendMessage(callback.obtainMessage(0, obj));
+				//callback.OnCallback(false,null);
 
  			}
 		}.start();

@@ -1,7 +1,5 @@
 package com.thx.bizcat;
 
-import org.json.JSONObject;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -19,10 +17,8 @@ import android.widget.Toast;
 
 import com.facebook.android.Facebook;
 import com.thx.bizcat.http.apiproxy.APIProxyLayer;
-import com.thx.bizcat.http.apiproxy.IAPIProxyCallback;
 import com.thx.bizcat.tab.login.PasswordFindActivity;
 import com.thx.bizcat.tab.login.RegisterActivity;
-import com.thx.bizcat.util.Logger;
 //import com.wable.http.apiproxy.JSONParser.sp_GetRequestsByTime_Item;
 
 public class WableActivity extends Activity implements OnClickListener {
@@ -72,6 +68,9 @@ public class WableActivity extends Activity implements OnClickListener {
         
         etUser.setOnFocusChangeListener(onFocusChangeListner);
         etPass.setOnFocusChangeListener(onFocusChangeListner);
+        
+        etUser.setText("cc");
+		etPass.setText("1111111");
         
 //        etPass = (EditText)findViewById(R.id.editLoginPass);
 //        etPass.setOnEditorActionListener(new OnEditorActionListener() {
@@ -233,40 +232,58 @@ public class WableActivity extends Activity implements OnClickListener {
 			
 		case R.id.LOGINbtnLogin:
 
-			if (etUser.getText().toString().length() == 0) {
+			if (etUser.getText().toString().length() < 1) {
 				//Toast.makeText(context, "아이디를 입력해주세요", Toast.LENGTH_SHORT).show();
 				//break;
-				etUser.setText("test1111");
-				etPass.setText("1111111");
-			} else if (etPass.getText().toString().length() == 0) {
+				
+			} else if (etPass.getText().toString().length() < 1) {
 				Toast.makeText(context, "비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show();
 				break;
 			}
 			
 			pd = ProgressDialog.show(context, "로그인", "사용자 정보 조회중입니다...", true, false);
 			
-					
-			APIProxyLayer.Instance().Login(etUser.getText().toString(), etPass.getText().toString(), new IAPIProxyCallback(){
 
+			APIProxyLayer.Instance().Login(etUser.getText().toString(), etPass.getText().toString(), 
+
+				new Handler() {
+				
 				@Override
-				public void OnCallback(boolean success, JSONObject json) {		
-					pd.dismiss();
+				public void handleMessage(Message msg) {
+
 					
-					if(success)
-					{
-						//Logger.Instance().Write(json.toString());
-						Intent intent = new Intent(context, MainActivity.class);
-						startActivity(intent);			
-						overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-						finish();
-
-					} else { 
-
-						handler.sendEmptyMessage(500);
-						Logger.Instance().Write("login fail");
-					}
+					
+					super.handleMessage(msg);
 				}
-			});
+			}
+
+
+
+
+					);
+
+					
+//					new IAPIProxyCallback(){
+//
+//				@Override
+//				public void OnCallback(boolean success, JSONObject json) {		
+//					pd.dismiss();
+//					
+//					if(success)
+//					{
+//						//Logger.Instance().Write(json.toString());
+//						Intent intent = new Intent(context, MainActivity.class);
+//						startActivity(intent);			
+//						overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+//						finish();
+//
+//					} else { 
+//
+//						handler.sendEmptyMessage(500);
+//						Logger.Instance().Write("login fail");
+//					}
+//				}
+			
 			//Toast.makeText(context, "아이디 또는 비밀번호를 확인해주세요", Toast.LENGTH_SHORT).show();
 			
 			//Toast.makeText(context, "Login OK", Toast.LENGTH_SHORT).show();

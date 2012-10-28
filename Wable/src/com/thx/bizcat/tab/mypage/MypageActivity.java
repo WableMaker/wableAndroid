@@ -104,7 +104,11 @@ public class MypageActivity extends Activity implements OnClickListener {
 			@Override
 			public void OnCallback(boolean success, final JSONObject json) {
 			
-				if(!success) return;
+				if(!success) {
+					
+					mHandler.sendEmptyMessage(1);
+					return;
+				}
 				
 
 				runOnUiThread(new Runnable() {

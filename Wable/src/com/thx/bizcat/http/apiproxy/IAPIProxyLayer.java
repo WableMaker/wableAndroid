@@ -2,6 +2,7 @@ package com.thx.bizcat.http.apiproxy;
 
 import java.util.Date;
 
+import android.os.Handler;
 import android.text.format.Time;
 
 
@@ -9,7 +10,8 @@ public interface IAPIProxyLayer {
 	
 	// [start] Account
 	
-	boolean Login(String loginid,String password, IAPIProxyCallback callback);//�α��� �õ�
+	//boolean Login(String loginid,String password, IAPIProxyCallback callback);//�α��� �õ�
+	boolean Login(String loginid,String password, Handler callback);//�α��� �õ�
 	boolean Logout(IAPIProxyCallback callback);//�α��� �õ�
 	boolean Register(String loginid,String email,String username,String password, IAPIProxyCallback callback);//�α��� �õ�
 	
