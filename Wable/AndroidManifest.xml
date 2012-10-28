@@ -50,6 +50,7 @@
         <activity android:name=".tab.search.SearchProvideDistance" android:theme="@android:style/Theme.NoTitleBar"></activity>
         <activity android:name=".tab.search.SearchProvideMap" android:theme="@android:style/Theme.NoTitleBar"></activity>
         <activity android:name=".tab.search.SearchRequestActivity" android:theme="@android:style/Theme.NoTitleBar"></activity>
+        <activity android:name=".chat.ChatActivity"></activity>
         
     </application>
 

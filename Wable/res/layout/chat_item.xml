@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/CHATtextLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="사람1" />
+
+    <TextView
+        android:id="@+id/CHATtextRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="사람2" />
+
+    <TextView
+        android:id="@+id/CHATtextLeftStr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/CHATtextLeft"
+        android:layout_toRightOf="@id/CHATtextLeft"
+        android:maxWidth="200dp"
+        android:text="1" />
+
+    <TextView
+        android:id="@+id/CHATtextRightStr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/CHATtextRight"
+        android:layout_marginTop="-10dp"
+        android:layout_toLeftOf="@id/CHATtextRight"
+        android:gravity="clip_horizontal"
+        android:maxWidth="200dp"
+        android:text="내가 밥을 언제 먹었냐??\n넌 기억하냐??" />
+
+</RelativeLayout>

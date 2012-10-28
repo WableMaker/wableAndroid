@@ -2,7 +2,7 @@
 <resources>
 
     <string name="hello">Hello World, WableActivity!</string>
-    <string name="app_name">Wable</string>
+    <string name="app_name">BIzCat</string>
     
     <string name="setting">설정</string>
     <string name="setting_faq">FAQ</string>

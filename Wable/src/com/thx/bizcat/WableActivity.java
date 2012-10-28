@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.facebook.android.Facebook;
+import com.thx.bizcat.chat.ChatActivity;
 import com.thx.bizcat.http.apiproxy.APIProxyLayer;
 import com.thx.bizcat.tab.login.PasswordFindActivity;
 import com.thx.bizcat.tab.login.RegisterActivity;
@@ -71,6 +72,9 @@ public class WableActivity extends Activity implements OnClickListener {
         
         etUser.setText("cc");
 		etPass.setText("1111111");
+		
+		Intent intent = new Intent(context, ChatActivity.class);
+		startActivity(intent);
         
 //        etPass = (EditText)findViewById(R.id.editLoginPass);
 //        etPass.setOnEditorActionListener(new OnEditorActionListener() {
