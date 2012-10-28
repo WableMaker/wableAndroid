@@ -196,7 +196,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 			
 		SetAccountInfo(loginid,password,null,null);
 		final Map<String,Object> params = new HashMap<String,Object>();
-		params.put("loginid", loginid);
+		params.put("login_id", loginid);
 		params.put("password", password);
 		
 		new Thread()
@@ -355,7 +355,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		SetAccountInfo(loginid,password,null,null);
 
 		final Map<String,Object> params = new HashMap<String,Object>();
-		params.put("loginid", loginid);
+		params.put("login_id", loginid);
 		params.put("email", email);
 		params.put("username", username);
 		params.put("password", password);
@@ -415,7 +415,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 			@Override
  			public void run()
  			{
-				String result = _httpLayer.POSTSync(_domainSSL+"account/FBLoginMobile", params);
+				String result = _httpLayer.POSTSync(_domainSSL+"account/FBLoginMobile2", params);
 				// TODO Auto-generated method stub
 				JSONObject obj = null;
 				
@@ -465,7 +465,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 			@Override
  			public void run()
  			{
-				String result = _httpLayer.POSTSync(_domainSSL+"account/FBRegisterMobile", params);
+				String result = _httpLayer.POSTSync(_domainSSL+"account/FBRegisterMobile2", params);
 				// TODO Auto-generated method stub
 				JSONObject obj = null;
 				
