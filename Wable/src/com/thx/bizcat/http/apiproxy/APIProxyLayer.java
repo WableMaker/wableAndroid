@@ -237,7 +237,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				callback.sendMessage(callback.obtainMessage(APICODE.Login.toInt(), obj));
+				callback.sendMessage(callback.obtainMessage(APICODE.Login.toInt(), null));
 				
 
  			}
@@ -288,7 +288,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					Logger.Instance().Write(e);
 					
 				}
-				callback.sendMessage(callback.obtainMessage(APICODE.Logout.toInt(), obj));
+				callback.sendMessage(callback.obtainMessage(APICODE.Logout.toInt(), null));
 				
 
  			}
@@ -325,8 +325,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					{
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
-							SessionDisconnected("Logout");
-						callback.OnCallback(true,obj);
+							SessionUpdate("MyInfo");
+						callback.sendMessage(callback.obtainMessage(APICODE.MyInfo.toInt(), obj));
 						return;
 					}
 					catch(Exception e)
@@ -335,7 +335,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						
 					}
 				}
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.MyInfo.toInt(), null));
  			}
 			
 		}.start();
@@ -378,7 +378,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 							SessionDisconnected("Register");
 						else SessionConnected("Register");
 						
-						callback.OnCallback(true,obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.Register.toInt(), obj));
 						return;
 					}
 				}
@@ -387,7 +387,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					Logger.Instance().Write(e);
 				}
 					
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.Register.toInt(), null));
  			}
 			
 		}.start();
@@ -428,7 +428,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 							SessionDisconnected("FBlogin");
 						else SessionConnected("FBlogin");
 						
-						callback.OnCallback(true,obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.FBlogin.toInt(), obj));
 						return;
 					}
 				}
@@ -437,7 +437,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					Logger.Instance().Write(e);
 				}
 				
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.FBlogin.toInt(), null));
  			}
 			
 		}.start();
@@ -478,7 +478,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 							SessionDisconnected("FBregister");
 						else SessionConnected("FBregister");
 						
-						callback.OnCallback(true,obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.FBregister.toInt(), obj));
 						return;
 					}
 				}
@@ -488,7 +488,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.FBregister.toInt(), null));
  			}
 			
 		}.start();
@@ -533,7 +533,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("FBconnect");
 						
-						callback.OnCallback(true,obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.FBconnect.toInt(), obj));
 						return;
 					}
 				}
@@ -543,7 +543,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.FBconnect.toInt(), null));
  			}
 			
 		}.start();
@@ -587,7 +587,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("OtherRequestList");
 						
-						callback.OnCallback(true,obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.RequestOtherList.toInt(), obj));
 						return;
 					}
 				}
@@ -597,7 +597,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.RequestOtherList.toInt(), null));
  			}
 			
 		}.start();
@@ -643,7 +643,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("MyActiveRequestList");
 						
-						callback.OnCallback(true,obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.RequestMyActiveList.toInt(), obj));
 						return;
 					}
 				}
@@ -653,7 +653,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.RequestMyActiveList.toInt(), null));
  			}
 			
 		}.start();
@@ -697,7 +697,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("RequestListbyTime");
 						
-						callback.OnCallback(true,obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.RequestListbyTime.toInt(), obj));
 						return;
 					}
 				}
@@ -707,7 +707,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.RequestListbyTime.toInt(), null));
  			}
 			
 		}.start();
@@ -756,7 +756,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("RequestListbyArea");
 						
-						callback.OnCallback(true,obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.RequestListbyArea.toInt(), obj));
 						return;
 					}
 				}
@@ -766,7 +766,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.RequestListbyArea.toInt(), null));
  			}
 			
 		}.start();
@@ -814,7 +814,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("RequestListbyDistance");
 						
-						callback.OnCallback(true,obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.RequestListbyDistance.toInt(), obj));
 						return;
 					}
 				}
@@ -824,7 +824,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.RequestListbyDistance.toInt(), null));
  			}
 			
 		}.start();
@@ -870,7 +870,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("OtherProvideList");
-						callback.OnCallback(true,obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.ProvideOtherList.toInt(), obj));
 						return;
 					}
 				}
@@ -880,7 +880,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.ProvideOtherList.toInt(), null));
  			}
 			
 		}.start();
@@ -924,7 +924,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("MyActiveProvideList");
-						callback.OnCallback(true,obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.ProvideMyActiveList.toInt(), obj));
 						return;
 					}
 					
@@ -935,7 +935,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.ProvideMyActiveList.toInt(), null));
  			}
 			
 		}.start();
@@ -980,7 +980,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("ProvideListbyTime");
-						callback.OnCallback(true,obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.ProvideListbyTime.toInt(), obj));
 						return;
 					}
 					
@@ -991,7 +991,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.ProvideListbyTime.toInt(), null));
  			}
 			
 		}.start();
@@ -1039,7 +1039,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("ProvideListbyArea");
-						callback.OnCallback(true,obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.ProvideListbyArea.toInt(), obj));
 						return;
 					}
 					
@@ -1050,7 +1050,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.ProvideListbyArea.toInt(), null));
  			}
 			
 		}.start();
@@ -1094,7 +1094,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("ProvideListbyDistance");
-						callback.OnCallback(true,obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.ProvideListbyDistance.toInt(), obj));
 						return;
 					}
 					
@@ -1105,7 +1105,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.ProvideListbyDistance.toInt(), null));
  			}
 			
 		}.start();
@@ -1158,8 +1158,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					{
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
-							SessionUpdate("AddRequest");
-						callback.OnCallback(true,obj);
+							SessionUpdate("RequestAdd");
+						callback.sendMessage(callback.obtainMessage(APICODE.RequestAdd.toInt(), obj));
 						return;
 					}
 					
@@ -1170,7 +1170,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.RequestAdd.toInt(), null));
  			}
 			
 		}.start();
@@ -1223,7 +1223,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("AddProvide");
-						callback.OnCallback(true,obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.ProvideAdd.toInt(), obj));
 						return;
 					}
 					
@@ -1234,7 +1234,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.ProvideAdd.toInt(), null));
  			}
 			
 		}.start();
@@ -1264,7 +1264,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("Category");
-						callback.OnCallback(true,obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.CategoryList.toInt(), obj));
 						return;
 					}
 					
@@ -1275,7 +1275,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.CategoryList.toInt(), null));
  			}
 			
 		}.start();
@@ -1304,7 +1304,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("Category");
-						callback.OnCallback(true,obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.CategoryUpdatedTime.toInt(), obj));
 						return;
 					}
 					
@@ -1315,7 +1315,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.CategoryList.toInt(), null));
  			}
 			
 		}.start();
@@ -1357,7 +1357,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("OfferAsProvider");
-						callback.OnCallback(true,obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.BiddingOfferAsProvider.toInt(), obj));
 						return;
 					}
 					
@@ -1368,7 +1368,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.BiddingOfferAsProvider.toInt(), null));
  			}
 			
 		}.start();
@@ -1411,7 +1411,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("OfferAsRequester");
-						callback.OnCallback(true,obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.BiddingOfferAsRequester.toInt(), obj));
 						return;
 					}
 					
@@ -1422,7 +1422,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.BiddingOfferAsRequester.toInt(), null));
  			}
 			
 		}.start();
@@ -1463,7 +1463,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("Message/SetMessage");
-						callback.OnCallback(true,obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.MessageSendText.toInt(), obj));
 						return;
 					}
 					
@@ -1474,7 +1474,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.MessageSendText.toInt(), null));
+				
  			}
 			
 		}.start();
@@ -1515,7 +1516,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("RequestDelete");
-						callback.OnCallback(true,obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.RequestDelete.toInt(), obj));
 						return;
 					}
 					
@@ -1526,7 +1527,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.RequestDelete.toInt(), null));
  			}
 			
 		}.start();
@@ -1566,7 +1567,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("ProvideDelete");
-						callback.OnCallback(true,obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.ProvideDelete.toInt(), obj));
 						return;
 					}
 					
@@ -1577,7 +1578,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.ProvideDelete.toInt(), null));
  			}
 			
 		}.start();
@@ -1619,7 +1620,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("MessageGet");
-						callback.OnCallback(true,obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.MessageGet.toInt(), obj));
 						return;
 					}
 					
@@ -1630,7 +1631,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.MessageGet.toInt(), null));
  			}
 			
 		}.start();
@@ -1670,7 +1671,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("RequestMyDetailById");
-						callback.OnCallback(true,obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.RequestMyDetailById.toInt(), obj));
 						return;
 					}
 					
@@ -1681,7 +1682,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.RequestMyDetailById.toInt(), null));
  			}
 			
 		}.start();
@@ -1720,7 +1721,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("ProvideMyDetailById");
-						callback.OnCallback(true,obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.ProvideMyDetailById.toInt(), obj));
 						return;
 					}
 					
@@ -1731,7 +1732,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.ProvideMyDetailById.toInt(), null));
  			}
 			
 		}.start();
@@ -1773,7 +1774,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("Message/SetImage");
-						callback.OnCallback(true,obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.MessageSendImage.toInt(), obj));
 						return;
 					}
 					
@@ -1784,7 +1785,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.MessageSendImage.toInt(), null));
  			}
 			
 		}.start();
@@ -1822,7 +1823,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("RequestOtherDetailById");
-						callback.OnCallback(true,obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.RequestOtherDetailById.toInt(), obj));
 						return;
 					}
 					
@@ -1833,7 +1834,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.RequestOtherDetailById.toInt(), null));
  			}
 			
 		}.start();
@@ -1872,7 +1873,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("ProvideOtherDetailById");
-						callback.OnCallback(true,obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.ProvideOtherDetailById.toInt(), obj));
 						return;
 					}
 					
@@ -1883,7 +1884,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.ProvideOtherDetailById.toInt(), null));
  			}
 			
 		}.start();
@@ -1934,7 +1935,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("RequestUpdate");
-						callback.OnCallback(true,obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.RequestUpdate.toInt(), obj));
 						return;
 					}
 					
@@ -1945,7 +1946,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.RequestUpdate.toInt(), null));
  			}
 			
 		}.start();
@@ -1996,7 +1997,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("ProvideUpdate");
-						callback.OnCallback(true,obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.ProvideUpdate.toInt(), obj));
 						return;
 					}
 					
@@ -2007,7 +2008,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.ProvideUpdate.toInt(), null));
  			}
 			
 		}.start();
@@ -2042,7 +2043,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("SystemAppVersion");
-						callback.OnCallback(true,obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.SystemAppVersion.toInt(), obj));
 						return;
 					}
 					
@@ -2053,7 +2054,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.SystemAppVersion.toInt(), null));
  			}
 			
 		}.start();
@@ -2094,7 +2095,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("Message/SetAudio");
-						callback.OnCallback(true,obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.MessageSendAudio.toInt(), obj));
 						return;
 					}
 					
@@ -2105,7 +2106,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.MessageSendAudio.toInt(), null));
  			}
 			
 		}.start();
@@ -2148,7 +2149,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("Message/SetVideo");
-						callback.OnCallback(true,obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.MessageSendVideo.toInt(), obj));
 						return;
 					}
 					
@@ -2159,7 +2160,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.MessageSendVideo.toInt(), null));
  			}
 			
 		}.start();
@@ -2207,7 +2208,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("UserUpdate");
-						callback.OnCallback(true,obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.UserUpdate.toInt(), obj));
 						return;
 					}
 					
@@ -2218,7 +2219,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.UserUpdate.toInt(), null));
  			}
 			
 		}.start();
@@ -2257,7 +2258,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("BiddingListAsProvider");
-						callback.OnCallback(true,obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.BiddingListAsProvider.toInt(), obj));
 						return;
 					}
 					
@@ -2268,7 +2269,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.BiddingListAsProvider.toInt(), null));
  			}
 			
 		}.start();
@@ -2310,7 +2311,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("BiddingListAsRequester");
-						callback.OnCallback(true,obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.BiddingListAsRequester.toInt(), obj));
 						return;
 					}
 					
@@ -2321,7 +2322,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.BiddingListAsRequester.toInt(), null));
  			}
 			
 		}.start();
@@ -2360,7 +2361,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("Provide/MyDoneList");
-						callback.OnCallback(true,obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.ProvideMyDoneList.toInt(), obj));
 						return;
 					}
 					
@@ -2371,7 +2372,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.ProvideMyDoneList.toInt(), null));
  			}
 			
 		}.start();
@@ -2410,7 +2411,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("RequestDone");
-						callback.OnCallback(true,obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.RequestDone.toInt(), obj));
 						return;
 					}
 					
@@ -2421,7 +2422,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.RequestDone.toInt(), null));
  			}
 			
 		}.start();
@@ -2460,7 +2461,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("ProvideDone");
-						callback.OnCallback(true,obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.ProvideDone.toInt(), obj));
 						return;
 					}
 					
@@ -2471,7 +2472,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.ProvideDone.toInt(), null));
  			}
 			
 		}.start();
@@ -2510,7 +2511,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("MessageGetNewMessage");
-						callback.OnCallback(true,obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.MessageGetNewMessage.toInt(), obj));
 						return;
 					}
 					
@@ -2521,7 +2522,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.MessageGetNewMessage.toInt(), null));
  			}
 			
 		}.start();
@@ -2563,7 +2564,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("SettingRegisterDevice");
-						callback.OnCallback(true,obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.SettingRegisterDevice.toInt(), obj));
 						return;
 					}
 					
@@ -2574,7 +2575,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.SettingRegisterDevice.toInt(), null));
  			}
 			
 		}.start();
@@ -2617,7 +2618,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("BiddingRating");
-						callback.OnCallback(true,obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.BiddingRating.toInt(), obj));
 						return;
 					}
 					
@@ -2628,7 +2629,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.BiddingRating.toInt(), null));
  			}
 			
 		}.start();
@@ -2668,7 +2669,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("BiddingDecideProvider");
-						callback.OnCallback(true,obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.BiddingDecideProvider.toInt(), obj));
 						return;
 					}
 					
@@ -2679,7 +2680,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.BiddingDecideProvider.toInt(), null));
  			}
 			
 		}.start();
@@ -2721,7 +2722,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("BiddingDecideRequester");
-						callback.OnCallback(true,obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.BiddingDecideRequester.toInt(), obj));
 						return;
 					}
 					
@@ -2732,7 +2733,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.BiddingDecideRequester.toInt(), null));
  			}
 			
 		}.start();
@@ -2773,7 +2774,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("BiddingDelete");
-						callback.OnCallback(true,obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.BiddingDelete.toInt(), obj));
 						return;
 					}
 					
@@ -2784,7 +2785,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.BiddingDelete.toInt(), null));
  			}
 			
 		}.start();
@@ -2826,7 +2827,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("UserEnablePushNotify");
-						callback.OnCallback(true,obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.UserEnablePushNotify.toInt(), obj));
 						return;
 					}
 					
@@ -2837,7 +2838,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.UserEnablePushNotify.toInt(), null));
  			}
 			
 		}.start();
@@ -2874,7 +2875,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("UserResetBadgeCount");
-						callback.OnCallback(true,obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.UserResetBadgeCount.toInt(), obj));
 						return;
 					}
 					
@@ -2885,7 +2886,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.UserResetBadgeCount.toInt(), null));
  			}
 			
 		}.start();
@@ -2926,7 +2927,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("UserSendSMSAuthCode");
-						callback.OnCallback(true,obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.UserSendSMSAuthCode.toInt(), obj));
 						return;
 					}
 					
@@ -2937,7 +2938,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.UserSendSMSAuthCode.toInt(), null));
  			}
 			
 		}.start();
@@ -2977,7 +2978,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("UserAuthorizedMobile");
-						callback.OnCallback(true,obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.UserAuthorizedMobile.toInt(), obj));
 						return;
 					}
 					
@@ -2988,7 +2989,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.UserAuthorizedMobile.toInt(), null));
 				
  			}
 			
@@ -3043,7 +3044,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("GetUpdatedContents");
-						callback.OnCallback(true,obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.UserGetUpdatedContents.toInt(), obj));
 						return;
 					}
 				}
@@ -3053,7 +3054,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.UserGetUpdatedContents.toInt(), null));
  			}
 			
 		}.start();
@@ -3093,7 +3094,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("Account/ResetPassword");
-						callback.OnCallback(true,obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.AccountResetPassword.toInt(), obj));
 						return;
 					}
 					
@@ -3104,7 +3105,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.AccountResetPassword.toInt(), null));
 				
  			}
 			
@@ -3140,7 +3141,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("AccountResendActivation");
-						callback.OnCallback(true,obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.AccountResendActivation.toInt(), obj));
 						return;
 					}
 					
@@ -3151,7 +3152,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.AccountResendActivation.toInt(), null));
 				
  			}
 			
@@ -3188,7 +3189,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("AccountEmailAuthorize");
-						callback.OnCallback(true,obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.AccountEmailAuthorize.toInt(), obj));
 						return;
 					}
 					
@@ -3199,7 +3200,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.AccountEmailAuthorize.toInt(), null));
 				
  			}
 			
@@ -3240,7 +3241,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("AccountChangePassword");
-						callback.OnCallback(true,obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.AccountChangePassword.toInt(), obj));
 						return;
 					}
 					
@@ -3251,7 +3252,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.AccountChangePassword.toInt(), null));
 				
  			}
 			
@@ -3290,7 +3291,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("BiddingSendSMSOfferAsProvider");
-						callback.OnCallback(true,obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.BiddingSendSMSOfferAsProvider.toInt(), obj));
 						return;
 					}
 					
@@ -3301,7 +3302,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.BiddingSendSMSOfferAsProvider.toInt(), null));
 				
  			}
 			
@@ -3340,7 +3341,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("BiddingSendSMSOfferAsRequester");
-						callback.OnCallback(true,obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.BiddingSendSMSOfferAsRequester.toInt(), obj));
 						return;
 					}
 					
@@ -3351,7 +3352,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.BiddingSendSMSOfferAsRequester.toInt(), null));
 				
  			}
 			
@@ -3388,7 +3389,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("UserDeletePhoto");
-						callback.OnCallback(true,obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.UserDeletePhoto.toInt(), obj));
 						return;
 					}
 					
@@ -3399,7 +3400,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.UserDeletePhoto.toInt(), null));
 				
  			}
 			
