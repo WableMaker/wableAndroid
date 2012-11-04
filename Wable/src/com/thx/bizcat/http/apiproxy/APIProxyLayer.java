@@ -207,7 +207,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				try
 				{
 						String result = _httpLayer.POSTSync(_domainSSL+"account/loginmobile", params);
-						// TODO Auto-generated method stub
+						 
 						JSONObject obj = null;
 						if(result != null)
 						{
@@ -220,9 +220,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 								else {
 									SessionConnected("Login");
 								}
-								//callback.OnCallback(true,obj);
 								
-								//callback.sendMessage(callback.obtainMessage((int)WHAT.aeh, obj));
+								callback.sendMessage(callback.obtainMessage(APICODE.Login.toInt(), obj));
 								return;
 							}
 							catch(Exception e)
@@ -238,8 +237,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				//callback.sendMessage(callback.obtainMessage(0, obj));
-				//callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.Login.toInt(), obj));
+				
 
  			}
 		}.start();
@@ -251,7 +250,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	}
 
 	@Override
-	public boolean Logout(final IAPIProxyCallback callback) {
+	public boolean Logout(final Handler callback) {
 		SetAccountInfo(null,null,null,null);
 		if(!_httpLayer.IsConnectedSession())
 			return true;
@@ -265,7 +264,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				try
 				{
 					String result = _httpLayer.POSTSync(_domain+"account/LogOffMobile", null);
-					// TODO Auto-generated method stub
+					 
 					JSONObject obj = null;
 					if(result != null)
 					{
@@ -274,7 +273,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 							obj = new JSONObject(result);
 							if(true == obj.getBoolean("success"))
 								SessionDisconnected("Logout");
-							callback.OnCallback(true,obj);
+							callback.sendMessage(callback.obtainMessage(APICODE.Logout.toInt(), obj));
 							return;
 						}
 						catch(Exception e)
@@ -289,7 +288,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					Logger.Instance().Write(e);
 					
 				}
-				callback.OnCallback(false,null);
+				callback.sendMessage(callback.obtainMessage(APICODE.Logout.toInt(), obj));
 				
 
  			}
@@ -301,7 +300,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	}
 
 	@Override
-	public boolean MyInfo(final IAPIProxyCallback callback) {
+	public boolean MyInfo(final Handler callback) {
 		
 		new Thread()
 		{
@@ -318,7 +317,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				}
 
 				String result = _httpLayer.GETSync(_domain+"user/myinfo", null);
-				// TODO Auto-generated method stub
+				 
 				JSONObject obj = null;
 				if(result != null)
 				{
@@ -350,7 +349,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 	@Override
 	public boolean Register(String loginid, String email, String username,
-			String password, final IAPIProxyCallback callback) {
+			String password, final Handler callback) {
 
 		SetAccountInfo(loginid,password,null,null);
 
@@ -366,7 +365,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
  			public void run()
  			{
 				String result = _httpLayer.POSTSync(_domainSSL+"account/RegisterMobile", params);
-				// TODO Auto-generated method stub
+				 
 				JSONObject obj = null;
 				
 				try
@@ -401,7 +400,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 	@Override
 	public boolean FBlogin(String fb_uid, String oauth_token,
-			final IAPIProxyCallback callback) {
+			final Handler callback) {
 		
 		SetAccountInfo(null,null,fb_uid,oauth_token);
 		
@@ -416,7 +415,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
  			public void run()
  			{
 				String result = _httpLayer.POSTSync(_domainSSL+"account/FBLoginMobile2", params);
-				// TODO Auto-generated method stub
+				 
 				JSONObject obj = null;
 				
 				try
@@ -449,7 +448,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 
 	@Override
-	public boolean FBregister(String fb_uid,String oauth_token, final IAPIProxyCallback callback) {
+	public boolean FBregister(String fb_uid,String oauth_token, final Handler callback) {
 		
 		
 		SetAccountInfo(null,null,fb_uid,oauth_token);
@@ -466,7 +465,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
  			public void run()
  			{
 				String result = _httpLayer.POSTSync(_domainSSL+"account/FBRegisterMobile2", params);
-				// TODO Auto-generated method stub
+				 
 				JSONObject obj = null;
 				
 				try
@@ -501,7 +500,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 	@Override
 	public boolean FBconnect(String fb_uid, String oauth_token,
-			final IAPIProxyCallback callback) {
+			final Handler callback) {
 
 		final Map<String,Object> params = new HashMap<String,Object>();
 		params.put("fb_uid", fb_uid);
@@ -522,7 +521,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				}
 
 				String result = _httpLayer.GETSync(_domainSSL+"account/FBConnectMobile", params);
-				// TODO Auto-generated method stub
+				 
 				JSONObject obj = null;
 				
 				try
@@ -554,7 +553,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	
 	@Override
 	public boolean RequestOtherList(String userid, String lastid,
-			final IAPIProxyCallback callback) {
+			final Handler callback) {
 
 		final Map<String,Object> params = new HashMap<String,Object>();
 		params.put("userid", userid);
@@ -576,7 +575,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				}
 
 				String result = _httpLayer.GETSync(_domain+"Request/OtherList", params);
-				// TODO Auto-generated method stub
+				 
 				JSONObject obj = null;
 				
 				try
@@ -609,7 +608,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 
 	@Override
-	public boolean RequestMyActiveList(String lastid, final IAPIProxyCallback callback) {
+	public boolean RequestMyActiveList(String lastid, final Handler callback) {
 
 		
 		final Map<String,Object> params = new HashMap<String,Object>();
@@ -632,7 +631,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				}
 
 				String result = _httpLayer.GETSync(_domain+"Request/MyActiveList", params);
-				// TODO Auto-generated method stub
+				 
 				JSONObject obj = null;
 				
 				try
@@ -666,7 +665,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 	@Override
 	public boolean RequestListbyTime(String lastid, String keyword,
-			final IAPIProxyCallback callback) {
+			final Handler callback) {
 
 		final Map<String,Object> params = new HashMap<String,Object>();
 		if(lastid !=null)params.put("lastid", lastid);
@@ -721,7 +720,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 	@Override
 	public boolean RequestListbyArea(double north, double south, double east,
-			double west, String keyword, final IAPIProxyCallback callback) {
+			double west, String keyword, final Handler callback) {
 
 		final Map<String,Object> params = new HashMap<String,Object>();
 		params.put("north", north);
@@ -779,7 +778,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 	@Override
 	public boolean RequestListbyDistance(double lat, double lon,
-			double mindistance, String keyword, final IAPIProxyCallback callback) {
+			double mindistance, String keyword, final Handler callback) {
 		
 		final Map<String,Object> params = new HashMap<String,Object>();
 		params.put("lat", lat);
@@ -803,7 +802,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				}
 
 				String result = _httpLayer.GETSync(_domain+"Request/ListbyDistance", params);
-				// TODO Auto-generated method stub
+				 
 				JSONObject obj = null;
 				
 				try
@@ -837,7 +836,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 	@Override
 	public boolean ProvideOtherList(String userid, String lastid,
-			final IAPIProxyCallback callback) {
+			final Handler callback) {
 
 		
 		final Map<String,Object> params = new HashMap<String,Object>();
@@ -861,7 +860,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				}
 
 				String result = _httpLayer.GETSync(_domain+"Provide/OtherList", params);
-				// TODO Auto-generated method stub
+				 
 				JSONObject obj = null;
 				
 				try
@@ -892,7 +891,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 
 	@Override
-	public boolean ProvideMyActiveList(String lastid, final IAPIProxyCallback callback) {
+	public boolean ProvideMyActiveList(String lastid, final Handler callback) {
 
 		
 		final Map<String,Object> params = new HashMap<String,Object>();
@@ -915,7 +914,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				}
 
 				String result = _httpLayer.GETSync(_domain+"Provide/MyActiveList", params);
-				// TODO Auto-generated method stub
+				 
 				JSONObject obj = null;
 				
 				try
@@ -949,7 +948,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 	@Override
 	public boolean ProvideListbyTime(String lastid, String keyword,
-			final IAPIProxyCallback callback) {
+			final Handler callback) {
 
 		final Map<String,Object> params = new HashMap<String,Object>();
 		if(lastid !=null)params.put("lastid", lastid);
@@ -971,7 +970,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				}
 
 				String result = _httpLayer.GETSync(_domain+"Provide/ListbyTime", params);
-				// TODO Auto-generated method stub
+				 
 				JSONObject obj = null;
 				
 				try
@@ -1004,7 +1003,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 	@Override
 	public boolean ProvideListbyArea(double north, double south, double east,
-			double west, String keyword, final IAPIProxyCallback callback) {
+			double west, String keyword, final Handler callback) {
 
 		
 		final Map<String,Object> params = new HashMap<String,Object>();
@@ -1030,7 +1029,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				}
 
 				String result = _httpLayer.GETSync(_domain+"Provide/ListbyArea", params);
-				// TODO Auto-generated method stub
+				 
 				JSONObject obj = null;
 				
 				try
@@ -1062,7 +1061,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 	@Override
 	public boolean ProvideListbyDistance(double lat, double lon,
-			double mindistance, String keyword, final IAPIProxyCallback callback) {
+			double mindistance, String keyword, final Handler callback) {
 
 		final Map<String,Object> params = new HashMap<String,Object>();
 		params.put("lat", lat);
@@ -1085,7 +1084,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				}
 
 				String result = _httpLayer.GETSync(_domain+"Provide/ListbyDistance", params);
-				// TODO Auto-generated method stub
+				 
 				JSONObject obj = null;
 				
 				try
@@ -1121,7 +1120,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	public boolean RequestAdd(String title, String description, int price,
 			Integer category, Date duedate, double lat, double lon,
 			Boolean totwitter, Boolean tofacebook, 
-			final IAPIProxyCallback callback) {
+			final Handler callback) {
 
 		
 		final Map<String,Object> params = new HashMap<String,Object>();
@@ -1150,7 +1149,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				}
 
 				String result = _httpLayer.GETSync(_domain+"Request/Add", params);
-				// TODO Auto-generated method stub
+				 
 				JSONObject obj = null;
 				
 				try
@@ -1184,7 +1183,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	@Override
 	public boolean ProvideAdd(String title,String description, int minprice, int category,
 			double lat, double lon, int radius, boolean totwitter, boolean tofacebook, 
-			final IAPIProxyCallback callback) {
+			final Handler callback) {
 
 
 		final Map<String,Object> params = new HashMap<String,Object>();
@@ -1214,7 +1213,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				}
 
 				String result = _httpLayer.GETSync(_domain+"Provide/Add", params);
-				// TODO Auto-generated method stub
+				 
 				JSONObject obj = null;
 				
 				try
@@ -1246,7 +1245,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 
 	@Override
-	public boolean CategoryList(final IAPIProxyCallback callback) {
+	public boolean CategoryList(final Handler callback) {
 		
 		
 		new Thread()
@@ -1255,7 +1254,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
  			public void run()
  			{
 				String result = _httpLayer.GETSync(_domain+"Category/List", null);
-				// TODO Auto-generated method stub
+				 
 				JSONObject obj = null;
 				
 				try
@@ -1287,7 +1286,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 
 	@Override
-	public boolean CategoryUpdatedTime(final IAPIProxyCallback callback) {
+	public boolean CategoryUpdatedTime(final Handler callback) {
 		
 		new Thread()
 		{
@@ -1295,7 +1294,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
  			public void run()
  			{
 				String result = _httpLayer.GETSync(_domain+"Category/Updatedtime", null);
-				// TODO Auto-generated method stub
+				 
 				JSONObject obj = null;
 				
 				try
@@ -1328,7 +1327,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 	@Override
 	public boolean BiddingOfferAsProvider(String provide_id,String request_id, 
-			final IAPIProxyCallback callback) {
+			final Handler callback) {
 		
 
 		
@@ -1348,7 +1347,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				}
 				
 				String result = _httpLayer.POSTSync(_domain+"Bidding/OfferAsProvider", params);
-				// TODO Auto-generated method stub
+				 
 				JSONObject obj = null;
 				
 				try
@@ -1382,7 +1381,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 	@Override
 	public boolean BiddingOfferAsRequester(String request_id,String provide_id, 
-			final IAPIProxyCallback callback) {
+			final Handler callback) {
 		
 
 		
@@ -1402,7 +1401,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				}
 				
 				String result = _httpLayer.POSTSync(_domain+"Bidding/OfferAsRequester", params);
-				// TODO Auto-generated method stub
+				 
 				JSONObject obj = null;
 				
 				try
@@ -1434,7 +1433,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	
 	@Override
 	public boolean MessageSendText(String biddingid, String message,String lastmsgutctick,
-			final IAPIProxyCallback callback) {
+			final Handler callback) {
 		
 		final Map<String,Object> params = new HashMap<String,Object>();
 		params.put("biddingid", biddingid);
@@ -1454,7 +1453,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				}
 				
 				String result = _httpLayer.POSTSync(_domain+"Message/SetMessage", params);
-				// TODO Auto-generated method stub
+				 
 				JSONObject obj = null;
 				
 				try
@@ -1486,7 +1485,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 
 	@Override
-	public boolean RequestDelete(String request_id, final IAPIProxyCallback callback) {
+	public boolean RequestDelete(String request_id, final Handler callback) {
 		
 		
 		final Map<String,Object> params = new HashMap<String,Object>();
@@ -1506,7 +1505,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				}
 				
 				String result = _httpLayer.POSTSync(_domain+"Request/Delete", params);
-				// TODO Auto-generated method stub
+				 
 				JSONObject obj = null;
 				
 				try
@@ -1538,7 +1537,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 
 	@Override
-	public boolean ProvideDelete(String provide_id, final IAPIProxyCallback callback) {
+	public boolean ProvideDelete(String provide_id, final Handler callback) {
 		
 		
 		final Map<String,Object> params = new HashMap<String,Object>();
@@ -1557,7 +1556,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				}
 				
 				String result = _httpLayer.POSTSync(_domain+"Provide/Delete", params);
-				// TODO Auto-generated method stub
+				 
 				JSONObject obj = null;
 				
 				try
@@ -1591,7 +1590,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 	@Override
 	public boolean MessageGet(String biddingid, String lastmsgutctick,
-			final IAPIProxyCallback callback) {
+			final Handler callback) {
 		
 		
 		final Map<String,Object> params = new HashMap<String,Object>();
@@ -1610,7 +1609,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				}
 				
 				String result = _httpLayer.GETSync(_domain+"Message/GetMessage", params);
-				// TODO Auto-generated method stub
+				 
 				JSONObject obj = null;
 				
 				try
@@ -1643,7 +1642,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 	@Override
 	public boolean RequestMyDetailById(String request_id,
-			final IAPIProxyCallback callback) {
+			final Handler callback) {
 		
 		final Map<String,Object> params = new HashMap<String,Object>();
 		params.put("id", request_id);
@@ -1661,7 +1660,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				}
 				
 				String result = _httpLayer.GETSync(_domain+"Request/MyDetailById", params);
-				// TODO Auto-generated method stub
+				 
 				JSONObject obj = null;
 				
 				try
@@ -1694,7 +1693,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 	@Override
 	public boolean ProvideMyDetailById(String request_id,
-			final IAPIProxyCallback callback) {
+			final Handler callback) {
 		
 		final Map<String,Object> params = new HashMap<String,Object>();
 		params.put("id", request_id);
@@ -1711,7 +1710,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				}
 				
 				String result = _httpLayer.GETSync(_domain+"Provide/MyDetailById", params);
-				// TODO Auto-generated method stub
+				 
 				JSONObject obj = null;
 				
 				try
@@ -1742,7 +1741,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 	@Override
 	public boolean MessageSendImage(String biddingid, String filepath,String lastmsgutctick,
-			final IAPIProxyCallback callback) {
+			final Handler callback) {
 		
 		
 		final Map<String,Object> params = new HashMap<String,Object>();
@@ -1764,7 +1763,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				}
 				
 				String result = _httpLayer.POSTFileSync(_domain+"Provide/MyDetailById", params,files);
-				// TODO Auto-generated method stub
+				 
 				JSONObject obj = null;
 				
 				try
@@ -1795,7 +1794,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	
 	@Override
 	public boolean RequestOtherDetailById(String request_id,
-			final IAPIProxyCallback callback) {
+			final Handler callback) {
 		
 		
 		final Map<String,Object> params = new HashMap<String,Object>();
@@ -1813,7 +1812,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				}
 				
 				String result = _httpLayer.GETSync(_domain+"Request/OtherDetailById", params);
-				// TODO Auto-generated method stub
+				 
 				JSONObject obj = null;
 				
 				try
@@ -1844,7 +1843,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 	@Override
 	public boolean ProvideOtherDetailById(String provide_id,
-			final IAPIProxyCallback callback) {
+			final Handler callback) {
 		
 		
 		final Map<String,Object> params = new HashMap<String,Object>();
@@ -1863,7 +1862,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				}
 				
 				String result = _httpLayer.GETSync(_domain+"Provide/OtherDetailById", params);
-				// TODO Auto-generated method stub
+				 
 				JSONObject obj = null;
 				
 				try
@@ -1898,7 +1897,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	public boolean RequestUpdate(String request_id, String title,
 			String description, int price, int category, Date duedate,
 			double lat, double lon, boolean totwitter, boolean tofacebook,
-			final IAPIProxyCallback callback) {
+			final Handler callback) {
 		
 
 		final Map<String,Object> params = new HashMap<String,Object>();
@@ -1925,7 +1924,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				}
 				
 				String result = _httpLayer.POSTSync(_domain+"Request/Update", params);
-				// TODO Auto-generated method stub
+				 
 				JSONObject obj = null;
 				
 				try
@@ -1959,7 +1958,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	@Override
 	public boolean ProvideUpdate(String provide_id, String title, String description, int minprice,
 			int category, double lat, double lon, int radius,boolean totwitter, boolean tofacebook, 
-			final IAPIProxyCallback callback) {
+			final Handler callback) {
 		
 
 		
@@ -1987,7 +1986,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				}
 				
 				String result = _httpLayer.POSTSync(_domain+"Provide/Update", params);
-				// TODO Auto-generated method stub
+				 
 				JSONObject obj = null;
 				
 				try
@@ -2018,7 +2017,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	}
 
 	@Override
-	public boolean SystemAppVersion(final IAPIProxyCallback callback) {
+	public boolean SystemAppVersion(final Handler callback) {
 		
 
 		new Thread()
@@ -2033,7 +2032,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				}
 				
 				String result = _httpLayer.GETSync(_domain+"System/AndroidAppVersion", null);
-				// TODO Auto-generated method stub
+				 
 				JSONObject obj = null;
 				
 				try
@@ -2064,7 +2063,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 	@Override
 	public boolean MessageSendAudio(String biddingid, String filepath,
-			String lastmsgutctick, final IAPIProxyCallback callback) {
+			String lastmsgutctick, final Handler callback) {
 		
 		final Map<String,Object> params = new HashMap<String,Object>();
 		params.put("biddingid", biddingid);
@@ -2085,7 +2084,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				}
 				
 				String result = _httpLayer.POSTFileSync(_domain+"Message/SetAudio", params,files);
-				// TODO Auto-generated method stub
+				 
 				JSONObject obj = null;
 				
 				try
@@ -2117,7 +2116,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 	@Override
 	public boolean MessageSendVideo(String biddingid, String filepath,
-			String lastmsgutctick, final IAPIProxyCallback callback) {
+			String lastmsgutctick, final Handler callback) {
 		
 
 		final Map<String,Object> params = new HashMap<String,Object>();
@@ -2139,7 +2138,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				}
 				
 				String result = _httpLayer.POSTFileSync(_domain+"Message/SetVideo", params,files);
-				// TODO Auto-generated method stub
+				 
 				JSONObject obj = null;
 				
 				try
@@ -2171,7 +2170,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	@Override
 	public boolean UserUpdate(String name, String introduce,String photo, Boolean publicfb, Boolean publictwitter,
 			Boolean publicemail, Boolean publicmobile, Boolean publicphone,
-			final IAPIProxyCallback callback) {
+			final Handler callback) {
 		
 
 		
@@ -2198,7 +2197,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				}
 				
 				String result = _httpLayer.POSTFileSync(_domain+"User/Update", params,files);
-				// TODO Auto-generated method stub
+				 
 				JSONObject obj = null;
 				
 				try
@@ -2229,7 +2228,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 	@Override
 	public boolean BiddingListAsProvider(String last_bidding_id,
-			final IAPIProxyCallback callback) {
+			final Handler callback) {
 		
 		
 		final Map<String,Object> params = new HashMap<String,Object>();
@@ -2248,7 +2247,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				}
 				
 				String result = _httpLayer.GETSync(_domain+"Bidding/ListAsProvider", params);
-				// TODO Auto-generated method stub
+				 
 				JSONObject obj = null;
 				
 				try
@@ -2281,7 +2280,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 	@Override
 	public boolean BiddingListAsRequester(String last_bidding_id,
-			final IAPIProxyCallback callback) {
+			final Handler callback) {
 		
 
 		
@@ -2301,7 +2300,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				}
 				
 				String result = _httpLayer.GETSync(_domain+"Bidding/ListAsRequester", params);
-				// TODO Auto-generated method stub
+				 
 				JSONObject obj = null;
 				
 				try
@@ -2332,7 +2331,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 
 	@Override
-	public boolean ProvideMyDoneList(String lastid, final IAPIProxyCallback callback) {
+	public boolean ProvideMyDoneList(String lastid, final Handler callback) {
 		
 
 		final Map<String,Object> params = new HashMap<String,Object>();
@@ -2351,7 +2350,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				}
 				
 				String result = _httpLayer.GETSync(_domain+"Provide/MyDoneList", params);
-				// TODO Auto-generated method stub
+				 
 				JSONObject obj = null;
 				
 				try
@@ -2383,7 +2382,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 
 	@Override
-	public boolean RequestDone(String request_id, final IAPIProxyCallback callback) {
+	public boolean RequestDone(String request_id, final Handler callback) {
 		
 		
 		final Map<String,Object> params = new HashMap<String,Object>();
@@ -2401,7 +2400,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				}
 				
 				String result = _httpLayer.POSTSync(_domain+"Request/Done", params);
-				// TODO Auto-generated method stub
+				 
 				JSONObject obj = null;
 				
 				try
@@ -2433,7 +2432,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 
 	@Override
-	public boolean ProvideDone(String provide_id, final IAPIProxyCallback callback) {
+	public boolean ProvideDone(String provide_id, final Handler callback) {
 		
 		
 		final Map<String,Object> params = new HashMap<String,Object>();
@@ -2451,7 +2450,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				}
 				
 				String result = _httpLayer.POSTSync(_domain+"Provide/Done", params);
-				// TODO Auto-generated method stub
+				 
 				JSONObject obj = null;
 				
 				try
@@ -2483,7 +2482,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 
 	@Override
-	public boolean MessageGetNewMessage(String lastmsgutctime, final IAPIProxyCallback callback) {
+	public boolean MessageGetNewMessage(String lastmsgutctime, final Handler callback) {
 		
 
 		final Map<String,Object> params = new HashMap<String,Object>();
@@ -2501,7 +2500,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				}
 				
 				String result = _httpLayer.GETSync(_domain+"Message/GetNewMessage", params);
-				// TODO Auto-generated method stub
+				 
 				JSONObject obj = null;
 				
 				try
@@ -2535,7 +2534,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 	@Override
 	public boolean SettingRegisterDevice(String deviceid, int devicetype,
-			final IAPIProxyCallback callback) {
+			final Handler callback) {
 		
 		
 		final Map<String,Object> params = new HashMap<String,Object>();
@@ -2554,7 +2553,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				}
 				
 				String result = _httpLayer.POSTSync(_domain+"Setting/RegisterDevice", params);
-				// TODO Auto-generated method stub
+				 
 				JSONObject obj = null;
 				
 				try
@@ -2587,7 +2586,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 	@Override
 	public boolean BiddingRating(String bidding_id, String other_id,
-			int rating, String description, final IAPIProxyCallback callback) {
+			int rating, String description, final Handler callback) {
 		
 
 		final Map<String,Object> params = new HashMap<String,Object>();
@@ -2608,7 +2607,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				}
 				
 				String result = _httpLayer.POSTSync(_domain+"Bidding/Rating", params);
-				// TODO Auto-generated method stub
+				 
 				JSONObject obj = null;
 				
 				try
@@ -2641,7 +2640,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 	@Override
 	public boolean BiddingDecideProvider(String biddingid,
-			final IAPIProxyCallback callback) {
+			final Handler callback) {
 		
 
 		final Map<String,Object> params = new HashMap<String,Object>();
@@ -2659,7 +2658,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				}
 				
 				String result = _httpLayer.POSTSync(_domain+"Bidding/DecideProvider", params);
-				// TODO Auto-generated method stub
+				 
 				JSONObject obj = null;
 				
 				try
@@ -2693,7 +2692,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 	@Override
 	public boolean BiddingDecideRequester(String biddingid,
-			final IAPIProxyCallback callback) {
+			final Handler callback) {
 		
 
 		
@@ -2712,7 +2711,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				}
 				
 				String result = _httpLayer.POSTSync(_domain+"Bidding/DecideRequester", params);
-				// TODO Auto-generated method stub
+				 
 				JSONObject obj = null;
 				
 				try
@@ -2745,7 +2744,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 
 	@Override
-	public boolean BiddingDelete(String biddingid, final IAPIProxyCallback callback) {
+	public boolean BiddingDelete(String biddingid, final Handler callback) {
 		
 
 		
@@ -2764,7 +2763,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				}
 				
 				String result = _httpLayer.POSTSync(_domain+"Bidding/Delete", params);
-				// TODO Auto-generated method stub
+				 
 				JSONObject obj = null;
 				
 				try
@@ -2798,7 +2797,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 	@Override
 	public boolean UserEnablePushNotify(Time starttime, Time endtime,
-			final IAPIProxyCallback callback) {
+			final Handler callback) {
 	
 		final Map<String,Object> params = new HashMap<String,Object>();
 		params.put("starttime", starttime.format("HH:mm:ss"));
@@ -2817,7 +2816,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				}
 				
 				String result = _httpLayer.POSTSync(_domain+"User/EnablePushNotify", params);
-				// TODO Auto-generated method stub
+				 
 				JSONObject obj = null;
 				
 				try
@@ -2850,7 +2849,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 
 	@Override
-	public boolean UserResetBadgeCount(final IAPIProxyCallback callback) {
+	public boolean UserResetBadgeCount(final Handler callback) {
 		
 
 		new Thread()
@@ -2865,7 +2864,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				}
 				
 				String result = _httpLayer.POSTSync(_domain+"User/ResetBadgeCount", null);
-				// TODO Auto-generated method stub
+				 
 				JSONObject obj = null;
 				
 				try
@@ -2899,7 +2898,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 	@Override
 	public boolean UserSendSMSAuthCode(String mobile, String code,
-			final IAPIProxyCallback callback) {
+			final Handler callback) {
 		final Map<String,Object> params = new HashMap<String,Object>();
 		params.put("mobile", mobile);
 		params.put("code", code);
@@ -2917,7 +2916,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				}
 				
 				String result = _httpLayer.POSTSync(_domain+"User/SendSMSAuthCode", params);
-				// TODO Auto-generated method stub
+				 
 				JSONObject obj = null;
 				
 				try
@@ -2951,7 +2950,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 	@Override
 	public boolean UserAuthorizedMobile(String mobile,
-			final IAPIProxyCallback callback) {
+			final Handler callback) {
 		final Map<String,Object> params = new HashMap<String,Object>();
 		params.put("mobile", mobile);
 		
@@ -2968,7 +2967,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				}
 				
 				String result = _httpLayer.POSTSync(_domain+"User/AuthorizedMobile", params);
-				// TODO Auto-generated method stub
+				 
 				JSONObject obj = null;
 				
 				try
@@ -3006,8 +3005,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
             , String BiddingRecentSyncTime
             , String BiddingMessageRecentSyncTime
             , String EndBiddingRecentSyncTime
-            , String EndBiddingMessageRecentSyncTime,final IAPIProxyCallback callback) {
-		// TODO Auto-generated method stub
+            , String EndBiddingMessageRecentSyncTime,final Handler callback) {
+		 
 			
 		final Map<String,Object> params = new HashMap<String,Object>();
 		params.put("RequestRecentSyncTime", RequestRecentSyncTime);
@@ -3034,7 +3033,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				}
 
 				String result = _httpLayer.GETSync(_domain+"User/GetUpdatedContents", params);
-				// TODO Auto-generated method stub
+				 
 				JSONObject obj = null;
 				
 				try
@@ -3066,8 +3065,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 	@Override
 	public boolean AccountResetPassword(String loginid, String email
-			,String mobile,final IAPIProxyCallback callback) {
-		// TODO Auto-generated method stub
+			,String mobile,final Handler callback) {
+		 
 		final Map<String,Object> params = new HashMap<String,Object>();
 		params.put("loginid", loginid);
 		params.put("email", email);
@@ -3084,7 +3083,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				}
 				
 				String result = _httpLayer.POSTSync(_domain+"Account/ResetPassword", params);
-				// TODO Auto-generated method stub
+				 
 				JSONObject obj = null;
 				
 				try
@@ -3116,8 +3115,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 
 	@Override
-	public boolean AccountResendActivation(final IAPIProxyCallback callback) {
-		// TODO Auto-generated method stub
+	public boolean AccountResendActivation(final Handler callback) {
+		 
 		
 		new Thread()
 		{
@@ -3131,7 +3130,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				}
 				
 				String result = _httpLayer.POSTSync(_domain+"Account/ResendActivation", null);
-				// TODO Auto-generated method stub
+				 
 				JSONObject obj = null;
 				
 				try
@@ -3161,8 +3160,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	}
 
 	@Override
-	public boolean AccountEmailAuthorize(String email,final IAPIProxyCallback callback) {
-		// TODO Auto-generated method stub
+	public boolean AccountEmailAuthorize(String email,final Handler callback) {
+		 
 		
 		final Map<String,Object> params = new HashMap<String,Object>();
 		params.put("email", email);
@@ -3179,7 +3178,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				}
 				
 				String result = _httpLayer.POSTSync(_domain+"Account/EmailAuthorize", params);
-				// TODO Auto-generated method stub
+				 
 				JSONObject obj = null;
 				
 				try
@@ -3212,8 +3211,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 	@Override
 	public boolean AccountChangePassword(String loginid, String oldpassword,
-			String newpassword, final IAPIProxyCallback callback) {
-		// TODO Auto-generated method stub
+			String newpassword, final Handler callback) {
+		 
 		final Map<String,Object> params = new HashMap<String,Object>();
 		params.put("loginid", loginid);
 		params.put("oldpassword", oldpassword);
@@ -3231,7 +3230,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				}
 				
 				String result = _httpLayer.POSTSync(_domain+"Account/ChangePassword", params);
-				// TODO Auto-generated method stub
+				 
 				JSONObject obj = null;
 				
 				try
@@ -3264,8 +3263,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 	@Override
 	public boolean BiddingSendSMSOfferAsProvider(String request_id,
-			final IAPIProxyCallback callback) {
-		// TODO Auto-generated method stub
+			final Handler callback) {
+		 
 		final Map<String,Object> params = new HashMap<String,Object>();
 		params.put("request_id", request_id);
 		
@@ -3281,7 +3280,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				}
 				
 				String result = _httpLayer.POSTSync(_domain+"Bidding/SendSMSOfferAsProvider", params);
-				// TODO Auto-generated method stub
+				 
 				JSONObject obj = null;
 				
 				try
@@ -3314,8 +3313,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 	@Override
 	public boolean BiddingSendSMSOfferAsRequester(String provide_id,
-			final IAPIProxyCallback callback) {
-		// TODO Auto-generated method stub
+			final Handler callback) {
+		 
 		final Map<String,Object> params = new HashMap<String,Object>();
 		params.put("provide_id", provide_id);
 		
@@ -3331,7 +3330,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				}
 				
 				String result = _httpLayer.POSTSync(_domain+"Bidding/SendSMSOfferAsRequester", params);
-				// TODO Auto-generated method stub
+				 
 				JSONObject obj = null;
 				
 				try
@@ -3363,8 +3362,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 
 	@Override
-	public boolean UserDeletePhoto(final IAPIProxyCallback callback) {
-		// TODO Auto-generated method stub
+	public boolean UserDeletePhoto(final Handler callback) {
+		 
 		
 		
 		new Thread()
@@ -3379,7 +3378,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				}
 				
 				String result = _httpLayer.POSTSync(_domain+"User/DeletePhoto", null);
-				// TODO Auto-generated method stub
+				 
 				JSONObject obj = null;
 				
 				try
