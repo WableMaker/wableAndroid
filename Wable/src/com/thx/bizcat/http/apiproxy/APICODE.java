@@ -140,7 +140,7 @@ public enum APICODE {
     }
 
     public static APICODE forValue(int value) {
-        return typesByValue.get(value);
+       
         
         try{
         	 return typesByValue.get(value);
