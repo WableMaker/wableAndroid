@@ -1,5 +1,8 @@
 package com.thx.bizcat;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -20,10 +23,11 @@ import com.thx.bizcat.http.apiproxy.APIProxyLayer;
 import com.thx.bizcat.tab.login.PasswordFindActivity;
 import com.thx.bizcat.tab.login.RegisterActivity;
 import com.thx.bizcat.util.RefHandlerMessage;
+import com.thx.bizcat.util.Utils;
 import com.thx.bizcat.util.WeakHandler;
 //import com.wable.http.apiproxy.JSONParser.sp_GetRequestsByTime_Item;
 
-public class WableActivity extends Activity implements OnClickListener {
+public class WableActivity extends Activity implements OnClickListener, RefHandlerMessage {
     /** Called when the activity is first created. */
 	
 	private Context context;
@@ -36,47 +40,58 @@ public class WableActivity extends Activity implements OnClickListener {
 	private ProgressDialog pd;
 	//private SharedPreferences pref;
 	
-	
 	/* Handler */
-	private WeakHandler mHandler = new WeakHandler(new RefHandlerMessage() {
+	private WeakHandler mHandler = new WeakHandler(this);
+	public void handleMessage(Message msg) {
+	
+		switch(APICODE.fromInt(msg.what)) {
 
-		@Override
-		public void handleMessage(Message msg) {
+		case Login:
 
-			switch(APICODE.fromInt(msg.what)) {
-
-			case Login:
-
-				if(pd != null) pd.dismiss();
-				//				
-
-				//				if(success)
-				//				{
-				//					//Logger.Instance().Write(json.toString());
-				Intent intent = new Intent(context, MainActivity.class);
-				startActivity(intent);			
-				overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-				finish();
-				//
-				//				} else { 
-				//
-				//					handler.sendEmptyMessage(500);
-				//					Logger.Instance().Write("login fail");
-				//				}
-
-				break;
-
-
-			default:
-				break;
-
+			if(pd != null) pd.dismiss();
+			//				
+			
+			try {
+				JSONObject obj = new JSONObject(msg.obj.toString());
+				
+				if(obj.getBoolean("success")) {
+					Intent intent = new Intent(context, MainActivity.class);
+					startActivity(intent);			
+					overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+					finish();
+				} else {
+					Toast.makeText(context, "계정정보를 확인하세요", Toast.LENGTH_LONG).show();
+					
+				}
+				
+				
+			} catch (JSONException e) {
+				e.printStackTrace();
 			}
+			
+			
+
+			//				if(success)
+			//				{
+			//					//Logger.Instance().Write(json.toString());
+			
+			//
+			//				} else { 
+			//
+			//					handler.sendEmptyMessage(500);
+			//					Logger.Instance().Write("login fail");
+			//				}
+
+			break;
+
+
+		default:
+			break;
+
 		}
-	});
-		
+	}
 	
-	
-     @Override
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_main);  
@@ -112,7 +127,7 @@ public class WableActivity extends Activity implements OnClickListener {
         etPass.setOnFocusChangeListener(onFocusChangeListner);
         
         etUser.setText("cc");
-		etPass.setText("1111111");
+		etPass.setText("111111");
 		
 		//Intent intent = new Intent(context, ChatActivity.class);
 		//startActivity(intent);
@@ -294,8 +309,6 @@ public class WableActivity extends Activity implements OnClickListener {
 			
 		}
 	};
-	
-	
 	
 
 }
