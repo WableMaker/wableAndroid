@@ -139,7 +139,7 @@ public enum APICODE {
     	return value;
     }
 
-    public static APICODE forValue(int value) {
+    public static APICODE fromInt(int value) {
        
         
         try{
