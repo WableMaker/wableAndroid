@@ -144,7 +144,7 @@ public enum APICODE {
         
         try{
         	 return typesByValue.get(value);
-            }catch(ArrayIndexOutOfBoundsException e){
+            }catch(Exception e){
                return APICODE.UNKNOWN;
             }
     }
