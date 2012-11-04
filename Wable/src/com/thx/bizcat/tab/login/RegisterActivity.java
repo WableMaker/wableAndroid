@@ -2,23 +2,64 @@ package com.thx.bizcat.tab.login;
 
 import java.util.regex.Pattern;
 
-import org.json.JSONObject;
-
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.thx.bizcat.R;
+import com.thx.bizcat.http.apiproxy.APICODE;
 import com.thx.bizcat.http.apiproxy.APIProxyLayer;
-import com.thx.bizcat.http.apiproxy.IAPIProxyCallback;
+import com.thx.bizcat.util.RefHandlerMessage;
+import com.thx.bizcat.util.WeakHandler;
 
 public class RegisterActivity extends Activity implements OnClickListener{
 	private Pattern pattern_email = Pattern.compile(
 	        "^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$"
 			);
+	
+	/* Handler */
+	private WeakHandler mHandler = new WeakHandler(new RefHandlerMessage() {
+		
+		@Override
+		public void handleMessage(Message msg) {
+
+			switch(APICODE.fromInt(msg.what)) {
+			
+			case Register:
+				
+				
+//				if(success) {
+//					// Email 인증하라고 말하고, 이메일 인증이 되면 로그인 가능.
+//					
+//					// Register Success;
+//					// goto main activity 
+//					
+//					//Logger.Instance().Write(json.toString());
+//					//Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+//					//startActivity(intent);			
+//					//overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+//					//finish();
+//					
+//				} else {
+//					// Login fail
+//					Toast.makeText(getApplicationContext(), "ERROR", Toast.LENGTH_SHORT).show();
+//				}
+				
+				break;
+				
+				
+			default:
+				break;
+			
+			}
+		}
+		
+	});
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +73,7 @@ public class RegisterActivity extends Activity implements OnClickListener{
 
 	@Override
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
+
 		switch (v.getId()) {
 			case R.id.btnRegisterRequest:
 				// send sms information. 
@@ -56,29 +97,7 @@ public class RegisterActivity extends Activity implements OnClickListener{
 				String loginid = ( (EditText) findViewById(R.id.editRegisterTel)).getText().toString();
 				String username = ((EditText) findViewById(R.id.editRegisterName)).getText().toString();
 
-				APIProxyLayer.Instance().Register(loginid, email, username, password,
-						new IAPIProxyCallback() {
-					@Override
-					public void OnCallback(boolean success, JSONObject json) {
-						if(success) {
-							// Email 인증하라고 말하고, 이메일 인증이 되면 로그인 가능.
-							
-							// Register Success;
-							// goto main activity 
-							
-							//Logger.Instance().Write(json.toString());
-							//Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-							//startActivity(intent);			
-							//overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-							//finish();
-							
-						} else {
-							// Login fail
-							Toast.makeText(getApplicationContext(), "ERROR", Toast.LENGTH_SHORT).show();
-						}
-					}
-				});
-				
+				APIProxyLayer.Instance().Register(loginid, email, username, password, mHandler);
 				break;
 		}
 		

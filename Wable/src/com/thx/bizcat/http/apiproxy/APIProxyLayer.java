@@ -311,7 +311,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				{
 					if(!Relogin())	
 					{
-						callback.OnCallback(false,null);
+						// TODO 임시로 주석처리
+						//callback.OnCallback(false,null);
 						return;
 					}
 				}
@@ -515,7 +516,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				{
 					if(!Relogin())	
 					{
-						callback.OnCallback(false,null);
+						// TODO 임시로 주석처리
+						//callback.OnCallback(false,null);
 						return;
 					}
 				}
@@ -569,7 +571,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				{
 					if(!Relogin())	
 					{
-						callback.OnCallback(false,null);
+						// TODO 임시로 주석처리
+						//callback.OnCallback(false,null);
 						return;
 					}
 				}
@@ -625,7 +628,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				{
 					if(!Relogin())	
 					{
-						callback.OnCallback(false,null);
+						// TODO 임시로 주석처리
+						//callback.OnCallback(false,null);
 						return;
 					}
 				}
@@ -681,7 +685,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				{
 					if(!Relogin())	
 					{
-						callback.OnCallback(false,null);
+						// TODO 임시로 주석처리
+						//callback.OnCallback(false,null);
 						return;
 					}
 				}
@@ -739,7 +744,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				{
 					if(!Relogin())	
 					{
-						callback.OnCallback(false,null);
+						// TODO 임시로 주석처리
+						//callback.OnCallback(false,null);
 						return;
 					}
 				}
@@ -796,7 +802,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				{
 					if(!Relogin())	
 					{
-						callback.OnCallback(false,null);
+						// TODO 임시로 주석처리
+						//callback.OnCallback(false,null);
 						return;
 					}
 				}
@@ -854,7 +861,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				{
 					if(!Relogin())	
 					{
-						callback.OnCallback(false,null);
+						// TODO 임시로 주석처리
+						//callback.OnCallback(false,null);
 						return;
 					}
 				}
@@ -908,7 +916,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				{
 					if(!Relogin())	
 					{
-						callback.OnCallback(false,null);
+						// TODO 임시로 주석처리
+						//callback.OnCallback(false,null);
 						return;
 					}
 				}
@@ -964,7 +973,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				{
 					if(!Relogin())	
 					{
-						callback.OnCallback(false,null);
+						// TODO 임시로 주석처리
+						//callback.OnCallback(false,null);
 						return;
 					}
 				}
@@ -1023,7 +1033,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				{
 					if(!Relogin())	
 					{
-						callback.OnCallback(false,null);
+						// TODO 임시로 주석처리
+						//callback.OnCallback(false,null);
 						return;
 					}
 				}
@@ -1078,7 +1089,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				{
 					if(!Relogin())	
 					{
-						callback.OnCallback(false,null);
+						// TODO 임시로 주석처리
+						//callback.OnCallback(false,null);
 						return;
 					}
 				}
@@ -1143,7 +1155,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				{
 					if(!Relogin())	
 					{
-						callback.OnCallback(false,null);
+						// TODO 임시로 주석처리
+						//callback.OnCallback(false,null);
 						return;
 					}
 				}
@@ -1207,7 +1220,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				{
 					if(!Relogin())	
 					{
-						callback.OnCallback(false,null);
+						// TODO 임시로 주석처리
+						//callback.OnCallback(false,null);
 						return;
 					}
 				}
@@ -3028,7 +3042,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				{
 					if(!Relogin())	
 					{
-						callback.OnCallback(false,null);
+						// TODO 임시로 주석처리
+						//callback.OnCallback(false,null);
 						return;
 					}
 				}

@@ -1,5 +1,7 @@
 package com.thx.bizcat.http.apiproxy;
 
+import android.util.SparseArray;
+
 public enum APICODE {
 
 
@@ -118,9 +120,9 @@ public enum APICODE {
 	
 	// [start] System
 	SystemAppVersion(60),
-	UNKNOWN(10000),
+	UNKNOWN(10000);
 
-    private static final Map<int, APICODE> typesByValue = new HashMap<int, APICODE>();
+    private static final SparseArray<APICODE> typesByValue = new SparseArray<APICODE>();
 
     static {
         for (APICODE type : APICODE.values()) {

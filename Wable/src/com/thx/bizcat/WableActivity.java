@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -16,10 +15,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.facebook.android.Facebook;
-import com.thx.bizcat.chat.ChatActivity;
+import com.thx.bizcat.http.apiproxy.APICODE;
 import com.thx.bizcat.http.apiproxy.APIProxyLayer;
 import com.thx.bizcat.tab.login.PasswordFindActivity;
 import com.thx.bizcat.tab.login.RegisterActivity;
+import com.thx.bizcat.util.RefHandlerMessage;
+import com.thx.bizcat.util.WeakHandler;
 //import com.wable.http.apiproxy.JSONParser.sp_GetRequestsByTime_Item;
 
 public class WableActivity extends Activity implements OnClickListener {
@@ -34,6 +35,46 @@ public class WableActivity extends Activity implements OnClickListener {
 	
 	private ProgressDialog pd;
 	//private SharedPreferences pref;
+	
+	
+	/* Handler */
+	private WeakHandler mHandler = new WeakHandler(new RefHandlerMessage() {
+
+		@Override
+		public void handleMessage(Message msg) {
+
+			switch(APICODE.fromInt(msg.what)) {
+
+			case Login:
+
+				if(pd != null) pd.dismiss();
+				//				
+
+				//				if(success)
+				//				{
+				//					//Logger.Instance().Write(json.toString());
+				Intent intent = new Intent(context, MainActivity.class);
+				startActivity(intent);			
+				overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+				finish();
+				//
+				//				} else { 
+				//
+				//					handler.sendEmptyMessage(500);
+				//					Logger.Instance().Write("login fail");
+				//				}
+
+				break;
+
+
+			default:
+				break;
+
+			}
+		}
+	});
+		
+	
 	
      @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -73,96 +114,14 @@ public class WableActivity extends Activity implements OnClickListener {
         etUser.setText("cc");
 		etPass.setText("1111111");
 		
-		Intent intent = new Intent(context, ChatActivity.class);
-		startActivity(intent);
+		//Intent intent = new Intent(context, ChatActivity.class);
+		//startActivity(intent);
         
 //        etPass = (EditText)findViewById(R.id.editLoginPass);
 //        etPass.setOnEditorActionListener(new OnEditorActionListener() {
 //
 //    
-       // JSON Parser TEST code
-/*       APIProxyLayer.Instance().Login("cc", "111111", new IAPIProxyCallback(){
 
-			@Override
-			public void OnCallback(boolean success, JSONObject json) {
-				if(success)
-				{
-					Logger.Instance().Write(json.toString());
-					
-					//APIProxyLayer.Instance().RequestListbyTime(null, null,new IAPIProxyCallback()
-					//APIProxyLayer.Instance().RequestListbyArea(0,0,0,0,null,new IAPIProxyCallback()
-					//APIProxyLayer.Instance().RequestMyActiveList(null,new IAPIProxyCallback()
-					APIProxyLayer.Instance().RequestOtherList("-9223372036854775806",null,new IAPIProxyCallback()
-					{
-						@Override
-						public void OnCallback(boolean success, JSONObject json) {
-							if(success)
-							{
-								//sp_GetMyActiveRequests_Items result=  JSONParser.RequestMyActiveListParser(json);
-								//sp_GetRequestsByArea_Items result = JSONParser.RequestListByAreaParser(json);
-								sp_GetOtherRequests_Items result = JSONParser.RequestOtherListParser(json);
-								int ii = 0;
-								if(ii == 0)
-								{
-									
-								}
-							}
-							else Logger.Instance().Write("Fail to GetMyInfo");
-							
-						}
-						
-					});
-					 				
-			
-					APIProxyLayer.Instance().MyInfo(new IAPIProxyCallback(){
-
-						@Override
-						public void OnCallback(boolean success, JSONObject json) {
-							if(success)
-							{
-								Logger.Instance().Write(json.toString());
-			
-								
-							}
-							else Logger.Instance().Write("Fail to GetMyInfo");
-						}
-						
-					});
-					
-					APIProxyLayer.Instance().RequestMyActiveList(null,new IAPIProxyCallback(){
-						@Override
-						public void OnCallback(boolean success, JSONObject json) {
-							if(success)
-							{
-								Logger.Instance().Write(json.toString());
-								
-							}
-							else Logger.Instance().Write("Fail to MessageSendImage");
-						}
-					});
-					
-					
-					APIProxyLayer.Instance().MessageSendImage("-9223372036854775805", "/sdcard/koala.jpg",null, new IAPIProxyCallback(){
-						@Override
-						public void OnCallback(boolean success, JSONObject json) {
-							if(success)
-							{
-								Logger.Instance().Write(json.toString());
-								
-							}
-							else Logger.Instance().Write("Fail to MessageSendImage");
-						}
-					});
-					
-					
-					
-				
-				}else 	Logger.Instance().Write("Fail to login");
-			}
-			
-        	
-        });
-    	 */    // JSON Parser TEST code
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -245,26 +204,10 @@ public class WableActivity extends Activity implements OnClickListener {
 				break;
 			}
 			
-			pd = ProgressDialog.show(context, "로그인", "사용자 정보 조회중입니다...", true, false);
-			
+			pd = ProgressDialog.show(context, "로그인", "사용자 정보 조회중입니다...", true, true);
 
-			APIProxyLayer.Instance().Login(etUser.getText().toString(), etPass.getText().toString(), 
+			APIProxyLayer.Instance().Login(etUser.getText().toString(), etPass.getText().toString(), mHandler);
 
-				new Handler() {
-				
-				@Override
-				public void handleMessage(Message msg) {
-
-					
-					
-					super.handleMessage(msg);
-				}
-			}
-
-
-
-
-					);
 
 					
 //					new IAPIProxyCallback(){
@@ -315,22 +258,6 @@ public class WableActivity extends Activity implements OnClickListener {
 		}
 	}
 	
-	private Handler handler = new Handler() {
-		
-		@Override
-		public void handleMessage(Message msg) {
-
-			switch (msg.what) {
-			
-			// Password Not matching
-			case 500:
-				Toast.makeText(context, "아이디 또는 비밀번호를 확인해주세요", Toast.LENGTH_SHORT).show();
-				break;
-			}
-			
-			super.handleMessage(msg);
-		}
-	};
 	
 	private OnFocusChangeListener onFocusChangeListner = new OnFocusChangeListener() {
 		

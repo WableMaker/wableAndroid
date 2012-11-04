@@ -1,13 +1,10 @@
 package com.thx.bizcat.tab.setting;
 
-import org.json.JSONObject;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.Message;
 import android.text.format.Time;
 import android.view.View;
@@ -18,15 +15,46 @@ import android.widget.TimePicker;
 import android.widget.ToggleButton;
 
 import com.thx.bizcat.R;
+import com.thx.bizcat.http.apiproxy.APICODE;
 import com.thx.bizcat.http.apiproxy.APIProxyLayer;
-import com.thx.bizcat.http.apiproxy.IAPIProxyCallback;
 import com.thx.bizcat.util.Logger;
+import com.thx.bizcat.util.RefHandlerMessage;
+import com.thx.bizcat.util.WeakHandler;
 
 public class PushActivity extends Activity implements OnClickListener{
 	private static int DIALOG_TIMEPICKER = 0;
 	Time starttime, endtime;
 	boolean ispush = false;
 	String SETTING_PUSH_ENABLED = "PUSH_ENABLED", SETTING_STARTTIME = "STARTTIME" , SETTING_ENDTIME="ENDTIME";
+	
+	/* Handler */
+	private WeakHandler mHandler = new WeakHandler(new RefHandlerMessage() {
+		
+		@Override
+		public void handleMessage(Message msg) {
+
+			switch(APICODE.fromInt(msg.what)) {
+			
+			case UserEnablePushNotify:
+				
+				SharedPreferences pref = getPreferences(Activity.MODE_PRIVATE);
+				SharedPreferences.Editor editor = pref.edit();
+				editor.putBoolean(SETTING_PUSH_ENABLED, ispush);
+				editor.putString(SETTING_STARTTIME, starttime.format("%H:%M"));
+				editor.putString(SETTING_ENDTIME, endtime.format("%H:%M")) ;
+				
+				editor.commit();
+				
+				
+				break;
+				
+				
+			default:
+				break;
+			
+			}
+		}
+	});
 	
 	
 	@Override
@@ -70,49 +98,17 @@ public class PushActivity extends Activity implements OnClickListener{
 		
 	}
 
-	Handler savePushPreferences = new Handler() {
-		@Override
-		public void handleMessage(Message msg) {
-			switch (msg.what) {
-			
-			case 500:
-				SharedPreferences pref = getPreferences(Activity.MODE_PRIVATE);
-				SharedPreferences.Editor editor = pref.edit();
-				editor.putBoolean(SETTING_PUSH_ENABLED, ispush);
-				editor.putString(SETTING_STARTTIME, starttime.format("%H:%M"));
-				editor.putString(SETTING_ENDTIME, endtime.format("%H:%M")) ;
-				
-				editor.commit();
-				
-				break;
-			}
-			
-			super.handleMessage(msg);
-		}
-	};
 	
 	@Override
 	protected void onStop() {
-		// TODO Auto-generated method stub
 	
-		APIProxyLayer.Instance().UserEnablePushNotify(starttime, endtime, new IAPIProxyCallback() {
-			
-			@Override
-			public void OnCallback(boolean success, JSONObject json) {	
-				savePushPreferences.sendEmptyMessage(500);
-				
-				
-				
-				// TODO Auto-generated method stub
-				//savePushPreferences();
-			}
-		});
+		APIProxyLayer.Instance().UserEnablePushNotify(starttime, endtime, mHandler); 
 		super.onStop();
 	}
 
 	@Override
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
+
 		switch(v.getId()) {
 			
 			case R.id.STbtnBack:
@@ -138,7 +134,7 @@ public class PushActivity extends Activity implements OnClickListener{
 	TimePickerDialog.OnTimeSetListener timePickerListener = new TimePickerDialog.OnTimeSetListener() {
 		@Override
 		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-			// TODO Auto-generated method stub
+
 			TimePicker tp = (TimePicker) findViewById(R.id.timePicker1);
 			tp.setCurrentHour(hourOfDay);
 			tp.setCurrentMinute(minute);
@@ -153,7 +149,7 @@ public class PushActivity extends Activity implements OnClickListener{
 	TimePickerDialog.OnTimeSetListener timePickerListener2 = new TimePickerDialog.OnTimeSetListener() {
 		@Override
 		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-			// TODO Auto-generated method stub
+
 			endtime.set(0, minute, hourOfDay, 0, 0, 0);
 			EditText et = (EditText) findViewById(R.id.STetEndtime);
 			et.setText(endtime.format("%H:%M"));

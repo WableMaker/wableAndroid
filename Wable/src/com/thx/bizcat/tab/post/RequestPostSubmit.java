@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
-import org.json.JSONObject;
-
 import android.R.style;
 import android.content.Context;
 import android.content.Intent;
@@ -19,6 +17,8 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -26,7 +26,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
@@ -34,8 +33,8 @@ import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
 import com.google.android.maps.MapView.LayoutParams;
 import com.thx.bizcat.R;
+import com.thx.bizcat.http.apiproxy.APICODE;
 import com.thx.bizcat.http.apiproxy.APIProxyLayer;
-import com.thx.bizcat.http.apiproxy.IAPIProxyCallback;
 
 public class RequestPostSubmit extends MapActivity implements LocationListener, OnClickListener {
 
@@ -56,6 +55,33 @@ public class RequestPostSubmit extends MapActivity implements LocationListener, 
 	private SharedPreferences pref;
 	
 	Integer category;
+	
+	/* Handler */
+	private Handler mHandler = new Handler() {
+		
+		@Override
+		public void handleMessage(Message msg) {
+
+			switch(APICODE.fromInt(msg.what)) {
+			
+			case RequestAdd:
+//				if(success)
+//					Toast.makeText(context, "제공 등록완료", Toast.LENGTH_SHORT).show();
+				
+				break;
+				
+				
+			default:
+				break;
+			
+			}
+			
+			super.handleMessage(msg);
+		}
+		
+	};
+	
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -206,14 +232,8 @@ public class RequestPostSubmit extends MapActivity implements LocationListener, 
 					btCategory.getText().toString(),
 					tvDetail.getText().toString(), 
 					price, category, c.getTime(), lat, lon, false, false, 
-					new IAPIProxyCallback() {
-						
-						@Override
-						public void OnCallback(boolean success, JSONObject json) {
-							if(success)
-								Toast.makeText(context, "제공 등록완료", Toast.LENGTH_SHORT).show();
-						}
-					});
+					mHandler);
+					
 			break;
 			
 		case R.id.POST_RQ_SBbtnLoc:

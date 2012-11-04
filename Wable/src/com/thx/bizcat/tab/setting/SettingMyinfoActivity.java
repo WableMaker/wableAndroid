@@ -1,18 +1,18 @@
 package com.thx.bizcat.tab.setting;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 
 import com.thx.bizcat.R;
+import com.thx.bizcat.http.apiproxy.APICODE;
 import com.thx.bizcat.http.apiproxy.APIProxyLayer;
-import com.thx.bizcat.http.apiproxy.IAPIProxyCallback;
+import com.thx.bizcat.util.RefHandlerMessage;
+import com.thx.bizcat.util.WeakHandler;
 
 public class SettingMyinfoActivity extends Activity implements OnClickListener{
 	
@@ -20,6 +20,44 @@ public class SettingMyinfoActivity extends Activity implements OnClickListener{
 	private String profile;
 	private boolean cert_fb, cert_phone, cert_email;
 	private boolean public_fb, public_phone, public_email;
+	
+	
+	/* Handler */
+	private WeakHandler mHandler = new WeakHandler(new RefHandlerMessage() {
+		
+		@Override
+		public void handleMessage(Message msg) {
+
+			switch(APICODE.fromInt(msg.what)) {
+			
+			case MyInfo:
+//				if (success){
+//					try {
+//						username = json.getString("name");
+//						
+//						profile = "프로필을 입력해주세요.";
+//						
+//						public_fb = json.getBoolean("public_fb");
+//						public_email = json.getBoolean("public_email");
+//						public_phone = json.getBoolean("public_phone");
+//						
+//						
+//					} catch (JSONException e) {
+//						e.printStackTrace();
+//					}
+//					
+//				}
+				
+				
+				break;
+				
+				
+			default:
+				break;
+			
+			}
+		}
+	});
 	
 	
 
@@ -44,7 +82,6 @@ public class SettingMyinfoActivity extends Activity implements OnClickListener{
 
 	@Override
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
 
 		switch(v.getId()){
 		
@@ -76,31 +113,7 @@ public class SettingMyinfoActivity extends Activity implements OnClickListener{
 	}	
 	
 	private void updateData() {
-		APIProxyLayer.Instance().MyInfo(new IAPIProxyCallback() {
-			
-			@Override
-			public void OnCallback(boolean success, JSONObject json) {
-				// TODO Auto-generated method stub
-				if (success){
-					try {
-						username = json.getString("name");
-						
-						profile = "프로필을 입력해주세요.";
-						
-						public_fb = json.getBoolean("public_fb");
-						public_email = json.getBoolean("public_email");
-						public_phone = json.getBoolean("public_phone");
-						
-						
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					
-				}
-			}
-		});
-		
+		APIProxyLayer.Instance().MyInfo(mHandler);
 	}
 	
 	private void updateView () {
