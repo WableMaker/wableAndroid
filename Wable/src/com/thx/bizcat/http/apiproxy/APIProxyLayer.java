@@ -17,6 +17,7 @@ import com.thx.bizcat.http.HttpClientWrapper;
 import com.thx.bizcat.http.HttpURLConnectionWrapper;
 import com.thx.bizcat.http.IHttpConnectionLayer;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_LogIn_Items;
+import com.thx.bizcat.http.apiproxy.JSONParser.sp_MyInfo_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_LogIn_Result;
 import com.thx.bizcat.util.Logger;
 
@@ -313,8 +314,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				{
 					if(!Relogin())	
 					{
-						// TODO 임시로 주석처리
-						//callback.OnCallback(false,null);
+						callback.sendMessage(callback.obtainMessage(APICODE.MyInfo.toInt(), null));
 						return;
 					}
 				}
@@ -329,7 +329,9 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("MyInfo");
-						callback.sendMessage(callback.obtainMessage(APICODE.MyInfo.toInt(), obj));
+						
+						sp_MyInfo_Items item = new sp_MyInfo_Items(obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.MyInfo.toInt(), item));
 						return;
 					}
 					catch(Exception e)
