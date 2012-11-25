@@ -58,21 +58,4 @@
         android:layout_height="wrap_content" >
     </ListView>
 
-    
-    <ScrollView
-        android:id="@+id/ScrollView1"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentTop="true" >
-
-        <LinearLayout
-            android:id="@+id/MYPAGE_RQlinear"
-            android:layout_width="match_parent"
-            android:layout_height="510dp"
-            android:orientation="vertical" >
-
-        </LinearLayout>
-    </ScrollView>
-
 </RelativeLayout>

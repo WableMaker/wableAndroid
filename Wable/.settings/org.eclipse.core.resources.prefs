@@ -1,4 +1,8 @@
 eclipse.preferences.version=1
 encoding//src/com/thx/bizcat/tab/mypage/MypageActivity.java=UTF-8
+encoding//src/com/thx/bizcat/tab/mypage/sub/ProviderAskActivity.java=UTF-8
+encoding//src/com/thx/bizcat/tab/mypage/sub/ProviderPostActivity.java=UTF-8
+encoding//src/com/thx/bizcat/tab/mypage/sub/RequestAskActivity.java=UTF-8
+encoding//src/com/thx/bizcat/tab/mypage/sub/RequestPostActivity.java=UTF-8
 encoding//src/com/thx/bizcat/util/ExtensionEditText.java=UTF-8
 encoding/<project>=UTF-8

@@ -52,6 +52,10 @@
         <activity android:name=".tab.search.SearchProvideMap" android:theme="@android:style/Theme.NoTitleBar"></activity>
         <activity android:name=".tab.search.SearchRequestActivity" android:theme="@android:style/Theme.NoTitleBar"></activity>
         <activity android:name=".chat.ChatActivity"></activity>
+        <activity android:name=".tab.mypage.sub.ProviderAskActivity"></activity>
+        <activity android:name=".tab.mypage.sub.ProviderPostActivity"></activity>
+        <activity android:name=".tab.mypage.sub.RequestAskActivity"></activity>
+        <activity android:name=".tab.mypage.sub.RequestPostActivity"></activity>
         
     </application>
 

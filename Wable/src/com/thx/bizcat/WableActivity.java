@@ -14,6 +14,7 @@ import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.android.Facebook;
@@ -35,7 +36,7 @@ public class WableActivity extends Activity implements OnClickListener, RefHandl
 	private Button loginOk;
 	
 	private EditText etUser, etPass, etUp;
-	private boolean isWork;
+	private TextView tvSplash; 
 	
 	private ProgressDialog pd;
 	private SharedPreferences pref;
@@ -49,7 +50,8 @@ public class WableActivity extends Activity implements OnClickListener, RefHandl
 		case Login:
 		{
 			sp_LogIn_Items r = (sp_LogIn_Items)msg.obj;
-
+			if(pd != null) pd.dismiss();
+			
 			if(r.bsuccess) {
 				
 				String lastid = pref.getString("LAST_ID", "");
@@ -74,6 +76,7 @@ public class WableActivity extends Activity implements OnClickListener, RefHandl
 			break;
 		}
 		default:
+			tvSplash.setVisibility(View.GONE);
 			break;
 
 		}
@@ -104,18 +107,14 @@ public class WableActivity extends Activity implements OnClickListener, RefHandl
         etUser = (EditText)findViewById(R.id.LOGINeditId);
         etPass = (EditText)findViewById(R.id.LOGINeditPass);
         etUp = (EditText)findViewById(R.id.LOGINeditUp);        
+        tvSplash = (TextView)findViewById(R.id.LOGINtvSplash);
         
         loginOk.setOnClickListener(this);
-        etUser.setOnClickListener(this);
-        etPass.setOnClickListener(this);
-        
-        isWork = false;
-        
-        etUser.setOnFocusChangeListener(onFocusChangeListner);
-        etPass.setOnFocusChangeListener(onFocusChangeListner);
-        
+       
         etUser.setText("cc");
 		etPass.setText("111111");
+		
+		mHandler.sendEmptyMessageDelayed(10000, 2000);
 		
 		//Intent intent = new Intent(context, ChatActivity.class);
 		//startActivity(intent);
@@ -211,64 +210,8 @@ public class WableActivity extends Activity implements OnClickListener, RefHandl
 			APIProxyLayer.Instance().Login(etUser.getText().toString(), etPass.getText().toString(), mHandler);
 			break;
 			
-		case R.id.LOGINeditId:
-		case R.id.LOGINeditPass:
-
-			if(v.isFocused()) {
-				isWork = true;
-				etUp.requestFocus();
-				etUp.postDelayed(new Runnable() {
-					@Override
-					public void run() { 
-						v.requestFocus();
-						isWork = false;
-					}
-				}, 200);
-			}
-			else 
-				v.requestFocus();
-			
-			break;
-
 		}
 	}
-	
-	
-	private OnFocusChangeListener onFocusChangeListner = new OnFocusChangeListener() {
-		
-		@Override
-		public void onFocusChange(final View v, boolean hasFocus) {
-			
-			if(hasFocus && !isWork) {					
 
-    			Rect rect = new Rect();         
-    			getWindow().getDecorView().getWindowVisibleDisplayFrame(rect);
-
-    			int layoutHeight = rect.height();
-    			int screenHeight = getWindowManager().getDefaultDisplay().getHeight();
-    			int diff = screenHeight - layoutHeight;
-
-    			if(diff < 100) {
-
-    				isWork = true;
-    				v.postDelayed(new Runnable() {
-    					@Override
-    					public void run() {
-    						etUp.requestFocus();
-    						etUp.postDelayed(new Runnable() {
-    							@Override
-    							public void run() { 
-    								v.requestFocus();
-    								isWork = false;
-    							}
-    						}, 200);
-    					}
-    				}, 20);
-    			}
-    		}
-			
-		}
-	};
-	
 
 }

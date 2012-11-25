@@ -90,12 +90,10 @@
 
     </EditText>
 
-    <EditText
-        android:id="@+id/editText1"
+    <TextView
+        android:id="@+id/LOGINtvSplash"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:ems="10" android:visibility="invisible"/>
+        android:background="@drawable/biz_splash" />
 
 </RelativeLayout>

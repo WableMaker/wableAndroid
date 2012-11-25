@@ -12,20 +12,21 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
     </LinearLayout>
-
+
     <LinearLayout
         android:id="@+id/Bottom"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:background="@drawable/tab_bar_bg" android:gravity="bottom">
-
+        android:background="@drawable/biz_tab_bar"
+        android:gravity="bottom" >
+
         <Button
             android:id="@+id/btnMainMypage"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/tab_bar_activity_selected" />
+            android:background="@drawable/biz_tab_bar_my_selected" />
 
         <Button
             android:id="@+id/btnMainPost"
@@ -38,12 +39,13 @@
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:background="@drawable/tab_bar_browse"/>
-
+
         <Button
             android:id="@+id/btnMainSetting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/tab_bar_profile"/>
+            android:background="@drawable/biz_tab_bar_setting_selected" />
+
     </LinearLayout>
 
 </RelativeLayout>
