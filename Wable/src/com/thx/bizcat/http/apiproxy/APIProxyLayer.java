@@ -16,6 +16,8 @@ import android.text.format.Time;
 import com.thx.bizcat.http.HttpClientWrapper;
 import com.thx.bizcat.http.HttpURLConnectionWrapper;
 import com.thx.bizcat.http.IHttpConnectionLayer;
+import com.thx.bizcat.http.apiproxy.JSONParser.sp_LogIn_Items;
+import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_LogIn_Result;
 import com.thx.bizcat.util.Logger;
 
 public class APIProxyLayer implements IAPIProxyLayer {
@@ -190,8 +192,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	
 	@Override
 	public boolean Login(String loginid, String password,
-			//final IAPIProxyCallback callback) {
-
+			
 			final Handler callback) {
 			
 		SetAccountInfo(loginid,password,null,null);
@@ -220,8 +221,9 @@ public class APIProxyLayer implements IAPIProxyLayer {
 								else {
 									SessionConnected("Login");
 								}
-								
-								callback.sendMessage(callback.obtainMessage(APICODE.Login.toInt(), obj));
+										
+								sp_LogIn_Items item = new sp_LogIn_Items(obj);
+								callback.sendMessage(callback.obtainMessage(APICODE.Login.toInt(), item));
 								return;
 							}
 							catch(Exception e)
