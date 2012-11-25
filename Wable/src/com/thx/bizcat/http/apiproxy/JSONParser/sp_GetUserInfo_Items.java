@@ -23,7 +23,7 @@ public class sp_MyInfo_Items {
 				result = new sp_LogIn_Result(obj.getJSONObject("data"));
 				
 			}
-			else//실패시는 errorcode입력
+			else//�패�는 errorcode�력
 			{
 				try
 				{

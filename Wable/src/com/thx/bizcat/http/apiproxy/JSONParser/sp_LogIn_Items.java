@@ -1,13 +1,9 @@
 package com.thx.bizcat.http.apiproxy.JSONParser;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_LogIn_Result;
-import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_RegisterUser_Result;
 import com.thx.bizcat.util.Logger;
 
 public class sp_LogIn_Items {
@@ -27,7 +23,7 @@ public class sp_LogIn_Items {
 			{
 				try
 				{
-					resultCode =ResultCode.valueOf(obj.getString("data"));
+					resultCode = ResultCode.valueOf(obj.getString("data"));
 				} catch (JSONException e) {
 					Logger.Instance().Write(e);
 				}

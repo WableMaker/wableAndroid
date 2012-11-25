@@ -16,13 +16,22 @@
         android:text="phone"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content" />
-    
-    <Button 
-        android:text="010"
-        android:id="@+id/STtvCertPhone"
+
+    <EditText
+        android:id="@+id/SETTINGeditPhoneNumber"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent" />
-    
+        android:ems="10"
+        android:inputType="phone" >
+
+        <requestFocus />
+    </EditText>
+    
+    <Button
+        android:id="@+id/SETTINGbtnCertificationPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="인증하기" />
     
     <!-- 페이스북 인증 -->
     <TextView
@@ -55,14 +64,12 @@
         android:text="email"
         android:layout_width="229dp"
         android:layout_height="wrap_content" />
-
-    <Button 
-        android:id="@+id/STtvCertEmail"
-        android:layout_height="wrap_content"
+
+    <Button
+        android:id="@+id/SETTINGbtnCertificationEmail"
         android:layout_width="match_parent"
-        android:text="인증하기"
-        />
-
+        android:layout_height="wrap_content"
+        android:text="인증하기" />
     
     <!--  footer  -->
     <TextView

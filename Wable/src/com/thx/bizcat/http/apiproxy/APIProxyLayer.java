@@ -16,6 +16,7 @@ import android.text.format.Time;
 import com.thx.bizcat.http.HttpClientWrapper;
 import com.thx.bizcat.http.HttpURLConnectionWrapper;
 import com.thx.bizcat.http.IHttpConnectionLayer;
+import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetMyActiveRequests_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_LogIn_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_MyInfo_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_LogIn_Result;
@@ -651,7 +652,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("MyActiveRequestList");
 						
-						callback.sendMessage(callback.obtainMessage(APICODE.RequestMyActiveList.toInt(), obj));
+						sp_GetMyActiveRequests_Items item = new sp_GetMyActiveRequests_Items(obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.RequestMyActiveList.toInt(), item));
 						return;
 					}
 				}

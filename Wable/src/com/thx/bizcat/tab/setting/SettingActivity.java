@@ -3,12 +3,36 @@ package com.thx.bizcat.tab.setting;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
 
 import com.thx.bizcat.R;
+import com.thx.bizcat.http.apiproxy.APICODE;
+import com.thx.bizcat.http.apiproxy.APIProxyLayer;
+import com.thx.bizcat.util.RefHandlerMessage;
+import com.thx.bizcat.util.WeakHandler;
 
-public class SettingActivity extends Activity implements OnClickListener {
+public class SettingActivity extends Activity implements OnClickListener, RefHandlerMessage {
+	
+	/* Handler */
+	private WeakHandler mHandler = new WeakHandler(this);
+			
+	@Override
+	public void handleMessage(Message msg) {
+
+		switch(APICODE.fromInt(msg.what)) {
+		
+		case Logout:
+				//로그아웃 절차 구현
+							
+			break;		
+		default:
+			break;
+		}
+	}	
+			
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +66,7 @@ public class SettingActivity extends Activity implements OnClickListener {
 		
 		// 로그아웃
 		case R.id.STbtnLogout:
-		
+			APIProxyLayer.Instance().Logout(mHandler);
 		
 		break;
 		
