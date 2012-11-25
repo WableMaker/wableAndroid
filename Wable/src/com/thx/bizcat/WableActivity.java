@@ -1,15 +1,14 @@
 package com.thx.bizcat;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Message;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
@@ -20,10 +19,11 @@ import android.widget.Toast;
 import com.facebook.android.Facebook;
 import com.thx.bizcat.http.apiproxy.APICODE;
 import com.thx.bizcat.http.apiproxy.APIProxyLayer;
+import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetMyActiveRequests_Items;
+import com.thx.bizcat.http.apiproxy.JSONParser.sp_LogIn_Items;
 import com.thx.bizcat.tab.login.PasswordFindActivity;
 import com.thx.bizcat.tab.login.RegisterActivity;
 import com.thx.bizcat.util.RefHandlerMessage;
-import com.thx.bizcat.util.Utils;
 import com.thx.bizcat.util.WeakHandler;
 //import com.wable.http.apiproxy.JSONParser.sp_GetRequestsByTime_Item;
 
@@ -38,7 +38,7 @@ public class WableActivity extends Activity implements OnClickListener, RefHandl
 	private boolean isWork;
 	
 	private ProgressDialog pd;
-	//private SharedPreferences pref;
+	private SharedPreferences pref;
 	
 	/* Handler */
 	private WeakHandler mHandler = new WeakHandler(this);
@@ -47,44 +47,32 @@ public class WableActivity extends Activity implements OnClickListener, RefHandl
 		switch(APICODE.fromInt(msg.what)) {
 
 		case Login:
+		{
+			sp_LogIn_Items r = (sp_LogIn_Items)msg.obj;
 
-			if(pd != null) pd.dismiss();
-			//				
-			
-			try {
-				JSONObject obj = new JSONObject(msg.obj.toString());
+			if(r.bsuccess) {
 				
-				if(obj.getBoolean("success")) {
-					Intent intent = new Intent(context, MainActivity.class);
-					startActivity(intent);			
-					overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-					finish();
-				} else {
-					Toast.makeText(context, "계정정보를 확인하세요", Toast.LENGTH_LONG).show();
-					
-				}
+				String lastid = pref.getString("LAST_ID", "");
+				APIProxyLayer.Instance().RequestMyActiveList(lastid, mHandler);
 				
-				
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
-			
-			
-
-			//				if(success)
-			//				{
-			//					//Logger.Instance().Write(json.toString());
-			
-			//
-			//				} else { 
-			//
-			//					handler.sendEmptyMessage(500);
-			//					Logger.Instance().Write("login fail");
-			//				}
-
+			} else
+				Toast.makeText(context, r.resultCode.toString() , Toast.LENGTH_LONG).show();
 			break;
-
-
+		}
+		
+		case RequestMyActiveList:
+		{
+			//if(pd != null) pd.dismiss();
+			sp_GetMyActiveRequests_Items r = (sp_GetMyActiveRequests_Items)msg.obj;
+			
+			if(r.bsuccess) {
+				Intent intent = new Intent(context, MainActivity.class);
+				startActivity(intent);			
+				overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+				finish();
+			}
+			break;
+		}
 		default:
 			break;
 
@@ -97,7 +85,7 @@ public class WableActivity extends Activity implements OnClickListener, RefHandl
         setContentView(R.layout.login_main);  
         context = this;        
         
-//        pref = PreferenceManager.getDefaultSharedPreferences(this);
+        pref = PreferenceManager.getDefaultSharedPreferences(this);
 //
 //        Editor edit = pref.edit();
 //        edit.putBoolean("categoryUpdate", true);
@@ -220,35 +208,7 @@ public class WableActivity extends Activity implements OnClickListener, RefHandl
 			}
 			
 			pd = ProgressDialog.show(context, "로그인", "사용자 정보 조회중입니다...", true, true);
-
 			APIProxyLayer.Instance().Login(etUser.getText().toString(), etPass.getText().toString(), mHandler);
-
-
-					
-//					new IAPIProxyCallback(){
-//
-//				@Override
-//				public void OnCallback(boolean success, JSONObject json) {		
-//					pd.dismiss();
-//					
-//					if(success)
-//					{
-//						//Logger.Instance().Write(json.toString());
-//						Intent intent = new Intent(context, MainActivity.class);
-//						startActivity(intent);			
-//						overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-//						finish();
-//
-//					} else { 
-//
-//						handler.sendEmptyMessage(500);
-//						Logger.Instance().Write("login fail");
-//					}
-//				}
-			
-			//Toast.makeText(context, "아이디 또는 비밀번호를 확인해주세요", Toast.LENGTH_SHORT).show();
-			
-			//Toast.makeText(context, "Login OK", Toast.LENGTH_SHORT).show();
 			break;
 			
 		case R.id.LOGINeditId:

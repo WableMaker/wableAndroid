@@ -53,30 +53,30 @@ public class JSONParser {
 	
 	public static sp_GetMyActiveRequests_Items RequestMyActiveListParser(JSONObject json)
 	{
-		sp_GetMyActiveRequests_Items results = new sp_GetMyActiveRequests_Items();
-		
-		try 
-		{
-			results.bsuccess = json.getBoolean("success");
-			
-			if(results.bsuccess)
-			{
-				JSONArray array= json.getJSONArray("data");
-				
-				for(int i=0;i<array.length();i++)
-				{
-					results.requestsItem.add(new sp_GetMyActiveRequests_Result( array.getJSONObject(i)));
-				}
-				results.resultCode = ResultCode.SUCCESS;
-				return results;
-			}
-			else
-			{
-				results.resultCode = ResultCode.valueOf(json.getString("data"));
-			}
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
+//		sp_GetMyActiveRequests_Items results = new sp_GetMyActiveRequests_Items();
+//		
+//		try 
+//		{
+//			results.bsuccess = json.getBoolean("success");
+//			
+//			if(results.bsuccess)
+//			{
+//				JSONArray array= json.getJSONArray("data");
+//				
+//				for(int i=0;i<array.length();i++)
+//				{
+//					results.requestsItem.add(new sp_GetMyActiveRequests_Result( array.getJSONObject(i)));
+//				}
+//				results.resultCode = ResultCode.SUCCESS;
+//				return results;
+//			}
+//			else
+//			{
+//				results.resultCode = ResultCode.valueOf(json.getString("data"));
+//			}
+//		} catch (JSONException e) {
+//			e.printStackTrace();
+//		}
 		return null;	
 	}
 	
@@ -341,26 +341,26 @@ public class JSONParser {
 	
 	public static sp_GetUserInfo_Items MyInfo(JSONObject json)
 	{
-		sp_GetUserInfo_Items item = new sp_GetUserInfo_Items();
-		try 
-		{
-			item.bsuccess = json.getBoolean("success");
-			
-			if(item.bsuccess)
-			{
-				JSONObject obj= json.getJSONObject("data");
-					
-				item.result = new sp_GetUserInfo_Result(obj);
-				item.resultCode = ResultCode.SUCCESS;
-				return item;
-			}
-			else
-			{
-				item.resultCode = ResultCode.valueOf(json.getString("data"));
-			}
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
+//		sp_GetUserInfo_Items item = new sp_GetUserInfo_Items();
+//		try 
+//		{
+//			item.bsuccess = json.getBoolean("success");
+//			
+//			if(item.bsuccess)
+//			{
+//				JSONObject obj= json.getJSONObject("data");
+//					
+//				item.result = new sp_GetUserInfo_Result(obj);
+//				item.resultCode = ResultCode.SUCCESS;
+//				return item;
+//			}
+//			else
+//			{
+//				item.resultCode = ResultCode.valueOf(json.getString("data"));
+//			}
+//		} catch (JSONException e) {
+//			e.printStackTrace();
+//		}
 		return null;
 	}
 	

@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 
+import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetMyActiveRequests_Result;
 import com.thx.bizcat.tab.mypage.MypageActivity;
 import com.thx.bizcat.tab.post.PostActivity;
 import com.thx.bizcat.tab.search.SearchActivity;

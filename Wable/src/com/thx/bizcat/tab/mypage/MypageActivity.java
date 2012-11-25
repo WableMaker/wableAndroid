@@ -6,8 +6,10 @@ import java.util.List;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Message;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.SoundEffectConstants;
@@ -22,10 +24,11 @@ import android.widget.ViewSwitcher;
 import com.thx.bizcat.R;
 import com.thx.bizcat.http.apiproxy.APICODE;
 import com.thx.bizcat.http.apiproxy.APIProxyLayer;
+import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetMyActiveRequests_Items;
 import com.thx.bizcat.util.RefHandlerMessage;
 import com.thx.bizcat.util.WeakHandler;
 
-public class MypageActivity extends Activity implements OnClickListener {
+public class MypageActivity extends Activity implements OnClickListener, RefHandlerMessage {
 
 	private Context context;
 	
@@ -43,25 +46,31 @@ public class MypageActivity extends Activity implements OnClickListener {
 	LinearLayout container, container2;
 	
 	private ProgressDialog pd;
+	private SharedPreferences pref;
 	
 	/* Handler */
-	private WeakHandler mHandler = new WeakHandler(new RefHandlerMessage() {        
+	private WeakHandler mHandler = new WeakHandler(this);
+	public void handleMessage(Message msg) {   
 
-		public void handleMessage(Message msg) {   
-			
-			switch(APICODE.fromInt(msg.what)) {     
-			
-			//RequestMyActiveList
-			//ProvideMyActiveList
-			
-			case RequestMyActiveList:
+		switch(APICODE.fromInt(msg.what)) {     
+
+		//RequestMyActiveList
+		//ProvideMyActiveList
+
+		case RequestMyActiveList:
+		{
+			sp_GetMyActiveRequests_Items r =(sp_GetMyActiveRequests_Items) msg.obj;
+			if(r.bsuccess) {
 				
+			}
+			
+		}
+			
 //				if(!success) {
 //					
 //					mHandler.sendEmptyMessage(1);
 //					return;
 //				}
-//				
 //
 //				runOnUiThread(new Runnable() {
 //					public void run() {
@@ -346,8 +355,8 @@ public class MypageActivity extends Activity implements OnClickListener {
 //					e.printStackTrace();
 //				}	
 
-		
-				
+
+
 				break;
 			
 			
@@ -361,10 +370,8 @@ public class MypageActivity extends Activity implements OnClickListener {
 				
 			default:
 				break;
-			}
-		}  
-		
-	}); 
+		}
+	}; 
 	
 	
 	@Override
@@ -372,6 +379,7 @@ public class MypageActivity extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.mypage_main);
 		context = this;
+		pref = PreferenceManager.getDefaultSharedPreferences(this);
 		
 		inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);		
 		v1 = inflater.inflate(R.layout.mypage_request, null);
@@ -395,10 +403,13 @@ public class MypageActivity extends Activity implements OnClickListener {
 		
 		
 		/* 요청목록 */
-		APIProxyLayer.Instance().RequestMyActiveList("", mHandler); 
+		//APIProxyLayer.Instance().RequestMyActiveList("", mHandler); 
+		
+		String lastid = pref.getString("LAST_ID", "");
+		APIProxyLayer.Instance().RequestMyActiveList(lastid, mHandler);
 				
 		/* 제공목록 */
-		APIProxyLayer.Instance().ProvideMyActiveList("", mHandler); 
+		//APIProxyLayer.Instance().ProvideMyActiveList(lastid, mHandler); 
 					
 		menu = (Button)findViewById(R.id.MYPAGEbtnMenu);
 		menu.setOnTouchListener(new OnTouchListener() {

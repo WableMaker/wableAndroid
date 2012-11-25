@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.Message;
 import android.preference.PreferenceManager;
 import android.view.View;
@@ -19,25 +18,24 @@ import com.thx.bizcat.R;
 import com.thx.bizcat.adapter.CategoryElement;
 import com.thx.bizcat.http.apiproxy.APICODE;
 import com.thx.bizcat.http.apiproxy.APIProxyLayer;
+import com.thx.bizcat.util.RefHandlerMessage;
+import com.thx.bizcat.util.WeakHandler;
 
 
-public class PostActivity extends Activity implements OnClickListener {
+public class PostActivity extends Activity implements OnClickListener, RefHandlerMessage {
 
 	Context context;
 	SharedPreferences  pref;
 	public static Map<Integer, TreeMap<Integer, CategoryElement>> categoriesRequest;
 	public static Map<Integer, TreeMap<Integer, CategoryElement>> categoriesProvide;
 	
-	
 	/* Handler */
-	private Handler mHandler = new Handler() {
+	private WeakHandler mHandler = new WeakHandler(this);
+	public void handleMessage(Message msg) {
 		
-		@Override
-		public void handleMessage(Message msg) {
+		switch(APICODE.fromInt(msg.what)) {
 
-			switch(APICODE.fromInt(msg.what)) {
-			
-			case CategoryList:
+		case CategoryList:
 				
 //				if(success)
 //				{
@@ -135,31 +133,23 @@ public class PostActivity extends Activity implements OnClickListener {
 //				Serializes.readObject(path + "/p.ser");
 //	}
 
-				break;
+			break;
 
-				
-			default:
-				break;
-			
-			}
-			
-			super.handleMessage(msg);
+
+		default:
+			break;
+
 		}
-		
 	};
 	
-	
-	
-	
-	@SuppressWarnings("unchecked")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.post_main);
 		context = this;
+		pref = PreferenceManager.getDefaultSharedPreferences(this);
 		
 		findViewById(R.id.btnPostRequest).setOnClickListener(this);
-		pref = PreferenceManager.getDefaultSharedPreferences(this);
 
 		if(pref.getBoolean("categoryUpdate", true)) {
 			APIProxyLayer.Instance().CategoryList(mHandler);
@@ -171,9 +161,6 @@ public class PostActivity extends Activity implements OnClickListener {
 		Intent intent;
 		switch (v.getId()) {
 		case R.id.btnPostRequest:
-			
-			MainActivity activity = (MainActivity)getParent();
-			//activity.hideBottomTab();			
 			
 			intent = new Intent(this, RequestPostSubmit.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
