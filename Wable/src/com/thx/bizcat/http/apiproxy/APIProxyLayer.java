@@ -17,6 +17,7 @@ import com.thx.bizcat.http.HttpClientWrapper;
 import com.thx.bizcat.http.HttpURLConnectionWrapper;
 import com.thx.bizcat.http.IHttpConnectionLayer;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetMyActiveRequests_Items;
+import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetMyProvides_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_LogIn_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_MyInfo_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_LogIn_Result;
@@ -939,7 +940,10 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("MyActiveProvideList");
-						callback.sendMessage(callback.obtainMessage(APICODE.ProvideMyActiveList.toInt(), obj));
+						
+						sp_GetMyProvides_Items item = new sp_GetMyProvides_Items(obj);
+						
+						callback.sendMessage(callback.obtainMessage(APICODE.ProvideMyActiveList.toInt(), item));
 						return;
 					}
 					

@@ -11,3 +11,4 @@ packages/
 *.ldf
 .metadata/
 gen/
+*.DS_Store

@@ -7,7 +7,6 @@ import org.json.JSONObject;
 
 import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetAllRequests_Result;
 import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetMyActiveProvides_Result;
-import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetMyActiveRequests_Result;
 import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetOtherProvides_Result;
 import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetOtherRequests_Result;
 import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetProvidesByArea_Result;
@@ -16,7 +15,6 @@ import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetProvidesByTime_Resul
 import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetRequestsByArea_Result;
 import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetRequestsByDistance_Result;
 import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetRequestsByTime_Result;
-import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetUserInfo_Result;
 
 public class JSONParser {
 
@@ -195,30 +193,30 @@ public class JSONParser {
 	
 	public static sp_GetMyActiveProvides_Items ProvideMyActiveListParser(JSONObject json)
 	{
-		sp_GetMyActiveProvides_Items results = new sp_GetMyActiveProvides_Items();
-		
-		try 
-		{
-			results.bsuccess = json.getBoolean("success");
-			
-			if(results.bsuccess)
-			{
-				JSONArray array= json.getJSONArray("data");
-				
-				for(int i=0;i<array.length();i++)
-				{
-					results.requestsItem.add(new sp_GetMyActiveProvides_Result( array.getJSONObject(i)));
-				}
-				results.resultCode = ResultCode.SUCCESS;
-				return results;
-			}
-			else
-			{
-				results.resultCode = ResultCode.valueOf(json.getString("data"));
-			}
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
+//		sp_GetMyActiveProvides_Items results = new sp_GetMyActiveProvides_Items();
+//		
+//		try 
+//		{
+//			results.bsuccess = json.getBoolean("success");
+//			
+//			if(results.bsuccess)
+//			{
+//				JSONArray array= json.getJSONArray("data");
+//				
+//				for(int i=0;i<array.length();i++)
+//				{
+//					results.requestsItem.add(new sp_GetMyActiveProvides_Result( array.getJSONObject(i)));
+//				}
+//				results.resultCode = ResultCode.SUCCESS;
+//				return results;
+//			}
+//			else
+//			{
+//				results.resultCode = ResultCode.valueOf(json.getString("data"));
+//			}
+//		} catch (JSONException e) {
+//			e.printStackTrace();
+//		}
 		return null;	
 	}
 	
@@ -339,8 +337,8 @@ public class JSONParser {
 	
 
 	
-	public static sp_GetUserInfo_Items MyInfo(JSONObject json)
-	{
+//	public static sp_GetUserInfo_Items MyInfo(JSONObject json)
+//	{
 //		sp_GetUserInfo_Items item = new sp_GetUserInfo_Items();
 //		try 
 //		{
@@ -361,8 +359,8 @@ public class JSONParser {
 //		} catch (JSONException e) {
 //			e.printStackTrace();
 //		}
-		return null;
-	}
+//		return null;
+//	}
 	
 	
 	

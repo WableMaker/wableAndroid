@@ -11,6 +11,7 @@ import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_LogIn_Result;
 import com.thx.bizcat.util.Logger;
 
 public class sp_MyInfo_Items {
+	
 	public sp_GetUserInfo_Result result;
 	public boolean bsuccess = false;
 	public ResultCode resultCode;
@@ -20,10 +21,10 @@ public class sp_MyInfo_Items {
 			
 			if(bsuccess)
 			{
-				result = new sp_LogIn_Result(obj.getJSONObject("data"));
+				result = new sp_GetUserInfo_Result(obj.getJSONObject("data"));
 				
 			}
-			else//�패�는 errorcode�력
+			else//�패�는 errorcode�력
 			{
 				try
 				{

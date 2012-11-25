@@ -15,6 +15,8 @@ import android.widget.LinearLayout;
 
 import com.thx.bizcat.R;
 import com.thx.bizcat.http.apiproxy.APICODE;
+import com.thx.bizcat.http.apiproxy.APIProxyLayer;
+import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetMyActiveProvides_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetMyActiveRequests_Items;
 import com.thx.bizcat.tab.mypage.sub.ProviderAskActivity;
 import com.thx.bizcat.tab.mypage.sub.ProviderPostActivity;
@@ -54,7 +56,7 @@ public class MypageActivity extends ActivityGroup  implements OnClickListener, R
 
 		case ProvideMyActiveList:
 		{
-			sp_GetMyActiveRequests_Items r =(sp_GetMyActiveRequests_Items) msg.obj;
+			sp_GetMyActiveProvides_Items r =(sp_GetMyActiveProvides_Items) msg.obj;
 			if(r.bsuccess) {
 
 				ArrayList<ProviderAdapterItem> list = new ArrayList<ProviderAdapterItem>();
@@ -90,6 +92,11 @@ public class MypageActivity extends ActivityGroup  implements OnClickListener, R
 		views[2] = getLocalActivityManager().startActivity("PROV_POST", new Intent(this, ProviderPostActivity.class)).getDecorView();
 		views[3] = getLocalActivityManager().startActivity("PROV_ASK", new Intent(this, ProviderAskActivity.class)).getDecorView();
 		originView = container;
+		
+		//APIProxyLayer.Instance().RequestMyActiveList("", mHandler);
+		//APIProxyLayer.Instance().ProvideMyActiveList("", mHandler);
+		
+		
 		
 	}
 
