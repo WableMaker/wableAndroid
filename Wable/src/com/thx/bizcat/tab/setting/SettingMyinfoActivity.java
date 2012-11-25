@@ -14,7 +14,7 @@ import com.thx.bizcat.http.apiproxy.APIProxyLayer;
 import com.thx.bizcat.util.RefHandlerMessage;
 import com.thx.bizcat.util.WeakHandler;
 
-public class SettingMyinfoActivity extends Activity implements OnClickListener{
+public class SettingMyinfoActivity extends Activity implements OnClickListener, RefHandlerMessage{
 	
 	private String username;
 	private String profile;
@@ -23,8 +23,8 @@ public class SettingMyinfoActivity extends Activity implements OnClickListener{
 	
 	
 	/* Handler */
-	private WeakHandler mHandler = new WeakHandler(new RefHandlerMessage() {
-		
+	private WeakHandler mHandler = new WeakHandler(this);
+			
 		@Override
 		public void handleMessage(Message msg) {
 
@@ -48,16 +48,14 @@ public class SettingMyinfoActivity extends Activity implements OnClickListener{
 //					
 //				}
 				
-				
 				break;
-				
 				
 			default:
 				break;
 			
 			}
 		}
-	});
+
 	
 	
 
