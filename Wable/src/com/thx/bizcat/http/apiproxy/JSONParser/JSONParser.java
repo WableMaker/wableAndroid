@@ -23,28 +23,30 @@ public class JSONParser {
 	public static sp_GetOtherRequests_Items RequestOtherListParser(JSONObject json)
 	{
 		sp_GetOtherRequests_Items results = new sp_GetOtherRequests_Items();
-		if()
-		try 
+		if(json !=null)
 		{
-			results.bsuccess = json.getBoolean("success");
-			
-			if(results.bsuccess)
+			try 
 			{
-				JSONArray array= json.getJSONArray("data");
-					
-				for(int i=0;i<array.length();i++)
+				results.bsuccess = json.getBoolean("success");
+				
+				if(results.bsuccess)
 				{
-					results.requestsItem.add(new sp_GetOtherRequests_Result( array.getJSONObject(i)));
+					JSONArray array= json.getJSONArray("data");
+						
+					for(int i=0;i<array.length();i++)
+					{
+						results.requestsItem.add(new sp_GetOtherRequests_Result( array.getJSONObject(i)));
+					}
+					results.resultCode = ResultCode.SUCCESS;
+					return results;
 				}
-				results.resultCode = ResultCode.SUCCESS;
-				return results;
+				else
+				{
+					results.resultCode = ResultCode.valueOf(json.getString("data"));
+				}
+			} catch (JSONException e) {
+				e.printStackTrace();
 			}
-			else
-			{
-				results.resultCode = ResultCode.valueOf(json.getString("data"));
-			}
-		} catch (JSONException e) {
-			e.printStackTrace();
 		}
 		return null;
 	}
