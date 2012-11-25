@@ -16,12 +16,14 @@ import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetProvidesByTime_Resul
 import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetRequestsByArea_Result;
 import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetRequestsByDistance_Result;
 import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetRequestsByTime_Result;
+import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetUserInfo_Result;
 
 public class JSONParser {
 
 	public static sp_GetOtherRequests_Items RequestOtherListParser(JSONObject json)
 	{
 		sp_GetOtherRequests_Items results = new sp_GetOtherRequests_Items();
+		if()
 		try 
 		{
 			results.bsuccess = json.getBoolean("success");
@@ -317,7 +319,7 @@ public class JSONParser {
 					
 				for(int i=0;i<array.length();i++)
 				{
-					results.requestsItem.add(new sp_GetAllRequests_Result( array.getJSONObject(i)));
+					results.result.add(new sp_GetAllRequests_Result( array.getJSONObject(i)));
 				}
 				results.resultCode = ResultCode.SUCCESS;
 				return results;
@@ -335,7 +337,30 @@ public class JSONParser {
 	
 
 	
-
+	public static sp_GetUserInfo_Items MyInfo(JSONObject json)
+	{
+		sp_GetUserInfo_Items item = new sp_GetUserInfo_Items();
+		try 
+		{
+			item.bsuccess = json.getBoolean("success");
+			
+			if(item.bsuccess)
+			{
+				JSONObject obj= json.getJSONObject("data");
+					
+				item.result = new sp_GetUserInfo_Result(obj);
+				item.resultCode = ResultCode.SUCCESS;
+				return item;
+			}
+			else
+			{
+				item.resultCode = ResultCode.valueOf(json.getString("data"));
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 	
 	
 	

@@ -1,0 +1,275 @@
+package com.thx.bizcat.http.apiproxy;
+
+<<<<<<< HEAD
+
+public enum APICODE{
+	AccountLogin,
+	AccountLogout,
+	AccountRegister,
+	
+	AccountFBlogin,
+	AccountFBregister,
+	AccountFBconnect,
+	AccountResetPassword,
+	AccountResendActivation,
+	AccountEmailAuthorize,
+	AccountChangePassword,
+=======
+import android.util.SparseArray;
+
+public enum APICODE {
+
+
+	Login(0),
+	Logout(1),
+	Register(2),
+	
+	FBlogin(3),
+	FBregister(4),
+	FBconnect(5),
+	AccountResetPassword(6),
+	AccountResendActivation(7),
+	AccountEmailAuthorize(8),
+	AccountChangePassword(9),
+>>>>>>> origin/master
+	
+	// [end]
+	
+	// [start] User
+	
+<<<<<<< HEAD
+	UserMyInfo,
+	UserUpdate,
+		
+	
+	UserEnablePushNotify,
+	UserResetBadgeCount,
+	UserSendSMSAuthCode,
+	UserAuthorizedMobile,
+	UserGetUpdatedContents,
+	UserDeletePhoto,
+=======
+	MyInfo(10),
+	UserUpdate(11),
+	
+	UserEnablePushNotify(12),
+	UserResetBadgeCount(13),
+	UserSendSMSAuthCode(14),
+	UserAuthorizedMobile(15),
+	UserGetUpdatedContents(16),
+	UserDeletePhoto(17),
+>>>>>>> origin/master
+	// [end]
+		
+	// [start] Request
+	
+<<<<<<< HEAD
+	RequestOtherList,
+	RequestMyActiveList,
+	RequestListbyArea,
+	RequestListbyDistance,
+
+	RequestAdd,
+			
+	RequestDelete,
+	RequestDone,
+	
+	RequestMyDetailById,
+	RequestOtherDetailById,
+	RequestUpdate,
+			
+	
+	RequestListbyTime,
+=======
+	RequestOtherList(18),
+	RequestMyActiveList(19),
+	RequestListbyArea(20),
+	RequestListbyDistance(21),
+
+	RequestAdd(22),
+	RequestDelete(23),
+	RequestDone(24),
+	
+	RequestMyDetailById(25),
+	RequestOtherDetailById(26),
+	RequestUpdate(27),
+	
+	RequestListbyTime(28),
+>>>>>>> origin/master
+	// [end]
+	
+	// [start] Provide
+	
+<<<<<<< HEAD
+	ProvideOtherList,
+	ProvideMyActiveList,
+	ProvideMyDoneList,
+	ProvideListbyTime,
+	ProvideListbyArea,
+	ProvideListbyDistance,
+
+	ProvideAdd,
+			
+	ProvideDelete,
+	ProvideDone,
+	
+	ProvideMyDetailById,
+	
+	ProvideOtherDetailById,
+	ProvideUpdate,
+			
+=======
+	ProvideOtherList(29),
+	ProvideMyActiveList(30),
+	ProvideMyDoneList(31),
+	ProvideListbyTime(32),
+	ProvideListbyArea(33),
+	ProvideListbyDistance(34),
+
+	ProvideAdd(35),
+	ProvideDelete(36),
+	ProvideDone(37),
+	
+	ProvideMyDetailById(38),
+	
+	ProvideOtherDetailById(39),
+	ProvideUpdate(40),
+>>>>>>> origin/master
+	// [end]
+	
+	// [start] Bidding
+
+<<<<<<< HEAD
+	//�����ڸ� �����Ѵ�
+	BiddingDecideProvider,
+	
+	//��û���� ������ �����Ѵ�
+	BiddingDecideRequester,
+	
+	
+	BiddingOfferAsProvider,
+	BiddingOfferAsRequester,
+
+	BiddingListAsProvider,
+	BiddingListAsRequester,
+	BiddingRating,
+	
+	//�ŷ� ����
+	BiddingDelete,
+	
+	BiddingSendSMSOfferAsProvider,
+	BiddingSendSMSOfferAsRequester,
+=======
+
+	BiddingDecideProvider(41),
+
+	BiddingDecideRequester(42),
+	
+	
+	BiddingOfferAsProvider(43),
+	BiddingOfferAsRequester(44),
+
+	BiddingListAsProvider(45),
+	BiddingListAsRequester(46),
+	BiddingRating(47),
+	
+	//�ŷ� ����
+	BiddingDelete(48),
+	
+	BiddingSendSMSOfferAsProvider(49),
+	BiddingSendSMSOfferAsRequester(50),
+>>>>>>> origin/master
+	
+	// [end]
+	
+	// [start] Message
+	
+<<<<<<< HEAD
+	MessageSendText,
+	MessageSendImage,
+	MessageSendAudio,
+	MessageSendVideo,
+	
+	MessageGet,
+	MessageGetNewMessage,
+=======
+	MessageSendText(51),
+	MessageSendImage(52),
+	MessageSendAudio(53),
+	MessageSendVideo(54),
+	
+	MessageGet(55),
+	MessageGetNewMessage(56),
+>>>>>>> origin/master
+	
+
+	
+	// [end]
+	
+	// [start] Category
+<<<<<<< HEAD
+	CategoryList,
+	CategoryUpdatedTime,
+=======
+	CategoryList(57),	
+	CategoryUpdatedTime(58),
+>>>>>>> origin/master
+	
+	// [end]
+	
+	// [start] setting
+	
+<<<<<<< HEAD
+	SettingRegisterDevice,
+=======
+	SettingRegisterDevice(59),
+>>>>>>> origin/master
+	
+	// [end]
+	
+	// [start] System
+<<<<<<< HEAD
+	SystemAppVersion,
+	// [end]
+	
+	private static final int amount = EnumSet.allOf(Quality.class).size();
+    private static Quality[] val = new Quality[amount];
+    static{ for(Quality q:EnumSet.allOf(Quality.class)){ val[q.ordinal()]=q; } }
+    public static Quality fromInt(int i) { return val[i]; }
+    public Quality next() { return fromInt((ordinal()+1)%amount); }
+=======
+	SystemAppVersion(60),
+	UNKNOWN(10000);
+
+    private static final SparseArray<APICODE> typesByValue = new SparseArray<APICODE>();
+
+    static {
+        for (APICODE type : APICODE.values()) {
+            typesByValue.put(type.value, type);
+        }
+    }
+
+    private final int value;
+
+    private APICODE(int value) {
+        this.value = value;
+    }
+    
+    public int toInt()
+    {
+    	return value;
+    }
+
+    public static APICODE fromInt(int value) {
+       
+        
+        try{
+        	 return typesByValue.get(value);
+            }catch(Exception e){
+               return APICODE.UNKNOWN;
+            }
+    }
+	
+	
+>>>>>>> origin/master
+}
