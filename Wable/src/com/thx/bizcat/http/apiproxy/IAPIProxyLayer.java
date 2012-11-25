@@ -10,8 +10,25 @@ public interface IAPIProxyLayer {
 	
 	// [start] Account
 	
-	//boolean Login(String loginid,String password, Handler callback);//�α��� �õ�
-	boolean Login(String loginid,String password, Handler callback);//�α��� �õ�
+	
+	//반환 클래스 class sp_LogIn_Items
+	//성공시
+	//public sp_LogIn_Result result = 정보 ;
+    //public boolean bsuccess =true;
+    //public ResultCode resultCode = ResultCode .NONE;
+	//
+	//실패시
+	// public sp_LogIn_Result result = null;
+    //public boolean bsuccess =false;
+    //public ResultCode resultCode = 실패사유;
+	//
+	//서버호출 실패시
+	//public sp_LogIn_Result result = null;
+    //public boolean bsuccess =false;
+    //public ResultCode resultCode = ResultCode .NONE;
+	boolean Login(String loginid,String password, Handler callback);
+	
+	
 	boolean Logout(Handler callback);//�α��� �õ�
 	boolean Register(String loginid,String email,String username,String password, Handler callback);//�α��� �õ�
 	
