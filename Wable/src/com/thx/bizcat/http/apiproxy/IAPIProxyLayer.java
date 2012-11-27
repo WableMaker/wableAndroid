@@ -1,6 +1,14 @@
 package com.thx.bizcat.http.apiproxy;
 
 import java.util.Date;
+import java.util.List;
+
+import com.thx.bizcat.http.apiproxy.JSONParser.ResultCode;
+import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetMyUpdatedBiddings_Result;
+import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetMyUpdatedMatch_Result;
+import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetMyUpdatedProvides_Result;
+import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetMyUpdatedRequests_Result;
+import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetNewMessage_Result;
 
 import android.os.Handler;
 import android.text.format.Time;
@@ -12,6 +20,9 @@ public interface IAPIProxyLayer {
 	
 	
 	//반환 클래스 class sp_LogIn_Items
+	//호출 오류시
+	//null
+	//
 	//성공시
 	//public sp_LogIn_Result result = 정보 ;
     //public boolean bsuccess =true;
@@ -52,6 +63,52 @@ public interface IAPIProxyLayer {
 	boolean UserResetBadgeCount(Handler callback);//Ǫ������ �ð�
 	boolean UserSendSMSAuthCode(String mobile, String code,Handler callback);
 	boolean UserAuthorizedMobile(String mobile, Handler callback);
+	
+	//반환 클래스 class sp_UserGetUpdatedContents_Items
+	//호출 오류시
+	//null
+	//
+	//성공시
+	// List<sp_GetMyUpdatedRequests_Result> newrequests;//인자 RequestRecentSyncTime 이후의 요청사항들
+	// List<sp_GetMyUpdatedProvides_Result> newprovides;//인자 ProvideRecentSyncTime 이후의 요청사항들
+	// List<sp_GetMyUpdatedBiddings_Result> newbiddings;//인자 BiddingRecentSyncTime 이후의 요청사항들
+    // List<sp_GetNewMessage_Result> newbiddingmessages;//인자 BiddingMessageRecentSyncTime 이후의 요청사항들
+	// List<sp_GetMyUpdatedMatch_Result> newmatches;//인자 MatchRecentSyncTime 이후의 요청사항들
+	// String  last_modified_time_request;//서버에서 가져온 가장 마지막 Request 항목 의 시간, 이 값을 로컬에 저장하였다가 다음 호출시 인자 RequestRecentSyncTime에 넣어줌
+	// String  last_modified_time_provide;//서버에서 가져온 가장 마지막 Provide 항목 의 시간, 이 값을 로컬에 저장하였다가 다음 호출시 인자 ProvideRecentSyncTime 넣어줌
+	// String  last_modified_time_bidding;//서버에서 가져온 가장 마지막 bidding 항목 의 시간, 이 값을 로컬에 저장하였다가 다음 호출시 인자 BiddingRecentSyncTime 넣어줌
+	// String  last_modified_time_biddingmessage;//서버에서 가져온 가장 마지막 biddingmessage 항목 의 시간, 이 값을 로컬에 저장하였다가 다음 호출시 인자 BiddingMessageRecentSyncTime 넣어줌
+	// String  last_modified_time_match;//서버에서 가져온 가장 마지막 match 항목 의 시간, 이 값을 로컬에 저장하였다가 다음 호출시 인자 MatchRecentSyncTime 넣어줌
+	// boolean bsuccess = true;
+	// ResultCode resultCode = ResultCode.NONE;
+	//
+	//실패시
+	// List<sp_GetMyUpdatedRequests_Result> newrequests= null
+	// List<sp_GetMyUpdatedProvides_Result> newprovides= null
+	// List<sp_GetMyUpdatedBiddings_Result> newbiddings= null
+    // List<sp_GetNewMessage_Result> newbiddingmessages= null
+	// List<sp_GetMyUpdatedMatch_Result> newmatches= null
+	// String  last_modified_time_request= null
+	// String  last_modified_time_provide= null
+	// String  last_modified_time_bidding= null
+	// String  last_modified_time_biddingmessage= null
+	// String  last_modified_time_match= null
+	//public boolean bsuccess =false;
+    //public ResultCode resultCode = 실패사유;
+	//
+	//서버호출 실패시
+	// List<sp_GetMyUpdatedRequests_Result> newrequests= null
+	// List<sp_GetMyUpdatedProvides_Result> newprovides= null
+	// List<sp_GetMyUpdatedBiddings_Result> newbiddings= null
+    // List<sp_GetNewMessage_Result> newbiddingmessages= null
+	// List<sp_GetMyUpdatedMatch_Result> newmatches= null
+	// String  last_modified_time_request= null
+	// String  last_modified_time_provide= null
+	// String  last_modified_time_bidding= null
+	// String  last_modified_time_biddingmessage= null
+	// String  last_modified_time_match= null
+    //public boolean bsuccess =false;
+    //public ResultCode resultCode = ResultCode .NONE;
 	boolean UserGetUpdatedContents(String RequestRecentSyncTime
             , String ProvideRecentSyncTime
             , String MatchRecentSyncTime

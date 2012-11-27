@@ -20,6 +20,7 @@ import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetMyActiveRequests_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetMyProvides_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_LogIn_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_MyInfo_Items;
+import com.thx.bizcat.http.apiproxy.JSONParser.sp_UserGetUpdatedContents_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_LogIn_Result;
 import com.thx.bizcat.util.Logger;
 
@@ -3053,7 +3054,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					if(!Relogin())	
 					{
 						// TODO 임시로 주석처리
-						//callback.OnCallback(false,null);
+						callback.sendMessage(callback.obtainMessage(APICODE.UserGetUpdatedContents.toInt(), null));
+						
 						return;
 					}
 				}
@@ -3069,7 +3071,9 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("GetUpdatedContents");
-						callback.sendMessage(callback.obtainMessage(APICODE.UserGetUpdatedContents.toInt(), obj));
+						sp_UserGetUpdatedContents_Items  item = new sp_UserGetUpdatedContents_Items(obj);
+						
+						callback.sendMessage(callback.obtainMessage(APICODE.UserGetUpdatedContents.toInt(), item));
 						return;
 					}
 				}
