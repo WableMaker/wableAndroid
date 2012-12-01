@@ -281,7 +281,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 							obj = new JSONObject(result);
 							if(true == obj.getBoolean("success"))
 								SessionDisconnected("Logout");
-							callback.sendMessage(callback.obtainMessage(APICODE.Logout.toInt(), obj));
+							sp_Simple_Items item = new sp_Simple_Items(obj);
+							callback.sendMessage(callback.obtainMessage(APICODE.Logout.toInt(), item));
 							return;
 						}
 						catch(Exception e)

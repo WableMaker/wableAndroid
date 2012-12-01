@@ -41,7 +41,21 @@ public interface IAPIProxyLayer {
     //public ResultCode resultCode = ResultCode .NONE;
 	boolean Login(String loginid,String password, Handler callback);
 	
-	
+	//반환 클래스 class sp_Simple_Items
+	//호출 오류시
+	//null
+	//
+	//성공시
+    //public boolean bsuccess =true;
+    //public ResultCode resultCode = ResultCode .NONE;
+	//
+	//실패시
+    //public boolean bsuccess =false;
+    //public ResultCode resultCode = 실패사유;
+	//
+	//서버호출 실패시
+    //public boolean bsuccess =false;
+    //public ResultCode resultCode = ResultCode .NONE;		
 	boolean Logout(Handler callback);//�α��� �õ�
 	
 	//반환 클래스 class sp_LogIn_Items
