@@ -16,6 +16,7 @@ import android.text.format.Time;
 import com.thx.bizcat.http.HttpClientWrapper;
 import com.thx.bizcat.http.HttpURLConnectionWrapper;
 import com.thx.bizcat.http.IHttpConnectionLayer;
+import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetMessage_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetMyActiveRequests_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetMyProvides_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_LogIn_Items;
@@ -1491,7 +1492,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 							SessionUpdate("Message/SetMessage");
 						sp_GetMessage_Items item = new sp_GetMessage_Items(obj);
 						
-						callback.sendMessage(callback.obtainMessage(APICODE.MessageSendText.toInt(), obj));
+						callback.sendMessage(callback.obtainMessage(APICODE.MessageSendText.toInt(), item));
 						return;
 					}
 					
