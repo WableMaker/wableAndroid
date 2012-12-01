@@ -436,8 +436,9 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						if(false == obj.getBoolean("success"))
 							SessionDisconnected("FBlogin");
 						else SessionConnected("FBlogin");
+						sp_LogIn_Items item = new sp_LogIn_Items(obj);
 						
-						callback.sendMessage(callback.obtainMessage(APICODE.FBlogin.toInt(), obj));
+						callback.sendMessage(callback.obtainMessage(APICODE.FBlogin.toInt(), item));
 						return;
 					}
 				}

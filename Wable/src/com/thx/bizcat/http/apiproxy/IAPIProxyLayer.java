@@ -45,6 +45,24 @@ public interface IAPIProxyLayer {
 	boolean Logout(Handler callback);//�α��� �õ�
 	boolean Register(String loginid,String email,String username,String password, Handler callback);//�α��� �õ�
 	
+	//반환 클래스 class sp_LogIn_Items
+	//호출 오류시
+	//null
+	//
+	//성공시
+	//public sp_LogIn_Result result = 정보 ;
+    //public boolean bsuccess =true;
+    //public ResultCode resultCode = ResultCode .NONE;
+	//
+	//실패시
+	// public sp_LogIn_Result result = null;
+    //public boolean bsuccess =false;
+    //public ResultCode resultCode = 실패사유;
+	//
+	//서버호출 실패시
+	//public sp_LogIn_Result result = null;
+    //public boolean bsuccess =false;
+    //public ResultCode resultCode = ResultCode .NONE;
 	boolean FBlogin(String fb_uid,String oauth_token, Handler callback);//�α��� �õ�
 	boolean FBregister(String fb_uid,String oauth_token, Handler callback);//�α��� �õ�
 	boolean FBconnect(String fb_uid,String oauth_token, Handler callback);//�α��� �õ�
