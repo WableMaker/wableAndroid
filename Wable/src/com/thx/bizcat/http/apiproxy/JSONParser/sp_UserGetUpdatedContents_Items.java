@@ -37,70 +37,75 @@ public class sp_UserGetUpdatedContents_Items {
 			if(bsuccess)
 			{
 				JSONObject data = obj.getJSONObject("data");
-				JSONObject requests = data.getJSONObject("newrequests");
-				if(requests != null)//
+				if(data != null)
 				{
-					newrequests = new ArrayList<sp_GetMyUpdatedRequests_Result>();
-					JSONArray array = requests.getJSONArray("requests");
-					for(int i=0;i<array.length();i++)
+					// 새로운 요청 목록 처리
+					JSONObject requests = data.getJSONObject("newrequests");
+					if(requests != null)//
 					{
-						newrequests.add(new sp_GetMyUpdatedRequests_Result(array.getJSONObject(i)));
+						newrequests = new ArrayList<sp_GetMyUpdatedRequests_Result>();
+						JSONArray array = requests.getJSONArray("requests");
+						for(int i=0;i<array.length();i++)
+						{
+							newrequests.add(new sp_GetMyUpdatedRequests_Result(array.getJSONObject(i)));
+						}
+						
+						last_modified_time_request = requests.getString("latest_modified_time");
 					}
-					
-					last_modified_time_request = requests.getString("latest_modified_time");
-				}
+					// 새로운 제공 목록 처리
+					JSONObject provides = data.getJSONObject("newprovides");
+					if(provides != null)//
+					{
+						newprovides = new ArrayList<sp_GetMyUpdatedProvides_Result>();
+						JSONArray array = provides.getJSONArray("provides");
+						for(int i=0;i<array.length();i++)
+						{
+							newprovides.add(new sp_GetMyUpdatedProvides_Result(array.getJSONObject(i)));
+						}
+						
+						last_modified_time_provide = provides.getString("latest_modified_time");
+					}
+					// 새로운 거래 목록 처리
+					JSONObject biddings = data.getJSONObject("newbidding");
+					if(biddings != null)//
+					{
+						newbiddings = new ArrayList<sp_GetMyUpdatedBiddings_Result>();
+						JSONArray array = biddings.getJSONArray("biddings");
+						for(int i=0;i<array.length();i++)
+						{
+							newbiddings.add(new sp_GetMyUpdatedBiddings_Result(array.getJSONObject(i)));
+						}
+						
+						last_modified_time_bidding = biddings.getString("latest_modified_time");
+					}
+					// 새로운 거래메시지 목록 처리
+					JSONObject biddingmessages = data.getJSONObject("newbiddingmessage");
+					if(biddingmessages != null)//
+					{
+						newbiddingmessages = new ArrayList<sp_GetNewMessage_Result>();
+						JSONArray array = biddingmessages.getJSONArray("biddingmessages");
+						for(int i=0;i<array.length();i++)
+						{
+							newbiddingmessages.add(new sp_GetNewMessage_Result(array.getJSONObject(i)));
+						}
+						
+						last_modified_time_biddingmessage = biddingmessages.getString("latest_modified_time");
+					}
+					// 새로운 매칭 목록 처리
+					JSONObject matches = data.getJSONObject("newmatch");
+					if(matches != null)//
+					{
+						newmatches = new ArrayList<sp_GetMyUpdatedMatch_Result>();
+						JSONArray array = matches.getJSONArray("matches");
+						for(int i=0;i<array.length();i++)
+						{
+							newmatches.add(new sp_GetMyUpdatedMatch_Result(array.getJSONObject(i)));
+						}
+						
+						last_modified_time_match = matches.getString("latest_modified_time");
+					}
+				}else Logger.Instance().Write("sp_UserGetUpdatedContents_Items 파싱중 data가 null임");
 				
-				JSONObject provides = data.getJSONObject("newprovides");
-				if(provides != null)//
-				{
-					newprovides = new ArrayList<sp_GetMyUpdatedProvides_Result>();
-					JSONArray array = provides.getJSONArray("provides");
-					for(int i=0;i<array.length();i++)
-					{
-						newprovides.add(new sp_GetMyUpdatedProvides_Result(array.getJSONObject(i)));
-					}
-					
-					last_modified_time_provide = provides.getString("latest_modified_time");
-				}
-				
-				JSONObject biddings = data.getJSONObject("newbidding");
-				if(biddings != null)//
-				{
-					newbiddings = new ArrayList<sp_GetMyUpdatedBiddings_Result>();
-					JSONArray array = biddings.getJSONArray("biddings");
-					for(int i=0;i<array.length();i++)
-					{
-						newbiddings.add(new sp_GetMyUpdatedBiddings_Result(array.getJSONObject(i)));
-					}
-					
-					last_modified_time_bidding = biddings.getString("latest_modified_time");
-				}
-				
-				JSONObject biddingmessages = data.getJSONObject("newbiddingmessage");
-				if(biddingmessages != null)//
-				{
-					newbiddingmessages = new ArrayList<sp_GetNewMessage_Result>();
-					JSONArray array = biddingmessages.getJSONArray("biddingmessages");
-					for(int i=0;i<array.length();i++)
-					{
-						newbiddingmessages.add(new sp_GetNewMessage_Result(array.getJSONObject(i)));
-					}
-					
-					last_modified_time_biddingmessage = biddingmessages.getString("latest_modified_time");
-				}
-				
-				JSONObject matches = data.getJSONObject("newmatch");
-				if(matches != null)//
-				{
-					newmatches = new ArrayList<sp_GetMyUpdatedMatch_Result>();
-					JSONArray array = matches.getJSONArray("matches");
-					for(int i=0;i<array.length();i++)
-					{
-						newmatches.add(new sp_GetMyUpdatedMatch_Result(array.getJSONObject(i)));
-					}
-					
-					last_modified_time_match = matches.getString("latest_modified_time");
-				}
 			}
 			else//실패시는 errorcode입력
 			{
@@ -112,7 +117,7 @@ public class sp_UserGetUpdatedContents_Items {
 				}
 			}
 			
-		} catch (JSONException e) {
+		} catch (Exception e) {
 			Logger.Instance().Write(e);
 		}
 	}

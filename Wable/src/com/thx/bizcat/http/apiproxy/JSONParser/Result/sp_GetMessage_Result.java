@@ -10,8 +10,10 @@ public class sp_GetMessage_Result
     public String audio_path;
     public String video_path;
     public String written_time;
-    public long writer_id;
+    public String writer_id;
     public String read_time;
+    public String written_tick;
+    public String local_written_time;
 	public sp_GetMessage_Result(JSONObject obj)
 	{
 		try {
@@ -32,10 +34,16 @@ public class sp_GetMessage_Result
 		written_time= obj.getString("written_time");
 
 	if(!obj.isNull("writer_id"))
-		writer_id= obj.getLong("writer_id");
+		writer_id= obj.getString("writer_id");
 
 	if(!obj.isNull("read_time"))
 		read_time= obj.getString("read_time");
+	
+	if(!obj.isNull("written_tick"))
+		written_tick= obj.getString("written_tick");
+	
+	if(!obj.isNull("local_written_time"))
+		local_written_time= obj.getString("local_written_time");
 
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block

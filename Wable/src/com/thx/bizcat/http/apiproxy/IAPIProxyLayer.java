@@ -186,7 +186,7 @@ public interface IAPIProxyLayer {
 	
 	// [start] Message
 	
-	boolean MessageSendText(String biddingid, String message,String lastmsgutctick,Handler callback);//������
+	boolean MessageSendText(String biddingid, String message,String lastmsgutctick, String local_written_time,Handler callback);//������
 	boolean MessageSendImage(String biddingid, String filepath,String lastmsgutctick,Handler callback);//������
 	boolean MessageSendAudio(String biddingid, String filepath,String lastmsgutctick,Handler callback);//������
 	boolean MessageSendVideo(String biddingid, String filepath,String lastmsgutctick,Handler callback);//������

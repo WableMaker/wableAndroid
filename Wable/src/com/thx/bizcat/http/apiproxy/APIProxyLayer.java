@@ -1457,13 +1457,14 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	}
 	
 	@Override
-	public boolean MessageSendText(String biddingid, String message,String lastmsgutctick,
+	public boolean MessageSendText(String biddingid, String message,String lastmsgutctick, String local_written_time,
 			final Handler callback) {
 		
 		final Map<String,Object> params = new HashMap<String,Object>();
 		params.put("biddingid", biddingid);
 		params.put("message", message);
 		params.put("lastmsgutctick", lastmsgutctick);
+		params.put("local_written_time", local_written_time);
 		
 		
 		new Thread()
@@ -1488,6 +1489,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("Message/SetMessage");
+						sp_GetMessage_Items item = new sp_GetMessage_Items(obj);
+						
 						callback.sendMessage(callback.obtainMessage(APICODE.MessageSendText.toInt(), obj));
 						return;
 					}
