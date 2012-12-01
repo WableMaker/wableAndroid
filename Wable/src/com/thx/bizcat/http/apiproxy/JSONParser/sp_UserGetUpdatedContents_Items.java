@@ -36,7 +36,8 @@ public class sp_UserGetUpdatedContents_Items {
 			
 			if(bsuccess)
 			{
-				JSONObject requests = obj.getJSONObject("newrequests");
+				JSONObject data = obj.getJSONObject("data");
+				JSONObject requests = data.getJSONObject("newrequests");
 				if(requests != null)//
 				{
 					newrequests = new ArrayList<sp_GetMyUpdatedRequests_Result>();
@@ -49,7 +50,7 @@ public class sp_UserGetUpdatedContents_Items {
 					last_modified_time_request = requests.getString("latest_modified_time");
 				}
 				
-				JSONObject provides = obj.getJSONObject("newprovides");
+				JSONObject provides = data.getJSONObject("newprovides");
 				if(provides != null)//
 				{
 					newprovides = new ArrayList<sp_GetMyUpdatedProvides_Result>();
@@ -62,7 +63,7 @@ public class sp_UserGetUpdatedContents_Items {
 					last_modified_time_provide = provides.getString("latest_modified_time");
 				}
 				
-				JSONObject biddings = obj.getJSONObject("newbidding");
+				JSONObject biddings = data.getJSONObject("newbidding");
 				if(biddings != null)//
 				{
 					newbiddings = new ArrayList<sp_GetMyUpdatedBiddings_Result>();
@@ -75,7 +76,7 @@ public class sp_UserGetUpdatedContents_Items {
 					last_modified_time_bidding = biddings.getString("latest_modified_time");
 				}
 				
-				JSONObject biddingmessages = obj.getJSONObject("newbiddingmessage");
+				JSONObject biddingmessages = data.getJSONObject("newbiddingmessage");
 				if(biddingmessages != null)//
 				{
 					newbiddingmessages = new ArrayList<sp_GetNewMessage_Result>();
@@ -88,7 +89,7 @@ public class sp_UserGetUpdatedContents_Items {
 					last_modified_time_biddingmessage = biddingmessages.getString("latest_modified_time");
 				}
 				
-				JSONObject matches = obj.getJSONObject("newmatch");
+				JSONObject matches = data.getJSONObject("newmatch");
 				if(matches != null)//
 				{
 					newmatches = new ArrayList<sp_GetMyUpdatedMatch_Result>();
