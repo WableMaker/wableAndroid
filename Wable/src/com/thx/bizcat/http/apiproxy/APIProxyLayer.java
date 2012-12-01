@@ -21,6 +21,7 @@ import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetMyActiveRequests_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetMyProvides_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_LogIn_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_MyInfo_Items;
+import com.thx.bizcat.http.apiproxy.JSONParser.sp_Simple_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_UserGetUpdatedContents_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_LogIn_Result;
 import com.thx.bizcat.util.Logger;
