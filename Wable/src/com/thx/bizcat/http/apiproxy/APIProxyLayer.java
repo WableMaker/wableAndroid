@@ -386,8 +386,9 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						if(false == obj.getBoolean("success"))
 							SessionDisconnected("Register");
 						else SessionConnected("Register");
+						sp_LogIn_Items item = new sp_LogIn_Items(obj);
 						
-						callback.sendMessage(callback.obtainMessage(APICODE.Register.toInt(), obj));
+						callback.sendMessage(callback.obtainMessage(APICODE.Register.toInt(), item));
 						return;
 					}
 				}
@@ -487,8 +488,9 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						if(false == obj.getBoolean("success"))
 							SessionDisconnected("FBregister");
 						else SessionConnected("FBregister");
+						sp_LogIn_Items item = new sp_LogIn_Items(obj);
 						
-						callback.sendMessage(callback.obtainMessage(APICODE.FBregister.toInt(), obj));
+						callback.sendMessage(callback.obtainMessage(APICODE.FBregister.toInt(), item));
 						return;
 					}
 				}
@@ -543,8 +545,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("FBconnect");
-						
-						callback.sendMessage(callback.obtainMessage(APICODE.FBconnect.toInt(), obj));
+						sp_Simple_Items item = new sp_Simple_Items(obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.FBconnect.toInt(), item));
 						return;
 					}
 				}

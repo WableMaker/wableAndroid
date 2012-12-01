@@ -14,7 +14,7 @@ import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetMyUpdatedRequests_Re
 import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetNewMessage_Result;
 import com.thx.bizcat.util.Logger;
 
-public class sp_UserGetUpdatedContents_Items {
+public class sp_UserGetUpdatedContents_Items extends sp_Simple_Items {
 	public List<sp_GetMyUpdatedRequests_Result> newrequests;
 	public List<sp_GetMyUpdatedProvides_Result> newprovides;
 	public List<sp_GetMyUpdatedBiddings_Result> newbiddings;
@@ -27,13 +27,9 @@ public class sp_UserGetUpdatedContents_Items {
 	public String  last_modified_time_biddingmessage;
 	public String  last_modified_time_match;
 	
-	
-	public boolean bsuccess = false;
-	public ResultCode resultCode = ResultCode.NONE;
 	public sp_UserGetUpdatedContents_Items(JSONObject obj) {
+		super(obj);
 		try {
-			bsuccess = obj.getBoolean("success");
-			
 			if(bsuccess)
 			{
 				JSONObject data = obj.getJSONObject("data");
@@ -107,17 +103,8 @@ public class sp_UserGetUpdatedContents_Items {
 				}else Logger.Instance().Write("sp_UserGetUpdatedContents_Items 파싱중 data가 null임");
 				
 			}
-			else//실패시는 errorcode입력
-			{
-				try
-				{
-					resultCode = ResultCode.valueOf(obj.getString("data"));
-				} catch (JSONException e) {
-					Logger.Instance().Write(e);
-				}
-			}
 			
-		} catch (Exception e) {
+		} catch (JSONException e) {
 			Logger.Instance().Write(e);
 		}
 	}

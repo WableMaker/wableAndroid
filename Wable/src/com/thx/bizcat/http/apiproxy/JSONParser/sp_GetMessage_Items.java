@@ -54,7 +54,7 @@ public class sp_GetMessage_Items {
 				}
 			}
 			
-		} catch (Exception e) {
+		} catch (JSONException e) {
 			Logger.Instance().Write(e);
 		}
 	}
