@@ -281,10 +281,39 @@ public interface IAPIProxyLayer {
 	
 	// [start] Bidding
 
-	//�����ڸ� �����Ѵ�
+	//반환 클래스 class sp_Simple_Items
+	//호출 오류시
+	//null
+	//
+	//성공시
+    //public boolean bsuccess =true;
+    //public ResultCode resultCode = ResultCode .NONE;
+	//
+	//실패시
+    //public boolean bsuccess =false;
+    //public ResultCode resultCode = 실패사유;
+	//
+	//서버호출 실패시
+    //public boolean bsuccess =false;
+    //public ResultCode resultCode = ResultCode .NONE;	
 	boolean BiddingDecideProvider(String biddingid,Handler callback);
 	
-	//��û���� ������ �����Ѵ�
+	
+	//반환 클래스 class sp_Simple_Items
+	//호출 오류시
+	//null
+	//
+	//성공시
+    //public boolean bsuccess =true;
+    //public ResultCode resultCode = ResultCode .NONE;
+	//
+	//실패시
+    //public boolean bsuccess =false;
+    //public ResultCode resultCode = 실패사유;
+	//
+	//서버호출 실패시
+    //public boolean bsuccess =false;
+    //public ResultCode resultCode = ResultCode .NONE;	
 	boolean BiddingDecideRequester(String biddingid,Handler callback);
 	
 	
@@ -295,7 +324,21 @@ public interface IAPIProxyLayer {
 	boolean BiddingListAsRequester(String last_bidding_id,Handler callback);
 	boolean BiddingRating(String bidding_id,String other_id, int rating,String description,Handler callback);
 	
-	//�ŷ� ����
+	//반환 클래스 class sp_Simple_Items
+	//호출 오류시
+	//null
+	//
+	//성공시
+    //public boolean bsuccess =true;
+    //public ResultCode resultCode = ResultCode .NONE;
+	//
+	//실패시
+    //public boolean bsuccess =false;
+    //public ResultCode resultCode = 실패사유;
+	//
+	//서버호출 실패시
+    //public boolean bsuccess =false;
+    //public ResultCode resultCode = ResultCode .NONE;
 	boolean BiddingDelete(String biddingid, Handler callback);
 	
 	boolean BiddingSendSMSOfferAsProvider(String request_id, Handler callback);

@@ -2699,7 +2699,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("BiddingDecideProvider");
-						callback.sendMessage(callback.obtainMessage(APICODE.BiddingDecideProvider.toInt(), obj));
+						sp_Simple_Items item = new sp_Simple_Items(obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.BiddingDecideProvider.toInt(), item));
 						return;
 					}
 					
@@ -2752,7 +2753,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("BiddingDecideRequester");
-						callback.sendMessage(callback.obtainMessage(APICODE.BiddingDecideRequester.toInt(), obj));
+						sp_Simple_Items item = new sp_Simple_Items(obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.BiddingDecideRequester.toInt(), item));
 						return;
 					}
 					
@@ -2804,7 +2806,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("BiddingDelete");
-						callback.sendMessage(callback.obtainMessage(APICODE.BiddingDelete.toInt(), obj));
+						sp_Simple_Items item = new sp_Simple_Items(obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.BiddingDelete.toInt(), item));
 						return;
 					}
 					
