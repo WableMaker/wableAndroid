@@ -16,6 +16,8 @@ import android.text.format.Time;
 import com.thx.bizcat.http.HttpClientWrapper;
 import com.thx.bizcat.http.HttpURLConnectionWrapper;
 import com.thx.bizcat.http.IHttpConnectionLayer;
+import com.thx.bizcat.http.apiproxy.JSONParser.sp_BiddingOfferAsProvider_Items;
+import com.thx.bizcat.http.apiproxy.JSONParser.sp_BiddingOfferAsRequester_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetMessage_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetMyActiveRequests_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetMyProvides_Items;
@@ -1384,7 +1386,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("OfferAsProvider");
-						callback.sendMessage(callback.obtainMessage(APICODE.BiddingOfferAsProvider.toInt(), obj));
+						sp_BiddingOfferAsProvider_Items item = new sp_BiddingOfferAsProvider_Items(obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.BiddingOfferAsProvider.toInt(), item));
 						return;
 					}
 					
@@ -1438,7 +1441,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("OfferAsRequester");
-						callback.sendMessage(callback.obtainMessage(APICODE.BiddingOfferAsRequester.toInt(), obj));
+						sp_BiddingOfferAsRequester_Items item = new sp_BiddingOfferAsRequester_Items(obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.BiddingOfferAsRequester.toInt(), item));
 						return;
 					}
 					
