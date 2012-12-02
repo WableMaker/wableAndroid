@@ -1,8 +1,5 @@
 package com.thx.bizcat.http.apiproxy.JSONParser.Result;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.json.JSONObject;
 import org.json.JSONException;
 
