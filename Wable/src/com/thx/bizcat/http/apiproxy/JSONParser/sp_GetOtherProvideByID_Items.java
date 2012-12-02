@@ -1,15 +1,29 @@
 package com.thx.bizcat.http.apiproxy.JSONParser;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetOtherProvideByID_Result;
+import com.thx.bizcat.util.Logger;
 
-public class sp_GetOtherProvideByID_Items {
-	public List<sp_GetOtherProvideByID_Result> requestsItem = new ArrayList<sp_GetOtherProvideByID_Result>();
-	public boolean bsuccess = false;
-	public ResultCode resultCode;
-	public sp_GetOtherProvideByID_Items() {
+public class sp_GetOtherProvideByID_Items extends sp_Simple_Items {
+	public sp_GetOtherProvideByID_Result result ;
+	public sp_GetOtherProvideByID_Items(JSONObject obj) {
+		super(obj);
+		try {
+			
+			if(bsuccess)
+			{
+				result = new sp_GetOtherProvideByID_Result(obj.getJSONObject("data"));
+			}
+			else//�패�는 errorcode�력
+			{
+				resultCode =ResultCode.valueOf(obj.getString("data"));		
+			}
+			
+		} catch (JSONException e) {
+			Logger.Instance().Write(e);
+		}
 	}
 
 }
