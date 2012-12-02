@@ -21,6 +21,7 @@ import com.thx.bizcat.http.apiproxy.JSONParser.sp_BiddingOfferAsRequester_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetMessage_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetMyActiveRequests_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetMyProvides_Items;
+import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetOtherProvideByID_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetProviderDetail_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetProvidesByArea_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetProvidesByDistance_Items;
@@ -1899,7 +1900,10 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				if(!_httpLayer.IsConnectedSession())
 				{
 					if(!Relogin())
+					{
+						callback.sendMessage(callback.obtainMessage(APICODE.ProvideOtherDetailById.toInt(), null));
 						return;
+					}
 				}
 				
 				String result = _httpLayer.GETSync(_domain+"Provide/OtherDetailById", params);
@@ -1913,7 +1917,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("ProvideOtherDetailById");
-						callback.sendMessage(callback.obtainMessage(APICODE.ProvideOtherDetailById.toInt(), obj));
+						sp_GetOtherProvideByID_Items item = new sp_GetOtherProvideByID_Items(obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.ProvideOtherDetailById.toInt(), item));
 						return;
 					}
 					
@@ -2023,7 +2028,10 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				if(!_httpLayer.IsConnectedSession())
 				{
 					if(!Relogin())
+					{
+						callback.sendMessage(callback.obtainMessage(APICODE.ProvideUpdate.toInt(), null));
 						return;
+					}
 				}
 				
 				String result = _httpLayer.POSTSync(_domain+"Provide/Update", params);
@@ -2037,7 +2045,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("ProvideUpdate");
-						callback.sendMessage(callback.obtainMessage(APICODE.ProvideUpdate.toInt(), obj));
+						sp_Simple_Items item = new sp_Simple_Items(obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.ProvideUpdate.toInt(), item));
 						return;
 					}
 					
