@@ -30,24 +30,36 @@ public class sp_UserGetUpdatedContents_Items extends sp_Simple_Items {
 	public sp_UserGetUpdatedContents_Items(JSONObject obj) {
 		super(obj);
 		try {
-			if(bsuccess)
+			if(bsuccess && !obj.isNull("data"))
 			{
 				JSONObject data = obj.getJSONObject("data");
 				if(data != null)
 				{
 					// 새로운 요청 목록 처리
-					JSONObject requests = data.getJSONObject("newrequests");
-					if(requests != null)//
+					if(!data.isNull("newrequests"))
 					{
-						newrequests = new ArrayList<sp_GetMyUpdatedRequests_Result>();
-						JSONArray array = requests.getJSONArray("requests");
-						for(int i=0;i<array.length();i++)
+						JSONObject requests = data.getJSONObject("newrequests");
+						if(requests != null)//
 						{
-							newrequests.add(new sp_GetMyUpdatedRequests_Result(array.getJSONObject(i)));
+							
+							if(!requests.isNull("requests"))
+							{
+								newrequests = new ArrayList<sp_GetMyUpdatedRequests_Result>();
+								JSONArray array = requests.getJSONArray("requests");
+								
+								if(array != null)
+								{
+									for(int i=0;i<array.length();i++)
+									{
+										newrequests.add(new sp_GetMyUpdatedRequests_Result(array.getJSONObject(i)));
+									}
+								}
+							}
+							if(!requests.isNull("latest_modified_time"))
+								last_modified_time_request = requests.getString("latest_modified_time");
 						}
-						
-						last_modified_time_request = requests.getString("latest_modified_time");
 					}
+					
 					// 새로운 제공 목록 처리
 					JSONObject provides = data.getJSONObject("newprovides");
 					if(provides != null)//
