@@ -22,6 +22,9 @@ import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetMessage_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetMyActiveRequests_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetMyProvides_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetProviderDetail_Items;
+import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetProvidesByArea_Items;
+import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetProvidesByDistance_Items;
+import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetProvidesByTime_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetRequesterDetail_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_LogIn_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_MyInfo_Items;
@@ -1005,7 +1008,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("ProvideListbyTime");
-						callback.sendMessage(callback.obtainMessage(APICODE.ProvideListbyTime.toInt(), obj));
+						sp_GetProvidesByTime_Items item = new sp_GetProvidesByTime_Items(obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.ProvideListbyTime.toInt(), item));
 						return;
 					}
 					
@@ -1065,7 +1069,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("ProvideListbyArea");
-						callback.sendMessage(callback.obtainMessage(APICODE.ProvideListbyArea.toInt(), obj));
+						sp_GetProvidesByArea_Items item = new sp_GetProvidesByArea_Items(obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.ProvideListbyArea.toInt(), item));
 						return;
 					}
 					
@@ -1121,7 +1126,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("ProvideListbyDistance");
-						callback.sendMessage(callback.obtainMessage(APICODE.ProvideListbyDistance.toInt(), obj));
+						sp_GetProvidesByDistance_Items item = new sp_GetProvidesByDistance_Items(obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.ProvideListbyDistance.toInt(), item));
 						return;
 					}
 					

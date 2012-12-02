@@ -266,6 +266,25 @@ public interface IAPIProxyLayer {
 	boolean ProvideOtherList(String userid,String lastid,Handler callback);//������
 	boolean ProvideMyActiveList(String lastid,Handler callback);//Ȱ��ȭ�� �Ǵ� �����������
 	boolean ProvideMyDoneList(String lastid,Handler callback);//�Ϸ��������
+	
+	//반환 클래스 class sp_GetProvidesByTime_Items
+	//호출 오류시
+	//null
+	//
+	//성공시
+	//public List<sp_GetProvidesByTime_Result> result : 정보
+	//public boolean bsuccess =true;
+    //public ResultCode resultCode = ResultCode .NONE;
+	//
+	//실패시
+	//public List<sp_GetProvidesByTime_Result> result = null
+	//public boolean bsuccess =false;
+    //public ResultCode resultCode = 실패사유;
+	//
+	//서버호출 실패시
+	//public List<sp_GetProvidesByTime_Result> result = null
+	//public boolean bsuccess =false;
+    //public ResultCode resultCode = ResultCode .NONE;		
 	boolean ProvideListbyTime(String lastid,String keyword,Handler callback);//������
 	
 	//반환 클래스 class sp_GetProvidesByArea_Items
