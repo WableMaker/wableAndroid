@@ -9,21 +9,14 @@ import org.json.JSONObject;
 
 import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetLatestReadMessage_Result;
 import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetMessage_Result;
-import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetMyUpdatedBiddings_Result;
-import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetMyUpdatedMatch_Result;
-import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetMyUpdatedProvides_Result;
-import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetMyUpdatedRequests_Result;
-import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetNewMessage_Result;
 import com.thx.bizcat.util.Logger;
 
-public class sp_GetMessage_Items {
+public class sp_GetMessage_Items extends sp_Simple_Items {
 	public List<sp_GetMessage_Result> newmessages = null;
 	public sp_GetLatestReadMessage_Result readmessage = null;
-	public boolean bsuccess = false;
-	public ResultCode resultCode;
 	public sp_GetMessage_Items(JSONObject obj) {
+		super(obj);
 		try {
-			bsuccess = obj.getBoolean("success");
 			
 			if(bsuccess)
 			{
@@ -46,12 +39,7 @@ public class sp_GetMessage_Items {
 			}
 			else//실패시는 errorcode입력
 			{
-				try
-				{
-					resultCode = ResultCode.valueOf(obj.getString("data"));
-				} catch (JSONException e) {
-					Logger.Instance().Write(e);
-				}
+				resultCode = ResultCode.valueOf(obj.getString("data"));
 			}
 			
 		} catch (JSONException e) {
