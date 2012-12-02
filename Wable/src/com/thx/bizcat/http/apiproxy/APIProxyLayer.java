@@ -19,11 +19,12 @@ import com.thx.bizcat.http.IHttpConnectionLayer;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetMessage_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetMyActiveRequests_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetMyProvides_Items;
+import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetProviderDetail_Items;
+import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetRequesterDetail_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_LogIn_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_MyInfo_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_Simple_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_UserGetUpdatedContents_Items;
-import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_LogIn_Result;
 import com.thx.bizcat.util.Logger;
 
 public class APIProxyLayer implements IAPIProxyLayer {
@@ -529,9 +530,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				{
 					if(!Relogin())	
 					{
-						// TODO 임시로 주석처리
-						//callback.OnCallback(false,null);
-						return;
+						callback.sendMessage(callback.obtainMessage(APICODE.FBconnect.toInt(), null));
+			 			return;
 					}
 				}
 
@@ -584,9 +584,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				{
 					if(!Relogin())	
 					{
-						// TODO 임시로 주석처리
-						//callback.OnCallback(false,null);
-						return;
+						callback.sendMessage(callback.obtainMessage(APICODE.RequestOtherList.toInt(), null));
+			 			return;
 					}
 				}
 
@@ -641,8 +640,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				{
 					if(!Relogin())	
 					{
-						// TODO 임시로 주석처리
-						//callback.OnCallback(false,null);
+						callback.sendMessage(callback.obtainMessage(APICODE.RequestMyActiveList.toInt(), null));
+
 						return;
 					}
 				}
@@ -699,9 +698,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				{
 					if(!Relogin())	
 					{
-						// TODO 임시로 주석처리
-						//callback.OnCallback(false,null);
-						return;
+						callback.sendMessage(callback.obtainMessage(APICODE.RequestListbyTime.toInt(), null));
+			 			return;
 					}
 				}
 				String result = _httpLayer.GETSync(_domain+"Request/ListbyTime", params);
@@ -758,8 +756,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				{
 					if(!Relogin())	
 					{
-						// TODO 임시로 주석처리
-						//callback.OnCallback(false,null);
+						callback.sendMessage(callback.obtainMessage(APICODE.RequestListbyArea.toInt(), null));
+
 						return;
 					}
 				}
@@ -816,9 +814,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				{
 					if(!Relogin())	
 					{
-						// TODO 임시로 주석처리
-						//callback.OnCallback(false,null);
-						return;
+						callback.sendMessage(callback.obtainMessage(APICODE.RequestListbyDistance.toInt(), null));
+			 			return;
 					}
 				}
 
@@ -875,8 +872,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				{
 					if(!Relogin())	
 					{
-						// TODO 임시로 주석처리
-						//callback.OnCallback(false,null);
+						callback.sendMessage(callback.obtainMessage(APICODE.ProvideOtherList.toInt(), null));
 						return;
 					}
 				}
@@ -930,8 +926,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				{
 					if(!Relogin())	
 					{
-						// TODO 임시로 주석처리
-						//callback.OnCallback(false,null);
+						callback.sendMessage(callback.obtainMessage(APICODE.ProvideMyActiveList.toInt(), null));
+
 						return;
 					}
 				}
@@ -990,8 +986,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				{
 					if(!Relogin())	
 					{
-						// TODO 임시로 주석처리
-						//callback.OnCallback(false,null);
+						callback.sendMessage(callback.obtainMessage(APICODE.ProvideListbyTime.toInt(), null));
+
 						return;
 					}
 				}
@@ -1050,8 +1046,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				{
 					if(!Relogin())	
 					{
-						// TODO 임시로 주석처리
-						//callback.OnCallback(false,null);
+						callback.sendMessage(callback.obtainMessage(APICODE.ProvideListbyArea.toInt(), null));
+
 						return;
 					}
 				}
@@ -1106,8 +1102,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				{
 					if(!Relogin())	
 					{
-						// TODO 임시로 주석처리
-						//callback.OnCallback(false,null);
+						callback.sendMessage(callback.obtainMessage(APICODE.ProvideListbyDistance.toInt(), null));
+
 						return;
 					}
 				}
@@ -1172,8 +1168,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				{
 					if(!Relogin())	
 					{
-						// TODO 임시로 주석처리
-						//callback.OnCallback(false,null);
+						callback.sendMessage(callback.obtainMessage(APICODE.RequestAdd.toInt(), null));
+
 						return;
 					}
 				}
@@ -1237,8 +1233,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				{
 					if(!Relogin())	
 					{
-						// TODO 임시로 주석처리
-						//callback.OnCallback(false,null);
+						callback.sendMessage(callback.obtainMessage(APICODE.ProvideAdd.toInt(), null));
+
 						return;
 					}
 				}
@@ -3062,7 +3058,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				{
 					if(!Relogin())	
 					{
-						// TODO 임시로 주석처리
+						
 						callback.sendMessage(callback.obtainMessage(APICODE.UserGetUpdatedContents.toInt(), null));
 						
 						return;
@@ -3443,6 +3439,116 @@ public class APIProxyLayer implements IAPIProxyLayer {
  			}
 			
 		}.start();
+		return true;
+	}
+
+
+
+	@Override
+	public boolean UserProviderDetailById(String userid, final Handler callback) {
+		final Map<String,Object> params = new HashMap<String,Object>();
+		params.put("userid", userid);
+		
+		
+		new Thread()
+		{
+			@Override
+ 			public void run()
+ 			{
+				if(!_httpLayer.IsConnectedSession())
+				{
+					if(!Relogin())	
+					{
+						
+						callback.sendMessage(callback.obtainMessage(APICODE.UserProviderDetailById.toInt(), null));
+						
+						return;
+					}
+				}
+
+				String result = _httpLayer.GETSync(_domain+"User/ProviderDetailById", params);
+				 
+				JSONObject obj = null;
+				
+				try
+				{
+					if(result !=null)
+					{
+						obj = new JSONObject(result);
+						if(true == obj.getBoolean("success"))
+							SessionUpdate("GetUpdatedContents");
+						sp_GetProviderDetail_Items  item = new sp_GetProviderDetail_Items(obj);
+						
+						callback.sendMessage(callback.obtainMessage(APICODE.UserProviderDetailById.toInt(), item));
+						return;
+					}
+				}
+				catch(Exception e)
+				{
+					Logger.Instance().Write(e);
+					
+				}
+				
+				callback.sendMessage(callback.obtainMessage(APICODE.UserProviderDetailById.toInt(), null));
+ 			}
+			
+		}.start();
+		
+		return true;
+	}
+
+
+
+	@Override
+	public boolean UserRequesterDetailById(String userid, final Handler callback) {
+		final Map<String,Object> params = new HashMap<String,Object>();
+		params.put("userid", userid);
+	
+		
+		new Thread()
+		{
+			@Override
+ 			public void run()
+ 			{
+				if(!_httpLayer.IsConnectedSession())
+				{
+					if(!Relogin())	
+					{
+						
+						callback.sendMessage(callback.obtainMessage(APICODE.UserRequesterDetailById.toInt(), null));
+						
+						return;
+					}
+				}
+
+				String result = _httpLayer.GETSync(_domain+"User/RequesterDetailById", params);
+				 
+				JSONObject obj = null;
+				
+				try
+				{
+					if(result !=null)
+					{
+						obj = new JSONObject(result);
+						if(true == obj.getBoolean("success"))
+							SessionUpdate("GetUpdatedContents");
+						sp_GetRequesterDetail_Items  item = new sp_GetRequesterDetail_Items(obj);
+						
+						callback.sendMessage(callback.obtainMessage(APICODE.UserRequesterDetailById.toInt(), item));
+						return;
+					}
+				}
+				catch(Exception e)
+				{
+					Logger.Instance().Write(e);
+					
+				}
+				
+				callback.sendMessage(callback.obtainMessage(APICODE.UserRequesterDetailById.toInt(), null));
+ 			}
+			
+		}.start();
+		
 		return true;
 	}
 

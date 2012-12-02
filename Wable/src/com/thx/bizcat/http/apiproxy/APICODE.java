@@ -30,6 +30,8 @@ public enum APICODE {
 	UserAuthorizedMobile(15),
 	UserGetUpdatedContents(16),
 	UserDeletePhoto(17),
+	UserProviderDetailById(100),
+	UserRequesterDetailById(101),
 	// [end]
 		
 	// [start] Request
