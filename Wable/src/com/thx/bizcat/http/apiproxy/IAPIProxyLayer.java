@@ -317,7 +317,44 @@ public interface IAPIProxyLayer {
 	boolean BiddingDecideRequester(String biddingid,Handler callback);
 	
 	
+	//반환 클래스 class sp_BiddingOfferAsProvider_Items
+	//호출 오류시
+	//null
+	//
+	//성공시
+	//public sp_BiddingOfferAsProvider_Result result = 정보 ;
+    //public boolean bsuccess =true;
+    //public ResultCode resultCode = ResultCode .NONE;
+	//
+	//실패시
+	// public sp_BiddingOfferAsProvider_Result result = null;
+    //public boolean bsuccess =false;
+    //public ResultCode resultCode = 실패사유;
+	//
+	//서버호출 실패시
+	//public sp_BiddingOfferAsProvider_Result result = null;
+    //public boolean bsuccess =false;
+    //public ResultCode resultCode = ResultCode .NONE;
 	boolean BiddingOfferAsProvider(String provide_id,String request_id, Handler callback);//������
+	
+	//반환 클래스 class sp_BiddingOfferAsRequester_Items
+	//호출 오류시
+	//null
+	//
+	//성공시
+	//public sp_BiddingOfferAsRequester_Result result = 정보 ;
+    //public boolean bsuccess =true;
+    //public ResultCode resultCode = ResultCode .NONE;
+	//
+	//실패시
+	// public sp_BiddingOfferAsRequester_Result result = null;
+    //public boolean bsuccess =false;
+    //public ResultCode resultCode = 실패사유;
+	//
+	//서버호출 실패시
+	//public sp_BiddingOfferAsRequester_Result result = null;
+    //public boolean bsuccess =false;
+    //public ResultCode resultCode = ResultCode .NONE;
 	boolean BiddingOfferAsRequester(String request_id,String provide_id, Handler callback);//������
 
 	boolean BiddingListAsProvider(String last_bidding_id,Handler callback);
