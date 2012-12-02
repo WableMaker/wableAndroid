@@ -24,15 +24,24 @@ public class sp_GetMessage_Items extends sp_Simple_Items {
 				if(data != null)//
 				{
 					//새 매시지
-					newmessages = new ArrayList<sp_GetMessage_Result>();
-					JSONArray array = data.getJSONArray("newmessages");
-					for(int i=0;i<array.length();i++)
+					if(!data.isNull("newmessages"))
 					{
-						newmessages.add(new sp_GetMessage_Result(array.getJSONObject(i)));
+						newmessages = new ArrayList<sp_GetMessage_Result>();
+						JSONArray array = data.getJSONArray("newmessages");
+						if(array !=null)
+						{
+							for(int i=0;i<array.length();i++)
+							{
+								newmessages.add(new sp_GetMessage_Result(array.getJSONObject(i)));
+							}
+						}
+						
 					}
 					
+					
 					// 상대방이 읽은 마지막 메시지
-					readmessage = new  sp_GetLatestReadMessage_Result(data.getJSONObject("readmessage"));
+					if(!data.isNull("readmessage"))
+						readmessage = new  sp_GetLatestReadMessage_Result(data.getJSONObject("readmessage"));
 					
 				}
 				else Logger.Instance().Write("sp_GetMessage_Items 파싱중 data가 null임");
