@@ -6,7 +6,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetAllRequests_Result;
-import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetMyActiveProvides_Result;
 import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetOtherProvides_Result;
 import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetOtherRequests_Result;
 import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetProvidesByArea_Result;
