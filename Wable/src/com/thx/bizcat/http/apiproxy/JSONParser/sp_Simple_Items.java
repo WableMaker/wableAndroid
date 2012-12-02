@@ -14,11 +14,7 @@ public class sp_Simple_Items {
 		try {
 			bsuccess = obj.getBoolean("success");
 			
-			if(bsuccess)
-			{
-				//성공시에 이 API는 다른 정보는 없음		
-			}
-			else//실패시는 errorcode입력
+			if(!bsuccess)//실패시는 errorcode입력
 			{
 				resultCode = ResultCode.valueOf(obj.getString("data"));
 			}
