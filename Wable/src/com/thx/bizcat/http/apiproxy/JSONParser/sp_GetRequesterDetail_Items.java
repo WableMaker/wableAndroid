@@ -3,7 +3,6 @@ package com.thx.bizcat.http.apiproxy.JSONParser;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetProviderDetail_Result;
 import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetRequesterDetail_Result;
 import com.thx.bizcat.util.Logger;
 
