@@ -6,13 +6,11 @@ import org.json.JSONObject;
 import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_LogIn_Result;
 import com.thx.bizcat.util.Logger;
 
-public class sp_LogIn_Items {
+public class sp_LogIn_Items extends sp_Simple_Items {
 	public sp_LogIn_Result result ;
-	public boolean bsuccess = false;
-	public ResultCode resultCode = ResultCode.NONE;
 	public sp_LogIn_Items(JSONObject obj) {
+		super(obj);
 		try {
-			bsuccess = obj.getBoolean("success");
 			
 			if(bsuccess)
 			{
@@ -21,12 +19,7 @@ public class sp_LogIn_Items {
 			}
 			else//실패시는 errorcode입력
 			{
-				try
-				{
-					resultCode = ResultCode.valueOf(obj.getString("data"));
-				} catch (JSONException e) {
-					Logger.Instance().Write(e);
-				}
+				resultCode = ResultCode.valueOf(obj.getString("data"));
 			}
 			
 		} catch (JSONException e) {
