@@ -1,6 +1,9 @@
 package com.thx.bizcat.http.apiproxy;
 
 import java.util.Date;
+import java.util.List;
+
+import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetProvidesByArea_Result;
 
 import android.os.Handler;
 import android.text.format.Time;
@@ -264,7 +267,45 @@ public interface IAPIProxyLayer {
 	boolean ProvideMyActiveList(String lastid,Handler callback);//Ȱ��ȭ�� �Ǵ� �����������
 	boolean ProvideMyDoneList(String lastid,Handler callback);//�Ϸ��������
 	boolean ProvideListbyTime(String lastid,String keyword,Handler callback);//������
+	
+	//반환 클래스 class sp_GetProvidesByArea_Items
+	//호출 오류시
+	//null
+	//
+	//성공시
+	//public List<sp_GetProvidesByArea_Result> result : 정보
+	//public boolean bsuccess =true;
+    //public ResultCode resultCode = ResultCode .NONE;
+	//
+	//실패시
+	//public List<sp_GetProvidesByArea_Result> result = null
+	//public boolean bsuccess =false;
+    //public ResultCode resultCode = 실패사유;
+	//
+	//서버호출 실패시
+	//public List<sp_GetProvidesByArea_Result> result = null
+	//public boolean bsuccess =false;
+    //public ResultCode resultCode = ResultCode .NONE;		
 	boolean ProvideListbyArea(double north,double south,double ease,double west,String keyword,Handler callback);//������
+	
+	//반환 클래스 class sp_GetProvidesByDistance_Items
+	//호출 오류시
+	//null
+	//
+	//성공시
+	//public List<sp_GetProvidesByDistance_Items> result : 정보
+	//public boolean bsuccess =true;
+    //public ResultCode resultCode = ResultCode .NONE;
+	//
+	//실패시
+	//public List<sp_GetProvidesByDistance_Items> result = null
+	//public boolean bsuccess =false;
+    //public ResultCode resultCode = 실패사유;
+	//
+	//서버호출 실패시
+	//public List<sp_GetProvidesByDistance_Items> result = null
+	//public boolean bsuccess =false;
+    //public ResultCode resultCode = ResultCode .NONE;		
 	boolean ProvideListbyDistance(double lat, double lon,double mindistance,String keyword,Handler callback);//������
 
 	boolean ProvideAdd(String title,String description, int minprice,int category
