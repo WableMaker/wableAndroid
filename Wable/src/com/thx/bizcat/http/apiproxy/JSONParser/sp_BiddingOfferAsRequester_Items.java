@@ -6,12 +6,11 @@ import org.json.JSONObject;
 import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_BiddingOfferAsRequester_Result;
 import com.thx.bizcat.util.Logger;
 
-public class sp_BiddingOfferAsRequester_Items {
+public class sp_BiddingOfferAsRequester_Items extends sp_Simple_Items  {
 	public sp_BiddingOfferAsRequester_Result result;
-	public boolean bsuccess = false;
-	public ResultCode resultCode = ResultCode.NONE;
 	
 	public sp_BiddingOfferAsRequester_Items(JSONObject obj) {
+		super(obj);
 		try {
 			bsuccess = obj.getBoolean("success");
 			
@@ -22,12 +21,9 @@ public class sp_BiddingOfferAsRequester_Items {
 			}
 			else//실패시는 errorcode입력
 			{
-				try
-				{
-					resultCode = ResultCode.valueOf(obj.getString("data"));
-				} catch (JSONException e) {
-					Logger.Instance().Write(e);
-				}
+				
+				resultCode = ResultCode.valueOf(obj.getString("data"));
+				
 			}
 			
 		} catch (JSONException e) {
