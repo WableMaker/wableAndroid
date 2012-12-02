@@ -1,9 +1,6 @@
 package com.thx.bizcat.http.apiproxy;
 
 import java.util.Date;
-import java.util.List;
-
-import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetProvidesByArea_Result;
 
 import android.os.Handler;
 import android.text.format.Time;
@@ -49,7 +46,7 @@ public interface IAPIProxyLayer {
 	//서버호출 실패시
     //public boolean bsuccess =false;
     //public ResultCode resultCode = ResultCode .NONE;		
-	boolean Logout(Handler callback);//�α��� �õ�
+	boolean Logout(Handler callback);
 	
 	//반환 클래스 class sp_LogIn_Items
 	//호출 오류시
@@ -69,7 +66,7 @@ public interface IAPIProxyLayer {
 	//public sp_LogIn_Result result = null;
     //public boolean bsuccess =false;
     //public ResultCode resultCode = ResultCode .NONE;
-	boolean Register(String loginid,String email,String username,String password, Handler callback);//�α��� �õ�
+	boolean Register(String loginid,String email,String username,String password, Handler callback);
 	
 	//반환 클래스 class sp_LogIn_Items
 	//호출 오류시
@@ -109,7 +106,7 @@ public interface IAPIProxyLayer {
 	//public sp_LogIn_Result result = null;
     //public boolean bsuccess =false;
     //public ResultCode resultCode = ResultCode .NONE;
-	boolean FBregister(String fb_uid,String oauth_token, Handler callback);//�α��� �õ�
+	boolean FBregister(String fb_uid,String oauth_token, Handler callback);
 	
 	//반환 클래스 class sp_Simple_Items
 	//호출 오류시
@@ -136,12 +133,12 @@ public interface IAPIProxyLayer {
 	
 	// [start] User
 	
-	boolean MyInfo(Handler callback);//������	
+	boolean MyInfo(Handler callback);
 	boolean UserUpdate(String name, String introduce,String photo, Boolean publicfb, Boolean publictwitter,
-			Boolean publicemail, Boolean publicmobile, Boolean publicphone,Handler callback);//������
+			Boolean publicemail, Boolean publicmobile, Boolean publicphone,Handler callback);
 	
-	boolean UserEnablePushNotify(Time starttime, Time endtime,Handler callback);//Ǫ������ �ð�
-	boolean UserResetBadgeCount(Handler callback);//Ǫ������ �ð�
+	boolean UserEnablePushNotify(Time starttime, Time endtime,Handler callback);
+	boolean UserResetBadgeCount(Handler callback);
 	boolean UserSendSMSAuthCode(String mobile, String code,Handler callback);
 	boolean UserAuthorizedMobile(String mobile, Handler callback);
 	
@@ -243,29 +240,29 @@ public interface IAPIProxyLayer {
 		
 	// [start] Request
 	
-	boolean RequestOtherList(String userid,String lastid,Handler callback);//������
-	boolean RequestMyActiveList(String lastid,Handler callback);//Ȱ��ȭ�� �Ǵ� �������û���	boolean RequestMyDoneList(String lastid,Handler callback);//�Ϸ����û���	boolean RequestListbyTime(String lastid,String keyword,Handler callback);//������
-	boolean RequestListbyArea(double north,double south,double ease,double west,String keyword,Handler callback);//������
-	boolean RequestListbyDistance(double lat, double lon,double mindistance,String keyword,Handler callback);//������
+	boolean RequestOtherList(String userid,String lastid,Handler callback);
+	boolean RequestMyActiveList(String lastid,Handler callback);
+	boolean RequestListbyArea(double north,double south,double ease,double west,String keyword,Handler callback);
+	boolean RequestListbyDistance(double lat, double lon,double mindistance,String keyword,Handler callback);
 
 	boolean RequestAdd(String title, String description, int price, Integer category, Date duedate
-			,double lat,double lon, Boolean totwitter, Boolean tofacebook, Handler callback);//������
-	boolean RequestDelete(String request_id ,Handler callback);//��û ����
-	boolean RequestDone(String request_id ,Handler callback);//��û ����
+			,double lat,double lon, Boolean totwitter, Boolean tofacebook, Handler callback);
+	boolean RequestDelete(String request_id ,Handler callback);
+	boolean RequestDone(String request_id ,Handler callback);
 	
-	boolean RequestMyDetailById(String request_id ,Handler callback);//������
+	boolean RequestMyDetailById(String request_id ,Handler callback);
 	boolean RequestOtherDetailById(String request_id ,Handler callback);
 	boolean RequestUpdate(String request_id,String title, String description,int price,int category,Date duedate
-			,double lat,double lon,boolean totwitter, boolean tofacebook, Handler callback);//������
+			,double lat,double lon,boolean totwitter, boolean tofacebook, Handler callback);
 	
 	boolean RequestListbyTime(String lastid, String keyword,Handler callback);
 	// [end]
 	
 	// [start] Provide
 	
-	boolean ProvideOtherList(String userid,String lastid,Handler callback);//������
-	boolean ProvideMyActiveList(String lastid,Handler callback);//Ȱ��ȭ�� �Ǵ� �����������
-	boolean ProvideMyDoneList(String lastid,Handler callback);//�Ϸ��������
+	boolean ProvideOtherList(String userid,String lastid,Handler callback);
+	boolean ProvideMyActiveList(String lastid,Handler callback);
+	boolean ProvideMyDoneList(String lastid,Handler callback);
 	
 	//반환 클래스 class sp_GetProvidesByTime_Items
 	//호출 오류시
@@ -285,7 +282,7 @@ public interface IAPIProxyLayer {
 	//public List<sp_GetProvidesByTime_Result> result = null
 	//public boolean bsuccess =false;
     //public ResultCode resultCode = ResultCode .NONE;		
-	boolean ProvideListbyTime(String lastid,String keyword,Handler callback);//������
+	boolean ProvideListbyTime(String lastid,String keyword,Handler callback);
 	
 	//반환 클래스 class sp_GetProvidesByArea_Items
 	//호출 오류시
@@ -305,7 +302,7 @@ public interface IAPIProxyLayer {
 	//public List<sp_GetProvidesByArea_Result> result = null
 	//public boolean bsuccess =false;
     //public ResultCode resultCode = ResultCode .NONE;		
-	boolean ProvideListbyArea(double north,double south,double ease,double west,String keyword,Handler callback);//������
+	boolean ProvideListbyArea(double north,double south,double ease,double west,String keyword,Handler callback);
 	
 	//반환 클래스 class sp_GetProvidesByDistance_Items
 	//호출 오류시
@@ -325,18 +322,18 @@ public interface IAPIProxyLayer {
 	//public List<sp_GetProvidesByDistance_Items> result = null
 	//public boolean bsuccess =false;
     //public ResultCode resultCode = ResultCode .NONE;		
-	boolean ProvideListbyDistance(double lat, double lon,double mindistance,String keyword,Handler callback);//������
+	boolean ProvideListbyDistance(double lat, double lon,double mindistance,String keyword,Handler callback);
 
 	boolean ProvideAdd(String title,String description, int minprice,int category
-			,double lat,double lon,int radius,boolean totwitter, boolean tofacebook, Handler callback);//������
-	boolean ProvideDelete(String provide_id ,Handler callback);//���� ����
-	boolean ProvideDone(String provide_id ,Handler callback);//���� ����
+			,double lat,double lon,int radius,boolean totwitter, boolean tofacebook, Handler callback);
+	boolean ProvideDelete(String provide_id ,Handler callback);
+	boolean ProvideDone(String provide_id ,Handler callback);
 	
-	boolean ProvideMyDetailById(String provide_id ,Handler callback);//������
+	boolean ProvideMyDetailById(String provide_id ,Handler callback);
 	
 	boolean ProvideOtherDetailById(String provide_id ,Handler callback);
 	boolean ProvideUpdate(String provide_id,String title, String description, int minprice,int category
-			,double lat,double lon,int radius,boolean totwitter, boolean tofacebook, Handler callback);//������
+			,double lat,double lon,int radius,boolean totwitter, boolean tofacebook, Handler callback);
 	// [end]
 	
 	// [start] Bidding
@@ -395,7 +392,7 @@ public interface IAPIProxyLayer {
 	//public sp_BiddingOfferAsProvider_Result result = null;
     //public boolean bsuccess =false;
     //public ResultCode resultCode = ResultCode .NONE;
-	boolean BiddingOfferAsProvider(String provide_id,String request_id, Handler callback);//������
+	boolean BiddingOfferAsProvider(String provide_id,String request_id, Handler callback);
 	
 	//반환 클래스 class sp_BiddingOfferAsRequester_Items
 	//호출 오류시
@@ -415,7 +412,7 @@ public interface IAPIProxyLayer {
 	//public sp_BiddingOfferAsRequester_Result result = null;
     //public boolean bsuccess =false;
     //public ResultCode resultCode = ResultCode .NONE;
-	boolean BiddingOfferAsRequester(String request_id,String provide_id, Handler callback);//������
+	boolean BiddingOfferAsRequester(String request_id,String provide_id, Handler callback);
 
 	boolean BiddingListAsProvider(String last_bidding_id,Handler callback);
 	boolean BiddingListAsRequester(String last_bidding_id,Handler callback);
@@ -466,13 +463,13 @@ public interface IAPIProxyLayer {
 	//public sp_GetLatestReadMessage_Result readmessage =null;
     //public boolean bsuccess =false;
     //public ResultCode resultCode = ResultCode .NONE;
-	boolean MessageSendText(String biddingid, String message,String lastmsgutctick, String local_written_time,Handler callback);//������
-	boolean MessageSendImage(String biddingid, String filepath,String lastmsgutctick,Handler callback);//������
-	boolean MessageSendAudio(String biddingid, String filepath,String lastmsgutctick,Handler callback);//������
-	boolean MessageSendVideo(String biddingid, String filepath,String lastmsgutctick,Handler callback);//������
+	boolean MessageSendText(String biddingid, String message,String lastmsgutctick, String local_written_time,Handler callback);
+	boolean MessageSendImage(String biddingid, String filepath,String lastmsgutctick,Handler callback);
+	boolean MessageSendAudio(String biddingid, String filepath,String lastmsgutctick,Handler callback);
+	boolean MessageSendVideo(String biddingid, String filepath,String lastmsgutctick,Handler callback);
 	
-	boolean MessageGet(String biddingid,String lastmsgutctick,Handler callback);//������
-	boolean MessageGetNewMessage(String lastmsgutctime,Handler callback);//���ڷ� ���� ���������� ����ŷ��޽��� �ޱ�
+	boolean MessageGet(String biddingid,String lastmsgutctick,Handler callback);
+	boolean MessageGetNewMessage(String lastmsgutctime,Handler callback);
 	
 
 	
