@@ -19,9 +19,9 @@ import com.thx.bizcat.http.IHttpConnectionLayer;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_BiddingOfferAsProvider_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_BiddingOfferAsRequester_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetMessage_Items;
-import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetMyActiveRequests_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetMyProvides_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetOtherProvideByID_Items;
+import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetOtherRequests_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetProviderDetail_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetProvidesByArea_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetProvidesByDistance_Items;
@@ -29,6 +29,7 @@ import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetProvidesByTime_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetRequesterDetail_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_LogIn_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_MyInfo_Items;
+import com.thx.bizcat.http.apiproxy.JSONParser.sp_RequestMyActiveList_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_Simple_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_UserGetUpdatedContents_Items;
 import com.thx.bizcat.util.Logger;
@@ -596,7 +597,6 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				}
 
 				String result = _httpLayer.GETSync(_domain+"Request/OtherList", params);
-				 
 				JSONObject obj = null;
 				
 				try
@@ -607,8 +607,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("OtherRequestList");
-						
-						callback.sendMessage(callback.obtainMessage(APICODE.RequestOtherList.toInt(), obj));
+						sp_GetOtherRequests_Items item = new sp_GetOtherRequests_Items(obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.RequestOtherList.toInt(), item));
 						return;
 					}
 				}
@@ -664,8 +664,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("MyActiveRequestList");
-						
-						sp_GetMyActiveRequests_Items item = new sp_GetMyActiveRequests_Items(obj);
+						 
+						sp_RequestMyActiveList_Items item = new sp_RequestMyActiveList_Items(obj);
 						callback.sendMessage(callback.obtainMessage(APICODE.RequestMyActiveList.toInt(), item));
 						return;
 					}
