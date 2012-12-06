@@ -21,12 +21,16 @@ import com.thx.bizcat.http.apiproxy.JSONParser.sp_BiddingOfferAsRequester_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetMessage_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetMyProvides_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetOtherProvideByID_Items;
+import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetOtherRequestByID_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetOtherRequests_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetProviderDetail_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetProvidesByArea_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetProvidesByDistance_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetProvidesByTime_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetRequesterDetail_Items;
+import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetRequestsByArea_Items;
+import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetRequestsByDistance_Items;
+import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetRequestsByTime_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_LogIn_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_MyInfo_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_RequestMyActiveList_Items;
@@ -719,8 +723,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("RequestListbyTime");
-						
-						callback.sendMessage(callback.obtainMessage(APICODE.RequestListbyTime.toInt(), obj));
+						sp_GetRequestsByTime_Items item = new sp_GetRequestsByTime_Items(obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.RequestListbyTime.toInt(), item));
 						return;
 					}
 				}
@@ -779,8 +783,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("RequestListbyArea");
-						
-						callback.sendMessage(callback.obtainMessage(APICODE.RequestListbyArea.toInt(), obj));
+						sp_GetRequestsByArea_Items item = new sp_GetRequestsByArea_Items(obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.RequestListbyArea.toInt(), item));
 						return;
 					}
 				}
@@ -837,8 +841,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("RequestListbyDistance");
-						
-						callback.sendMessage(callback.obtainMessage(APICODE.RequestListbyDistance.toInt(), obj));
+						sp_GetRequestsByDistance_Items item = new sp_GetRequestsByDistance_Items(obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.RequestListbyDistance.toInt(), item));
 						return;
 					}
 				}
@@ -1194,7 +1198,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("RequestAdd");
-						callback.sendMessage(callback.obtainMessage(APICODE.RequestAdd.toInt(), obj));
+						sp_Simple_Items item = new sp_Simple_Items(obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.RequestAdd.toInt(), item));
 						return;
 					}
 					
@@ -1557,7 +1562,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("RequestDelete");
-						callback.sendMessage(callback.obtainMessage(APICODE.RequestDelete.toInt(), obj));
+						sp_Simple_Items item = new sp_Simple_Items(obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.RequestDelete.toInt(), item));
 						return;
 					}
 					
@@ -1864,7 +1870,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("RequestOtherDetailById");
-						callback.sendMessage(callback.obtainMessage(APICODE.RequestOtherDetailById.toInt(), obj));
+						sp_GetOtherRequestByID_Items item = new sp_GetOtherRequestByID_Items(obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.RequestOtherDetailById.toInt(), item));
 						return;
 					}
 					
@@ -1980,7 +1987,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("RequestUpdate");
-						callback.sendMessage(callback.obtainMessage(APICODE.RequestUpdate.toInt(), obj));
+						sp_Simple_Items item = new sp_Simple_Items(obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.RequestUpdate.toInt(), item));
 						return;
 					}
 					
@@ -2460,7 +2468,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("RequestDone");
-						callback.sendMessage(callback.obtainMessage(APICODE.RequestDone.toInt(), obj));
+						sp_Simple_Items item = new sp_Simple_Items(obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.RequestDone.toInt(), item));
 						return;
 					}
 					

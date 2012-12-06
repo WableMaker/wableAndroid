@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.thx.bizcat.http.apiproxy.JSONParser.ResultCode;
+import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetRequestsByDistance_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetMyActiveRequests_Result;
 import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetMySuggestRequests_Result;
 import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetOtherRequests_Result;
@@ -290,19 +291,155 @@ public interface IAPIProxyLayer {
     //public ResultCode resultCode = ResultCode .NONE;
 	boolean RequestMyActiveList(String lastid,Handler callback);
 	
+	//반환 클래스 class sp_GetMyActiveRequests_Items
+	//호출 오류시
+	//null
+	//
+	//성공시
+	//public List<sp_GetRequestListbyArea_Result> requests = 정보 ;
+    //public boolean bsuccess =true;
+    //public ResultCode resultCode = ResultCode .NONE;
+	//
+	//실패시
+	//public List<sp_GetRequestListbyArea_Result> requests = null ;
+    //public boolean bsuccess =false;
+    //public ResultCode resultCode = 실패사유;
+	//
+	//서버호출 실패시
+	//public List<sp_GetRequestListbyArea_Result> requests = null ;
+    //public boolean bsuccess =false;
+    //public ResultCode resultCode = ResultCode .NONE;
 	boolean RequestListbyArea(double north,double south,double ease,double west,String keyword,Handler callback);
+	
+	//반환 클래스 class sp_GetMyActiveRequests_Items
+	//호출 오류시
+	//null
+	//
+	//성공시
+	//public List<sp_GetRequestsByDistance_Result> requests = 정보 ;
+	//public boolean bsuccess =true;
+	//public ResultCode resultCode = ResultCode .NONE;
+	//
+	//실패시
+	//public List<sp_GetRequestsByDistance_Result> requests = null ;
+	//public boolean bsuccess =false;
+	//public ResultCode resultCode = 실패사유;
+	//
+	//서버호출 실패시
+	//public List<sp_GetRequestsByDistance_Result> requests = null ;
+	//public boolean bsuccess =false;
+	//public ResultCode resultCode = ResultCode .NONE;
 	boolean RequestListbyDistance(double lat, double lon,double mindistance,String keyword,Handler callback);
 
+	//반환 클래스 class sp_Simple_Items
+	//호출 오류시
+	//null
+	//
+	//성공시
+	//public boolean bsuccess =true;
+	//public ResultCode resultCode = ResultCode .NONE;
+	//
+	//실패시
+	//public boolean bsuccess =false;
+	//public ResultCode resultCode = 실패사유;
+	//
+	//서버호출 실패시
+	//public boolean bsuccess =false;
+	//public ResultCode resultCode = ResultCode .NONE;	
 	boolean RequestAdd(String title, String description, int price, Integer category, Date duedate
 			,double lat,double lon, Boolean totwitter, Boolean tofacebook, Handler callback);
+	//반환 클래스 class sp_Simple_Items
+	//호출 오류시
+	//null
+	//
+	//성공시
+	//public boolean bsuccess =true;
+	//public ResultCode resultCode = ResultCode .NONE;
+	//
+	//실패시
+	//public boolean bsuccess =false;
+	//public ResultCode resultCode = 실패사유;
+	//
+	//서버호출 실패시
+	//public boolean bsuccess =false;
+	//public ResultCode resultCode = ResultCode .NONE;	
 	boolean RequestDelete(String request_id ,Handler callback);
+	
+	//반환 클래스 class sp_Simple_Items
+	//호출 오류시
+	//null
+	//
+	//성공시
+	//public boolean bsuccess =true;
+	//public ResultCode resultCode = ResultCode .NONE;
+	//
+	//실패시
+	//public boolean bsuccess =false;
+	//public ResultCode resultCode = 실패사유;
+	//
+	//서버호출 실패시
+	//public boolean bsuccess =false;
+	//public ResultCode resultCode = ResultCode .NONE;	
 	boolean RequestDone(String request_id ,Handler callback);
 	
 	boolean RequestMyDetailById(String request_id ,Handler callback);
+	
+	//반환 클래스 class sp_GetOtherRequestByID_Items
+	//호출 오류시
+	//null
+	//
+	//성공시
+	//public List<sp_GetOtherRequestByID_Result> requests = 정보 ;
+	//public boolean bsuccess =true;
+	//public ResultCode resultCode = ResultCode .NONE;
+	//
+	//실패시
+	//public List<sp_GetOtherRequestByID_Result> requests = null ;
+	//public boolean bsuccess =false;
+	//public ResultCode resultCode = 실패사유;
+	//
+	//서버호출 실패시
+	//public List<sp_GetOtherRequestByID_Result> requests = null ;
+	//public boolean bsuccess =false;
+	//public ResultCode resultCode = ResultCode .NONE;
 	boolean RequestOtherDetailById(String request_id ,Handler callback);
+
+	//반환 클래스 class sp_Simple_Items
+	//호출 오류시
+	//null
+	//
+	//성공시
+	//public boolean bsuccess =true;
+	//public ResultCode resultCode = ResultCode .NONE;
+	//
+	//실패시
+	//public boolean bsuccess =false;
+	//public ResultCode resultCode = 실패사유;
+	//
+	//서버호출 실패시
+	//public boolean bsuccess =false;
+	//public ResultCode resultCode = ResultCode .NONE;	
 	boolean RequestUpdate(String request_id,String title, String description,int price,int category,Date duedate
 			,double lat,double lon,boolean totwitter, boolean tofacebook, Handler callback);
 	
+	//반환 클래스 class sp_GetRequestsByTime_Items
+	//호출 오류시
+	//null
+	//
+	//성공시
+	//public List<sp_GetRequestsByTime_Result> requests = 정보 ;
+	//public boolean bsuccess =true;
+	//public ResultCode resultCode = ResultCode .NONE;
+	//
+	//실패시
+	//public List<sp_GetRequestsByTime_Result> requests = null ;
+	//public boolean bsuccess =false;
+	//public ResultCode resultCode = 실패사유;
+	//
+	//서버호출 실패시
+	//public List<sp_GetRequestsByTime_Result> requests = null ;
+	//public boolean bsuccess =false;
+	//public ResultCode resultCode = ResultCode .NONE;
 	boolean RequestListbyTime(String lastid, String keyword,Handler callback);
 	// [end]
 	
