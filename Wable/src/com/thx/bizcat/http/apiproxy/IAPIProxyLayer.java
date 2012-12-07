@@ -6,7 +6,10 @@ import java.util.List;
 
 import com.thx.bizcat.http.apiproxy.JSONParser.ResultCode;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetRequestsByDistance_Items;
+import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetBiddingByRequest_Result;
+import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetMatchByRequest_Result;
 import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetMyActiveRequests_Result;
+import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetMyRequestByID_Result;
 import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetMySuggestRequests_Result;
 import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetOtherRequests_Result;
 
@@ -382,6 +385,38 @@ public interface IAPIProxyLayer {
 	//public ResultCode resultCode = ResultCode .NONE;	
 	boolean RequestDone(String request_id ,Handler callback);
 	
+	
+	
+	//반환 클래스 class sp_RequestMyDetailById_Items
+	//호출 오류시
+	//null
+	//
+	//성공시
+	//public sp_GetMyRequestByID_Result request= 정보;
+	//public List<sp_GetMatchByRequest_Result> requests = 정보;
+	//public List<sp_GetBiddingByRequest_Result> biddings = 정보;
+	//public int bidding_count= 정보;
+	//public int matching_count= 정보;
+	//public boolean bsuccess = true;
+	//public ResultCode resultCode=ResultCode .NONE;	
+	//
+	//실패시
+	//public sp_GetMyRequestByID_Result request= null;
+	//public List<sp_GetMatchByRequest_Result> requests = null;
+	//public List<sp_GetBiddingByRequest_Result> biddings = null;
+	//public int bidding_count= null;
+	//public int matching_count= null;
+	//public boolean bsuccess = null;
+	//public ResultCode resultCode=실패사유;	
+	//
+	//서버호출 실패시
+	//public sp_GetMyRequestByID_Result request= null;
+	//public List<sp_GetMatchByRequest_Result> requests = null;
+	//public List<sp_GetBiddingByRequest_Result> biddings= null;
+	//public int bidding_count= null;
+	//public int matching_count= null;
+	//public boolean bsuccess = false;
+	//public ResultCode resultCode=ResultCode .NONE;	
 	boolean RequestMyDetailById(String request_id ,Handler callback);
 	
 	//반환 클래스 class sp_GetOtherRequestByID_Items
