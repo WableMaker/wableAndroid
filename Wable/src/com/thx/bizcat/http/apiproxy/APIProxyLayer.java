@@ -33,7 +33,7 @@ import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetRequestsByDistance_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetRequestsByTime_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_LogIn_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_MyInfo_Items;
-import com.thx.bizcat.http.apiproxy.JSONParser.sp_RequestMyActiveList_Items;
+import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetMyActiveRequests_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_RequestMyDetailById_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_Simple_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_UserGetUpdatedContents_Items;
@@ -670,7 +670,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("MyActiveRequestList");
 						 
-						sp_RequestMyActiveList_Items item = new sp_RequestMyActiveList_Items(obj);
+						sp_GetMyActiveRequests_Items item = new sp_GetMyActiveRequests_Items(obj);
 						callback.sendMessage(callback.obtainMessage(APICODE.RequestMyActiveList.toInt(), item));
 						return;
 					}
