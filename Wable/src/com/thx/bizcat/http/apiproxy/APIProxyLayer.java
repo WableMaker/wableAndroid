@@ -21,6 +21,7 @@ import com.thx.bizcat.http.apiproxy.JSONParser.sp_BiddingOfferAsRequester_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetMessage_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetMyProvides_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetOtherProvideByID_Items;
+import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetOtherProvides_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetOtherRequestByID_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetOtherRequests_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetProviderDetail_Items;
@@ -899,7 +900,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("OtherProvideList");
-						callback.sendMessage(callback.obtainMessage(APICODE.ProvideOtherList.toInt(), obj));
+						sp_GetOtherProvides_Items item = new sp_GetOtherProvides_Items(obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.ProvideOtherList.toInt(), item));
 						return;
 					}
 				}
@@ -919,63 +921,63 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 
 
-	@Override
-	public boolean ProvideMyActiveList(String lastid, final Handler callback) {
-
-		
-		final Map<String,Object> params = new HashMap<String,Object>();
-		if(lastid !=null)
-			params.put("lastid", lastid);
-		
-		
-		new Thread()
-		{
-			@Override
- 			public void run()
- 			{
-				if(!_httpLayer.IsConnectedSession())
-				{
-					if(!Relogin())	
-					{
-						callback.sendMessage(callback.obtainMessage(APICODE.ProvideMyActiveList.toInt(), null));
-
-						return;
-					}
-				}
-
-				String result = _httpLayer.GETSync(_domain+"Provide/MyActiveList", params);
-				 
-				JSONObject obj = null;
-				
-				try
-				{
-					if(result !=null)
-					{
-						obj = new JSONObject(result);
-						if(true == obj.getBoolean("success"))
-							SessionUpdate("MyActiveProvideList");
-						
-						sp_GetMyProvides_Items item = new sp_GetMyProvides_Items(obj);
-						
-						callback.sendMessage(callback.obtainMessage(APICODE.ProvideMyActiveList.toInt(), item));
-						return;
-					}
-					
-				}
-				catch(Exception e)
-				{
-					Logger.Instance().Write(e);
-					
-				}
-				
-				callback.sendMessage(callback.obtainMessage(APICODE.ProvideMyActiveList.toInt(), null));
- 			}
-			
-		}.start();
-		
-		
-		return true;
-	}
+//	@Override
+//	public boolean ProvideMyActiveList(String lastid, final Handler callback) {
+//
+//		
+//		final Map<String,Object> params = new HashMap<String,Object>();
+//		if(lastid !=null)
+//			params.put("lastid", lastid);
+//		
+//		
+//		new Thread()
+//		{
+//			@Override
+// 			public void run()
+// 			{
+//				if(!_httpLayer.IsConnectedSession())
+//				{
+//					if(!Relogin())	
+//					{
+//						callback.sendMessage(callback.obtainMessage(APICODE.ProvideMyActiveList.toInt(), null));
+//
+//						return;
+//					}
+//				}
+//
+//				String result = _httpLayer.GETSync(_domain+"Provide/MyActiveList", params);
+//				 
+//				JSONObject obj = null;
+//				
+//				try
+//				{
+//					if(result !=null)
+//					{
+//						obj = new JSONObject(result);
+//						if(true == obj.getBoolean("success"))
+//							SessionUpdate("MyActiveProvideList");
+//						
+//						sp_GetMyProvides_Items item = new sp_GetMyProvides_Items(obj);
+//						
+//						callback.sendMessage(callback.obtainMessage(APICODE.ProvideMyActiveList.toInt(), item));
+//						return;
+//					}
+//					
+//				}
+//				catch(Exception e)
+//				{
+//					Logger.Instance().Write(e);
+//					
+//				}
+//				
+//				callback.sendMessage(callback.obtainMessage(APICODE.ProvideMyActiveList.toInt(), null));
+// 			}
+//			
+//		}.start();
+//		
+//		
+//		return true;
+//	}
 
 
 
@@ -1265,7 +1267,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("AddProvide");
-						callback.sendMessage(callback.obtainMessage(APICODE.ProvideAdd.toInt(), obj));
+						sp_Simple_Items item = new sp_Simple_Items(obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.ProvideAdd.toInt(), item));
 						return;
 					}
 					
@@ -1615,7 +1618,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("ProvideDelete");
-						callback.sendMessage(callback.obtainMessage(APICODE.ProvideDelete.toInt(), obj));
+						sp_Simple_Items item = new sp_Simple_Items(obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.ProvideDelete.toInt(), item));
 						return;
 					}
 					
@@ -2390,54 +2394,54 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	}
 
 
-	@Override
-	public boolean ProvideMyDoneList(String lastid, final Handler callback) {
-		
-
-		final Map<String,Object> params = new HashMap<String,Object>();
-		params.put("lastid", lastid);
-		
-		
-		new Thread()
-		{
-			@Override
- 			public void run()
- 			{
-				if(!_httpLayer.IsConnectedSession())
-				{
-					if(!Relogin())
-						return;
-				}
-				
-				String result = _httpLayer.GETSync(_domain+"Provide/MyDoneList", params);
-				 
-				JSONObject obj = null;
-				
-				try
-				{
-					if(result !=null)
-					{
-						obj = new JSONObject(result);
-						if(true == obj.getBoolean("success"))
-							SessionUpdate("Provide/MyDoneList");
-						callback.sendMessage(callback.obtainMessage(APICODE.ProvideMyDoneList.toInt(), obj));
-						return;
-					}
-					
-				}
-				catch(Exception e)
-				{
-					Logger.Instance().Write(e);
-					
-				}
-				
-				callback.sendMessage(callback.obtainMessage(APICODE.ProvideMyDoneList.toInt(), null));
- 			}
-			
-		}.start();
-		
-		return true;
-	}
+//	@Override
+//	public boolean ProvideMyDoneList(String lastid, final Handler callback) {
+//		
+//
+//		final Map<String,Object> params = new HashMap<String,Object>();
+//		params.put("lastid", lastid);
+//		
+//		
+//		new Thread()
+//		{
+//			@Override
+// 			public void run()
+// 			{
+//				if(!_httpLayer.IsConnectedSession())
+//				{
+//					if(!Relogin())
+//						return;
+//				}
+//				
+//				String result = _httpLayer.GETSync(_domain+"Provide/MyDoneList", params);
+//				 
+//				JSONObject obj = null;
+//				
+//				try
+//				{
+//					if(result !=null)
+//					{
+//						obj = new JSONObject(result);
+//						if(true == obj.getBoolean("success"))
+//							SessionUpdate("Provide/MyDoneList");
+//						callback.sendMessage(callback.obtainMessage(APICODE.ProvideMyDoneList.toInt(), obj));
+//						return;
+//					}
+//					
+//				}
+//				catch(Exception e)
+//				{
+//					Logger.Instance().Write(e);
+//					
+//				}
+//				
+//				callback.sendMessage(callback.obtainMessage(APICODE.ProvideMyDoneList.toInt(), null));
+// 			}
+//			
+//		}.start();
+//		
+//		return true;
+//	}
 
 
 
@@ -2492,53 +2496,53 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 
 
-	@Override
-	public boolean ProvideDone(String provide_id, final Handler callback) {
-		
-		
-		final Map<String,Object> params = new HashMap<String,Object>();
-		params.put("provide_id", provide_id);
-		
-		new Thread()
-		{
-			@Override
- 			public void run()
- 			{
-				if(!_httpLayer.IsConnectedSession())
-				{
-					if(!Relogin())
-						return;
-				}
-				
-				String result = _httpLayer.POSTSync(_domain+"Provide/Done", params);
-				 
-				JSONObject obj = null;
-				
-				try
-				{
-					if(result !=null)
-					{
-						obj = new JSONObject(result);
-						if(true == obj.getBoolean("success"))
-							SessionUpdate("ProvideDone");
-						callback.sendMessage(callback.obtainMessage(APICODE.ProvideDone.toInt(), obj));
-						return;
-					}
-					
-				}
-				catch(Exception e)
-				{
-					Logger.Instance().Write(e);
-					
-				}
-				
-				callback.sendMessage(callback.obtainMessage(APICODE.ProvideDone.toInt(), null));
- 			}
-			
-		}.start();
-		
-		return true;
-	}
+//	@Override
+//	public boolean ProvideDone(String provide_id, final Handler callback) {
+//		
+//		
+//		final Map<String,Object> params = new HashMap<String,Object>();
+//		params.put("provide_id", provide_id);
+//		
+//		new Thread()
+//		{
+//			@Override
+// 			public void run()
+// 			{
+//				if(!_httpLayer.IsConnectedSession())
+//				{
+//					if(!Relogin())
+//						return;
+//				}
+//				
+//				String result = _httpLayer.POSTSync(_domain+"Provide/Done", params);
+//				 
+//				JSONObject obj = null;
+//				
+//				try
+//				{
+//					if(result !=null)
+//					{
+//						obj = new JSONObject(result);
+//						if(true == obj.getBoolean("success"))
+//							SessionUpdate("ProvideDone");
+//						callback.sendMessage(callback.obtainMessage(APICODE.ProvideDone.toInt(), obj));
+//						return;
+//					}
+//					
+//				}
+//				catch(Exception e)
+//				{
+//					Logger.Instance().Write(e);
+//					
+//				}
+//				
+//				callback.sendMessage(callback.obtainMessage(APICODE.ProvideDone.toInt(), null));
+// 			}
+//			
+//		}.start();
+//		
+//		return true;
+//	}
 
 
 

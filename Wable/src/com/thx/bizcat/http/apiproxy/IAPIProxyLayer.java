@@ -11,6 +11,7 @@ import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetMatchByRequest_Resul
 import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetMyActiveRequests_Result;
 import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetMyRequestByID_Result;
 import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetMySuggestRequests_Result;
+import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetOtherProvides_Result;
 import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetOtherRequests_Result;
 
 import android.os.Handler;
@@ -480,9 +481,27 @@ public interface IAPIProxyLayer {
 	
 	// [start] Provide
 	
+	//반환 클래스 class sp_GetOtherProvides_Items
+	//호출 오류시
+	//null
+	//
+	//성공시
+	//public List<sp_GetOtherProvides_Result> result : 정보
+	//public boolean bsuccess =true;
+    //public ResultCode resultCode = ResultCode .NONE;
+	//
+	//실패시
+	//public List<sp_GetOtherProvides_Result> result = null
+	//public boolean bsuccess =false;
+    //public ResultCode resultCode = 실패사유;
+	//
+	//서버호출 실패시
+	//public List<sp_GetOtherProvides_Result> result = null
+	//public boolean bsuccess =false;
+    //public ResultCode resultCode = ResultCode .NONE;		
 	boolean ProvideOtherList(String userid,String lastid,Handler callback);
-	boolean ProvideMyActiveList(String lastid,Handler callback);
-	boolean ProvideMyDoneList(String lastid,Handler callback);
+	//boolean ProvideMyActiveList(String lastid,Handler callback);
+	//boolean ProvideMyDoneList(String lastid,Handler callback);
 	
 	//반환 클래스 class sp_GetProvidesByTime_Items
 	//호출 오류시
@@ -544,10 +563,40 @@ public interface IAPIProxyLayer {
     //public ResultCode resultCode = ResultCode .NONE;		
 	boolean ProvideListbyDistance(double lat, double lon,double mindistance,String keyword,Handler callback);
 
+	//반환 클래스 class sp_Simple_Items
+	//호출 오류시
+	//null
+	//
+	//성공시
+    //public boolean bsuccess =true;
+    //public ResultCode resultCode = ResultCode .NONE;
+	//
+	//실패시
+    //public boolean bsuccess =false;
+    //public ResultCode resultCode = 실패사유;
+	//
+	//서버호출 실패시
+    //public boolean bsuccess =false;
+    //public ResultCode resultCode = ResultCode .NONE;	
 	boolean ProvideAdd(String title,String description, int minprice,int category
 			,double lat,double lon,int radius,boolean totwitter, boolean tofacebook, Handler callback);
+	//반환 클래스 class sp_Simple_Items
+	//호출 오류시
+	//null
+	//
+	//성공시
+    //public boolean bsuccess =true;
+    //public ResultCode resultCode = ResultCode .NONE;
+	//
+	//실패시
+    //public boolean bsuccess =false;
+    //public ResultCode resultCode = 실패사유;
+	//
+	//서버호출 실패시
+    //public boolean bsuccess =false;
+    //public ResultCode resultCode = ResultCode .NONE;	
 	boolean ProvideDelete(String provide_id ,Handler callback);
-	boolean ProvideDone(String provide_id ,Handler callback);
+	//boolean ProvideDone(String provide_id ,Handler callback);
 	
 	boolean ProvideMyDetailById(String provide_id ,Handler callback);
 	
