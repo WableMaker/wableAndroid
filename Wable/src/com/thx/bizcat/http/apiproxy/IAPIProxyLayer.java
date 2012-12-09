@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.thx.bizcat.http.apiproxy.JSONParser.ResultCode;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetRequestsByDistance_Items;
+import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_CompatiableAppVersion_Result;
 import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetBiddingByRequest_Result;
 import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetMatchByRequest_Result;
 import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetMyActiveRequests_Result;
@@ -946,6 +947,45 @@ public interface IAPIProxyLayer {
 	// [end]
 	
 	// [start] System
-	boolean SystemAppVersion(Handler callback);	
+	//반환 클래스 class sp_CompatiableAppVersion_Items
+	//호출 오류시
+	//null
+	//
+	//성공시
+	//public sp_CompatiableAppVersion_Result result = 버전;
+	//public boolean bsuccess = true;
+	//public ResultCode resultCode = ResultCode .NONE;
+	//
+	//실패시
+	//public sp_CompatiableAppVersion_Result result = null;
+	//public boolean bsuccess = false;
+	//public ResultCode resultCode = 실패사유;
+	//
+	//서버호출 실패시
+	//public sp_CompatiableAppVersion_Result result = null;
+	//public boolean bsuccess = false;
+	//public ResultCode resultCode = ResultCode .NONE;
+	boolean CompatibleAppVersion(Handler callback);	
+	
+	// [start] System
+	//반환 클래스 class sp_LatestAppVersion_Items
+	//호출 오류시
+	//null
+	//
+	//성공시
+	//public sp_LatestAppVersion_Result result = 버전;
+	//public boolean bsuccess = true;
+	//public ResultCode resultCode = ResultCode .NONE;
+	//
+	//실패시
+	//public sp_LatestAppVersion_Result result = null;
+	//public boolean bsuccess = false;
+	//public ResultCode resultCode = 실패사유;
+	//
+	//서버호출 실패시
+	//public sp_LatestAppVersion_Result result = null;
+	//public boolean bsuccess = false;
+	//public ResultCode resultCode = ResultCode .NONE;
+	boolean LatestAppVersion(Handler callback);
 	// [end]
 }

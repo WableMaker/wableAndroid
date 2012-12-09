@@ -35,7 +35,7 @@ public class sp_RequestMyDetailById_Items {
 
 				if(!data.isNull("request"))
 				{
-					sp_GetMyRequestByID_Result arr = new sp_GetMyRequestByID_Result(data.getJSONObject("request"));					
+					request = new sp_GetMyRequestByID_Result(data.getJSONObject("request"));					
 				}		
 				else
 				{
@@ -69,7 +69,7 @@ public class sp_RequestMyDetailById_Items {
 				
 				if(!data.isNull("bidding_count"))
 				{
-					int bidding_count = data.getInt("bidding_count");
+					bidding_count = data.getInt("bidding_count");
 				}		
 				else
 				{
@@ -79,7 +79,7 @@ public class sp_RequestMyDetailById_Items {
 				
 				if(!data.isNull("matching_count"))
 				{
-					int bidding_count = data.getInt("matching_count");
+					matching_count = data.getInt("matching_count");
 				}		
 				else
 				{
