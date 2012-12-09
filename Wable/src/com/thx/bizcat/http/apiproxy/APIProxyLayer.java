@@ -1663,7 +1663,10 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				if(!_httpLayer.IsConnectedSession())
 				{
 					if(!Relogin())
+					{
+						callback.sendMessage(callback.obtainMessage(APICODE.MessageGet.toInt(), null));
 						return;
+					}
 				}
 				
 				String result = _httpLayer.GETSync(_domain+"Message/GetMessage", params);
@@ -1677,7 +1680,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("MessageGet");
-						callback.sendMessage(callback.obtainMessage(APICODE.MessageGet.toInt(), obj));
+						sp_GetMessage_Items item = new sp_GetMessage_Items(obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.MessageGet.toInt(), item));
 						return;
 					}
 					
