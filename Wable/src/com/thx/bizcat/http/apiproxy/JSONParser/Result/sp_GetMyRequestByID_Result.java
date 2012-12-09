@@ -5,9 +5,9 @@ import org.json.JSONException;
 
 public class sp_GetMyRequestByID_Result
 {
-    public String title;
-    public String description;
-    public String due_date;
+    public String title="";
+    public String description="";
+    public String due_date="";
     public int status;
     public double lat;
     public double lon;

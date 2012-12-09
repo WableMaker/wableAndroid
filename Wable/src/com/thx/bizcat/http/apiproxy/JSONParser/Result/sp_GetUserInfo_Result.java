@@ -5,21 +5,21 @@ import org.json.JSONException;
 
 public class sp_GetUserInfo_Result
 {
-    public String name;
-    public String email;
+    public String name="";
+    public String email="";
     public boolean blocked;
-    public String phone;
-    public String mobile;
+    public String phone="";
+    public String mobile="";
     public Double pos_lat;
     public Double pos_lon;
-    public String blocked_info;
-    public String twitter_uid;
-    public String twitter_token;
-    public String registered_date;
-    public String last_visited_date;
+    public String blocked_info="";
+    public String twitter_uid="";
+    public String twitter_token="";
+    public String registered_date="";
+    public String last_visited_date="";
     public boolean deleted;
-    public String issmb;
-    public String photo;
+    public String issmb="";
+    public String photo="";
     public boolean public_mobile;
     public boolean public_phone;
     public boolean public_email;
@@ -27,8 +27,8 @@ public class sp_GetUserInfo_Result
     public boolean public_twitter;
     public double review_rating;
     public int review_count;
-    public String fb_user_id;
-    public String fb_oauth_token;
+    public String fb_user_id="";
+    public String fb_oauth_token="";
     public long id;
 	public sp_GetUserInfo_Result(JSONObject obj)
 	{

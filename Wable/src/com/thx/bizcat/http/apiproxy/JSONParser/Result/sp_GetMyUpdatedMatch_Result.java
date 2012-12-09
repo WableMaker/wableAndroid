@@ -7,17 +7,17 @@ public class sp_GetMyUpdatedMatch_Result
 {
     public long request_id;
     public long provide_id;
-    public String matched_time;
+    public String matched_time="";
     public int status;
     public boolean recommend;
     public long other_user_id;
-    public String other_title;
-    public String other_description;
+    public String other_title="";
+    public String other_description="";
     public Integer other_price;
-    public String other_user_photo;
-    public String other_user_name;
+    public String other_user_photo="";
+    public String other_user_name="";
     public Boolean deleted;
-    public String modified_time;
+    public String modified_time="";
 	public sp_GetMyUpdatedMatch_Result(JSONObject obj)
 	{
 		try {

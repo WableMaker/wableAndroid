@@ -5,16 +5,16 @@ import org.json.JSONException;
 
 public class sp_GetProvidesByArea_Result
 {
-    public String id;
-    public String photo;
+    public String id="";
+    public String photo="";
     public double lat;
     public double lon;
-    public String bidding_id;
-    public String title;
-    public String name;
+    public String bidding_id="";
+    public String title="";
+    public String name="";
     public int min_price;
-    public String description;
-    public String user_id;
+    public String description="";
+    public String user_id="";
 	public sp_GetProvidesByArea_Result(JSONObject obj)
 	{
 		try {

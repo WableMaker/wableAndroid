@@ -5,11 +5,11 @@ import org.json.JSONException;
 
 public class sp_GetMyBiddingAsRequester_Result
 {
-    public String bidding_id;
-    public String request_id;
-    public String provider_id;
-    public String provide_id;
-    public String provider_photo;
+    public String bidding_id="";
+    public String request_id="";
+    public String provider_id="";
+    public String provide_id="";
+    public String provider_photo="";
     public int status;
 	public sp_GetMyBiddingAsRequester_Result(JSONObject obj)
 	{

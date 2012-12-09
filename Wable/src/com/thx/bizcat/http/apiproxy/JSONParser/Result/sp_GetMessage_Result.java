@@ -5,15 +5,15 @@ import org.json.JSONException;
 
 public class sp_GetMessage_Result
 {
-    public String message;
-    public String picture_path;
-    public String audio_path;
-    public String video_path;
-    public String written_time;
-    public String writer_id;
-    public String read_time;
-    public String written_tick;
-    public String local_written_time;
+    public String message="";
+    public String picture_path="";
+    public String audio_path="";
+    public String video_path="";
+    public String written_time="";
+    public String writer_id="";
+    public String read_time="";
+    public String written_tick="";
+    public String local_written_time="";
 	public sp_GetMessage_Result(JSONObject obj)
 	{
 		try {

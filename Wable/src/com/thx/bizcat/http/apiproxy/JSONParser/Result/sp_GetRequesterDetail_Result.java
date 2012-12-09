@@ -5,19 +5,19 @@ import org.json.JSONException;
 
 public class sp_GetRequesterDetail_Result
 {
-    public String name;
-    public String introduce;
+    public String name="";
+    public String introduce="";
     public Integer request_count;
     public boolean public_mobile;
     public boolean public_phone;
     public boolean public_email;
     public boolean public_fb;
-    public String fb_user_id;
-    public String fb_oauth_token;
-    public String photo;
-    public String email;
-    public String mobile;
-    public String phone;
+    public String fb_user_id="";
+    public String fb_oauth_token="";
+    public String photo="";
+    public String email="";
+    public String mobile="";
+    public String phone="";
     public boolean is_email_authorized;
     public boolean is_mobile_authorized;
 	public sp_GetRequesterDetail_Result(JSONObject obj)

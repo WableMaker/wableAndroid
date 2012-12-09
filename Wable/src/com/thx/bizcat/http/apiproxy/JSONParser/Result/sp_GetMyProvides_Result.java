@@ -6,11 +6,11 @@ import org.json.JSONException;
 public class sp_GetMyProvides_Result
 {
     public int status;
-    public String keyword;
+    public String keyword="";
     public int min_price;
     public Integer bidding_count;
     public Integer match_count;
-    public String provide_id;
+    public String provide_id="";
     public double lat;
     public double lon;
 	public sp_GetMyProvides_Result(JSONObject obj)

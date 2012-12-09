@@ -5,13 +5,13 @@ import org.json.JSONException;
 
 public class sp_GetMessageByTime_Result
 {
-    public String message;
-    public String picture_path;
-    public String audio_path;
-    public String video_path;
-    public String written_time;
-    public String writer_id;
-    public String written_time_tick;
+    public String message="";
+    public String picture_path="";
+    public String audio_path="";
+    public String video_path="";
+    public String written_time="";
+    public String writer_id="";
+    public String written_time_tick="";
 	public sp_GetMessageByTime_Result(JSONObject obj)
 	{
 		try {

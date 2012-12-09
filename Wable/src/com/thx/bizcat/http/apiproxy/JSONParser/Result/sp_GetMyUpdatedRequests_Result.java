@@ -7,20 +7,20 @@ public class sp_GetMyUpdatedRequests_Result
 {
     public long id;
     public long user_id;
-    public String title;
-    public String description;
+    public String title="";
+    public String description="";
     public int price;
     public Integer category_id;
-    public String due_date;
+    public String due_date="";
     public double lat;
     public double lon;
     public boolean totwitter;
     public boolean tofacebook;
     public int status;
     public boolean receive_recommend;
-    public String created_time;
+    public String created_time="";
     public boolean deleted;
-    public String modified_time;
+    public String modified_time="";
 	public sp_GetMyUpdatedRequests_Result(JSONObject obj)
 	{
 		try {

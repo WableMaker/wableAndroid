@@ -6,7 +6,7 @@ import org.json.JSONException;
 public class sp_RegisterUser_Result
 {
     public Long userid;
-    public String activation_code;
+    public String activation_code="";
     public Integer cnt;
 	public sp_RegisterUser_Result(JSONObject obj)
 	{

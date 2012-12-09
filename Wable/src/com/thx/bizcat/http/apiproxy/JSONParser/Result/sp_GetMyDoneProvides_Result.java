@@ -5,11 +5,11 @@ import org.json.JSONException;
 
 public class sp_GetMyDoneProvides_Result
 {
-    public String provide_id;
+    public String provide_id="";
     public int min_price;
     public double lat;
     public double lon;
-    public String title;
+    public String title="";
 	public sp_GetMyDoneProvides_Result(JSONObject obj)
 	{
 		try {

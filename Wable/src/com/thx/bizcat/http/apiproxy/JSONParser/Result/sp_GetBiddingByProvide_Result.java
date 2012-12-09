@@ -5,15 +5,15 @@ import org.json.JSONException;
 
 public class sp_GetBiddingByProvide_Result
 {
-    public String bidding_id;
-    public String message;
-    public String picture_path;
-    public String writer_name;
-    public String writer_photo;
-    public String writer_id;
-    public String requester_id;
-    public String requester_photo;
-    public String requester_name;
+    public String bidding_id="";
+    public String message="";
+    public String picture_path="";
+    public String writer_name="";
+    public String writer_photo="";
+    public String writer_id="";
+    public String requester_id="";
+    public String requester_photo="";
+    public String requester_name="";
 	public sp_GetBiddingByProvide_Result(JSONObject obj)
 	{
 		try {

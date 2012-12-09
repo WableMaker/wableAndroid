@@ -5,15 +5,15 @@ import org.json.JSONException;
 
 public class sp_GetProvidesByDistance_Result
 {
-    public String id;
-    public String photo;
+    public String id="";
+    public String photo="";
     public Double distance;
-    public String bidding_id;
+    public String bidding_id="";
     public Integer min_price;
-    public String title;
-    public String name;
-    public String description;
-    public String user_id;
+    public String title="";
+    public String name="";
+    public String description="";
+    public String user_id="";
 	public sp_GetProvidesByDistance_Result(JSONObject obj)
 	{
 		try {

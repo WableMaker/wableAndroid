@@ -6,13 +6,13 @@ import org.json.JSONException;
 public class sp_GetMyRequests_Result
 {
     public int status;
-    public String title;
-    public String description;
-    public String due_date;
+    public String title="";
+    public String description="";
+    public String due_date="";
     public int post_price;
     public Integer bidding_count;
     public Integer match_count;
-    public String request_id;
+    public String request_id="";
     public Double lat;
     public Double lon;
 	public sp_GetMyRequests_Result(JSONObject obj)

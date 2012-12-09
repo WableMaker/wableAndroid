@@ -5,16 +5,16 @@ import org.json.JSONException;
 
 public class sp_GetOtherProvides_Result
 {
-    public String id;
+    public String id="";
     public double lat;
     public double lon;
-    public String name;
+    public String name="";
     public int min_price;
-    public String title;
-    public String description;
-    public String bidding_id;
+    public String title="";
+    public String description="";
+    public String bidding_id="";
     public long user_id;
-    public String photo;
+    public String photo="";
 	public sp_GetOtherProvides_Result(JSONObject obj)
 	{
 		try {

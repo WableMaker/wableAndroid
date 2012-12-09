@@ -5,12 +5,12 @@ import org.json.JSONException;
 
 public class sp_GetMatchByProvide_Result
 {
-    public String matched_time;
-    public String request_id;
-    public String title;
-    public String requester_id;
-    public String requester_name;
-    public String requester_photo;
+    public String matched_time="";
+    public String request_id="";
+    public String title="";
+    public String requester_id="";
+    public String requester_name="";
+    public String requester_photo="";
 	public sp_GetMatchByProvide_Result(JSONObject obj)
 	{
 		try {

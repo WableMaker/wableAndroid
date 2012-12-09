@@ -5,21 +5,21 @@ import org.json.JSONException;
 
 public class sp_GetMySuggestRequests_Result
 {
-    public String bidding_id;
-    public String provide_id;
+    public String bidding_id="";
+    public String provide_id="";
     public boolean providerdelete;
     public int status;
-    public String provide_title;
-    public String provide_description;
+    public String provide_title="";
+    public String provide_description="";
     public int provide_min_price;
-    public String provider_id;
-    public String provider_name;
-    public String provider_photo;
+    public String provider_id="";
+    public String provider_name="";
+    public String provider_photo="";
     public int provide_status;
-    public String message;
-    public String picture_path;
-    public String audio_path;
-    public String video_path;
+    public String message="";
+    public String picture_path="";
+    public String audio_path="";
+    public String video_path="";
 	public sp_GetMySuggestRequests_Result(JSONObject obj)
 	{
 		try {

@@ -6,8 +6,8 @@ import org.json.JSONObject;
 import com.thx.bizcat.util.Logger;
 
 public class sp_LogIn_Result {
-	public String categorytick;
-    public String description;
+	public String categorytick="";
+    public String description="";
 	public sp_LogIn_Result(JSONObject obj)
 	{
 		try {

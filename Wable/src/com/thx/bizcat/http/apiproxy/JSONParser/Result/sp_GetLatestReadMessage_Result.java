@@ -5,10 +5,10 @@ import org.json.JSONException;
 
 public class sp_GetLatestReadMessage_Result
 {
-    public String bidding_id;
-    public String written_time;
-    public String written_tick;
-    public String local_written_time;
+    public String bidding_id="";
+    public String written_time="";
+    public String written_tick="";
+    public String local_written_time="";
 	public sp_GetLatestReadMessage_Result(JSONObject obj)
 	{
 		try {

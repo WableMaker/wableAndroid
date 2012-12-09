@@ -5,18 +5,18 @@ import org.json.JSONException;
 
 public class sp_GetMyProvideByID_Result
 {
-    public String description;
-    public String photo1;
-    public String photo2;
-    public String photo3;
-    public String photo4;
-    public String photo5;
+    public String description="";
+    public String photo1="";
+    public String photo2="";
+    public String photo3="";
+    public String photo4="";
+    public String photo5="";
     public int min_price;
     public double lat;
     public double lon;
     public int status;
     public Integer category_id;
-    public String title;
+    public String title="";
     public int radius;
 	public sp_GetMyProvideByID_Result(JSONObject obj)
 	{

@@ -5,10 +5,10 @@ import org.json.JSONException;
 
 public class sp_GetMyActiveRequests_Result
 {
-    public String request_id;
-    public String title;
-    public String description;
-    public String due_date;
+    public String request_id="";
+    public String title="";
+    public String description="";
+    public String due_date="";
     public double lat;
     public double lon;
     public int status;

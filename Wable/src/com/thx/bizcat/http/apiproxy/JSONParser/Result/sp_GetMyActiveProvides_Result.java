@@ -5,15 +5,15 @@ import org.json.JSONException;
 
 public class sp_GetMyActiveProvides_Result
 {
-    public String provide_id;
+    public String provide_id="";
     public int min_price;
     public double lat;
     public double lon;
     public int status;
     public Integer bidding_count;
-    public String title;
+    public String title="";
     public Integer matching_count;
-    public String description;
+    public String description="";
 	public sp_GetMyActiveProvides_Result(JSONObject obj)
 	{
 		try {

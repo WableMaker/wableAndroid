@@ -5,12 +5,12 @@ import org.json.JSONException;
 
 public class sp_GetMessageByTick_Result
 {
-    public String message;
-    public String picture_path;
-    public String audio_path;
-    public String video_path;
+    public String message="";
+    public String picture_path="";
+    public String audio_path="";
+    public String video_path="";
     public long writer_id;
-    public String written_time;
+    public String written_time="";
 	public sp_GetMessageByTick_Result(JSONObject obj)
 	{
 		try {

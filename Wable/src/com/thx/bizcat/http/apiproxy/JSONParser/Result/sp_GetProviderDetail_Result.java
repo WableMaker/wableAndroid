@@ -5,8 +5,8 @@ import org.json.JSONException;
 
 public class sp_GetProviderDetail_Result
 {
-    public String name;
-    public String introduce;
+    public String name="";
+    public String introduce="";
     public double review_rating;
     public int review_count;
     public Integer provide_count;
@@ -14,12 +14,12 @@ public class sp_GetProviderDetail_Result
     public boolean public_phone;
     public boolean public_email;
     public boolean public_fb;
-    public String fb_user_id;
-    public String fb_oauth_token;
-    public String photo;
-    public String email;
-    public String mobile;
-    public String phone;
+    public String fb_user_id="";
+    public String fb_oauth_token="";
+    public String photo="";
+    public String email="";
+    public String mobile="";
+    public String phone="";
     public boolean is_email_authorized;
     public boolean is_mobile_authorized;
 	public sp_GetProviderDetail_Result(JSONObject obj)

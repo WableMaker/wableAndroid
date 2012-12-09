@@ -5,15 +5,15 @@ import org.json.JSONException;
 
 public class sp_GetOtherProvideByID_Result
 {
-    public String id;
-    public String description;
+    public String id="";
+    public String description="";
     public int min_price;
     public double lat;
     public double lon;
-    public String name;
-    public String title;
-    public String photo;
-    public String user_id;
+    public String name="";
+    public String title="";
+    public String photo="";
+    public String user_id="";
     public int radius;
 	public sp_GetOtherProvideByID_Result(JSONObject obj)
 	{

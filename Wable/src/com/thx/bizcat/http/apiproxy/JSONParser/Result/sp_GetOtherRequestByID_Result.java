@@ -5,16 +5,16 @@ import org.json.JSONException;
 
 public class sp_GetOtherRequestByID_Result
 {
-    public String id;
-    public String title;
-    public String description;
-    public String due_date;
+    public String id="";
+    public String title="";
+    public String description="";
+    public String due_date="";
     public int price;
     public double lat;
     public double lon;
-    public String name;
-    public String photo;
-    public String user_id;
+    public String name="";
+    public String photo="";
+    public String user_id="";
 	public sp_GetOtherRequestByID_Result(JSONObject obj)
 	{
 		try {

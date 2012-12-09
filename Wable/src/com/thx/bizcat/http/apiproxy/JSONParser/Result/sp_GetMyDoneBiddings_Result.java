@@ -5,12 +5,12 @@ import org.json.JSONException;
 
 public class sp_GetMyDoneBiddings_Result
 {
-    public String provider_id;
-    public String requester_id;
-    public String bidding_id;
-    public String completed_time;
-    public String provider_name;
-    public String requester_name;
+    public String provider_id="";
+    public String requester_id="";
+    public String bidding_id="";
+    public String completed_time="";
+    public String provider_name="";
+    public String requester_name="";
 	public sp_GetMyDoneBiddings_Result(JSONObject obj)
 	{
 		try {

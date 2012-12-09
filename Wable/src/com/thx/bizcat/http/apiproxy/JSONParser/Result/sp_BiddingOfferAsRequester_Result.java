@@ -6,8 +6,8 @@ import org.json.JSONObject;
 import com.thx.bizcat.util.Logger;
 
 public class sp_BiddingOfferAsRequester_Result {
-	public String biddingid;
-    public String description;
+	public String biddingid="";
+    public String description="";
     
 	public sp_BiddingOfferAsRequester_Result(JSONObject obj)
 	{

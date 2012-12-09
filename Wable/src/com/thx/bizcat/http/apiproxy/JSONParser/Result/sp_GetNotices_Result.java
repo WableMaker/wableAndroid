@@ -6,8 +6,8 @@ import org.json.JSONException;
 public class sp_GetNotices_Result
 {
     public int id;
-    public String title;
-    public String description;
+    public String title="";
+    public String description="";
 	public sp_GetNotices_Result(JSONObject obj)
 	{
 		try {

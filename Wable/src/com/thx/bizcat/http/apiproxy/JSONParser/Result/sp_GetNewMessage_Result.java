@@ -5,16 +5,16 @@ import org.json.JSONException;
 
 public class sp_GetNewMessage_Result
 {
-    public String bidding_id;
-    public String message;
-    public String picture_path;
-    public String audio_path;
-    public String video_path;
-    public String written_time;
-    public String writer_id;
-    public String read_time;
-    public String local_written_time;
-    public String written_tick;
+    public String bidding_id="";
+    public String message="";
+    public String picture_path="";
+    public String audio_path="";
+    public String video_path="";
+    public String written_time="";
+    public String writer_id="";
+    public String read_time="";
+    public String local_written_time="";
+    public String written_tick="";
 	public sp_GetNewMessage_Result(JSONObject obj)
 	{
 		try {

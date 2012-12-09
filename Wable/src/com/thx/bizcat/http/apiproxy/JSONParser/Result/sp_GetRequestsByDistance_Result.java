@@ -5,16 +5,16 @@ import org.json.JSONException;
 
 public class sp_GetRequestsByDistance_Result
 {
-    public String id;
-    public String title;
-    public String photo;
+    public String id="";
+    public String title="";
+    public String photo="";
     public Double distance;
-    public String due_date;
-    public String bidding_id;
+    public String due_date="";
+    public String bidding_id="";
     public Integer price;
-    public String name;
-    public String description;
-    public String user_id;
+    public String name="";
+    public String description="";
+    public String user_id="";
 	public sp_GetRequestsByDistance_Result(JSONObject obj)
 	{
 		try {

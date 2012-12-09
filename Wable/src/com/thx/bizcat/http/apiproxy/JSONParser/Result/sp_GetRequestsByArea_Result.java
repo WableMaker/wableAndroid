@@ -5,17 +5,17 @@ import org.json.JSONException;
 
 public class sp_GetRequestsByArea_Result
 {
-    public String id;
-    public String title;
-    public String photo;
+    public String id="";
+    public String title="";
+    public String photo="";
     public Double lat;
     public Double lon;
-    public String due_date;
-    public String bidding_id;
+    public String due_date="";
+    public String bidding_id="";
     public int price;
-    public String name;
-    public String description;
-    public String user_id;
+    public String name="";
+    public String description="";
+    public String user_id="";
 	public sp_GetRequestsByArea_Result(JSONObject obj)
 	{
 		try {
