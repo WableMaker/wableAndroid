@@ -1542,8 +1542,6 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		final Map<String,Object> params = new HashMap<String,Object>();
 		params.put("request_id", request_id);
 		
-		
-		
 		new Thread()
 		{
 			@Override
@@ -1552,6 +1550,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				if(!_httpLayer.IsConnectedSession())
 				{
 					if(!Relogin())
+						callback.sendMessage(callback.obtainMessage(APICODE.RequestDelete.toInt(), null));
 						return;
 				}
 				
@@ -1862,6 +1861,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				if(!_httpLayer.IsConnectedSession())
 				{
 					if(!Relogin())
+						callback.sendMessage(callback.obtainMessage(APICODE.RequestOtherDetailById.toInt(), null));
 						return;
 				}
 				
@@ -1979,6 +1979,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				if(!_httpLayer.IsConnectedSession())
 				{
 					if(!Relogin())
+						callback.sendMessage(callback.obtainMessage(APICODE.RequestUpdate.toInt(), null));
 						return;
 				}
 				
@@ -2460,6 +2461,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				if(!_httpLayer.IsConnectedSession())
 				{
 					if(!Relogin())
+						callback.sendMessage(callback.obtainMessage(APICODE.RequestDone.toInt(), null));
 						return;
 				}
 				
