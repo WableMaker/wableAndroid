@@ -8,7 +8,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetOtherProvides_Result;
-import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetOtherRequestByID_Result;
 import com.thx.bizcat.util.Logger;
 
 public class sp_GetOtherProvides_Items extends sp_Simple_Items {

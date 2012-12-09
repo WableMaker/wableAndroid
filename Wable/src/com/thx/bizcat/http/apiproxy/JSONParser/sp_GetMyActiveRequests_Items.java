@@ -3,8 +3,6 @@ package com.thx.bizcat.http.apiproxy.JSONParser;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.os.Parcel;
-import android.os.Parcelable;
 
 import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetMyActiveRequests_Result;
 import com.thx.bizcat.util.Logger;

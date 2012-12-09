@@ -7,8 +7,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetMyActiveProvides_Result;
-import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetMyUpdatedProvides_Result;
 import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetOtherRequests_Result;
 import com.thx.bizcat.util.Logger;
 

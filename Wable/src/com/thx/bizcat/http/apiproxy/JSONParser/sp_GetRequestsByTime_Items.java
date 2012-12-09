@@ -7,7 +7,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetRequestsByArea_Result;
 import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetRequestsByTime_Result;
 import com.thx.bizcat.util.Logger;
 
