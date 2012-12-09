@@ -2573,54 +2573,54 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 
 
-	@Override
-	public boolean MessageGetNewMessage(String lastmsgutctime, final Handler callback) {
-		
-
-		final Map<String,Object> params = new HashMap<String,Object>();
-		params.put("lastmsgutctime", lastmsgutctime);
-		
-		new Thread()
-		{
-			@Override
- 			public void run()
- 			{
-				if(!_httpLayer.IsConnectedSession())
-				{
-					if(!Relogin())
-						return;
-				}
-				
-				String result = _httpLayer.GETSync(_domain+"Message/GetNewMessage", params);
-				 
-				JSONObject obj = null;
-				
-				try
-				{
-					if(result !=null)
-					{
-						obj = new JSONObject(result);
-						if(true == obj.getBoolean("success"))
-							SessionUpdate("MessageGetNewMessage");
-						callback.sendMessage(callback.obtainMessage(APICODE.MessageGetNewMessage.toInt(), obj));
-						return;
-					}
-					
-				}
-				catch(Exception e)
-				{
-					Logger.Instance().Write(e);
-					
-				}
-				
-				callback.sendMessage(callback.obtainMessage(APICODE.MessageGetNewMessage.toInt(), null));
- 			}
-			
-		}.start();
-		
-		
-		return true;
-	}
+//	@Override
+//	public boolean MessageGetNewMessage(String lastmsgutctime, final Handler callback) {
+//		
+//
+//		final Map<String,Object> params = new HashMap<String,Object>();
+//		params.put("lastmsgutctime", lastmsgutctime);
+//		
+//		new Thread()
+//		{
+//			@Override
+// 			public void run()
+// 			{
+//				if(!_httpLayer.IsConnectedSession())
+//				{
+//					if(!Relogin())
+//						return;
+//				}
+//				
+//				String result = _httpLayer.GETSync(_domain+"Message/GetNewMessage", params);
+//				 
+//				JSONObject obj = null;
+//				
+//				try
+//				{
+//					if(result !=null)
+//					{
+//						obj = new JSONObject(result);
+//						if(true == obj.getBoolean("success"))
+//							SessionUpdate("MessageGetNewMessage");
+//						callback.sendMessage(callback.obtainMessage(APICODE.MessageGetNewMessage.toInt(), obj));
+//						return;
+//					}
+//					
+//				}
+//				catch(Exception e)
+//				{
+//					Logger.Instance().Write(e);
+//					
+//				}
+//				
+//				callback.sendMessage(callback.obtainMessage(APICODE.MessageGetNewMessage.toInt(), null));
+// 			}
+//			
+//		}.start();
+//		
+//		
+//		return true;
+//	}
 
 
 

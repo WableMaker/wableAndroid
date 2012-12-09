@@ -877,7 +877,9 @@ public interface IAPIProxyLayer {
     //public boolean bsuccess =false;
     //public ResultCode resultCode = ResultCode .NONE;
 	boolean MessageGet(String biddingid,String lastmsgutctick,Handler callback);
-	boolean MessageGetNewMessage(String lastmsgutctime,Handler callback);
+
+	
+//	boolean MessageGetNewMessage(String lastmsgutctime,Handler callback);
 	
 
 	
