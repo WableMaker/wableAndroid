@@ -2335,6 +2335,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				if(!_httpLayer.IsConnectedSession())
 				{
 					if(!Relogin())
+						callback.sendMessage(callback.obtainMessage(APICODE.UserUpdate.toInt(), null));
 						return;
 				}
 				
@@ -2349,7 +2350,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("UserUpdate");
-						callback.sendMessage(callback.obtainMessage(APICODE.UserUpdate.toInt(), obj));
+						sp_Simple_Items item = new sp_Simple_Items(obj); 
+						callback.sendMessage(callback.obtainMessage(APICODE.UserUpdate.toInt(), item));
 						return;
 					}
 					
@@ -2959,6 +2961,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				if(!_httpLayer.IsConnectedSession())
 				{
 					if(!Relogin())
+						callback.sendMessage(callback.obtainMessage(APICODE.UserEnablePushNotify.toInt(), null));
 						return;
 				}
 				
@@ -2973,7 +2976,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("UserEnablePushNotify");
-						callback.sendMessage(callback.obtainMessage(APICODE.UserEnablePushNotify.toInt(), obj));
+						sp_Simple_Items item = new sp_Simple_Items(obj); 
+						callback.sendMessage(callback.obtainMessage(APICODE.UserEnablePushNotify.toInt(), item));
 						return;
 					}
 					
@@ -3007,6 +3011,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				if(!_httpLayer.IsConnectedSession())
 				{
 					if(!Relogin())
+						callback.sendMessage(callback.obtainMessage(APICODE.UserResetBadgeCount.toInt(), null));
 						return;
 				}
 				
@@ -3021,7 +3026,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("UserResetBadgeCount");
-						callback.sendMessage(callback.obtainMessage(APICODE.UserResetBadgeCount.toInt(), obj));
+						sp_Simple_Items item = new sp_Simple_Items(obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.UserResetBadgeCount.toInt(), item));
 						return;
 					}
 					
@@ -3059,6 +3065,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				if(!_httpLayer.IsConnectedSession())
 				{
 					if(!Relogin())
+						callback.sendMessage(callback.obtainMessage(APICODE.UserSendSMSAuthCode.toInt(), null));
 						return;
 				}
 				
@@ -3073,7 +3080,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("UserSendSMSAuthCode");
-						callback.sendMessage(callback.obtainMessage(APICODE.UserSendSMSAuthCode.toInt(), obj));
+						sp_Simple_Items item = new sp_Simple_Items(obj); 
+						callback.sendMessage(callback.obtainMessage(APICODE.UserSendSMSAuthCode.toInt(), item));
 						return;
 					}
 					
@@ -3094,7 +3102,6 @@ public class APIProxyLayer implements IAPIProxyLayer {
 	}
 
 
-
 	@Override
 	public boolean UserAuthorizedMobile(String mobile,
 			final Handler callback) {
@@ -3110,6 +3117,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				if(!_httpLayer.IsConnectedSession())
 				{
 					if(!Relogin())
+						callback.sendMessage(callback.obtainMessage(APICODE.UserAuthorizedMobile.toInt(), null));
 						return;
 				}
 				
@@ -3124,7 +3132,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("UserAuthorizedMobile");
-						callback.sendMessage(callback.obtainMessage(APICODE.UserAuthorizedMobile.toInt(), obj));
+						sp_Simple_Items item = new sp_Simple_Items(obj); 
+						callback.sendMessage(callback.obtainMessage(APICODE.UserAuthorizedMobile.toInt(), item));
 						return;
 					}
 					
@@ -3518,9 +3527,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 	@Override
 	public boolean UserDeletePhoto(final Handler callback) {
-		 
-		
-		
+
 		new Thread()
 		{
 			@Override
@@ -3529,6 +3536,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				if(!_httpLayer.IsConnectedSession())
 				{
 					if(!Relogin())
+						callback.sendMessage(callback.obtainMessage(APICODE.UserDeletePhoto.toInt(), null));
 						return;
 				}
 				
@@ -3543,7 +3551,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("UserDeletePhoto");
-						callback.sendMessage(callback.obtainMessage(APICODE.UserDeletePhoto.toInt(), obj));
+						sp_Simple_Items item = new sp_Simple_Items(obj); 
+						callback.sendMessage(callback.obtainMessage(APICODE.UserDeletePhoto.toInt(), item));
 						return;
 					}
 					

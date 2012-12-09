@@ -194,13 +194,110 @@ public interface IAPIProxyLayer {
 	
 	// [start] User
 	
+	//반환 클래스 class sp_MyInfo_Items
+	//호출 오류시
+	//null
+	//
+	//성공시
+	//public sp_GetUserInfo_Result result = 내용;
+	//public boolean bsuccess =true;
+	//public ResultCode resultCode = ResultCode .NONE;
+	//
+	//실패시
+	//public sp_GetUserInfo_Result result = null;
+	//public boolean bsuccess =false;
+	//public ResultCode resultCode = 실패사유;
+	//
+	//서버호출 실패시
+	//public sp_GetUserInfo_Result result = null;
+	//public boolean bsuccess =false;
+	//public ResultCode resultCode = ResultCode .NONE;
 	boolean MyInfo(Handler callback);
+	
+	//반환 클래스 class sp_Simple_Items
+	//호출 오류시
+	//null
+	//
+	//성공시
+	//public boolean bsuccess =true;
+	//public ResultCode resultCode = ResultCode .NONE;
+	//
+	//실패시
+	//public boolean bsuccess =false;
+	//public ResultCode resultCode = 실패사유;
+	//
+	//서버호출 실패시
+	//public boolean bsuccess =false;
+	//public ResultCode resultCode = ResultCode .NONE;	
 	boolean UserUpdate(String name, String introduce,String photo, Boolean publicfb, Boolean publictwitter,
 			Boolean publicemail, Boolean publicmobile, Boolean publicphone,Handler callback);
 	
+	//반환 클래스 class sp_Simple_Items
+	//호출 오류시
+	//null
+	//
+	//성공시
+	//public boolean bsuccess =true;
+	//public ResultCode resultCode = ResultCode .NONE;
+	//
+	//실패시
+	//public boolean bsuccess =false;
+	//public ResultCode resultCode = 실패사유;
+	//
+	//서버호출 실패시
+	//public boolean bsuccess =false;
+	//public ResultCode resultCode = ResultCode .NONE;	
 	boolean UserEnablePushNotify(Time starttime, Time endtime,Handler callback);
+
+	//반환 클래스 class sp_Simple_Items
+	//호출 오류시
+	//null
+	//
+	//성공시
+	//public boolean bsuccess =true;
+	//public ResultCode resultCode = ResultCode .NONE;
+	//
+	//실패시
+	//public boolean bsuccess =false;
+	//public ResultCode resultCode = 실패사유;
+	//
+	//서버호출 실패시
+	//public boolean bsuccess =false;
+	//public ResultCode resultCode = ResultCode .NONE;		
 	boolean UserResetBadgeCount(Handler callback);
+	
+	//반환 클래스 class sp_Simple_Items
+	//호출 오류시
+	//null
+	//
+	//성공시
+	//public boolean bsuccess =true;
+	//public ResultCode resultCode = ResultCode .NONE;
+	//
+	//실패시
+	//public boolean bsuccess =false;
+	//public ResultCode resultCode = 실패사유;
+	//
+	//서버호출 실패시
+	//public boolean bsuccess =false;
+	//public ResultCode resultCode = ResultCode .NONE;		
 	boolean UserSendSMSAuthCode(String mobile, String code,Handler callback);
+
+	//반환 클래스 class sp_Simple_Items
+	//호출 오류시
+	//null
+	//
+	//성공시
+	//public boolean bsuccess =true;
+	//public ResultCode resultCode = ResultCode .NONE;
+	//
+	//실패시
+	//public boolean bsuccess =false;
+	//public ResultCode resultCode = 실패사유;
+	//
+	//서버호출 실패시
+	//public boolean bsuccess =false;
+	//public ResultCode resultCode = ResultCode .NONE;		
 	boolean UserAuthorizedMobile(String mobile, Handler callback);
 	
 	//반환 클래스 class sp_GetProviderDetail_Items
@@ -296,6 +393,22 @@ public interface IAPIProxyLayer {
             , String BiddingMessageRecentSyncTime
             , String EndBiddingRecentSyncTime
             , String EndBiddingMessageRecentSyncTime, Handler callback);
+
+	//반환 클래스 class sp_Simple_Items
+	//호출 오류시
+	//null
+	//
+	//성공시
+	//public boolean bsuccess =true;
+	//public ResultCode resultCode = ResultCode .NONE;
+	//
+	//실패시
+	//public boolean bsuccess =false;
+	//public ResultCode resultCode = 실패사유;
+	//
+	//서버호출 실패시
+	//public boolean bsuccess =false;
+	//public ResultCode resultCode = ResultCode .NONE;	
 	boolean UserDeletePhoto(Handler callback);
 	// [end]
 		
