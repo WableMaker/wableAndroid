@@ -19,6 +19,7 @@ import com.thx.bizcat.http.IHttpConnectionLayer;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_BiddingOfferAsProvider_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_BiddingOfferAsRequester_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetMessage_Items;
+import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetMyProvideByID_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetMyProvides_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetOtherProvideByID_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetOtherProvides_Items;
@@ -1497,7 +1498,11 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				if(!_httpLayer.IsConnectedSession())
 				{
 					if(!Relogin())
+					{
+						callback.sendMessage(callback.obtainMessage(APICODE.MessageSendText.toInt(), null));
+
 						return;
+					}
 				}
 				
 				String result = _httpLayer.POSTSync(_domain+"Message/SetMessage", params);
@@ -1657,7 +1662,10 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				if(!_httpLayer.IsConnectedSession())
 				{
 					if(!Relogin())
+					{
+						callback.sendMessage(callback.obtainMessage(APICODE.MessageGet.toInt(), null));
 						return;
+					}
 				}
 				
 				String result = _httpLayer.GETSync(_domain+"Message/GetMessage", params);
@@ -1671,7 +1679,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("MessageGet");
-						callback.sendMessage(callback.obtainMessage(APICODE.MessageGet.toInt(), obj));
+						sp_GetMessage_Items item = new sp_GetMessage_Items(obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.MessageGet.toInt(), item));
 						return;
 					}
 					
@@ -1759,7 +1768,11 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				if(!_httpLayer.IsConnectedSession())
 				{
 					if(!Relogin())
+					{
+						callback.sendMessage(callback.obtainMessage(APICODE.ProvideMyDetailById.toInt(), null));
+
 						return;
+					}
 				}
 				
 				String result = _httpLayer.GETSync(_domain+"Provide/MyDetailById", params);
@@ -1773,7 +1786,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("ProvideMyDetailById");
-						callback.sendMessage(callback.obtainMessage(APICODE.ProvideMyDetailById.toInt(), obj));
+						sp_GetMyProvideByID_Items item = new sp_GetMyProvideByID_Items(obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.ProvideMyDetailById.toInt(), item));
 						return;
 					}
 					
@@ -1812,8 +1826,12 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				if(!_httpLayer.IsConnectedSession())
 				{
 					if(!Relogin())
+					{
+						callback.sendMessage(callback.obtainMessage(APICODE.MessageSendImage.toInt(), null));
 						return;
+					}
 				}
+					
 				
 				String result = _httpLayer.POSTFileSync(_domain+"Provide/MyDetailById", params,files);
 				 
@@ -1826,7 +1844,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("Message/SetImage");
-						callback.sendMessage(callback.obtainMessage(APICODE.MessageSendImage.toInt(), obj));
+						sp_GetMessage_Items item = new sp_GetMessage_Items(obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.MessageSendImage.toInt(), item));
 						return;
 					}
 					
@@ -2145,7 +2164,10 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				if(!_httpLayer.IsConnectedSession())
 				{
 					if(!Relogin())
+					{
+						callback.sendMessage(callback.obtainMessage(APICODE.MessageSendAudio.toInt(), null));
 						return;
+					}
 				}
 				
 				String result = _httpLayer.POSTFileSync(_domain+"Message/SetAudio", params,files);
@@ -2159,7 +2181,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("Message/SetAudio");
-						callback.sendMessage(callback.obtainMessage(APICODE.MessageSendAudio.toInt(), obj));
+						sp_GetMessage_Items item = new sp_GetMessage_Items(obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.MessageSendAudio.toInt(), item));
 						return;
 					}
 					
@@ -2199,7 +2222,10 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				if(!_httpLayer.IsConnectedSession())
 				{
 					if(!Relogin())
+					{
+						callback.sendMessage(callback.obtainMessage(APICODE.MessageSendVideo.toInt(), null));
 						return;
+					}
 				}
 				
 				String result = _httpLayer.POSTFileSync(_domain+"Message/SetVideo", params,files);
@@ -2213,7 +2239,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("Message/SetVideo");
-						callback.sendMessage(callback.obtainMessage(APICODE.MessageSendVideo.toInt(), obj));
+						sp_GetMessage_Items item = new sp_GetMessage_Items(obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.MessageSendVideo.toInt(), item));
 						return;
 					}
 					
@@ -2548,54 +2575,54 @@ public class APIProxyLayer implements IAPIProxyLayer {
 
 
 
-	@Override
-	public boolean MessageGetNewMessage(String lastmsgutctime, final Handler callback) {
-		
-
-		final Map<String,Object> params = new HashMap<String,Object>();
-		params.put("lastmsgutctime", lastmsgutctime);
-		
-		new Thread()
-		{
-			@Override
- 			public void run()
- 			{
-				if(!_httpLayer.IsConnectedSession())
-				{
-					if(!Relogin())
-						return;
-				}
-				
-				String result = _httpLayer.GETSync(_domain+"Message/GetNewMessage", params);
-				 
-				JSONObject obj = null;
-				
-				try
-				{
-					if(result !=null)
-					{
-						obj = new JSONObject(result);
-						if(true == obj.getBoolean("success"))
-							SessionUpdate("MessageGetNewMessage");
-						callback.sendMessage(callback.obtainMessage(APICODE.MessageGetNewMessage.toInt(), obj));
-						return;
-					}
-					
-				}
-				catch(Exception e)
-				{
-					Logger.Instance().Write(e);
-					
-				}
-				
-				callback.sendMessage(callback.obtainMessage(APICODE.MessageGetNewMessage.toInt(), null));
- 			}
-			
-		}.start();
-		
-		
-		return true;
-	}
+//	@Override
+//	public boolean MessageGetNewMessage(String lastmsgutctime, final Handler callback) {
+//		
+//
+//		final Map<String,Object> params = new HashMap<String,Object>();
+//		params.put("lastmsgutctime", lastmsgutctime);
+//		
+//		new Thread()
+//		{
+//			@Override
+// 			public void run()
+// 			{
+//				if(!_httpLayer.IsConnectedSession())
+//				{
+//					if(!Relogin())
+//						return;
+//				}
+//				
+//				String result = _httpLayer.GETSync(_domain+"Message/GetNewMessage", params);
+//				 
+//				JSONObject obj = null;
+//				
+//				try
+//				{
+//					if(result !=null)
+//					{
+//						obj = new JSONObject(result);
+//						if(true == obj.getBoolean("success"))
+//							SessionUpdate("MessageGetNewMessage");
+//						callback.sendMessage(callback.obtainMessage(APICODE.MessageGetNewMessage.toInt(), obj));
+//						return;
+//					}
+//					
+//				}
+//				catch(Exception e)
+//				{
+//					Logger.Instance().Write(e);
+//					
+//				}
+//				
+//				callback.sendMessage(callback.obtainMessage(APICODE.MessageGetNewMessage.toInt(), null));
+// 			}
+//			
+//		}.start();
+//		
+//		
+//		return true;
+//	}
 
 
 
