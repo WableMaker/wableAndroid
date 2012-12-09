@@ -1391,6 +1391,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				if(!_httpLayer.IsConnectedSession())
 				{
 					if(!Relogin())
+						callback.sendMessage(callback.obtainMessage(APICODE.BiddingOfferAsProvider.toInt(), null));
 						return;
 				}
 				
@@ -1446,6 +1447,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				if(!_httpLayer.IsConnectedSession())
 				{
 					if(!Relogin())
+						callback.sendMessage(callback.obtainMessage(APICODE.BiddingOfferAsRequester.toInt(), null));
 						return;
 				}
 				
@@ -1610,6 +1612,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				if(!_httpLayer.IsConnectedSession())
 				{
 					if(!Relogin())
+						callback.sendMessage(callback.obtainMessage(APICODE.ProvideDelete.toInt(), null));
 						return;
 				}
 				
@@ -1719,6 +1722,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				if(!_httpLayer.IsConnectedSession())
 				{
 					if(!Relogin())
+						callback.sendMessage(callback.obtainMessage(APICODE.RequestMyDetailById.toInt(), null));
 						return;
 				}
 				
@@ -2800,6 +2804,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				if(!_httpLayer.IsConnectedSession())
 				{
 					if(!Relogin())
+						callback.sendMessage(callback.obtainMessage(APICODE.BiddingDecideProvider.toInt(), null));
 						return;
 				}
 				
@@ -2854,6 +2859,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				if(!_httpLayer.IsConnectedSession())
 				{
 					if(!Relogin())
+						callback.sendMessage(callback.obtainMessage(APICODE.BiddingDecideRequester.toInt(), null));
 						return;
 				}
 				
@@ -2907,6 +2913,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				if(!_httpLayer.IsConnectedSession())
 				{
 					if(!Relogin())
+						callback.sendMessage(callback.obtainMessage(APICODE.BiddingDelete.toInt(), null));
 						return;
 				}
 				

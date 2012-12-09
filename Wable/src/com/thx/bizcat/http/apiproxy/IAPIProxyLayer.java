@@ -1,19 +1,6 @@
 package com.thx.bizcat.http.apiproxy;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-
-import com.thx.bizcat.http.apiproxy.JSONParser.ResultCode;
-import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetRequestsByDistance_Items;
-import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_CompatiableAppVersion_Result;
-import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetBiddingByRequest_Result;
-import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetMatchByRequest_Result;
-import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetMyActiveRequests_Result;
-import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetMyRequestByID_Result;
-import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetMySuggestRequests_Result;
-import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetOtherProvides_Result;
-import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetOtherRequests_Result;
 
 import android.os.Handler;
 import android.text.format.Time;
