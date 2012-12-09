@@ -3,7 +3,6 @@ package com.thx.bizcat.http.apiproxy.JSONParser;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_LogIn_Result;
 import com.thx.bizcat.util.Logger;
 
 public class sp_Simple_Items {
