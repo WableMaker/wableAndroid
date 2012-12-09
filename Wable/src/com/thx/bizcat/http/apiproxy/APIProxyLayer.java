@@ -2318,108 +2318,108 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		return true;
 	}
 
-	@Override
-	public boolean BiddingListAsProvider(String last_bidding_id,
-			final Handler callback) {
-		
-		
-		final Map<String,Object> params = new HashMap<String,Object>();
-		params.put("last_bidding_id", last_bidding_id);
-		
-		
-		new Thread()
-		{
-			@Override
- 			public void run()
- 			{
-				if(!_httpLayer.IsConnectedSession())
-				{
-					if(!Relogin())
-						return;
-				}
-				
-				String result = _httpLayer.GETSync(_domain+"Bidding/ListAsProvider", params);
-				 
-				JSONObject obj = null;
-				
-				try
-				{
-					if(result !=null)
-					{
-						obj = new JSONObject(result);
-						if(true == obj.getBoolean("success"))
-							SessionUpdate("BiddingListAsProvider");
-						callback.sendMessage(callback.obtainMessage(APICODE.BiddingListAsProvider.toInt(), obj));
-						return;
-					}
-					
-				}
-				catch(Exception e)
-				{
-					Logger.Instance().Write(e);
-					
-				}
-				
-				callback.sendMessage(callback.obtainMessage(APICODE.BiddingListAsProvider.toInt(), null));
- 			}
-			
-		}.start();
-
-		return true;
-	}
-
-
-
-	@Override
-	public boolean BiddingListAsRequester(String last_bidding_id,
-			final Handler callback) {
-		
-
-		
-		final Map<String,Object> params = new HashMap<String,Object>();
-		params.put("last_bidding_id", last_bidding_id);
-		
-		
-		new Thread()
-		{
-			@Override
- 			public void run()
- 			{
-				if(!_httpLayer.IsConnectedSession())
-				{
-					if(!Relogin())
-						return;
-				}
-				
-				String result = _httpLayer.GETSync(_domain+"Bidding/ListAsRequester", params);
-				 
-				JSONObject obj = null;
-				
-				try
-				{
-					if(result !=null)
-					{
-						obj = new JSONObject(result);
-						if(true == obj.getBoolean("success"))
-							SessionUpdate("BiddingListAsRequester");
-						callback.sendMessage(callback.obtainMessage(APICODE.BiddingListAsRequester.toInt(), obj));
-						return;
-					}
-					
-				}
-				catch(Exception e)
-				{
-					Logger.Instance().Write(e);
-					
-				}
-				
-				callback.sendMessage(callback.obtainMessage(APICODE.BiddingListAsRequester.toInt(), null));
- 			}
-			
-		}.start();
-		
-		return true;
-	}
+//	@Override
+//	public boolean BiddingListAsProvider(String last_bidding_id,
+//			final Handler callback) {
+//		
+//		
+//		final Map<String,Object> params = new HashMap<String,Object>();
+//		params.put("last_bidding_id", last_bidding_id);
+//		
+//		
+//		new Thread()
+//		{
+//			@Override
+// 			public void run()
+// 			{
+//				if(!_httpLayer.IsConnectedSession())
+//				{
+//					if(!Relogin())
+//						return;
+//				}
+//				
+//				String result = _httpLayer.GETSync(_domain+"Bidding/ListAsProvider", params);
+//				 
+//				JSONObject obj = null;
+//				
+//				try
+//				{
+//					if(result !=null)
+//					{
+//						obj = new JSONObject(result);
+//						if(true == obj.getBoolean("success"))
+//							SessionUpdate("BiddingListAsProvider");
+//						callback.sendMessage(callback.obtainMessage(APICODE.BiddingListAsProvider.toInt(), obj));
+//						return;
+//					}
+//					
+//				}
+//				catch(Exception e)
+//				{
+//					Logger.Instance().Write(e);
+//					
+//				}
+//				
+//				callback.sendMessage(callback.obtainMessage(APICODE.BiddingListAsProvider.toInt(), null));
+// 			}
+//			
+//		}.start();
+//
+//		return true;
+//	}
+//
+//
+//
+//	@Override
+//	public boolean BiddingListAsRequester(String last_bidding_id,
+//			final Handler callback) {
+//		
+//
+//		
+//		final Map<String,Object> params = new HashMap<String,Object>();
+//		params.put("last_bidding_id", last_bidding_id);
+//		
+//		
+//		new Thread()
+//		{
+//			@Override
+// 			public void run()
+// 			{
+//				if(!_httpLayer.IsConnectedSession())
+//				{
+//					if(!Relogin())
+//						return;
+//				}
+//				
+//				String result = _httpLayer.GETSync(_domain+"Bidding/ListAsRequester", params);
+//				 
+//				JSONObject obj = null;
+//				
+//				try
+//				{
+//					if(result !=null)
+//					{
+//						obj = new JSONObject(result);
+//						if(true == obj.getBoolean("success"))
+//							SessionUpdate("BiddingListAsRequester");
+//						callback.sendMessage(callback.obtainMessage(APICODE.BiddingListAsRequester.toInt(), obj));
+//						return;
+//					}
+//					
+//				}
+//				catch(Exception e)
+//				{
+//					Logger.Instance().Write(e);
+//					
+//				}
+//				
+//				callback.sendMessage(callback.obtainMessage(APICODE.BiddingListAsRequester.toInt(), null));
+// 			}
+//			
+//		}.start();
+//		
+//		return true;
+//	}
 
 
 //	@Override

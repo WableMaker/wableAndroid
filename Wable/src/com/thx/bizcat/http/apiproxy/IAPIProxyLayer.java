@@ -735,8 +735,8 @@ public interface IAPIProxyLayer {
     //public ResultCode resultCode = ResultCode .NONE;
 	boolean BiddingOfferAsRequester(String request_id,String provide_id, Handler callback);
 
-	boolean BiddingListAsProvider(String last_bidding_id,Handler callback);
-	boolean BiddingListAsRequester(String last_bidding_id,Handler callback);
+//	boolean BiddingListAsProvider(String last_bidding_id,Handler callback);
+//	boolean BiddingListAsRequester(String last_bidding_id,Handler callback);
 	boolean BiddingRating(String bidding_id,String other_id, int rating,String description,Handler callback);
 	
 	//반환 클래스 class sp_Simple_Items
