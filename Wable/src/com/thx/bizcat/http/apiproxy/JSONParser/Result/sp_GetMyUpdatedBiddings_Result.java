@@ -13,7 +13,7 @@ public class sp_GetMyUpdatedBiddings_Result
     public int request_price;
     public int provide_price;
     public String created_time="";
-    public Integer settled_price;
+    public int settled_price;
     public int status;
     public Boolean requesteraccept;
     public Boolean provideraccept;
@@ -27,11 +27,11 @@ public class sp_GetMyUpdatedBiddings_Result
     public String other_user_name="";
     public String other_title="";
     public String other_description="";
-    public Integer other_price;
+    public int other_price;
     public String other_user_photo="";
-    public Integer provide_status;
+    public int provide_status;
     public Boolean provide_deleted;
-    public Integer request_status;
+    public int request_status;
     public Boolean request_deleted;
 	public sp_GetMyUpdatedBiddings_Result(JSONObject obj)
 	{

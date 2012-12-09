@@ -10,7 +10,7 @@ public class sp_GetCategory_Result
     public String description="";
     public int price;
     public String photo="";
-    public Integer parent_id;
+    public int parent_id;
     public String due_time="";
     public int type;
     public int order;

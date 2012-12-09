@@ -12,9 +12,9 @@ public class sp_GetMyActiveRequests_Result
     public double lat;
     public double lon;
     public int status;
-    public Integer bidding_count;
+    public int bidding_count;
     public int price;
-    public Integer matching_count;
+    public int matching_count;
 	public sp_GetMyActiveRequests_Result(JSONObject obj)
 	{
 		try {

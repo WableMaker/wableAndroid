@@ -6,7 +6,7 @@ import org.json.JSONObject;
 import com.thx.bizcat.util.Logger;
 
 public class sp_LatestAppVersion_Result {
-	public String latestAppVersion;
+	public String latestAppVersion="";
 	
 	public sp_LatestAppVersion_Result(JSONObject obj)
 	{

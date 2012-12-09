@@ -10,7 +10,7 @@ public class sp_GetMyUpdatedRequests_Result
     public String title="";
     public String description="";
     public int price;
-    public Integer category_id;
+    public int category_id;
     public String due_date="";
     public double lat;
     public double lon;

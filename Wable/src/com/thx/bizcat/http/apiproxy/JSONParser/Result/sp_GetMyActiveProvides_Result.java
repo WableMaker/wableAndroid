@@ -10,9 +10,9 @@ public class sp_GetMyActiveProvides_Result
     public double lat;
     public double lon;
     public int status;
-    public Integer bidding_count;
+    public int bidding_count;
     public String title="";
-    public Integer matching_count;
+    public int matching_count;
     public String description="";
 	public sp_GetMyActiveProvides_Result(JSONObject obj)
 	{

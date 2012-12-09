@@ -11,7 +11,7 @@ public class sp_GetMyRequestByID_Result
     public int status;
     public double lat;
     public double lon;
-    public Integer category_id;
+    public int category_id;
     public int price;
 	public sp_GetMyRequestByID_Result(JSONObject obj)
 	{
