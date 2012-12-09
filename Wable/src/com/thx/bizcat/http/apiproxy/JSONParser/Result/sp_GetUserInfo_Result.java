@@ -29,7 +29,7 @@ public class sp_GetUserInfo_Result
     public int review_count;
     public String fb_user_id="";
     public String fb_oauth_token="";
-    public long id;
+    public String id;
 	public sp_GetUserInfo_Result(JSONObject obj)
 	{
 		try {
@@ -107,7 +107,7 @@ public class sp_GetUserInfo_Result
 		fb_oauth_token= obj.getString("fb_oauth_token");
 
 	if(!obj.isNull("id"))
-		id= obj.getLong("id");
+		id= obj.getString("id");
 
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
