@@ -59,7 +59,7 @@ class SqlHelper extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase db) {
 		
 		/* 테이블 생성자 */ 		
-		//Sqlite DataType v3.0 INTEGER, TEXT,	NONE, REAL,	NUMERIC
+		//Sqlite DataType v3.0 INTEGER, TEXT, NONE, REAL, NUMERIC
 		
 		// Request Table
 		db.execSQL("CREATE TABLE request "		   
@@ -75,19 +75,23 @@ class SqlHelper extends SQLiteOpenHelper {
 		
 		// Match Table
 		db.execSQL("CREATE TABLE match "
-				+"( request_id INTEGER PRIMARY KEY, provide_id INTEGER PRIMARY KEY, matched_time TEXT, status INTEGER," +
+				+"(_id INTEGER PRIMARY KEY, request_id INTEGER, provide_id INTEGER, matched_time TEXT, status INTEGER," +
 				"recommend INTEGER, other_user_id INTEGER, other_title TEXT, other_description TEXT, other_price INTEGER," +
 				"other_user_photo TEXT, other_user_name TEXT, deleted INTEGER, modified_time TEXT);");
 		
 		// Bidding Table 
 		db.execSQL("CREATE TABLE bidding "
-				+"( bidding_id INTEGER PRIMARY KEY, requester_id INTEGER, provider_id INTEGER, request_id INTEGER, provide_id INTEGER," +
+				+"(_id INTEGER PRIMARY KEY AUTOINCREMENT, bidding_id INTEGER, requester_id INTEGER, provider_id INTEGER, request_id INTEGER, provide_id INTEGER," +
 				"request_price INTEGER, provide_price INTEGER, created_time TEXT, settled_price INTEGER, status INTEGER," +
 				"requesteraccept INTEGER, provideraccept INTEGER, requesterdelete INTEGER, providerdelete INTEGER," +
 				"approved_time TEXT, completed_time TEXT, requesteraccept_time TEXT, provideraccept_time TEXT, modified_time TEXT," +
 				"other_user_name TEXT, other_title TEXT, other_description TEXT, other_price INTEGER, other_user_photo TEXT, " +
 				"provide_status INTEGER, provide_deleted INTEGER, request_status INTEGER, request_deleted INTEGER);");
 		
+		// chat Table
+		db.execSQL("CREATE TABLE chat "
+				+"(_id INTEGER PRIMARY KEY AUTOINCREMENT, bidding_id INTEGER, writer_id INTEGER, msg TEXT, tick TEXT, is_read INTEGER, state INTEGER," +
+				"audio TEXT, video TEXT, picture TEXT);");
 		
 		// Chat Table
 		//db.execSQL("CREATE TABLE chat "
@@ -110,6 +114,9 @@ class SqlHelper extends SQLiteOpenHelper {
 	public void Reset(SQLiteDatabase db) {
 		db.execSQL("DROP TABLE IF EXISTS request");
 		db.execSQL("DROP TABLE IF EXISTS provide");
+		db.execSQL("DROP TABLE IF EXISTS match");
+		db.execSQL("DROP TABLE IF EXISTS bidding");
+		db.execSQL("DROP TABLE IF EXISTS chat");
 		onCreate(db);
 	}
 	

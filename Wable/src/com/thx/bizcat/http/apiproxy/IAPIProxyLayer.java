@@ -136,9 +136,57 @@ public interface IAPIProxyLayer {
     //public boolean bsuccess =false;
     //public ResultCode resultCode = ResultCode .NONE;	
 	boolean FBconnect(String fb_uid,String oauth_token, Handler callback);//�α��� �õ�
-	boolean AccountResetPassword(String loginid, String email,String mobile, Handler callback);//패스워드 초기화
+	//반환 클래스 sp_AccountResetPassword_Items
+	//호출 오류시
+	//null
+	//
+	//성공시
+	//public sp_AccountResetPassword_Result result=정보;
+	//public boolean bsuccess =true;
+	//public ResultCode resultCode = ResultCode .NONE;
+	//
+	//실패시
+	//public sp_AccountResetPassword_Result result=null;
+	//public boolean bsuccess =false;
+	//public ResultCode resultCode = 실패사유;
+	//
+	//서버호출 실패시
+	//public sp_AccountResetPassword_Result result=null;
+	//public boolean bsuccess =false;
+	//public ResultCode resultCode = ResultCode .NONE;	
+	boolean AccountResetPassword(String loginid, String email,String mobile, Handler callback);
 	boolean AccountResendActivation(Handler callback);//이메일 인증 다시 보내기
+	//반환 클래스 class sp_Simple_Items
+	//호출 오류시
+	//null
+	//
+	//성공시
+	//public boolean bsuccess =true;
+	//public ResultCode resultCode = ResultCode .NONE;
+	//
+	//실패시
+	//public boolean bsuccess =false;
+	//public ResultCode resultCode = 실패사유;
+	//
+	//서버호출 실패시
+	//public boolean bsuccess =false;
+	//public ResultCode resultCode = ResultCode .NONE;	
 	boolean AccountEmailAuthorize(String email,Handler callback);
+	//반환 클래스 class sp_Simple_Items
+	//호출 오류시
+	//null
+	//
+	//성공시
+	//public boolean bsuccess =true;
+	//public ResultCode resultCode = ResultCode .NONE;
+	//
+	//실패시
+	//public boolean bsuccess =false;
+	//public ResultCode resultCode = 실패사유;
+	//
+	//서버호출 실패시
+	//public boolean bsuccess =false;
+	//public ResultCode resultCode = ResultCode .NONE;	
 	boolean AccountChangePassword(String loginid, String oldpassword, String newpassword,Handler callback);
 	
 	// [end]
