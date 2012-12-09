@@ -1498,7 +1498,11 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				if(!_httpLayer.IsConnectedSession())
 				{
 					if(!Relogin())
+					{
+						callback.sendMessage(callback.obtainMessage(APICODE.MessageSendText.toInt(), null));
+
 						return;
+					}
 				}
 				
 				String result = _httpLayer.POSTSync(_domain+"Message/SetMessage", params);
@@ -1819,8 +1823,12 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				if(!_httpLayer.IsConnectedSession())
 				{
 					if(!Relogin())
+					{
+						callback.sendMessage(callback.obtainMessage(APICODE.MessageSendImage.toInt(), null));
 						return;
+					}
 				}
+					
 				
 				String result = _httpLayer.POSTFileSync(_domain+"Provide/MyDetailById", params,files);
 				 
@@ -1833,7 +1841,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("Message/SetImage");
-						callback.sendMessage(callback.obtainMessage(APICODE.MessageSendImage.toInt(), obj));
+						sp_GetMessage_Items item = new sp_GetMessage_Items(obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.MessageSendImage.toInt(), item));
 						return;
 					}
 					
@@ -2150,7 +2159,10 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				if(!_httpLayer.IsConnectedSession())
 				{
 					if(!Relogin())
+					{
+						callback.sendMessage(callback.obtainMessage(APICODE.MessageSendAudio.toInt(), null));
 						return;
+					}
 				}
 				
 				String result = _httpLayer.POSTFileSync(_domain+"Message/SetAudio", params,files);
@@ -2164,7 +2176,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("Message/SetAudio");
-						callback.sendMessage(callback.obtainMessage(APICODE.MessageSendAudio.toInt(), obj));
+						sp_GetMessage_Items item = new sp_GetMessage_Items(obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.MessageSendAudio.toInt(), item));
 						return;
 					}
 					
@@ -2204,7 +2217,10 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				if(!_httpLayer.IsConnectedSession())
 				{
 					if(!Relogin())
+					{
+						callback.sendMessage(callback.obtainMessage(APICODE.MessageSendVideo.toInt(), null));
 						return;
+					}
 				}
 				
 				String result = _httpLayer.POSTFileSync(_domain+"Message/SetVideo", params,files);
@@ -2218,7 +2234,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("Message/SetVideo");
-						callback.sendMessage(callback.obtainMessage(APICODE.MessageSendVideo.toInt(), obj));
+						sp_GetMessage_Items item = new sp_GetMessage_Items(obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.MessageSendVideo.toInt(), item));
 						return;
 					}
 					

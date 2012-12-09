@@ -785,8 +785,74 @@ public interface IAPIProxyLayer {
     //public boolean bsuccess =false;
     //public ResultCode resultCode = ResultCode .NONE;
 	boolean MessageSendText(String biddingid, String message,String lastmsgutctick, String local_written_time,Handler callback);
+
+	//반환 클래스 class sp_GetMessage_Items
+	//호출 오류시
+	//null
+	//
+	//성공시
+	//public List<sp_GetMessage_Result> newmessages = 인자로 넣은 lastmsgutctick이후의 새로운 메시지 ;
+	//public sp_GetLatestReadMessage_Result readmessage = 상대방이 읽은 가장 마지막 메시지
+	//public boolean bsuccess =true;
+    //public ResultCode resultCode = ResultCode .NONE;
+	//
+	//실패시
+	//public List<sp_GetMessage_Result> newmessages =null ;
+	//public sp_GetLatestReadMessage_Result readmessage =null;
+	//public boolean bsuccess =false;
+    //public ResultCode resultCode = 실패사유;
+	//
+	//서버호출 실패시
+	//public List<sp_GetMessage_Result> newmessages =null ;
+	//public sp_GetLatestReadMessage_Result readmessage =null;
+    //public boolean bsuccess =false;
+    //public ResultCode resultCode = ResultCode .NONE;
 	boolean MessageSendImage(String biddingid, String filepath,String lastmsgutctick,Handler callback);
+
+	//반환 클래스 class sp_GetMessage_Items
+	//호출 오류시
+	//null
+	//
+	//성공시
+	//public List<sp_GetMessage_Result> newmessages = 인자로 넣은 lastmsgutctick이후의 새로운 메시지 ;
+	//public sp_GetLatestReadMessage_Result readmessage = 상대방이 읽은 가장 마지막 메시지
+	//public boolean bsuccess =true;
+    //public ResultCode resultCode = ResultCode .NONE;
+	//
+	//실패시
+	//public List<sp_GetMessage_Result> newmessages =null ;
+	//public sp_GetLatestReadMessage_Result readmessage =null;
+	//public boolean bsuccess =false;
+    //public ResultCode resultCode = 실패사유;
+	//
+	//서버호출 실패시
+	//public List<sp_GetMessage_Result> newmessages =null ;
+	//public sp_GetLatestReadMessage_Result readmessage =null;
+    //public boolean bsuccess =false;
+    //public ResultCode resultCode = ResultCode .NONE;
 	boolean MessageSendAudio(String biddingid, String filepath,String lastmsgutctick,Handler callback);
+
+	//반환 클래스 class sp_GetMessage_Items
+	//호출 오류시
+	//null
+	//
+	//성공시
+	//public List<sp_GetMessage_Result> newmessages = 인자로 넣은 lastmsgutctick이후의 새로운 메시지 ;
+	//public sp_GetLatestReadMessage_Result readmessage = 상대방이 읽은 가장 마지막 메시지
+	//public boolean bsuccess =true;
+    //public ResultCode resultCode = ResultCode .NONE;
+	//
+	//실패시
+	//public List<sp_GetMessage_Result> newmessages =null ;
+	//public sp_GetLatestReadMessage_Result readmessage =null;
+	//public boolean bsuccess =false;
+    //public ResultCode resultCode = 실패사유;
+	//
+	//서버호출 실패시
+	//public List<sp_GetMessage_Result> newmessages =null ;
+	//public sp_GetLatestReadMessage_Result readmessage =null;
+    //public boolean bsuccess =false;
+    //public ResultCode resultCode = ResultCode .NONE;
 	boolean MessageSendVideo(String biddingid, String filepath,String lastmsgutctick,Handler callback);
 	
 	boolean MessageGet(String biddingid,String lastmsgutctick,Handler callback);
