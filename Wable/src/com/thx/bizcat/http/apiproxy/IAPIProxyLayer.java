@@ -598,6 +598,24 @@ public interface IAPIProxyLayer {
 	boolean ProvideDelete(String provide_id ,Handler callback);
 	//boolean ProvideDone(String provide_id ,Handler callback);
 	
+	//반환 클래스 class sp_GetMyProvideByID_Items
+	//호출 오류시
+	//null
+	//
+	//성공시
+	//public sp_GetMyProvideByID_Result result : 정보
+	//public boolean bsuccess =true;
+    //public ResultCode resultCode = ResultCode .NONE;
+	//
+	//실패시
+	//public sp_GetMyProvideByID_Result result = null
+	//public boolean bsuccess =false;
+    //public ResultCode resultCode = 실패사유;
+	//
+	//서버호출 실패시
+	//public sp_GetMyProvideByID_Result result = null
+	//public boolean bsuccess =false;
+    //public ResultCode resultCode = ResultCode .NONE;		
 	boolean ProvideMyDetailById(String provide_id ,Handler callback);
 	
 	//반환 클래스 class sp_GetOtherProvideByID_Items

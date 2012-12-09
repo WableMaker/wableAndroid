@@ -19,6 +19,7 @@ import com.thx.bizcat.http.IHttpConnectionLayer;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_BiddingOfferAsProvider_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_BiddingOfferAsRequester_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetMessage_Items;
+import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetMyProvideByID_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetMyProvides_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetOtherProvideByID_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetOtherProvides_Items;
@@ -1760,7 +1761,11 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				if(!_httpLayer.IsConnectedSession())
 				{
 					if(!Relogin())
+					{
+						callback.sendMessage(callback.obtainMessage(APICODE.ProvideMyDetailById.toInt(), null));
+
 						return;
+					}
 				}
 				
 				String result = _httpLayer.GETSync(_domain+"Provide/MyDetailById", params);
@@ -1774,7 +1779,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("ProvideMyDetailById");
-						callback.sendMessage(callback.obtainMessage(APICODE.ProvideMyDetailById.toInt(), obj));
+						sp_GetMyProvideByID_Items item = new sp_GetMyProvideByID_Items(obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.ProvideMyDetailById.toInt(), item));
 						return;
 					}
 					
