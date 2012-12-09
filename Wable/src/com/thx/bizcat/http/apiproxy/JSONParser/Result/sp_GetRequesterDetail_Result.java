@@ -7,7 +7,7 @@ public class sp_GetRequesterDetail_Result
 {
     public String name="";
     public String introduce="";
-    public Integer request_count;
+    public int request_count;
     public boolean public_mobile;
     public boolean public_phone;
     public boolean public_email;

@@ -8,8 +8,8 @@ public class sp_GetMyUpdatedBiddings_Result
     public long requester_id;
     public long provider_id;
     public long bidding_id;
-    public Long request_id;
-    public Long provide_id;
+    public long request_id;
+    public long provide_id;
     public int request_price;
     public int provide_price;
     public String created_time="";

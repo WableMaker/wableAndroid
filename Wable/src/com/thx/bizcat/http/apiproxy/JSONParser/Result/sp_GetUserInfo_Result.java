@@ -10,8 +10,8 @@ public class sp_GetUserInfo_Result
     public boolean blocked;
     public String phone="";
     public String mobile="";
-    public Double pos_lat;
-    public Double pos_lon;
+    public double pos_lat;
+    public double pos_lon;
     public String blocked_info="";
     public String twitter_uid="";
     public String twitter_token="";

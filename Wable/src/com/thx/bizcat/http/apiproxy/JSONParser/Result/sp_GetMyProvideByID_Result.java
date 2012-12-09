@@ -15,7 +15,7 @@ public class sp_GetMyProvideByID_Result
     public double lat;
     public double lon;
     public int status;
-    public Integer category_id;
+    public int category_id;
     public String title="";
     public int radius;
 	public sp_GetMyProvideByID_Result(JSONObject obj)

@@ -14,9 +14,9 @@ public class sp_GetUnnotifieds_Result
     public String sent_time;
     public int priority;
     public int type;
-    public Long bidding_id;
-    public Long provide_id;
-    public Long request_id;
+    public long bidding_id;
+    public long provide_id;
+    public long request_id;
 	public sp_GetUnnotifieds_Result(JSONObject obj)
 	{
 		try {

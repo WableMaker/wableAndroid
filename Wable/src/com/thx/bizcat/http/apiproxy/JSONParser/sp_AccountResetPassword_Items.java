@@ -19,7 +19,7 @@ public class sp_AccountResetPassword_Items {
 			{
 				result = new sp_AccountResetPassword_Result(obj.getJSONObject("data"));
 			}
-			else//�ㅽ뙣�쒕뒗 errorcode�낅젰
+			else//실패시는 errorcode입력
 			{
 				resultCode = ResultCode.valueOf(obj.getString("data"));
 			}

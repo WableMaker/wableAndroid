@@ -6,7 +6,7 @@ import org.json.JSONObject;
 import com.thx.bizcat.util.Logger;
 
 public class sp_AccountResetPassword_Result {
-	public String newpassword;
+	public String newpassword="";
 	
 	public sp_AccountResetPassword_Result(JSONObject obj)
 	{

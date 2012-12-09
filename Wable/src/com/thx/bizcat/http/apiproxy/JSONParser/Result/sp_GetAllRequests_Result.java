@@ -5,8 +5,8 @@ import org.json.JSONException;
 
 public class sp_GetAllRequests_Result
 {
-    public String id;
-    public String user_id;
+    public String id="";
+    public String user_id="";
 	public sp_GetAllRequests_Result(JSONObject obj)
 	{
 		try {

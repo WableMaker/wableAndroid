@@ -6,7 +6,7 @@ import org.json.JSONObject;
 import com.thx.bizcat.util.Logger;
 
 public class sp_CompatiableAppVersion_Result {
-	public String compatibleAppVersion;
+	public String compatibleAppVersion="";
 	
 	public sp_CompatiableAppVersion_Result(JSONObject obj)
 	{
