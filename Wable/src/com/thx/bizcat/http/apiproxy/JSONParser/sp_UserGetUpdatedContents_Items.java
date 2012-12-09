@@ -15,17 +15,17 @@ import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetNewMessage_Result;
 import com.thx.bizcat.util.Logger;
 
 public class sp_UserGetUpdatedContents_Items extends sp_Simple_Items {
-	public List<sp_GetMyUpdatedRequests_Result> newrequests;
-	public List<sp_GetMyUpdatedProvides_Result> newprovides;
-	public List<sp_GetMyUpdatedBiddings_Result> newbiddings;
-	public List<sp_GetNewMessage_Result> newbiddingmessages;
-	public List<sp_GetMyUpdatedMatch_Result> newmatches;
+	public List<sp_GetMyUpdatedRequests_Result> newrequests=new ArrayList<sp_GetMyUpdatedRequests_Result>();
+	public List<sp_GetMyUpdatedProvides_Result> newprovides=new ArrayList<sp_GetMyUpdatedProvides_Result>();
+	public List<sp_GetMyUpdatedBiddings_Result> newbiddings=new ArrayList<sp_GetMyUpdatedBiddings_Result>();
+	public List<sp_GetNewMessage_Result> newbiddingmessages=new ArrayList<sp_GetNewMessage_Result>();
+	public List<sp_GetMyUpdatedMatch_Result> newmatches=new ArrayList<sp_GetMyUpdatedMatch_Result>();
 	
-	public String  last_modified_time_request;
-	public String  last_modified_time_provide;
-	public String  last_modified_time_bidding;
-	public String  last_modified_time_biddingmessage;
-	public String  last_modified_time_match;
+	public String  last_modified_time_request="";
+	public String  last_modified_time_provide="";
+	public String  last_modified_time_bidding="";
+	public String  last_modified_time_biddingmessage="";
+	public String  last_modified_time_match="";
 	
 	public sp_UserGetUpdatedContents_Items(JSONObject obj) {
 		super(obj);
