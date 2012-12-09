@@ -16,11 +16,12 @@ import android.text.format.Time;
 import com.thx.bizcat.http.HttpClientWrapper;
 import com.thx.bizcat.http.HttpURLConnectionWrapper;
 import com.thx.bizcat.http.IHttpConnectionLayer;
+import com.thx.bizcat.http.apiproxy.JSONParser.sp_AccountResetPassword_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_BiddingOfferAsProvider_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_BiddingOfferAsRequester_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetMessage_Items;
+import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetMyActiveRequests_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetMyProvideByID_Items;
-import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetMyProvides_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetOtherProvideByID_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetOtherProvides_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetOtherRequestByID_Items;
@@ -35,7 +36,6 @@ import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetRequestsByDistance_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetRequestsByTime_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_LogIn_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_MyInfo_Items;
-import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetMyActiveRequests_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_RequestMyDetailById_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_Simple_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_UserGetUpdatedContents_Items;
@@ -3180,6 +3180,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				if(!_httpLayer.IsConnectedSession())
 				{
 					if(!Relogin())
+						callback.sendMessage(callback.obtainMessage(APICODE.AccountResetPassword.toInt(), null));
 						return;
 				}
 				
@@ -3194,7 +3195,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("Account/ResetPassword");
-						callback.sendMessage(callback.obtainMessage(APICODE.AccountResetPassword.toInt(), obj));
+						sp_AccountResetPassword_Items item = new sp_AccountResetPassword_Items(obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.AccountResetPassword.toInt(), item));
 						return;
 					}
 					
@@ -3205,15 +3207,12 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					
 				}
 				
-				callback.sendMessage(callback.obtainMessage(APICODE.AccountResetPassword.toInt(), null));
-				
+				callback.sendMessage(callback.obtainMessage(APICODE.AccountResetPassword.toInt(), null));				
  			}
 			
 		}.start();
 		return true;
 	}
-
-
 
 	@Override
 	public boolean AccountResendActivation(final Handler callback) {
@@ -3227,6 +3226,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				if(!_httpLayer.IsConnectedSession())
 				{
 					if(!Relogin())
+						callback.sendMessage(callback.obtainMessage(APICODE.AccountResendActivation.toInt(), null));
 						return;
 				}
 				
@@ -3275,6 +3275,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				if(!_httpLayer.IsConnectedSession())
 				{
 					if(!Relogin())
+						callback.sendMessage(callback.obtainMessage(APICODE.AccountEmailAuthorize.toInt(), null));
 						return;
 				}
 				
@@ -3289,7 +3290,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("AccountEmailAuthorize");
-						callback.sendMessage(callback.obtainMessage(APICODE.AccountEmailAuthorize.toInt(), obj));
+						sp_Simple_Items item = new sp_Simple_Items(obj); 
+						callback.sendMessage(callback.obtainMessage(APICODE.AccountEmailAuthorize.toInt(), item));
 						return;
 					}
 					
@@ -3327,6 +3329,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 				if(!_httpLayer.IsConnectedSession())
 				{
 					if(!Relogin())
+						callback.sendMessage(callback.obtainMessage(APICODE.AccountChangePassword.toInt(), null));
 						return;
 				}
 				
@@ -3341,7 +3344,8 @@ public class APIProxyLayer implements IAPIProxyLayer {
 						obj = new JSONObject(result);
 						if(true == obj.getBoolean("success"))
 							SessionUpdate("AccountChangePassword");
-						callback.sendMessage(callback.obtainMessage(APICODE.AccountChangePassword.toInt(), obj));
+						sp_Simple_Items item = new sp_Simple_Items(obj); 
+						callback.sendMessage(callback.obtainMessage(APICODE.AccountChangePassword.toInt(), item));
 						return;
 					}
 					
