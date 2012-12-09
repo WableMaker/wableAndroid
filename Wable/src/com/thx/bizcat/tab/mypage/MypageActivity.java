@@ -79,18 +79,6 @@ public class MypageActivity extends ActivityGroup  implements OnClickListener, R
 			sp_UserGetUpdatedContents_Items r =(sp_UserGetUpdatedContents_Items) msg.obj;
 			if(r.bsuccess) {
 
-				//r.last_modified_time_bidding
-//				APIProxyLayer.Instance().UserGetUpdatedContents(
-//						RequestRecentSyncTime, 
-//						ProvideRecentSyncTime, 
-//						MatchRecentSyncTime, 
-//						BiddingRecentSyncTime, 
-//						BiddingMessageRecentSyncTime, 
-//						EndBiddingRecentSyncTime, 
-//						EndBiddingMessageRecentSyncTime, 
-//						callback)
-				//listRequest.setAdapter(requestAdapter);
-				
 				LAST_REQUEST = r.last_modified_time_request;
 				LAST_PROVIDE = r.last_modified_time_provide;
 				LAST_MATCH = r.last_modified_time_match;
@@ -105,8 +93,9 @@ public class MypageActivity extends ActivityGroup  implements OnClickListener, R
 				//edit.putString("LAST_BIDDINGMSG", LAST_BIDDINGMSG);
 				//edit.commit();
 				
-				//SqlManager.Reset(context);
+				SqlManager.Reset(context);
 				
+				if(r.newrequests != null)
 				for(sp_GetMyUpdatedRequests_Result item : r.newrequests) {
 					
 					String sql = String.format("REPLACE INTO request (_id, user_id,title,description,price,category_id,due_date,lat,lon" +
@@ -120,7 +109,7 @@ public class MypageActivity extends ActivityGroup  implements OnClickListener, R
 					
 				}
 				
-				
+				if(r.newprovides != null)
 				for(sp_GetMyUpdatedProvides_Result item : r.newprovides) {
 					
 					String sql = String.format("REPLACE INTO provide values " +
@@ -134,6 +123,7 @@ public class MypageActivity extends ActivityGroup  implements OnClickListener, R
 				}
 				
 				
+				if(r.newmatches != null)
 				for(sp_GetMyUpdatedMatch_Result item : r.newmatches) {
 					
 					String sql = String.format("REPLACE INTO match values " +
@@ -146,59 +136,31 @@ public class MypageActivity extends ActivityGroup  implements OnClickListener, R
 					
 				}
 				
-//				public long requester_id;
-//			    public long provider_id;
-//			    
-//			    public long bidding_id;
-//			    
-//			    public Long request_id;
-//			    public Long provide_id;
-//			    
-//			    public int request_price;
-//			    public int provide_price;
-//			    public String created_time;
-//			    public Integer settled_price;
-//			    public int status;
-//			    
-//			    public Boolean requesteraccept;
-//			    public Boolean provideraccept;
-//			    public boolean requesterdelete;
-//			    public boolean providerdelete;
-//			    
-//			    public String approved_time;
-//			    public String completed_time;
-//			    public String requesteraccept_time;
-//			    public String provideraccept_time;
-//			    public String modified_time;
-//			    public String other_user_name;
-//			    public String other_title;
-//			    public String other_description;
-//			    
-//			    public Integer other_price;
-//			    public String other_user_photo;
-//			    public Integer provide_status;
-//			    public Boolean provide_deleted;
-//			    public Integer request_status;
-//			    public Boolean request_deleted;
-				
+				if(r.newbiddings != null)
 				for(sp_GetMyUpdatedBiddings_Result item : r.newbiddings) {
 					
-					String sql = String.format("REPLACE INTO match values " +
+					String sql = String.format("REPLACE INTO bidding values " +
 							"(%d,%d,%d,%d,%d, %d,%d,'%s',%d,%d, %d,%d,%d,%d, '%s','%s','%s','%s','%s','%s','%s','%s',%d,'%s',%d,%d,%d,%d)"
-							, "");
+							, item.requester_id, item.provider_id, item.bidding_id, item.request_id, item.provide_id, item.request_price,
+							item.provide_price, item.completed_time, item.settled_price, item.status, item.requesteraccept?1:0, item.provideraccept?1:0,
+							item.request_deleted?1:0,item.providerdelete?1:0,item.approved_time, item.completed_time,item.requesteraccept_time,
+							item.provideraccept_time,item.modified_time,item.other_user_name,item.other_title,item.other_description,
+							item.other_price,item.other_user_photo,item.provide_status,item.provide_deleted?1:0,item.request_status, 
+									item.request_deleted?1:0);
 					
 					SqlManager.excuteSql(context, sql);
 					
 				}
 				
+				if(r.newbiddingmessages != null)
 				for(sp_GetNewMessage_Result item : r.newbiddingmessages) {
 					
-					String sql = String.format("REPLACE INTO match values " +
-							"(%d,%d, '%s',%d,%d,%d, '%s','%s',%d, '%s','%s',%d,'%s')"
-							, "");
+					String sql = String.format("REPLACE INTO chat values " +
+							"(%d,%d, '%s','%s',%d,%d, '%s','%s','%s')"
+							, item.bidding_id,item.writer_id,item.message,item.written_tick,item.read_time, "state",item.audio_path
+							,item.video_path,item.picture_path);
 					
 					SqlManager.excuteSql(context, sql);
-					
 				}
 
 
