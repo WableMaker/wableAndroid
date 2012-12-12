@@ -5,21 +5,21 @@ import org.json.JSONException;
 
 public class sp_GetMyUpdatedRequests_Result
 {
-    public long id;
-    public long user_id;
+    public long id = 0;
+    public long user_id = 0;
     public String title="";
     public String description="";
-    public int price;
+    public int price = 0;
     public Integer category_id;
     public String due_date="";
-    public double lat;
-    public double lon;
-    public boolean totwitter;
-    public boolean tofacebook;
-    public int status;
-    public boolean receive_recommend;
+    public double lat= 0;
+    public double lon = 0;
+    public boolean totwitter = false;
+    public boolean tofacebook = false;
+    public int status = 0;
+    public boolean receive_recommend = false;
     public String created_time="";
-    public boolean deleted;
+    public boolean deleted = false;
     public String modified_time="";
 	public sp_GetMyUpdatedRequests_Result(JSONObject obj)
 	{

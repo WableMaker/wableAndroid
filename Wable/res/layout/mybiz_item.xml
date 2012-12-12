@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/MYBIZITEMtvHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/tab1_table_header_cell"
+        android:textColor="#FFF"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:id="@+id/RelativeLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/MYBIZITEMtvHeader"
+        android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/mybiz_table" />
+
+    <TextView
+        android:id="@+id/MYBIZITEMtvPic"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="14dp"
+        android:background="@drawable/mybiz_userpic" />
+
+    <TextView
+        android:id="@+id/MYBIZITEMtvState"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/mybiz_userpic2" />
+
+    <TextView
+        android:id="@+id/MYBIZITEMtvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/MYBIZITEMtvPic"
+        android:text="피아노 삽니다" />
+
+    <TextView
+        android:id="@+id/MYBIZITEMtvPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/MYBIZITEMtvPic"
+        android:layout_alignLeft="@+id/MYBIZITEMtvTitle"
+        android:textColor="#00F"
+        android:text="15,000" />
+
+    <TextView
+        android:id="@+id/MYBIZITEMtvTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/MYBIZITEMtvState"
+        android:layout_marginRight="25dp"
+        android:layout_toLeftOf="@+id/MYBIZITEMtvState"
+        android:text="19:30"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#FFF"
+        android:textSize="11dp" />
+    
+    </RelativeLayout>
+
+</RelativeLayout>

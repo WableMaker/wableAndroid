@@ -1,17 +1,22 @@
 package com.thx.bizcat.tab.mypage;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 import android.app.ActivityGroup;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Message;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 
 import com.thx.bizcat.R;
 import com.thx.bizcat.http.apiproxy.APICODE;
@@ -36,9 +41,8 @@ public class MypageActivity extends ActivityGroup  implements OnClickListener, R
 
 	private Context context;
 	
-	private View originView;
-	private View[] views;
-	private LinearLayout container;
+	private ListView listview;
+	private List<MybizElement> arrays;
 	
 	private SharedPreferences pref;
 	
@@ -85,15 +89,20 @@ public class MypageActivity extends ActivityGroup  implements OnClickListener, R
 				LAST_BIDDING = r.last_modified_time_bidding;
 				LAST_BIDDINGMSG = r.last_modified_time_biddingmessage;
 				
-				//Editor edit =  pref.edit();
-				//edit.putString("LAST_REQUEST", LAST_REQUEST);
-				//edit.putString("LAST_PROVIDE", LAST_PROVIDE);
-				//edit.putString("LAST_MATCH", LAST_MATCH);
-				//edit.putString("LAST_BIDDING", LAST_BIDDING);
-				//edit.putString("LAST_BIDDINGMSG", LAST_BIDDINGMSG);
-				//edit.commit();
+				Editor edit =  pref.edit();
+				if(LAST_REQUEST != null)
+				edit.putString("LAST_REQUEST", LAST_REQUEST);
+				if(LAST_PROVIDE != null)
+				edit.putString("LAST_PROVIDE", LAST_PROVIDE);
+				if(LAST_MATCH != null)
+				edit.putString("LAST_MATCH", LAST_MATCH);
+				if(LAST_BIDDING != null)
+				edit.putString("LAST_BIDDING", LAST_BIDDING);
+				if(LAST_BIDDINGMSG != null)
+				edit.putString("LAST_BIDDINGMSG", LAST_BIDDINGMSG);
+				edit.commit();
 				
-				SqlManager.Reset(context);
+				//SqlManager.Reset(context);
 				
 				if(r.newrequests != null)
 				for(sp_GetMyUpdatedRequests_Result item : r.newrequests) {
@@ -139,8 +148,14 @@ public class MypageActivity extends ActivityGroup  implements OnClickListener, R
 				if(r.newbiddings != null)
 				for(sp_GetMyUpdatedBiddings_Result item : r.newbiddings) {
 					
-					String sql = String.format("REPLACE INTO bidding values " +
-							"(%d,%d,%d,%d,%d, %d,%d,'%s',%d,%d, %d,%d,%d,%d, '%s','%s','%s','%s','%s','%s','%s','%s',%d,'%s',%d,%d,%d,%d)"
+					String sql = String.format("INSERT INTO bidding " +
+							"(bidding_id, requester_id, provider_id, request_id, provide_id," +
+				"request_price, provide_price, created_time, settled_price, status," +
+				"requesteraccept, provideraccept, requesterdelete, providerdelete," +
+				"approved_time, completed_time, requesteraccept_time, provideraccept_time, modified_time," +
+				"other_user_name, other_title, other_description, other_price, other_user_photo, " +
+				"provide_status, provide_deleted, request_status, request_deleted) values" +
+							"( %d,%d,%d,%d,%d, %d,%d,'%s',%d,%d, %d,%d,%d,%d, '%s','%s','%s','%s','%s','%s','%s','%s',%d,'%s',%d,%d,%d,%d)"
 							, item.requester_id, item.provider_id, item.bidding_id, item.request_id, item.provide_id, item.request_price,
 							item.provide_price, item.completed_time, item.settled_price, item.status, item.requesteraccept?1:0, item.provideraccept?1:0,
 							item.request_deleted?1:0,item.providerdelete?1:0,item.approved_time, item.completed_time,item.requesteraccept_time,
@@ -155,9 +170,10 @@ public class MypageActivity extends ActivityGroup  implements OnClickListener, R
 				if(r.newbiddingmessages != null)
 				for(sp_GetNewMessage_Result item : r.newbiddingmessages) {
 					
-					String sql = String.format("REPLACE INTO chat values " +
-							"(%d,%d, '%s','%s',%d,%d, '%s','%s','%s')"
-							, item.bidding_id,item.writer_id,item.message,item.written_tick,item.read_time, "state",item.audio_path
+					String sql = String.format("INSERT INTO chat " +
+							"(bidding_id, writer_id, msg, tick, is_read, state, audio, video, picture) values " +
+							"(%s,%s, '%s','%s','%s',%d, '%s','%s','%s')"
+							, item.bidding_id,item.writer_id,item.message,item.written_tick,item.read_time, 0,item.audio_path
 							,item.video_path,item.picture_path);
 					
 					SqlManager.excuteSql(context, sql);
@@ -194,28 +210,21 @@ public class MypageActivity extends ActivityGroup  implements OnClickListener, R
 		context = this;
 		pref = PreferenceManager.getDefaultSharedPreferences(this);
 		
-		container = (LinearLayout)findViewById(R.id.MYBIZContainer);
+		listview = (ListView)findViewById(R.id.MYBIZContainer);
 		findViewById(R.id.MYBIZbtnReqPost).setOnClickListener(this);
 		findViewById(R.id.MYBIZbtnReqAsk).setOnClickListener(this);
 		findViewById(R.id.MYBIZbtnProvPost).setOnClickListener(this);
 		findViewById(R.id.MYBIZbtnProvAsk).setOnClickListener(this);
+		arrays = new ArrayList<MybizElement>();
 		
-		views = new View[4];
-		views[0] = getLocalActivityManager().startActivity("REQ_POST", new Intent(this, RequestPostActivity.class)).getDecorView();
-		views[1] = getLocalActivityManager().startActivity("REQ_ASK", new Intent(this, RequestAskActivity.class)).getDecorView();
-		views[2] = getLocalActivityManager().startActivity("PROV_POST", new Intent(this, ProviderPostActivity.class)).getDecorView();
-		views[3] = getLocalActivityManager().startActivity("PROV_ASK", new Intent(this, ProviderAskActivity.class)).getDecorView();
-		originView = container;
-		
-		//LAST_REQUEST = pref.getString("LAST_REQUEST", "");
+		LAST_REQUEST = pref.getString("LAST_REQUEST", "");
 		LAST_PROVIDE = pref.getString("LAST_PROVIDE", "");
 		LAST_MATCH = pref.getString("LAST_MATCH", "");
 		LAST_BIDDING = pref.getString("LAST_BIDDING", "");
 		LAST_BIDDINGMSG = pref.getString("LAST_BIDDINGMSG", "");
 
-		
-		//APIProxyLayer.Instance().UserGetUpdatedContents(
-		//		LAST_REQUEST, LAST_PROVIDE, LAST_MATCH, LAST_BIDDING, LAST_BIDDINGMSG, "", "", mHandler);
+		APIProxyLayer.Instance().UserGetUpdatedContents(
+				LAST_REQUEST, LAST_PROVIDE, LAST_MATCH, LAST_BIDDING, LAST_BIDDINGMSG, "", "", mHandler);
 		
 
 		
@@ -226,35 +235,52 @@ public class MypageActivity extends ActivityGroup  implements OnClickListener, R
 	@Override
 	public void onClick(View v) {
 		
-		if(originView.getId() == v.getId()) return;	
-		
-		container.removeAllViews();	
-		originView.setBackgroundResource(0);
-		
+		Cursor c;
+		String sql ="SELECT * FROM";
 		switch (v.getId()) {
 		
 		case R.id.MYBIZbtnReqPost:
-			container.addView(views[0]);
-			v.setBackgroundResource(R.drawable.biz_request_post_btn_selected);
+
+			arrays.clear();
+			
+			//sql += String.format(" request WHERE _id='%s' and user_id='%s'", "","");
+			sql += String.format(" request");
+			c = SqlManager.getCursor(context, sql);
+			
+			while(c.moveToNext()) {
+				
+				//Status 0:대기중, 1:기한만료, 2:등록마
+				MybizElement e = new MybizElement();
+				e.setId(c.getLong(0)).setUser(c.getLong(1)).setCategory(c.getLong(5));
+				e.setTitle(c.getString(2)).setDescription(c.getString(3));
+				e.setPrice(c.getInt(4)).setLat(c.getInt(7)).setLon(c.getInt(8))
+					.setStatus(c.getInt(11)).setRecommand(c.getInt(12));
+				e.setDate(c.getString(6)).setCreated_time(c.getString(13));
+				
+				e.setTwitter(c.getInt(9) > 0 ? true : false).setFacebook(c.getInt(10) > 0 ? true : false);
+				e.setDeleted(c.getInt(14) > 0 ? true : false);
+				
+				arrays.add(e);
+				
+			}
+			SqlManager.Release(c);
+			
+			MybizAdapter adapter = new MybizAdapter(context, R.layout.mybiz_item, arrays);
+			listview.setAdapter(adapter);
+			
+			
+			
 			break;
 			
 		case R.id.MYBIZbtnReqAsk:
-			container.addView(views[1]);	
-			v.setBackgroundResource(R.drawable.biz_request_ask_btn_seleted);
 			break;
 			
 		case R.id.MYBIZbtnProvPost:
-			container.addView(views[2]);
-			v.setBackgroundResource(R.drawable.biz_provide_post_btn_seleted);
 			break;
 			
 		case R.id.MYBIZbtnProvAsk:
-			container.addView(views[3]);
-			v.setBackgroundResource(R.drawable.biz_provide_ask_btn_seleted);
 			break;
 
 		}
-		
-		originView = v;
 	}
 }

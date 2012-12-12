@@ -63,15 +63,15 @@ class SqlHelper extends SQLiteOpenHelper {
 		
 		// Request Table
 		db.execSQL("CREATE TABLE request "		   
-				+"(_id INTEGER PRIMARY KEY, user_id INTEGER, title TEXT, description TEXT, price INTEGER, category_id INTEGER, due_date TEXT," 
+				+"(_id INTEGER, user_id INTEGER, title TEXT, description TEXT, price INTEGER, category_id INTEGER, due_date TEXT," 
 				+"lat INTEGER, lon INTEGER, totwitter INTEGER, tofacebook INTEGER, status INTEGER, receive_recommand INTEGER," 
-				+"created_time TEXT, deleted INTEGER, modified_time TEXT);");
+				+"created_time TEXT, deleted INTEGER, modified_time TEXT, PRIMARY KEY (_id, user_id) );");
 		
 		// Provider Table
 		db.execSQL("CREATE TABLE provide "
-				+"( _id INTEGER PRIMARY KEY, user_id INTEGER, title TEXT, min_price INTEGER, lat INTEGER, lon INTEGER, radious INTEGER" +
+				+"( _id INTEGER, user_id INTEGER, title TEXT, min_price INTEGER, lat INTEGER, lon INTEGER, radious INTEGER" +
 				",status INTEGER, created_time TEXT, descrition TEXT, photo1 TEXT, photo2 TEXT, photo3 TEXT, photo4 TEXT, photo5 TEXT," +
-				"deleted INTEGER, modified_time TEXT, totwitter INTEGER, tofacebook INTEGER);");
+				"deleted INTEGER, modified_time TEXT, totwitter INTEGER, tofacebook INTEGER, PRIMARY KEY (_id, user_id));");
 		
 		// Match Table
 		db.execSQL("CREATE TABLE match "
