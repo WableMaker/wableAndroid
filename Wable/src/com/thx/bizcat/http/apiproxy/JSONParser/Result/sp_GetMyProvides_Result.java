@@ -8,8 +8,8 @@ public class sp_GetMyProvides_Result
     public int status;
     public String keyword="";
     public int min_price;
-    public Integer bidding_count;
-    public Integer match_count;
+    public int bidding_count;
+    public int match_count;
     public String provide_id="";
     public double lat;
     public double lon;

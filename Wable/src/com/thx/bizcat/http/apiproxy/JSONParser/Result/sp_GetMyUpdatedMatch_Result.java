@@ -13,7 +13,7 @@ public class sp_GetMyUpdatedMatch_Result
     public long other_user_id;
     public String other_title="";
     public String other_description="";
-    public Integer other_price;
+    public int other_price;
     public String other_user_photo="";
     public String other_user_name="";
     public Boolean deleted;

@@ -9,8 +9,8 @@ public class sp_GetMyUpdatedRequests_Result
     public long user_id = 0;
     public String title="";
     public String description="";
-    public int price = 0;
-    public Integer category_id;
+    public int price;
+    public int category_id;
     public String due_date="";
     public double lat= 0;
     public double lon = 0;

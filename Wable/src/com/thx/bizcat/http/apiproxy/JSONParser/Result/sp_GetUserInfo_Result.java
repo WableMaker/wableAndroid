@@ -10,8 +10,8 @@ public class sp_GetUserInfo_Result
     public boolean blocked;
     public String phone="";
     public String mobile="";
-    public Double pos_lat;
-    public Double pos_lon;
+    public double pos_lat;
+    public double pos_lon;
     public String blocked_info="";
     public String twitter_uid="";
     public String twitter_token="";
@@ -29,7 +29,7 @@ public class sp_GetUserInfo_Result
     public int review_count;
     public String fb_user_id="";
     public String fb_oauth_token="";
-    public long id;
+    public String id;
 	public sp_GetUserInfo_Result(JSONObject obj)
 	{
 		try {
@@ -107,7 +107,7 @@ public class sp_GetUserInfo_Result
 		fb_oauth_token= obj.getString("fb_oauth_token");
 
 	if(!obj.isNull("id"))
-		id= obj.getLong("id");
+		id= obj.getString("id");
 
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block

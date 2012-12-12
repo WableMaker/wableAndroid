@@ -5,8 +5,8 @@ import org.json.JSONException;
 
 public class sp_GetFBAppInfo_Result
 {
-    public String app_id;
-    public String app_secret_code;
+    public String app_id="";
+    public String app_secret_code="";
 	public sp_GetFBAppInfo_Result(JSONObject obj)
 	{
 		try {

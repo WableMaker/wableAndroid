@@ -10,11 +10,11 @@ public class sp_GetMyRequests_Result
     public String description="";
     public String due_date="";
     public int post_price;
-    public Integer bidding_count;
-    public Integer match_count;
+    public int bidding_count;
+    public int match_count;
     public String request_id="";
-    public Double lat;
-    public Double lon;
+    public double lat;
+    public double lon;
 	public sp_GetMyRequests_Result(JSONObject obj)
 	{
 		try {

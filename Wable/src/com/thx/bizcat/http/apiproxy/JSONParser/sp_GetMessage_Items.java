@@ -12,7 +12,7 @@ import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetMessage_Result;
 import com.thx.bizcat.util.Logger;
 
 public class sp_GetMessage_Items extends sp_Simple_Items {
-	public List<sp_GetMessage_Result> newmessages = null;
+	public List<sp_GetMessage_Result> newmessages = new ArrayList<sp_GetMessage_Result>();
 	public sp_GetLatestReadMessage_Result readmessage = null;
 	public sp_GetMessage_Items(JSONObject obj) {
 		super(obj);
@@ -26,7 +26,6 @@ public class sp_GetMessage_Items extends sp_Simple_Items {
 					//새 매시지
 					if(!data.isNull("newmessages"))
 					{
-						newmessages = new ArrayList<sp_GetMessage_Result>();
 						JSONArray array = data.getJSONArray("newmessages");
 						if(array !=null)
 						{

@@ -8,8 +8,8 @@ public class sp_GetRequestsByArea_Result
     public String id="";
     public String title="";
     public String photo="";
-    public Double lat;
-    public Double lon;
+    public double lat;
+    public double lon;
     public String due_date="";
     public String bidding_id="";
     public int price;

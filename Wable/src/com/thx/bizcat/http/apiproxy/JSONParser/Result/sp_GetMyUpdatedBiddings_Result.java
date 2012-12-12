@@ -5,20 +5,21 @@ import org.json.JSONException;
 
 public class sp_GetMyUpdatedBiddings_Result
 {
-    public long requester_id =0;
-    public long provider_id=0;
-    public long bidding_id=0;
-    public long request_id=0;
-    public long provide_id=0;
-    public int request_price=0;
-    public int provide_price=0;
+
+    public long requester_id;
+    public long provider_id;
+    public long bidding_id;
+    public long request_id;
+    public long provide_id;
+    public int request_price;
+    public int provide_price;
     public String created_time="";
-    public Integer settled_price=0;
-    public int status=0;
-    public Boolean requesteraccept=false;
-    public Boolean provideraccept=false;
-    public boolean requesterdelete=false;
-    public boolean providerdelete=false;
+    public int settled_price;
+    public int status;
+    public Boolean requesteraccept;
+    public Boolean provideraccept;
+    public boolean requesterdelete;
+    public boolean providerdelete;
     public String approved_time="";
     public String completed_time="";
     public String requesteraccept_time="";
@@ -27,12 +28,12 @@ public class sp_GetMyUpdatedBiddings_Result
     public String other_user_name="";
     public String other_title="";
     public String other_description="";
-    public Integer other_price=0;
+    public int other_price;
     public String other_user_photo="";
-    public Integer provide_status=0;
-    public Boolean provide_deleted=false;
-    public Integer request_status=0;
-    public Boolean request_deleted=false;
+    public int provide_status;
+    public Boolean provide_deleted;
+    public int request_status;
+    public Boolean request_deleted;
 	public sp_GetMyUpdatedBiddings_Result(JSONObject obj)
 	{
 		try {

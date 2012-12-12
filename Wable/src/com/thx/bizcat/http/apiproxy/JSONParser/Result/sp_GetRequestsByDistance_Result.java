@@ -8,10 +8,10 @@ public class sp_GetRequestsByDistance_Result
     public String id="";
     public String title="";
     public String photo="";
-    public Double distance;
+    public double distance;
     public String due_date="";
     public String bidding_id="";
-    public Integer price;
+    public int price;
     public String name="";
     public String description="";
     public String user_id="";

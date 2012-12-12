@@ -9,7 +9,7 @@ public class sp_GetProviderDetail_Result
     public String introduce="";
     public double review_rating;
     public int review_count;
-    public Integer provide_count;
+    public int provide_count;
     public boolean public_mobile;
     public boolean public_phone;
     public boolean public_email;

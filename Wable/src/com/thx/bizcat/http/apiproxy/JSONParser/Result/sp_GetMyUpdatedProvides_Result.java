@@ -7,7 +7,7 @@ public class sp_GetMyUpdatedProvides_Result
 {
     public long id;
     public long user_id;
-    public Integer category_id;
+    public int category_id;
     public String title="";
     public int min_price;
     public double lat;

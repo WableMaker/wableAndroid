@@ -5,19 +5,18 @@ import org.json.JSONObject;
 
 import com.thx.bizcat.util.Logger;
 
-public class sp_AccountResetPassword_Result {
-	public String newpassword="";
+public class sp_LatestAppVersion_Result {
+	public String latestAppVersion="";
 	
-	public sp_AccountResetPassword_Result(JSONObject obj)
+	public sp_LatestAppVersion_Result(JSONObject obj)
 	{
 		try {
 
-			if(!obj.isNull("newpassword"))
-				newpassword= obj.getString("newpassword");
+			if(!obj.isNull("data"))
+				latestAppVersion= obj.getString("data");
 		
 		} catch (JSONException e) {
 			Logger.Instance().Write(e);
 		}
 	}
-
 }
