@@ -10,10 +10,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 
-import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetMyActiveRequests_Result;
 import com.thx.bizcat.tab.mypage.MypageActivity;
 import com.thx.bizcat.tab.post.PostActivity;
-import com.thx.bizcat.tab.search.SearchActivity;
 import com.thx.bizcat.tab.setting.SettingActivity;
 
 public class MainActivity extends ActivityGroup implements OnClickListener {
@@ -38,11 +36,11 @@ public class MainActivity extends ActivityGroup implements OnClickListener {
 		findViewById(R.id.btnMainSearch).setOnClickListener(this);
 		findViewById(R.id.btnMainSetting).setOnClickListener(this);
 		
-		views = new View[4];
+		views = new View[3];
 		views[0] = getLocalActivityManager().startActivity("MYPAGE", new Intent(this, MypageActivity.class)).getDecorView();
 		views[1] = getLocalActivityManager().startActivity("POST", new Intent(this, PostActivity.class)).getDecorView();
-		views[2] = getLocalActivityManager().startActivity("SEARCH", new Intent(this, SearchActivity.class)).getDecorView();
-		views[3] = getLocalActivityManager().startActivity("SETTING", new Intent(this, SettingActivity.class)).getDecorView();
+		//views[2] = getLocalActivityManager().startActivity("SEARCH", new Intent(this, SearchActivity.class)).getDecorView();
+		views[2] = getLocalActivityManager().startActivity("SETTING", new Intent(this, SettingActivity.class)).getDecorView();
 		
 		viewId = R.id.btnMainMypage;		
 		originView = findViewById(R.id.btnMainMypage);			
@@ -86,13 +84,13 @@ public class MainActivity extends ActivityGroup implements OnClickListener {
 			v.setBackgroundResource(R.drawable.tab_bar_post_selected);
 			break;
 					
-		case R.id.btnMainSearch:
-			container.addView(views[2]);
-			v.setBackgroundResource(R.drawable.tab_bar_browse_selected);
-			break;
+		//case R.id.btnMainSearch:
+		//	container.addView(views[2]);
+		//	v.setBackgroundResource(R.drawable.tab_bar_browse_selected);
+		//	break;
 			
 		case R.id.btnMainSetting:
-			container.addView(views[3]);
+			container.addView(views[2]);
 			v.setBackgroundResource(R.drawable.tab_bar_profile_selected);
 			break;
 

@@ -39,6 +39,7 @@ import com.thx.bizcat.util.WeakHandler;
 
 public class MypageActivity extends ActivityGroup  implements OnClickListener, RefHandlerMessage {
 
+	private int originView = 0;
 	private Context context;
 	
 	private ListView listview;
@@ -155,13 +156,18 @@ public class MypageActivity extends ActivityGroup  implements OnClickListener, R
 				"approved_time, completed_time, requesteraccept_time, provideraccept_time, modified_time," +
 				"other_user_name, other_title, other_description, other_price, other_user_photo, " +
 				"provide_status, provide_deleted, request_status, request_deleted) values" +
-							"( %d,%d,%d,%d,%d, %d,%d,'%s',%d,%d, %d,%d,%d,%d, '%s','%s','%s','%s','%s','%s','%s','%s',%d,'%s',%d,%d,%d,%d)"
+							"( %d,%d,%d,%d,%d, " +
+							"%d,%d,'%s',%d,%d, " +
+							"%d,%d,%d,%d, '%s'," +
+							"'%s','%s','%s','%s','%s'," +
+							"'%s','%s',%d,'%s',%d," +
+							"%d,%d,%d)"
 							, item.requester_id, item.provider_id, item.bidding_id, item.request_id, item.provide_id, item.request_price,
-							item.provide_price, item.completed_time, item.settled_price, item.status, item.requesteraccept?1:0, item.provideraccept?1:0,
-							item.request_deleted?1:0,item.providerdelete?1:0,item.approved_time, item.completed_time,item.requesteraccept_time,
-							item.provideraccept_time,item.modified_time,item.other_user_name,item.other_title,item.other_description,
-							item.other_price,item.other_user_photo,item.provide_status,item.provide_deleted?1:0,item.request_status, 
-									item.request_deleted?1:0);
+							item.provide_price, item.completed_time, item.settled_price, item.status, 
+							item.requesteraccept?1:0, item.provideraccept?1:0,	item.request_deleted?1:0,item.providerdelete?1:0,item.approved_time, 
+							item.completed_time,item.requesteraccept_time, item.provideraccept_time,item.modified_time,item.other_user_name,
+							item.other_title,item.other_description,item.other_price,item.other_user_photo,item.provide_status,
+							item.provide_deleted?1:0,item.request_status,item.request_deleted?1:0);
 					
 					SqlManager.excuteSql(context, sql);
 					
@@ -235,15 +241,18 @@ public class MypageActivity extends ActivityGroup  implements OnClickListener, R
 	@Override
 	public void onClick(View v) {
 		
+		if(originView == v.getId()) return;
+		
 		Cursor c;
 		String sql ="SELECT * FROM";
+		MybizAdapter adapter;
+		
+		arrays.clear();
+		
 		switch (v.getId()) {
 		
 		case R.id.MYBIZbtnReqPost:
 
-			arrays.clear();
-			
-			//sql += String.format(" request WHERE _id='%s' and user_id='%s'", "","");
 			sql += String.format(" request");
 			c = SqlManager.getCursor(context, sql);
 			
@@ -265,7 +274,7 @@ public class MypageActivity extends ActivityGroup  implements OnClickListener, R
 			}
 			SqlManager.Release(c);
 			
-			MybizAdapter adapter = new MybizAdapter(context, R.layout.mybiz_item, arrays);
+			adapter = new MybizAdapter(context, R.layout.mybiz_item, arrays, 0);
 			listview.setAdapter(adapter);
 			
 			
@@ -276,11 +285,39 @@ public class MypageActivity extends ActivityGroup  implements OnClickListener, R
 			break;
 			
 		case R.id.MYBIZbtnProvPost:
+			
+			sql += String.format(" provide");
+			c = SqlManager.getCursor(context, sql);
+			
+			while(c.moveToNext()) {
+				
+				//Status 0:대기중, 1:기한만료, 2:등록마
+				MybizElement e = new MybizElement();
+				e.setId(c.getLong(0)).setUser(c.getLong(1));
+				e.setTitle(c.getString(2)).setMin_price(c.getInt(3))
+				.setLat(c.getInt(4)).setLon(c.getInt(5)).setRadious(c.getInt(6))
+				.setStatus(c.getInt(7)).setCreated_time(c.getString(8)).setDescription(c.getString(9))
+				.setPhoto1(c.getString(10)).setPhoto2(c.getString(11)).setPhoto3(c.getString(12))
+				.setPhoto4(c.getString(13)).setPhoto5(c.getString(14)).setModified_time(c.getString(16));
+				
+				e.setTwitter(c.getInt(17) > 0 ? true : false).setFacebook(c.getInt(18) > 0 ? true : false);
+				e.setDeleted(c.getInt(15) > 0 ? true : false);
+				arrays.add(e);
+				
+			}
+			SqlManager.Release(c);
+			
+			adapter = new MybizAdapter(context, R.layout.mybiz_item, arrays, 1);
+			listview.setAdapter(adapter);
+			
 			break;
 			
 		case R.id.MYBIZbtnProvAsk:
 			break;
 
 		}
+		originView = v.getId();
+		
+		
 	}
 }

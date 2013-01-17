@@ -16,8 +16,8 @@ public class sp_GetMyUpdatedBiddings_Result
     public String created_time="";
     public int settled_price;
     public int status;
-    public Boolean requesteraccept;
-    public Boolean provideraccept;
+    public boolean requesteraccept;
+    public boolean provideraccept;
     public boolean requesterdelete;
     public boolean providerdelete;
     public String approved_time="";
@@ -31,9 +31,9 @@ public class sp_GetMyUpdatedBiddings_Result
     public int other_price;
     public String other_user_photo="";
     public int provide_status;
-    public Boolean provide_deleted;
+    public boolean provide_deleted;
     public int request_status;
-    public Boolean request_deleted;
+    public boolean request_deleted;
 	public sp_GetMyUpdatedBiddings_Result(JSONObject obj)
 	{
 		try {
