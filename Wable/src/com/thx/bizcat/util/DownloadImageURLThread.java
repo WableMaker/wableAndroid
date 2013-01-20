@@ -34,7 +34,7 @@ public class DownloadImageURLThread {
 						
 							
 						//String name = url.substring(url.lastIndexOf("/"), url.lastIndexOf("."));
-//						final String files = path + name;
+						//final String files = path + name;
 					
 					for(int i=0, m=list.size(); i<m; i++) {
 
@@ -42,9 +42,8 @@ public class DownloadImageURLThread {
 
 							CategoryElement item = list.get(i);
 							if(item.getBitmap() == null) {
-
-//								String urlz = item.getPhoto();
-								String url = "http://www.coolenjoy.net/bbs/data/26/%EC%8B%A0%EC%84%B8%EA%B2%BD5.jpg";	
+						
+								String url = Utils.BaseImgUrl+item.getPhoto();	
 								URL urls = new URL(url);
 
 								HttpURLConnection conn = (HttpURLConnection)urls.openConnection();
@@ -52,8 +51,7 @@ public class DownloadImageURLThread {
 								Bitmap bm = BitmapFactory.decodeStream(is);
 								item.setBitmap(bm);
 								is.close();
-								conn.disconnect();
-								
+								conn.disconnect();								
 								
 								adapter.notifyDataSetChanged();
 							}

@@ -12,6 +12,8 @@ import com.thx.bizcat.R;
 
 public class Utils {
 	
+	public static String BaseImgUrl = "";
+	
 	/**
 	 * Ư�� ��ο� ���� �� ���� ��� ����
 	 * @param path ���� Ư�� ���

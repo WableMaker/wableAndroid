@@ -1,27 +1,31 @@
 package com.thx.bizcat.tab.setting;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.TextView;
+import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.facebook.android.Util;
 import com.thx.bizcat.R;
 import com.thx.bizcat.http.apiproxy.APICODE;
 import com.thx.bizcat.http.apiproxy.APIProxyLayer;
+import com.thx.bizcat.http.apiproxy.JSONParser.sp_MyInfo_Items;
+import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetUserInfo_Result;
+import com.thx.bizcat.util.ImageDownloader;
 import com.thx.bizcat.util.RefHandlerMessage;
+import com.thx.bizcat.util.Utils;
 import com.thx.bizcat.util.WeakHandler;
 
 public class SettingMyinfoActivity extends Activity implements OnClickListener, RefHandlerMessage{
 	
-	private String username;
-	private String profile;
-	private boolean cert_fb, cert_phone, cert_email;
-	private boolean public_fb, public_phone, public_email;
 	
-	
+	private sp_GetUserInfo_Result userInfo;
+	private Context context;
 	/* Handler */
 	private WeakHandler mHandler = new WeakHandler(this);
 			
@@ -31,23 +35,15 @@ public class SettingMyinfoActivity extends Activity implements OnClickListener, 
 			switch(APICODE.fromInt(msg.what)) {
 			
 			case MyInfo:
-//				if (success){
-//					try {
-//						username = json.getString("name");
-//						
-//						profile = "프로필을 입력해주세요.";
-//						
-//						public_fb = json.getBoolean("public_fb");
-//						public_email = json.getBoolean("public_email");
-//						public_phone = json.getBoolean("public_phone");
-//						
-//						
-//					} catch (JSONException e) {
-//						e.printStackTrace();
-//					}
-//					
-//				}
-				
+				sp_MyInfo_Items r = (sp_MyInfo_Items)msg.obj;
+				if(r.bsuccess){					
+					String ServerImgUrl = Utils.BaseImgUrl+r.result.photo;
+					String localImgUrl = getFilesDir().getAbsolutePath() +  "/datas/"+r.result.photo;
+					
+					ImageDownloader.getInstance().imageViewProcessing(localImgUrl, ServerImgUrl, (ImageView)findViewById(R.id.STimageProfile));										
+				}
+				else
+					Toast.makeText(context, r.resultCode.toString() , Toast.LENGTH_LONG).show();				
 				break;
 				
 			default:
@@ -65,7 +61,7 @@ public class SettingMyinfoActivity extends Activity implements OnClickListener, 
 		setContentView(R.layout.setting_myinfo);
 		
 		updateData();
-		updateView();
+
 		
 		findViewById(R.id.STtvName).setOnClickListener(this);
 		findViewById(R.id.STtvProfile).setOnClickListener(this);
@@ -115,13 +111,15 @@ public class SettingMyinfoActivity extends Activity implements OnClickListener, 
 	}
 	
 	private void updateView () {
-		// 상단 title 업데이트
-		((TextView)findViewById(R.id.STtvTitle)).setText(getIntent().getStringExtra("title"));
+		
+
+				
+		//((TextView)findViewById(R.id.STtvTitle)).setText(getIntent().getStringExtra("title"));
 		
 		// update Name and Profile.
-		String name = 1==2?"name":"hello world!";
+		//String name = 1==2?"name":"hello world!";
 		
-		((TextView) findViewById(R.id.STtvName)).setText(name);
+		//((TextView) findViewById(R.id.STtvName)).setText(name);
 		
 		
 		// update Certification information

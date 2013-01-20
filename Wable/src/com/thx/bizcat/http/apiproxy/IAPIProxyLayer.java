@@ -1088,4 +1088,21 @@ public interface IAPIProxyLayer {
 	//public ResultCode resultCode = ResultCode .NONE;
 	boolean LatestAppVersion(Handler callback);
 	// [end]
+
+	// [start] System
+	//諛섑솚 �대옒��class sp_BaseImgUrl_Items
+	//�몄텧 �ㅻ쪟��	//null
+	//
+	//�깃났��	//public sp_BaseImgUrl_Result result = 踰꾩쟾;
+	//public boolean bsuccess = true;
+	//public ResultCode resultCode = ResultCode .NONE;
+	//
+	//�ㅽ뙣��	//public sp_BaseImgUrl_Result result = null;
+	//public boolean bsuccess = false;
+	//public ResultCode resultCode = �ㅽ뙣�ъ쑀;
+	//
+	//�쒕쾭�몄텧 �ㅽ뙣��	//public sp_BaseImgUrl_Result result = null;
+	//public boolean bsuccess = false;
+	//public ResultCode resultCode = ResultCode .NONE;
+	boolean BaseImgUrl(Handler callback);
 }

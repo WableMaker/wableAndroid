@@ -17,6 +17,7 @@ import com.thx.bizcat.http.HttpClientWrapper;
 import com.thx.bizcat.http.HttpURLConnectionWrapper;
 import com.thx.bizcat.http.IHttpConnectionLayer;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_AccountResetPassword_Items;
+import com.thx.bizcat.http.apiproxy.JSONParser.sp_BaseImgUrl_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_BiddingOfferAsProvider_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_BiddingOfferAsRequester_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_CompatiableAppVersion_Items;
@@ -2106,6 +2107,54 @@ public class APIProxyLayer implements IAPIProxyLayer {
 		return true;
 	}
 
+	
+	@Override
+	public boolean BaseImgUrl(final Handler callback) {
+		
+
+		new Thread()
+		{
+			@Override
+ 			public void run()
+ 			{
+//				if(!_httpLayer.IsConnectedSession())
+//				{
+//					if(!Relogin())
+//						callback.sendMessage(callback.obtainMessage(APICODE.BaseImgUrl.toInt(), null));
+//						return;
+//				}
+				
+				String result = _httpLayer.GETSync(_domain+"System/BaseImgUrl", null);
+				 
+				JSONObject obj = null;
+				
+				try
+				{
+					if(result !=null)
+					{
+						obj = new JSONObject(result);
+						if(true == obj.getBoolean("success"))
+							SessionUpdate("BaseImgUrl");
+						sp_BaseImgUrl_Items item = new sp_BaseImgUrl_Items(obj);
+						callback.sendMessage(callback.obtainMessage(APICODE.BaseImgUrl.toInt(), item));
+						return;
+					}
+					
+				}
+				catch(Exception e)
+				{
+					Logger.Instance().Write(e);
+					
+				}
+				
+				callback.sendMessage(callback.obtainMessage(APICODE.BaseImgUrl.toInt(), null));
+ 			}
+			
+		}.start();
+
+		return true;
+	}
+	
 	@Override
 	public boolean CompatibleAppVersion(final Handler callback) {
 		

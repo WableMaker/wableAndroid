@@ -125,6 +125,7 @@ public enum APICODE {
 	// [start] System
 	CompatiableAppVersion(60),
 	LatestAppVersion(61),
+	BaseImgUrl(62),
 	UNKNOWN(10000);
 
     private static final SparseArray<APICODE> typesByValue = new SparseArray<APICODE>();

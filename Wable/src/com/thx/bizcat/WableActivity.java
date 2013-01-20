@@ -20,11 +20,13 @@ import android.widget.Toast;
 import com.facebook.android.Facebook;
 import com.thx.bizcat.http.apiproxy.APICODE;
 import com.thx.bizcat.http.apiproxy.APIProxyLayer;
+import com.thx.bizcat.http.apiproxy.JSONParser.sp_BaseImgUrl_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetMyActiveRequests_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_LogIn_Items;
 import com.thx.bizcat.tab.login.PasswordFindActivity;
 import com.thx.bizcat.tab.login.RegisterActivity;
 import com.thx.bizcat.util.RefHandlerMessage;
+import com.thx.bizcat.util.Utils;
 import com.thx.bizcat.util.WeakHandler;
 //import com.wable.http.apiproxy.JSONParser.sp_GetRequestsByTime_Item;
 
@@ -72,7 +74,19 @@ public class WableActivity extends Activity implements OnClickListener, RefHandl
 				startActivity(intent);			
 				overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 				finish();
+			}			
+			break;
+		}
+		
+		case BaseImgUrl:
+		{
+			sp_BaseImgUrl_Items r = (sp_BaseImgUrl_Items)msg.obj;
+			
+			if(r.bsuccess){
+				Utils.BaseImgUrl = r.result.baseImgUrl;
 			}
+			else
+				Toast.makeText(context, r.resultCode.toString() , Toast.LENGTH_LONG).show();
 			break;
 		}
 		default:
@@ -123,7 +137,9 @@ public class WableActivity extends Activity implements OnClickListener, RefHandl
 //        etPass.setOnEditorActionListener(new OnEditorActionListener() {
 //
 //    
-
+		//이미지 서버 주소 받아오기
+		APIProxyLayer.Instance().BaseImgUrl(mHandler);
+	
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

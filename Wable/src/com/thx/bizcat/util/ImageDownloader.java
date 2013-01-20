@@ -16,6 +16,7 @@ package com.thx.bizcat.util;
  * limitations under the License.
  */
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FilterInputStream;
@@ -23,6 +24,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.ref.SoftReference;
 import java.lang.ref.WeakReference;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.concurrent.ConcurrentHashMap;
@@ -35,9 +38,9 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.Bitmap.CompressFormat;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.http.AndroidHttpClient;
@@ -91,7 +94,63 @@ public class ImageDownloader {
             imageView.setImageBitmap(bitmap);
         }
     }
-        
+      
+    public void imageViewProcessing(String localImgUrl, String ServerImgUrl, ImageView imageView)
+    {    	    	
+    	//1.Cache Memory에 있는지 확인 
+    	Bitmap bitmap = getBitmapFromCache(localImgUrl);
+    	
+    	if (bitmap == null) {
+    	
+    		//이미지가 파일로 다운로드 되어 있는지 확인
+    		File file = new File(localImgUrl);
+    		if(file.exists()) 
+    		{    		
+    			Bitmap bm = BitmapFactory.decodeFile(files);
+    			imageView.setImageBitmap(bm);    			    			
+    		}
+    		else
+    		{
+    			try
+    			{
+    				//이미지 서버에서 다운로드해서 로컬 저장 후 View에 띄우기
+    				URL url = new URL(ServerImgUrl);
+
+    				HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+    				
+    				InputStream is = conn.getInputStream();    				
+					FileOutputStream fos = new FileOutputStream(localImgUrl);
+					
+					Bitmap bm = BitmapFactory.decodeStream(is);
+
+					int len = conn.getContentLength();
+					byte[] bt = new byte[len];
+					
+					while(true){						
+						int read = is.read(bt);
+						if(read <= 0)break;
+						fos.write(bt, 0, read);
+					}
+					
+					imageView.setImageBitmap(bm);
+					is.close();
+					fos.close();
+					conn.disconnect();
+
+    			}
+    			catch(Exception e)
+    			{
+    				e.printStackTrace();
+    			}
+    		}
+    	}
+    	else
+    	{    		
+    		imageView.setImageBitmap(bitmap);
+    	}
+    }
+    
+    
     /*
      * Same as download but the image is always downloaded and the cache is not used.
      * Kept private at the moment as its interest is not clear.

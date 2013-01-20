@@ -13,54 +13,50 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         >
-        
-        <ImageView 
+
+        <ImageView
             android:id="@+id/STimageProfile"
-            android:layout_width="100dp"
-            android:layout_height="100dp" />
-
-        <LinearLayout
-            android:id="@+id/STmypageCertification"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" >
-
-            <Button
-                android:id="@+id/STbtnPhone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="phone" />
-
-            <Button
-                android:id="@+id/STbtnFacebook"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" 
-                android:text="fb"/>
-
-            <Button
-                android:id="@+id/STbtnEmail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" 
-                android:text="email"/>
-        </LinearLayout>
+            android:layout_height="258dp" />
       
     </LinearLayout>
 
-            
-  
-  <TextView
-      android:id="@+id/STtvName"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content" 
-      android:text="name"/>
-  
+    <TextView
+        android:id="@+id/STtvName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="name" />
   
   <TextView 
       android:id="@+id/STtvProfile"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:text="my profile"
-      />  
+      />
 
+  <LinearLayout
+      android:id="@+id/STmypageCertification"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal" >
+
+      <Button
+          android:id="@+id/STbtnPhone"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="phone" />
+
+      <Button
+          android:id="@+id/STbtnFacebook"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="fb" />
+
+      <Button
+          android:id="@+id/STbtnEmail"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="email" />
+  </LinearLayout>
 	    
 </LinearLayout>
