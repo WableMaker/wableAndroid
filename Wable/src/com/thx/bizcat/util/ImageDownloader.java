@@ -97,6 +97,8 @@ public class ImageDownloader {
         }
     }
       
+    
+    //To Do : Cache Memory에 올리는 로직이 필요하지 않을까?
     public void imageViewProcessing(String localImgUrl, String ServerImgUrl, ImageView imageView)
     {   
     	//1.Cache Memory에 있는지 확인 
@@ -123,7 +125,7 @@ public class ImageDownloader {
 
     				HttpURLConnection conn = (HttpURLConnection)url.openConnection();
     				
-    				//Input Stream은 두번 읽을 수 없음
+    				//주의 : Input Stream은 두번 읽을 수 없음 (파일 저장 후 다시 읽어오는 로직으로 구현)
     				InputStream is = conn.getInputStream();    									
     				
     				FileOutputStream fos = new FileOutputStream(localImgUrl);
