@@ -16,6 +16,7 @@ package com.thx.bizcat.util;
  * limitations under the License.
  */
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -36,6 +37,7 @@ import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.ByteArrayBuffer;
 
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
@@ -96,47 +98,56 @@ public class ImageDownloader {
     }
       
     public void imageViewProcessing(String localImgUrl, String ServerImgUrl, ImageView imageView)
-    {    	    	
+    {   
     	//1.Cache Memory에 있는지 확인 
     	Bitmap bitmap = getBitmapFromCache(localImgUrl);
     	
     	if (bitmap == null) {
     	
     		//이미지가 파일로 다운로드 되어 있는지 확인
-    		File file = new File(localImgUrl);
+    		File file = new File(localImgUrl);    	
     		if(file.exists()) 
     		{    		
-    			Bitmap bm = BitmapFactory.decodeFile(files);
-    			imageView.setImageBitmap(bm);    			    			
+    			Bitmap bm = BitmapFactory.decodeFile(file.getAbsolutePath());
+    			if(bm!=null)
+    				imageView.setImageBitmap(bm);
+    			else
+    				file.delete();
     		}
     		else
     		{
     			try
     			{
-    				//이미지 서버에서 다운로드해서 로컬 저장 후 View에 띄우기
+    				//이미지 서버에서 다운로드해서 로컬 저장
     				URL url = new URL(ServerImgUrl);
 
     				HttpURLConnection conn = (HttpURLConnection)url.openConnection();
     				
-    				InputStream is = conn.getInputStream();    				
-					FileOutputStream fos = new FileOutputStream(localImgUrl);
-					
-					Bitmap bm = BitmapFactory.decodeStream(is);
+    				//Input Stream은 두번 읽을 수 없음
+    				InputStream is = conn.getInputStream();    									
+    				
+    				FileOutputStream fos = new FileOutputStream(localImgUrl);
+									
+					int len = conn.getContentLength();										
+					byte[] raster = new byte[len];
 
-					int len = conn.getContentLength();
-					byte[] bt = new byte[len];
-					
-					while(true){						
-						int read = is.read(bt);
-						if(read <= 0)break;
-						fos.write(bt, 0, read);
-					}
-					
-					imageView.setImageBitmap(bm);
+					int Read=0;
+					while(true) {
+						Read = is.read(raster);
+						if (Read <= 0) {
+							break;
+						}
+						fos.write(raster, 0, Read);
+					}											
+														
 					is.close();
 					fos.close();
 					conn.disconnect();
-
+					
+					//저장된 이미지 표시함
+					Bitmap bm = BitmapFactory.decodeFile(localImgUrl);
+	    			if(bm!=null)
+	    				imageView.setImageBitmap(bm);
     			}
     			catch(Exception e)
     			{

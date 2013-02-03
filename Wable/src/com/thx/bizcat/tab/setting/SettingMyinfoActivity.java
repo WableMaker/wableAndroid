@@ -4,13 +4,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.facebook.android.Util;
 import com.thx.bizcat.R;
 import com.thx.bizcat.http.apiproxy.APICODE;
 import com.thx.bizcat.http.apiproxy.APIProxyLayer;
@@ -35,15 +35,24 @@ public class SettingMyinfoActivity extends Activity implements OnClickListener, 
 			switch(APICODE.fromInt(msg.what)) {
 			
 			case MyInfo:
-				sp_MyInfo_Items r = (sp_MyInfo_Items)msg.obj;
-				if(r.bsuccess){					
-					String ServerImgUrl = Utils.BaseImgUrl+r.result.photo;
-					String localImgUrl = getFilesDir().getAbsolutePath() +  "/datas/"+r.result.photo;
-					
-					ImageDownloader.getInstance().imageViewProcessing(localImgUrl, ServerImgUrl, (ImageView)findViewById(R.id.STimageProfile));										
+				try
+				{
+					sp_MyInfo_Items r = (sp_MyInfo_Items)msg.obj;
+					if(r.bsuccess){					
+						String ServerImgUrl = Utils.BaseImgUrl+r.result.photo;
+						//String localImgUrl = getFilesDir().getAbsolutePath() +'/'+ r.result.photo;
+						
+						Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).mkdirs();						
+						String localImgUrl = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath() +'/'+ r.result.photo;
+						ImageDownloader.getInstance().imageViewProcessing(localImgUrl, ServerImgUrl, (ImageView)findViewById(R.id.STimageProfile));										
+					}
+					else
+						Toast.makeText(context, r.resultCode.toString() , Toast.LENGTH_LONG).show();
 				}
-				else
-					Toast.makeText(context, r.resultCode.toString() , Toast.LENGTH_LONG).show();				
+				catch(Exception e)
+				{
+					e.printStackTrace();	
+				}							
 				break;
 				
 			default:
