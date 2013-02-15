@@ -33,12 +33,7 @@
         <activity android:name=".tab.mypage.MypageActivity" android:launchMode="singleTop"></activity>
         <activity android:name=".tab.mypage.OfferListActivity"></activity>
         <activity android:name="MainActivity" android:theme="@android:style/Theme.NoTitleBar" android:launchMode="singleTop"></activity>
-        <activity android:name=".tab.post.RequestCategory" android:theme="@android:style/Theme.NoTitleBar"></activity>
         <activity android:name=".tab.post.PostActivity" android:launchMode="singleTop" android:theme="@android:style/Theme.NoTitleBar"></activity>
-        <activity android:name=".tab.post.RequestPost" android:theme="@android:style/Theme.NoTitleBar"></activity>
-        <activity android:name=".tab.post.RequestPostList" android:theme="@android:style/Theme.NoTitleBar"></activity>
-        <activity android:name=".tab.post.RequestPostSubmit" android:clearTaskOnLaunch="true" android:theme="@android:style/Theme.NoTitleBar"></activity>
-        <activity android:name=".tab.post.RequestCategorySub" android:launchMode="singleTop" android:theme="@android:style/Theme.NoTitleBar"></activity>
         <activity android:name=".tab.search.SearchActivity" android:theme="@android:style/Theme.NoTitleBar"></activity>
         <activity android:name=".tab.setting.SettingActivity"></activity>
         <activity android:name=".tab.setting.SettingMyinfoActivity" android:theme="@android:style/Theme.NoTitleBar"></activity>
@@ -52,10 +47,8 @@
         <activity android:name=".tab.search.SearchProvideMap" android:theme="@android:style/Theme.NoTitleBar"></activity>
         <activity android:name=".tab.search.SearchRequestActivity" android:theme="@android:style/Theme.NoTitleBar"></activity>
         <activity android:name=".chat.ChatActivity"></activity>
-        <activity android:name=".tab.mypage.sub.ProviderAskActivity"></activity>
-        <activity android:name=".tab.mypage.sub.ProviderPostActivity"></activity>
-        <activity android:name=".tab.mypage.sub.RequestAskActivity"></activity>
-        <activity android:name=".tab.mypage.sub.RequestPostActivity"></activity>
+        <activity android:name=".tab.post.PostRequest" android:theme="@android:style/Theme.NoTitleBar"></activity>
+        <activity android:name=".tab.post.PostProvide" android:theme="@android:style/Theme.NoTitleBar"></activity>
         
     </application>
 

@@ -26,32 +26,23 @@
         android:background="@drawable/biz_tab_bar"
         android:gravity="bottom" >
 
-
         <Button
             android:id="@+id/btnMainMypage"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/biz_tab_bar_my_selected" />
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:background="@drawable/biz_my_selected" />
 
         <Button
             android:id="@+id/btnMainPost"
-            android:layout_width="160dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/biz_go_selected" />
-
-        <Button
-            android:id="@+id/btnMainSearch"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/tab_bar_browse"
-            android:visibility="gone" />
-
+            android:layout_width="120dp"
+            android:layout_height="50dp"
+            android:background="@null" />
 
         <Button
             android:id="@+id/btnMainSetting"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/biz_tab_bar_setting_selected" />
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@null" />
 
     </LinearLayout>
 

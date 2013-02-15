@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg01_patten"
     android:orientation="vertical" >
-
+
+
     <RelativeLayout
         android:id="@+id/MYPAGE_RQrelNoitem"
         android:layout_width="wrap_content"
@@ -20,7 +21,8 @@
         android:layout_marginTop="57dp"
         android:gravity="center"
         android:text="내가 요청한 내역이 보이는 곳이에요. \n제공자들과 채팅하며 가격이나 \n서비스 내용에 대해 얘기해 보세요." />
-
+
+
     <Button
         android:id="@+id/MYPAGE_RQbtnPost"
         android:layout_width="wrap_content"
@@ -30,7 +32,8 @@
         android:layout_marginTop="73dp"
         android:background="@drawable/tab1_request_btn"
         android:text="요청 등록하기" />
-
+
+
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"

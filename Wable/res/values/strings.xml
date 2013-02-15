@@ -18,5 +18,6 @@
     <string name="setting_cert_email">이메일 인증</string>
     <string name="setting_cert_facebook">페이스북 인증</string>
     <string name="setting_cert_phone">휴대폰 인증</string>
+    <string name="_">피아노 레슨</string>
     
 </resources>

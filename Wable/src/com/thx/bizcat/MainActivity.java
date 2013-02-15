@@ -33,7 +33,7 @@ public class MainActivity extends ActivityGroup implements OnClickListener {
 		container = (LinearLayout)findViewById(R.id.Containers);
 		findViewById(R.id.btnMainMypage).setOnClickListener(this);
 		findViewById(R.id.btnMainPost).setOnClickListener(this);
-		findViewById(R.id.btnMainSearch).setOnClickListener(this);
+		//findViewById(R.id.btnMainSearch).setOnClickListener(this);
 		findViewById(R.id.btnMainSetting).setOnClickListener(this);
 		
 		views = new View[3];
@@ -44,7 +44,7 @@ public class MainActivity extends ActivityGroup implements OnClickListener {
 		
 		viewId = R.id.btnMainMypage;		
 		originView = findViewById(R.id.btnMainMypage);			
-		viewImage = getResources().getDrawable(R.drawable.tab_bar_activity);
+		viewImage = null;
 		
 		container.addView(views[0]);	
 		
@@ -76,12 +76,12 @@ public class MainActivity extends ActivityGroup implements OnClickListener {
 		
 		case R.id.btnMainMypage:
 			container.addView(views[0]);			
-			v.setBackgroundResource(R.drawable.tab_bar_activity_selected);
+			v.setBackgroundResource(R.drawable.biz_my_selected);
 			break;
 			
 		case R.id.btnMainPost:
 			container.addView(views[1]);
-			v.setBackgroundResource(R.drawable.tab_bar_post_selected);
+			v.setBackgroundResource(R.drawable.biz_tab_bar_go_selected);
 			break;
 					
 		//case R.id.btnMainSearch:
@@ -91,7 +91,7 @@ public class MainActivity extends ActivityGroup implements OnClickListener {
 			
 		case R.id.btnMainSetting:
 			container.addView(views[2]);
-			v.setBackgroundResource(R.drawable.tab_bar_profile_selected);
+			v.setBackgroundResource(R.drawable.biz_setting_selected);
 			break;
 
 		}		

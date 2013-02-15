@@ -28,22 +28,27 @@
         <TextView
             android:id="@+id/MYBIZbtnReqPost"
             android:layout_width="80dp"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:background="@drawable/s_mybiz_post_req" />
 
         <TextView
             android:id="@+id/MYBIZbtnReqAsk"
             android:layout_width="80dp"
-            android:layout_height="70dp" />
+            android:layout_height="70dp"
+            android:background="@drawable/s_mybiz_post_pro" />
 
         <TextView
             android:id="@+id/MYBIZbtnProvPost"
             android:layout_width="80dp"
-            android:layout_height="70dp" />
+            android:layout_height="70dp"
+            android:background="@drawable/s_mybiz_ask_req" />
 
         <TextView
             android:id="@+id/MYBIZbtnProvAsk"
             android:layout_width="80dp"
-            android:layout_height="70dp" />
+            android:layout_height="70dp"
+            android:background="@drawable/s_mybiz_ask_pro" />
+
     </LinearLayout>
 
     <ListView
@@ -53,7 +58,9 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/linearLayout1" >
+        android:layout_below="@+id/linearLayout1"
+        android:fadingEdge="none" >
+
     </ListView>
 
 </RelativeLayout>

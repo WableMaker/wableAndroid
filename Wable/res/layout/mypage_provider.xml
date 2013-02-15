@@ -5,7 +5,9 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg01_patten"
     android:orientation="vertical" >
-
+
+
+
     <RelativeLayout
         android:id="@+id/MYPAGE_PVrelNoitem"
         android:layout_width="wrap_content"
@@ -20,7 +22,8 @@
         android:layout_marginTop="57dp"
         android:gravity="center"
         android:text="내가 요청한 내역이 보이는 곳이에요. \n제공자들과 채팅하며 가격이나 \n서비스 내용에 대해 얘기해 보세요." />
-
+
+
     <Button
         android:id="@+id/MYPAGE_PVbtnPost"
         android:layout_width="wrap_content"
@@ -30,7 +33,8 @@
         android:layout_marginTop="73dp"
         android:background="@drawable/tab1_request_btn"
         android:text="제공 등록하기" />
-
+
+
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
@@ -50,15 +54,19 @@
         android:text="필요한 서비스를 등록만 하시면 \n실시간으로 제공자들에게서 연락이 옵니다" />
         
     </RelativeLayout>
-
+
+
+
     
-
+
+
     <ScrollView
         android:id="@+id/ScrollView1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true" >
-
+
+
         <LinearLayout
             android:id="@+id/MYPAGE_PVlinear"
             android:layout_width="match_parent"

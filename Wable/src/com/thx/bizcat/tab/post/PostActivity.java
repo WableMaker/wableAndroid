@@ -145,30 +145,40 @@ public class PostActivity extends Activity implements OnClickListener, RefHandle
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.post_main);
+		setContentView(R.layout.go_biz_main);
 		context = this;
 		pref = PreferenceManager.getDefaultSharedPreferences(this);
 		
-		findViewById(R.id.btnPostRequest).setOnClickListener(this);
+		findViewById(R.id.GOBIZtvPostReq).setOnClickListener(this);
+		findViewById(R.id.GOBIZtvPostPro).setOnClickListener(this);
+		findViewById(R.id.GOBIZtvSearchReq).setOnClickListener(this);
+		findViewById(R.id.GOBIZtvSearchPro).setOnClickListener(this);
 
-		if(pref.getBoolean("categoryUpdate", true)) {
-			APIProxyLayer.Instance().CategoryList(mHandler);
-		}
+//		if(pref.getBoolean("categoryUpdate", true)) {
+//			APIProxyLayer.Instance().CategoryList(mHandler);
+//		}
 	}
 
 	@Override
 	public void onClick(View v) {
 		Intent intent;
 		switch (v.getId()) {
-		case R.id.btnPostRequest:
-			
-			intent = new Intent(this, RequestPostSubmit.class);
-			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		case R.id.GOBIZtvPostReq:
+			intent = new Intent(this, PostRequest.class);
 			startActivity(intent);
 			break;
 
-		case R.id.btnPostOffer:
-			
+		case R.id.GOBIZtvPostPro:
+			intent = new Intent(this, PostProvide.class);
+			startActivity(intent);
+			break;
+
+		case R.id.GOBIZtvSearchReq:
+
+			break;
+
+		case R.id.GOBIZtvSearchPro:
+
 			break;
 		}
 		

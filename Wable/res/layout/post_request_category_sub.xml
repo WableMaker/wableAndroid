@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-
+
+
     <RelativeLayout
         android:id="@+id/RelativeLayout2"
         android:layout_width="match_parent"
@@ -19,7 +20,8 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:text="무엇을 원하세요?" android:textColor="#FFFFFF" android:textSize="8pt"/>
-
+
+
         <Button
             android:id="@+id/POSTCategoryDBtnBack"
             android:layout_width="wrap_content"
@@ -37,7 +39,10 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:text="요청사항 직접 작성하기" />
-
+
+
+
+
     <ListView
         android:id="@+id/POSTCategoryDList"
         android:layout_width="match_parent"

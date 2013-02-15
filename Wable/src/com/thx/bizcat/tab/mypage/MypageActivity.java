@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.thx.bizcat.R;
 import com.thx.bizcat.http.apiproxy.APICODE;
@@ -184,16 +185,10 @@ public class MypageActivity extends ActivityGroup  implements OnClickListener, R
 					
 					SqlManager.excuteSql(context, sql);
 				}
-
-
 				
-				
-				
-				
-				
+				findViewById(R.id.MYBIZbtnReqPost).performClick();
 			}
 		}
-			
 			
 			break;
 		default:
@@ -232,10 +227,6 @@ public class MypageActivity extends ActivityGroup  implements OnClickListener, R
 		APIProxyLayer.Instance().UserGetUpdatedContents(
 				LAST_REQUEST, LAST_PROVIDE, LAST_MATCH, LAST_BIDDING, LAST_BIDDINGMSG, "", "", mHandler);
 		
-
-		
-		
-		
 	}
 
 	@Override
@@ -245,7 +236,7 @@ public class MypageActivity extends ActivityGroup  implements OnClickListener, R
 		
 		Cursor c;
 		String sql ="SELECT * FROM";
-		MybizAdapter adapter;
+		MybizAdapter adapter = null;
 		
 		arrays.clear();
 		
@@ -275,13 +266,10 @@ public class MypageActivity extends ActivityGroup  implements OnClickListener, R
 			SqlManager.Release(c);
 			
 			adapter = new MybizAdapter(context, R.layout.mybiz_item, arrays, 0);
-			listview.setAdapter(adapter);
-			
-			
-			
 			break;
 			
 		case R.id.MYBIZbtnReqAsk:
+			Toast.makeText(context, "값이 없습니다", Toast.LENGTH_SHORT).show();
 			break;
 			
 		case R.id.MYBIZbtnProvPost:
@@ -308,14 +296,15 @@ public class MypageActivity extends ActivityGroup  implements OnClickListener, R
 			SqlManager.Release(c);
 			
 			adapter = new MybizAdapter(context, R.layout.mybiz_item, arrays, 1);
-			listview.setAdapter(adapter);
-			
 			break;
 			
 		case R.id.MYBIZbtnProvAsk:
+			Toast.makeText(context, "값이 없습니다", Toast.LENGTH_SHORT).show();
 			break;
 
 		}
+		
+		listview.setAdapter(adapter);
 		originView = v.getId();
 		
 		
