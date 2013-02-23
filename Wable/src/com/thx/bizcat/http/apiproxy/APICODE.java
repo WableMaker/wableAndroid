@@ -1,7 +1,5 @@
 package com.thx.bizcat.http.apiproxy;
 
-import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_CompatiableAppVersion_Result;
-
 import android.util.SparseArray;
 
 public enum APICODE {
@@ -126,6 +124,9 @@ public enum APICODE {
 	CompatiableAppVersion(60),
 	LatestAppVersion(61),
 	BaseImgUrl(62),
+	
+	USERSET1(9000),
+	USERSET2(9001),
 	UNKNOWN(10000);
 
     private static final SparseArray<APICODE> typesByValue = new SparseArray<APICODE>();

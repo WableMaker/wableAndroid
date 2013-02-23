@@ -13,7 +13,8 @@
         android:background="@drawable/biz_splash"
         android:visibility="gone" />
 
-    <RelativeLayout
+    <com.thx.bizcat.util.InterceptHWkeyLayout
+        android:id="@+id/LOGINLayout"
         android:layout_width="fill_parent"
         android:layout_height="300dp"
         android:layout_alignParentLeft="true"
@@ -101,6 +102,6 @@
             android:layout_marginRight="10dp"
             android:background="@drawable/login_input_identity_lostpw_basic_btn" />
 
-    </RelativeLayout>
+    </com.thx.bizcat.util.InterceptHWkeyLayout>
 
 </RelativeLayout>

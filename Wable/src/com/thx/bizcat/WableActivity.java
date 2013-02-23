@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +24,7 @@ import com.thx.bizcat.http.apiproxy.JSONParser.sp_GetMyActiveRequests_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_LogIn_Items;
 import com.thx.bizcat.tab.login.PasswordFindActivity;
 import com.thx.bizcat.tab.login.RegisterActivity;
+import com.thx.bizcat.util.InterceptHWkeyLayout;
 import com.thx.bizcat.util.RefHandlerMessage;
 import com.thx.bizcat.util.Utils;
 import com.thx.bizcat.util.WeakHandler;
@@ -40,6 +42,11 @@ public class WableActivity extends Activity implements OnClickListener, RefHandl
 	
 	private ProgressDialog pd;
 	private SharedPreferences pref;
+	
+	private boolean isUp = false;
+	private LayoutParams params;
+	private InterceptHWkeyLayout upLayout;
+	private int upCnt = 0;
 	
 	/* Handler */
 	private WeakHandler mHandler = new WeakHandler(this);
@@ -87,6 +94,21 @@ public class WableActivity extends Activity implements OnClickListener, RefHandl
 				Toast.makeText(context, r.resultCode.toString() , Toast.LENGTH_LONG).show();
 			break;
 		}
+		
+		case USERSET1:
+			//if(upCnt++ < 5) {
+				
+				params.topMargin -= 300;
+				upLayout.setLayoutParams(params);
+			//}
+			
+			break;
+			
+		case USERSET2:
+			params.topMargin += 300;
+			upLayout.setLayoutParams(params);
+			
+			break;
 		default:
 			tvSplash.setVisibility(View.GONE);
 			break;
@@ -119,11 +141,19 @@ public class WableActivity extends Activity implements OnClickListener, RefHandl
         etUser = (EditText)findViewById(R.id.LOGINeditId);
         etPass = (EditText)findViewById(R.id.LOGINeditPass);
         tvSplash = (TextView)findViewById(R.id.LOGINtvSplash);
+        upLayout = (InterceptHWkeyLayout)findViewById(R.id.LOGINLayout);
+        params = (LayoutParams)upLayout.getLayoutParams();
         
         loginOk.setOnClickListener(this);
        
         etUser.setText("cc");
 		etPass.setText("111111");
+		
+		etUser.setOnClickListener(this);
+		etPass.setOnClickListener(this);
+		
+		upLayout.setInterceptHWkeyLayout(this);
+		
 		
 		mHandler.sendEmptyMessageDelayed(10000, 2000);
 		
@@ -223,8 +253,25 @@ public class WableActivity extends Activity implements OnClickListener, RefHandl
 			APIProxyLayer.Instance().Login(etUser.getText().toString(), etPass.getText().toString(), mHandler);
 			break;
 			
+		case R.id.LOGINeditId:
+		case R.id.LOGINeditPass:
+
+			if(!isUp) {
+				isUp = true;
+				mHandler.sendEmptyMessageDelayed(9000, 50);
+			}
+				
+			break;
+			
 		}
 	}
-
+	
+	public void upLayoutF() {
+		if(isUp) {
+			isUp = false;
+			mHandler.sendEmptyMessageDelayed(9001, 300);
+		}
+	}
+	
 
 }
