@@ -9,7 +9,7 @@
         android:id="@+id/textView1"
         android:layout_width="fill_parent"
         android:layout_height="50dp"
-        android:background="@drawable/biz_nav_bar"
+        android:background="@drawable/top_indicator_green"
         android:gravity="center_vertical|center_horizontal"
         android:text="My BizCat"
         android:textColor="#FFFFFF"
@@ -22,7 +22,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/textView1"
-        android:background="@drawable/biz_upper_tab_bar"
+        android:background="@drawable/mybizcat_top_menu_basic_btn"
         android:weightSum="10" >
 
         <TextView

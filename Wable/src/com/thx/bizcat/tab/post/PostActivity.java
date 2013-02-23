@@ -13,11 +13,9 @@ import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.View.OnClickListener;
 
-import com.thx.bizcat.MainActivity;
 import com.thx.bizcat.R;
 import com.thx.bizcat.adapter.CategoryElement;
 import com.thx.bizcat.http.apiproxy.APICODE;
-import com.thx.bizcat.http.apiproxy.APIProxyLayer;
 import com.thx.bizcat.util.RefHandlerMessage;
 import com.thx.bizcat.util.WeakHandler;
 
@@ -169,8 +167,8 @@ public class PostActivity extends Activity implements OnClickListener, RefHandle
 			break;
 
 		case R.id.GOBIZtvPostPro:
-			intent = new Intent(this, PostProvide.class);
-			startActivity(intent);
+			//intent = new Intent(this, PostProvide.class);
+			//startActivity(intent);
 			break;
 
 		case R.id.GOBIZtvSearchReq:

@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
  <selector xmlns:android="http://schemas.android.com/apk/res/android">
-     <item android:state_pressed="true"
-           android:drawable="@drawable/biz_request_ask_btn_sel" /> <!-- pressed -->
+
+     
+          <item android:state_pressed="true"
+           android:drawable="@drawable/gobizcat_provider_search_selected_btn" /> <!-- pressed -->
+           
+     <item android:drawable="@drawable/gobizcat_provider_search_basic_btn" /> <!-- default -->
  </selector>

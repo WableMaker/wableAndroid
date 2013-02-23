@@ -1,23 +1,13 @@
 package com.thx.bizcat.adapter;
 
-import java.io.File;
 import java.util.List;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.thx.bizcat.R;
-import com.thx.bizcat.tab.post.RequestCategorySub;
 import com.thx.bizcat.util.ImageDownloader;
 import com.thx.bizcat.util.ImageDownloader.Mode;
 
@@ -64,57 +54,57 @@ public class CategoryAdapter extends BaseAdapter {
 		
 		if(view == null) view = inflater.inflate(layout, group, false);
 	
-		CategoryElement item = list.get(pos);
-		TextView tv = (TextView)view.findViewById(R.id.POSTCategoryItemText);
-		tv.setTag(pos);
-		tv.setText(item.getTitle() +"/"+item.getId());
+//		CategoryElement item = list.get(pos);
+//		TextView tv = (TextView)view.findViewById(R.id.POSTCategoryItemText);
+//		tv.setTag(pos);
+//		tv.setText(item.getTitle() +"/"+item.getId());
+//		
+//		ImageView iv = (ImageView)view.findViewById(R.id.POSTCategoryItemImage);
 		
-		ImageView iv = (ImageView)view.findViewById(R.id.POSTCategoryItemImage);
-		
-		Bitmap bitmap = item.getBitmap();
-		if(bitmap != null) {
-			
-			iv.setImageBitmap(bitmap);	
-			if(pos == 0)
-			Toast.makeText(context, cnt++ +" : ĳ��", Toast.LENGTH_SHORT).show();
-			
-		} else {
-		
-			
-			String url = urls[pos];
-			String name = url.substring(url.lastIndexOf("/"), url.lastIndexOf("."));
-			
-			String path = context.getFilesDir().getAbsolutePath() +"/cate";
-			String files = path  + name;
-			File file = new File(files);
-			if(file.exists()) {
-			
-				Bitmap bm = BitmapFactory.decodeFile(files);
-				iv.setImageBitmap(bm);
-				list.get(pos).setBitmap(bm);
-				
-				if(pos == 0)
-				Toast.makeText(context, cnt++ +" : ����", Toast.LENGTH_SHORT).show();
-				
-			} else {
-				ImageDownloader.getInstance().download(urls[pos], iv, path);
-				if(pos == 0)
-				Toast.makeText(context, cnt++ +" : �ٿ�", Toast.LENGTH_SHORT).show();
-			}
-		}
-		
-		view.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				
-				Intent i = new Intent(context, RequestCategorySub.class);
-				i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				i.putExtra("ID", list.get(pos).getId());	
-				context.startActivity(i);
-				
-			}
-		});
+//		Bitmap bitmap = item.getBitmap();
+//		if(bitmap != null) {
+//			
+//			iv.setImageBitmap(bitmap);	
+//			if(pos == 0)
+//			Toast.makeText(context, cnt++ +" : ĳ��", Toast.LENGTH_SHORT).show();
+//			
+//		} else {
+//		
+//			
+//			String url = urls[pos];
+//			String name = url.substring(url.lastIndexOf("/"), url.lastIndexOf("."));
+//			
+//			String path = context.getFilesDir().getAbsolutePath() +"/cate";
+//			String files = path  + name;
+//			File file = new File(files);
+//			if(file.exists()) {
+//			
+//				Bitmap bm = BitmapFactory.decodeFile(files);
+//				iv.setImageBitmap(bm);
+//				list.get(pos).setBitmap(bm);
+//				
+//				if(pos == 0)
+//				Toast.makeText(context, cnt++ +" : ����", Toast.LENGTH_SHORT).show();
+//				
+//			} else {
+//				ImageDownloader.getInstance().download(urls[pos], iv, path);
+//				if(pos == 0)
+//				Toast.makeText(context, cnt++ +" : �ٿ�", Toast.LENGTH_SHORT).show();
+//			}
+//		}
+//		
+//		view.setOnClickListener(new OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				
+//				Intent i = new Intent(context, RequestCategorySub.class);
+//				i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//				i.putExtra("ID", list.get(pos).getId());	
+//				context.startActivity(i);
+//				
+//			}
+//		});
 	
 		return view;
 	}

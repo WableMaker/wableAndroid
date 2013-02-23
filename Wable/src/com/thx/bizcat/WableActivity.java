@@ -5,13 +5,11 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Message;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnFocusChangeListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -37,7 +35,7 @@ public class WableActivity extends Activity implements OnClickListener, RefHandl
 	private Facebook facebook;
 	private Button loginOk;
 	
-	private EditText etUser, etPass, etUp;
+	private EditText etUser, etPass;
 	private TextView tvSplash; 
 	
 	private ProgressDialog pd;
@@ -120,7 +118,6 @@ public class WableActivity extends Activity implements OnClickListener, RefHandl
         loginOk = (Button)findViewById(R.id.LOGINbtnLogin);
         etUser = (EditText)findViewById(R.id.LOGINeditId);
         etPass = (EditText)findViewById(R.id.LOGINeditPass);
-        etUp = (EditText)findViewById(R.id.LOGINeditUp);        
         tvSplash = (TextView)findViewById(R.id.LOGINtvSplash);
         
         loginOk.setOnClickListener(this);

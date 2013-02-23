@@ -38,7 +38,7 @@ public class RequestListActivity extends MapActivity implements LocationListener
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.mypage_requestlist);
+		//setContentView(R.layout.mypage_requestlist);
 	
 		mapview = (MapView)findViewById(R.id.mapview);		
 		

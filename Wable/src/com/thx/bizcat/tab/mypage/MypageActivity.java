@@ -2,11 +2,9 @@ package com.thx.bizcat.tab.mypage;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import android.app.ActivityGroup;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.database.Cursor;
@@ -15,7 +13,6 @@ import android.os.Message;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -30,10 +27,6 @@ import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetMyUpdatedMatch_Resul
 import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetMyUpdatedProvides_Result;
 import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetMyUpdatedRequests_Result;
 import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetNewMessage_Result;
-import com.thx.bizcat.tab.mypage.sub.ProviderAskActivity;
-import com.thx.bizcat.tab.mypage.sub.ProviderPostActivity;
-import com.thx.bizcat.tab.mypage.sub.RequestAskActivity;
-import com.thx.bizcat.tab.mypage.sub.RequestPostActivity;
 import com.thx.bizcat.util.RefHandlerMessage;
 import com.thx.bizcat.util.SqlManager;
 import com.thx.bizcat.util.WeakHandler;
@@ -60,8 +53,8 @@ public class MypageActivity extends ActivityGroup  implements OnClickListener, R
 			if(r.bsuccess) {
 
 				ArrayList<RequestAdapterItem> list = new ArrayList<RequestAdapterItem>();
-				RequestAdapter requestAdapter = 
-						new RequestAdapter(context, R.layout.mypage_request_item, list);
+			    //RequestAdapter requestAdapter = 
+				//		new RequestAdapter(context, R.layout.mypage_request_item, list);
 				//listRequest.setAdapter(requestAdapter);
 			}
 		}
@@ -73,8 +66,8 @@ public class MypageActivity extends ActivityGroup  implements OnClickListener, R
 			if(r.bsuccess) {
 
 				ArrayList<ProviderAdapterItem> list = new ArrayList<ProviderAdapterItem>();
-				ProviderAdapter providerAdapter = 
-						new ProviderAdapter(context, R.layout.mypage_provider_item, list);
+				//ProviderAdapter providerAdapter = 
+				//		new ProviderAdapter(context, R.layout.mypage_provider_item, list);
 				//listRequest.setAdapter(providerAdapter);
 			}
 		}

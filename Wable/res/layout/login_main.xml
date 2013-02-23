@@ -3,13 +3,8 @@
     android:id="@+id/RelativeLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg01_patten"
+    android:background="@drawable/bg"
     android:orientation="vertical" >
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/biz_login_base" />
 
     <TextView
         android:id="@+id/LOGINtvSplash"
@@ -19,28 +14,29 @@
         android:visibility="gone" />
 
     <RelativeLayout
-        android:layout_marginTop="230sp"
         android:layout_width="fill_parent"
         android:layout_height="300dp"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true" >
-
-        <EditText
-            android:id="@+id/LOGINeditUp"
-            android:layout_width="1dp"
-            android:layout_height="1dp"
-            android:background="#00000000"
-            android:ems="10"
-            android:inputType="textEmailAddress" />
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="230sp" >
 
         <Button
             android:id="@+id/LOGINbtnFb"
             android:layout_width="268dp"
             android:layout_height="46dp"
-            android:layout_below="@+id/LOGINeditUp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="81dp"
-            android:background="@drawable/biz_login_fb" />
+            android:layout_marginTop="10dp"
+            android:background="@drawable/login_facebook_login_basic_btn" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/LOGINbtnRegister"
+            android:layout_alignLeft="@+id/LOGINbtnFb"
+            android:layout_alignRight="@+id/LOGINbtnFb"
+            android:layout_alignTop="@+id/LOGINeditId"
+            android:background="@drawable/login_input_identity" />
 
         <EditText
             android:id="@+id/LOGINeditId"
@@ -85,7 +81,7 @@
             android:layout_alignLeft="@+id/LOGINbtnFb"
             android:layout_below="@+id/LOGINeditPass"
             android:layout_marginLeft="10dp"
-            android:background="@drawable/biz_login_signup" />
+            android:background="@drawable/login_login_basic_btn" />
 
         <Button
             android:id="@+id/LOGINbtnLogin"
@@ -94,15 +90,16 @@
             android:layout_alignBaseline="@+id/LOGINbtnRegister"
             android:layout_alignBottom="@+id/LOGINbtnRegister"
             android:layout_toRightOf="@+id/LOGINbtnRegister"
-            android:background="@drawable/biz_login_log" />
+            android:background="@drawable/login_member_basic_btn" />
 
         <Button
             android:id="@+id/LOGINbtnFind"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/LOGINeditPass"
-            android:layout_alignRight="@+id/LOGINbtnFb"
-            android:background="@drawable/selector_login_password_btn" />
+            android:layout_alignRight="@+id/textView1"
+            android:layout_alignTop="@+id/LOGINeditPass"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/login_input_identity_lostpw_basic_btn" />
 
     </RelativeLayout>
 

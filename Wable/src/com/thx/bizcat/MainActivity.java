@@ -33,13 +33,11 @@ public class MainActivity extends ActivityGroup implements OnClickListener {
 		container = (LinearLayout)findViewById(R.id.Containers);
 		findViewById(R.id.btnMainMypage).setOnClickListener(this);
 		findViewById(R.id.btnMainPost).setOnClickListener(this);
-		//findViewById(R.id.btnMainSearch).setOnClickListener(this);
 		findViewById(R.id.btnMainSetting).setOnClickListener(this);
 		
 		views = new View[3];
 		views[0] = getLocalActivityManager().startActivity("MYPAGE", new Intent(this, MypageActivity.class)).getDecorView();
 		views[1] = getLocalActivityManager().startActivity("POST", new Intent(this, PostActivity.class)).getDecorView();
-		//views[2] = getLocalActivityManager().startActivity("SEARCH", new Intent(this, SearchActivity.class)).getDecorView();
 		views[2] = getLocalActivityManager().startActivity("SETTING", new Intent(this, SettingActivity.class)).getDecorView();
 		
 		viewId = R.id.btnMainMypage;		
@@ -76,22 +74,17 @@ public class MainActivity extends ActivityGroup implements OnClickListener {
 		
 		case R.id.btnMainMypage:
 			container.addView(views[0]);			
-			v.setBackgroundResource(R.drawable.biz_my_selected);
+			v.setBackgroundResource(R.drawable.menu_tabbar_mybizcat_selected_btn);
 			break;
 			
 		case R.id.btnMainPost:
 			container.addView(views[1]);
-			v.setBackgroundResource(R.drawable.biz_tab_bar_go_selected);
+			v.setBackgroundResource(R.drawable.menu_tabbar_gobizcat_selected_btn);
 			break;
-					
-		//case R.id.btnMainSearch:
-		//	container.addView(views[2]);
-		//	v.setBackgroundResource(R.drawable.tab_bar_browse_selected);
-		//	break;
-			
+
 		case R.id.btnMainSetting:
 			container.addView(views[2]);
-			v.setBackgroundResource(R.drawable.biz_setting_selected);
+			v.setBackgroundResource(R.drawable.menu_tabbar_setting_selected_btn);
 			break;
 
 		}		

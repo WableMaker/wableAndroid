@@ -3,14 +3,23 @@
     android:id="@+id/RelativeLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg01_patten"
+    android:background="@drawable/bg"
     android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_above="@+id/GOBIZ_REQtvGoBtn"
+        android:layout_below="@+id/textView3"
+        android:layout_margin="10dp"
+        android:background="@drawable/registered_asking_menu_shadow" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@drawable/biz_nav_bar"
+        android:background="@drawable/top_indicator_green"
         android:gravity="center"
         android:text="요청사항 등록하기"
         android:textColor="#FFF"
@@ -23,58 +32,17 @@
         android:layout_height="40dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:background="@drawable/biz_gobizcat_req_go" />
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_above="@+id/GOBIZ_REQtvGoBtn"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/biz_map_tag" />
+        android:background="@drawable/registered_asking_gobizcat_basic_btn" />
 
     <TextView
         android:id="@+id/GOBIZ_REQtvMapBtn"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_alignBaseline="@+id/textView1"
-        android:layout_alignBottom="@+id/textView1"
-        android:layout_alignRight="@+id/mapview"
-        android:background="@drawable/biz_map_btn" />
-
-    <TextView
-        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/textView1"
-        android:layout_alignParentLeft="true"
-        android:layout_alignTop="@+id/textView1"
-        android:layout_marginLeft="17dp"
-        android:text="여기에 맵을 입력하시ㅗㅇ" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_above="@+id/textView1"
-        android:layout_below="@+id/GOBIZ_REQtvTime"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="20dp"
-        android:background="@drawable/biz_map" />
-
-    <com.google.android.maps.MapView
-        android:id="@+id/mapview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView4"
-        android:layout_alignLeft="@+id/textView4"
-        android:layout_alignRight="@+id/textView4"
-        android:layout_alignTop="@+id/textView4"
-        android:layout_margin="4dp"
-        android:apiKey="0oqzs7eIvbFX8Faveem2CANcvsCaS5O1nULYH3A"
-        android:clickable="true" >
-
-    </com.google.android.maps.MapView>
+        android:layout_alignRight="@+id/textView1"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="14dp"
+        android:background="@drawable/registered_asking_location_basic_btn" />
 
     <TextView
         android:id="@+id/GOBIZ_REQtvTitle"
@@ -82,30 +50,67 @@
         android:layout_height="40dp"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/textView3"
-        android:background="@drawable/biz_gobizcat_req_title" />
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/registered_asking_keyword_basic_btn" />
 
     <TextView
         android:id="@+id/GOBIZ_REQtvDesc"
         android:layout_width="wrap_content"
         android:layout_height="70dp"
-        android:layout_alignParentLeft="true"
+        android:layout_alignLeft="@+id/GOBIZ_REQtvTitle"
+        android:layout_alignRight="@+id/GOBIZ_REQtvTitle"
         android:layout_below="@+id/GOBIZ_REQtvTitle"
-        android:background="@drawable/biz_gobizcat_req_des" />
+        android:background="@drawable/registered_asking_text_basic_btn" />
 
-    <TextView
-        android:id="@+id/GOBIZ_REQtvPrice"
+    <LinearLayout
+        android:id="@+id/linearLayout1"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_alignParentLeft="true"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/GOBIZ_REQtvTitle"
+        android:layout_alignRight="@+id/GOBIZ_REQtvTitle"
         android:layout_below="@+id/GOBIZ_REQtvDesc"
-        android:background="@drawable/biz_gobizcat_req_price" />
+        android:weightSum="1" >
+
+        <TextView
+            android:id="@+id/GOBIZ_REQtvPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/registered_asking_price_basic_btn" />
+
+        <TextView
+            android:id="@+id/GOBIZ_REQtvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/registered_asking_time_basic_btn" />
+    </LinearLayout>
 
     <TextView
-        android:id="@+id/GOBIZ_REQtvTime"
+        android:id="@+id/textView4"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/GOBIZ_REQtvPrice"
-        android:background="@drawable/biz_gobizcat_req_time" />
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/GOBIZ_REQtvGoBtn"
+        android:layout_alignLeft="@+id/GOBIZ_REQtvTitle"
+        android:layout_alignRight="@+id/GOBIZ_REQtvTitle"
+        android:layout_below="@+id/linearLayout1"
+        android:layout_marginBottom="70dp"
+        android:background="@drawable/registered_asking_map_base" />
+
+    <com.google.android.maps.MapView
+        android:id="@+id/mapview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView4"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_alignRight="@+id/textView1"
+        android:layout_alignTop="@+id/textView4"
+        android:layout_margin="4dp"
+        android:apiKey="0oqzs7eIvbFX8Faveem2CANcvsCaS5O1nULYH3A"
+        android:clickable="true" >
+
+    </com.google.android.maps.MapView>
 
 </RelativeLayout>

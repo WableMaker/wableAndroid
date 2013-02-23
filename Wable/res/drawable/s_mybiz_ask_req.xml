@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
  <selector xmlns:android="http://schemas.android.com/apk/res/android">
      <item android:state_pressed="true"
-           android:drawable="@drawable/mybiz_ask_req" /> <!-- pressed -->
+           android:drawable="@drawable/mybizcat_registered_asking_selected_btn" /> <!-- pressed -->
  </selector>

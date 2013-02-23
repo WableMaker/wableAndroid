@@ -43,7 +43,7 @@
         android:layout_alignRight="@id/STbtnPushToggle"/>
 
     <TextView
-        android:id="@+id/TextView01"
+        android:id="@+id/MYBIZITEMtvLike"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/STbtnPushToggle"
@@ -68,7 +68,7 @@
         android:id="@+id/STetEndtime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/TextView01"
+        android:layout_alignLeft="@id/MYBIZITEMtvLike"
         android:layout_alignRight="@id/checkBox1"
         android:layout_below="@id/checkBox1"
         android:ems="10"

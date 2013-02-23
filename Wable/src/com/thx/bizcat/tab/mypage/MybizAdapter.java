@@ -47,7 +47,8 @@ public class MybizAdapter extends BaseAdapter  {
 		tv.setText(e.getPrice() +"");
 		
 		tv = (TextView)view.findViewById(R.id.MYBIZITEMtvTime);
-		TextView img = (TextView)view.findViewById(R.id.MYBIZITEMtvState);
+		tv = (TextView)view.findViewById(R.id.MYBIZITEMtvReq);
+		tv = (TextView)view.findViewById(R.id.MYBIZITEMtvLike);
 		
 		Calendar c = Calendar.getInstance(Locale.KOREA);
 		
@@ -96,7 +97,8 @@ public class MybizAdapter extends BaseAdapter  {
 			tv.setText(e.getPrice() +"");
 			
 			tv = (TextView)view.findViewById(R.id.MYBIZITEMtvTime);
-			TextView img = (TextView)view.findViewById(R.id.MYBIZITEMtvState);
+			tv = (TextView)view.findViewById(R.id.MYBIZITEMtvReq);
+			tv = (TextView)view.findViewById(R.id.MYBIZITEMtvLike);
 			
 			Calendar c = Calendar.getInstance(Locale.KOREA);
 

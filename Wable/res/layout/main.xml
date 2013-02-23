@@ -3,7 +3,7 @@
     android:id="@+id/RelativeLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg01_patten"
+    android:background="@drawable/bg"
     android:orientation="vertical" >
 
     <LinearLayout
@@ -13,24 +13,20 @@
         android:orientation="vertical">
     </LinearLayout>
 
-
-
-
-
     <LinearLayout
         android:id="@+id/Bottom"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:background="@drawable/biz_tab_bar"
+        android:background="@drawable/menu_tabbar_base_btn"
         android:gravity="bottom" >
 
         <Button
             android:id="@+id/btnMainMypage"
             android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:background="@drawable/biz_my_selected" />
+            android:layout_height="wrap_content"
+            android:background="@drawable/menu_tabbar_mybizcat_selected_btn" />
 
         <Button
             android:id="@+id/btnMainPost"

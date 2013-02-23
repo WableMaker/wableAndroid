@@ -84,7 +84,7 @@ public class PostRequest extends MapActivity implements LocationListener, OnClic
 		findViewById(R.id.GOBIZ_REQtvGoBtn).setOnClickListener(this);
 		
 		mapview = (MapView)findViewById(R.id.mapview);
-		tvAddr = (TextView)findViewById(R.id.textPostSubmitAddr);
+		//tvAddr = (TextView)findViewById(R.id.textPostSubmitAddr);
 		
 		mapCtrl = mapview.getController();
 		mapCtrl.setZoom(16);
