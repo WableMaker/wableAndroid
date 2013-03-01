@@ -29,6 +29,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.http.HttpEntity;
@@ -38,6 +39,8 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.ByteArrayBuffer;
+
+import com.thx.bizcat.http.IHttpConnectionLayer;
 
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
@@ -98,7 +101,7 @@ public class ImageDownloader {
     }
       
     
-    //To Do : Cache Memory에 올리는 로직이 필요하지 않을까?
+    //이미지 다운로드
     public void imageViewProcessing(String localImgUrl, String ServerImgUrl, ImageView imageView)
     {   
     	//1.Cache Memory에 있는지 확인 
@@ -163,6 +166,21 @@ public class ImageDownloader {
     	}
     }
     
+    IHttpConnectionLayer _httpLayer;
+    String _domain= "http://wable.co.kr/";    
+    public void uploadImage(String localImgUrl)
+    {
+    	
+    	Map<String,Object> params = new HashMap<String,Object>();
+    	String fileName = "upload_test";
+    	params.put("fileName", fileName);
+    	    	
+		final Map<String,Object> files = new HashMap<String,Object>();
+		files.put("filepath", localImgUrl);
+    	
+    	_httpLayer.POSTFileSync(_domain+"Setting/ImageUpload", params, files);
+    
+    }
     
     /*
      * Same as download but the image is always downloaded and the cache is not used.

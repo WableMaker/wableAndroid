@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="hello">Hello World, WableActivity!</string>
+    <string name="hello">Hello World, BizCat Activity!</string>
     <string name="app_name">BIzCat</string>
     
     <string name="setting">설정</string>
     <string name="setting_faq">FAQ</string>
-    <string name="setting_howtouse">Wable 이용방법</string>
+    <string name="setting_howtouse">BizCat 이용방법</string>
     <string name="setting_intro_movie">소개동영상</string>
     <string name="setting_logout">로그아웃</string>
     <string name="setting_myinfo">내 정보</string>
@@ -19,5 +19,8 @@
     <string name="setting_cert_facebook">페이스북 인증</string>
     <string name="setting_cert_phone">휴대폰 인증</string>
     <string name="_">피아노 레슨</string>
+    <string name="setting_terms_and_condition">BizCat 이용약관</string>
+    <string name="setting_privacy">개인정보취급 방침 및 청소년 보호정책</string>
+    <string name="setting_location">위치기반서비스 이용약관</string>
     
 </resources>

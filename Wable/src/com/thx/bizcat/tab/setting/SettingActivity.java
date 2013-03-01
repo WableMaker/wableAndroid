@@ -44,8 +44,7 @@ public class SettingActivity extends Activity implements OnClickListener, RefHan
 		findViewById(R.id.STbtnLocation).setOnClickListener(this);
 		findViewById(R.id.STbtnLogout).setOnClickListener(this);
 		findViewById(R.id.STbtnProfile).setOnClickListener(this);
-		findViewById(R.id.STbtnPush).setOnClickListener(this);
-		findViewById(R.id.STbtnIntro).setOnClickListener(this);
+		findViewById(R.id.STbtnPush).setOnClickListener(this);		
 		findViewById(R.id.STbtnNotice).setOnClickListener(this);
 		findViewById(R.id.STbtnHowtouse).setOnClickListener(this);
 		findViewById( R.id.STbtnFaq).setOnClickListener(this);
@@ -69,14 +68,8 @@ public class SettingActivity extends Activity implements OnClickListener, RefHan
 			APIProxyLayer.Instance().Logout(mHandler);
 		
 		break;
-		
-		// 소개동영상
-		case R.id.STbtnIntro:
 			
-			
-		break;
-		
-		// Wable 이용방법
+		// Bizcat 이용방법
 		case R.id.STbtnHowtouse:
 			
 			
@@ -110,7 +103,7 @@ public class SettingActivity extends Activity implements OnClickListener, RefHan
 		case R.id.STbtnTerms:
 			i = new Intent(this, WebviewActivity.class);
 			i.putExtra("URL", "http://www.wable.co.kr/terms/membership");
-			i.putExtra("title", "Wable 이용약관");
+			i.putExtra("title", "Bizcat 이용약관");
 			startActivity(i);
 		break;
 			

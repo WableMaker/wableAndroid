@@ -44,7 +44,8 @@ public class SettingMyinfoActivity extends Activity implements OnClickListener, 
 						
 						Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).mkdirs();						
 						String localImgUrl = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath() +'/'+ r.result.photo;
-						ImageDownloader.getInstance().imageViewProcessing(localImgUrl, ServerImgUrl, (ImageView)findViewById(R.id.STimageProfile));										
+						ImageDownloader.getInstance().imageViewProcessing(localImgUrl, ServerImgUrl, (ImageView)findViewById(R.id.STimageProfile));
+						ImageDownloader.getInstance().uploadImage(localImgUrl);
 					}
 					else
 						Toast.makeText(context, r.resultCode.toString() , Toast.LENGTH_LONG).show();

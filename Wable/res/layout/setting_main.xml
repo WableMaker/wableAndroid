@@ -45,12 +45,12 @@
             android:orientation="vertical" >
 
         	<Button
-	            android:id="@+id/STbtnProfile"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_alignParentRight="true"
-	            android:layout_alignParentTop="true"
-	            android:text="내 정보" />
+        	    android:id="@+id/STbtnProfile"
+        	    android:layout_width="wrap_content"
+        	    android:layout_height="wrap_content"
+        	    android:layout_alignParentRight="true"
+        	    android:layout_alignParentTop="true"
+        	    android:text="@string/setting_myinfo" />
         
             <Button
                 android:id="@+id/STbtnNotice"
@@ -63,12 +63,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/setting_notify" />
-
-            <Button
-                android:id="@+id/STbtnIntro"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/setting_intro_movie" />
 
             <Button
                 android:id="@+id/STbtnHowtouse"
@@ -92,19 +86,19 @@
                 android:id="@+id/STbtnTerms"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="와블 이용약관" />
+                android:text="@string/setting_terms_and_condition" />
 
             <Button
                 android:id="@+id/STbtnPrivacy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="개인정보취급방침 및 청소년 보호정책" />
+                android:text="@string/setting_privacy" />
 
             <Button
                 android:id="@+id/STbtnLocation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="위치기반서비스 이용약관" />
+                android:text="@string/setting_location" />
 
         </LinearLayout>
     </ScrollView>
