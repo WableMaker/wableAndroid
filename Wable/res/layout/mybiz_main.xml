@@ -48,19 +48,23 @@
             android:layout_width="80dp"
             android:layout_height="70dp"
             android:background="@drawable/s_mybiz_ask_pro" />
-
     </LinearLayout>
 
     <ListView
-        android:id="@+id/MYBIZContainer"
+        android:id="@+id/MYBIZcontainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/linearLayout1"
-        android:fadingEdge="none" >
-
+        android:layout_below="@+id/linearLayout1" >
     </ListView>
+
+    <ProgressBar
+        android:id="@+id/progressBar1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" />
 
 </RelativeLayout>

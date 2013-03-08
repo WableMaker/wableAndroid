@@ -1,4 +1,4 @@
-package com.thx.bizcat.tab.mypage.sub;
+package com.thx.bizcat.tab.mypage;
 
 import android.app.Activity;
 import android.content.Context;
@@ -13,13 +13,13 @@ import android.widget.LinearLayout;
 
 import com.thx.bizcat.R;
 import com.thx.bizcat.http.apiproxy.APICODE;
-import com.thx.bizcat.tab.post.PostActivity;
+import com.thx.bizcat.tab.post.GoBizActivity;
 import com.thx.bizcat.tab.search.SearchActivity;
 import com.thx.bizcat.tab.setting.SettingActivity;
 import com.thx.bizcat.util.RefHandlerMessage;
 import com.thx.bizcat.util.WeakHandler;
 
-public class ProviderAskActivity extends Activity implements OnClickListener, RefHandlerMessage {
+public class ProviderPostActivity extends Activity implements OnClickListener, RefHandlerMessage {
 
 	private Context context;
 	private SharedPreferences pref;
@@ -39,7 +39,7 @@ public class ProviderAskActivity extends Activity implements OnClickListener, Re
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.mybiz_prov_ask);
+		setContentView(R.layout.mybiz_prov_post);
 		context = this;
 		
 		/* 요청목록 */

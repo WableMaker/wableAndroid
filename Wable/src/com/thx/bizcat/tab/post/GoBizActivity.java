@@ -20,7 +20,7 @@ import com.thx.bizcat.util.RefHandlerMessage;
 import com.thx.bizcat.util.WeakHandler;
 
 
-public class PostActivity extends Activity implements OnClickListener, RefHandlerMessage {
+public class GoBizActivity extends Activity implements OnClickListener, RefHandlerMessage {
 
 	Context context;
 	SharedPreferences  pref;
@@ -162,7 +162,7 @@ public class PostActivity extends Activity implements OnClickListener, RefHandle
 		Intent intent;
 		switch (v.getId()) {
 		case R.id.GOBIZtvPostReq:
-			intent = new Intent(this, PostRequest.class);
+			intent = new Intent(this, PostRequestActivity.class);
 			startActivity(intent);
 			break;
 

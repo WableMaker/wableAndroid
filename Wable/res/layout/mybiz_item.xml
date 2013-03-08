@@ -6,47 +6,34 @@
     android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/MYBIZITEMtvHeader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#FFF"
-        android:visibility="gone" />
-
-    <RelativeLayout
-        android:id="@+id/RelativeLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/MYBIZITEMtvHeader"
-        android:orientation="vertical" >
-
-    <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:background="@drawable/mybizcat_contents_tabbar_base" />
 
     <TextView
         android:id="@+id/MYBIZITEMtvPic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="40dp"
+        android:layout_alignBottom="@+id/textView1"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="27dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="4dp"
         android:background="@drawable/mybizcat_contents_tabbar_userpicture" />
 
     <TextView
         android:id="@+id/MYBIZITEMtvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/MYBIZITEMtvPic"
         android:layout_marginLeft="15dp"
-        android:layout_marginTop="11dp"
         android:layout_toRightOf="@+id/MYBIZITEMtvPic"
         android:text="피아노 삽니다"
-        android:textColor="#000" />
+        android:textColor="#000"
+        android:typeface="normal" />
 
     <TextView
         android:id="@+id/MYBIZITEMtvPrice"
@@ -54,9 +41,9 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/MYBIZITEMtvTitle"
         android:layout_below="@+id/MYBIZITEMtvTitle"
-        android:layout_marginTop="4dp"
         android:text="15,000"
-        android:textColor="#00F" />
+        android:textColor="#00F"
+        android:typeface="normal" />
 
     <TextView
         android:id="@+id/MYBIZITEMtvText"
@@ -64,8 +51,11 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/MYBIZITEMtvPrice"
         android:layout_below="@+id/MYBIZITEMtvPrice"
-        android:layout_marginTop="4dp"
-        android:text="감사합니다" />
+        android:layout_toLeftOf="@+id/MYBIZITEMtvTime"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text="감사합니다"
+        android:typeface="normal" />
 
     <TextView
         android:id="@+id/MYBIZITEMtvTime"
@@ -73,7 +63,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/MYBIZITEMtvText"
-        android:layout_marginRight="14dp"
+        android:layout_marginRight="4dp"
         android:background="@drawable/mybizcat_timebar_green"
         android:gravity="center"
         android:text="19:30"
@@ -85,29 +75,40 @@
         android:id="@+id/MYBIZITEMtvLike"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/MYBIZITEMtvTitle"
-        android:layout_alignBottom="@+id/MYBIZITEMtvTitle"
+        android:layout_alignBottom="@id/MYBIZITEMtvPrice"
         android:layout_alignRight="@+id/MYBIZITEMtvTime"
-        android:background="@drawable/mybizcat_contents_recom_number" />
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/mybizcat_contents_recom_number"
+        android:gravity="left|center_vertical"
+        android:text="   1"
+        android:textColor="#000"
+        android:textSize="12sp"
+        android:typeface="normal" />
 
     <TextView
         android:id="@+id/MYBIZITEMtvReq"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/MYBIZITEMtvLike"
-        android:layout_alignBottom="@+id/MYBIZITEMtvLike"
+        android:layout_alignBottom="@id/MYBIZITEMtvPrice"
         android:layout_alignLeft="@+id/MYBIZITEMtvTime"
-        android:background="@drawable/mybizcat_contents_request_member" />
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/mybizcat_contents_request_member"
+        android:gravity="left|center_vertical"
+        android:text="   1"
+        android:textColor="#000"
+        android:textSize="12sp"
+        android:typeface="normal" />
 
     <TextView
         android:id="@+id/MYBIZITEMtvNoti"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/MYBIZITEMtvPic"
-        android:layout_marginTop="4dp"
-        android:layout_marginLeft="52dp"
-        android:background="@drawable/message_number_red" />
-    
-    </RelativeLayout>
+        android:layout_alignParentTop="true"
+        android:background="@drawable/message_number_red"
+        android:gravity="center"
+        android:text="1"
+        android:textColor="#FFF"
+        android:textSize="12sp"
+        android:typeface="normal" />
 
 </RelativeLayout>

@@ -1,4 +1,4 @@
-package com.thx.bizcat.tab.mypage.sub;
+package com.thx.bizcat.tab.mypage;
 
 import android.app.Activity;
 import android.content.Context;
@@ -13,7 +13,7 @@ import android.widget.LinearLayout;
 
 import com.thx.bizcat.R;
 import com.thx.bizcat.http.apiproxy.APICODE;
-import com.thx.bizcat.tab.post.PostActivity;
+import com.thx.bizcat.tab.post.GoBizActivity;
 import com.thx.bizcat.tab.search.SearchActivity;
 import com.thx.bizcat.tab.setting.SettingActivity;
 import com.thx.bizcat.util.RefHandlerMessage;

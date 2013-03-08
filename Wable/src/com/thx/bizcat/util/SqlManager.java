@@ -1,5 +1,6 @@
 package com.thx.bizcat.util;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -44,6 +45,30 @@ public class SqlManager {
 	    help.Reset(help.getWritableDatabase());	
 	}
 	
+	
+	public static boolean InsertItem(Context context, String table, ContentValues values) {
+		
+		boolean rst = false;
+		if(help == null) help = new SqlHelper(context, DB_NAME, VERSION);
+		SQLiteDatabase db = help.getWritableDatabase();
+		db.insert(table, null, values);
+		db.close();
+		help.close();
+		return rst;
+	}
+	
+	public static boolean ReplaceItem(Context context, String table, ContentValues values) {
+		
+		boolean rst = false;
+		if(help == null) help = new SqlHelper(context, DB_NAME, VERSION);
+		SQLiteDatabase db = help.getWritableDatabase();
+		db.replace(table, null, values);
+		db.close();
+		help.close();
+		
+		return rst;
+	}
+	
 
 }
 
@@ -75,7 +100,7 @@ class SqlHelper extends SQLiteOpenHelper {
 		
 		// Match Table
 		db.execSQL("CREATE TABLE match "
-				+"(_id INTEGER PRIMARY KEY, request_id INTEGER, provide_id INTEGER, matched_time TEXT, status INTEGER," +
+				+"(_id INTEGER PRIMARY KEY AUTOINCREMENT, request_id INTEGER, provide_id INTEGER, matched_time TEXT, status INTEGER," +
 				"recommend INTEGER, other_user_id INTEGER, other_title TEXT, other_description TEXT, other_price INTEGER," +
 				"other_user_photo TEXT, other_user_name TEXT, deleted INTEGER, modified_time TEXT);");
 		
@@ -90,7 +115,7 @@ class SqlHelper extends SQLiteOpenHelper {
 		
 		// chat Table
 		db.execSQL("CREATE TABLE chat "
-				+"(_id INTEGER PRIMARY KEY AUTOINCREMENT, bidding_id INTEGER, writer_id INTEGER, msg TEXT, tick TEXT, is_read INTEGER, state INTEGER," +
+				+"(_id INTEGER PRIMARY KEY AUTOINCREMENT, bidding_id INTEGER, writer_id INTEGER, msg TEXT, tick TEXT, read_time TEXT, state INTEGER," +
 				"audio TEXT, video TEXT, picture TEXT);");
 		
 		// Chat Table

@@ -6,19 +6,10 @@
     android:background="@drawable/bg"
     android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/LOGINtvSplash"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/biz_splash"
-        android:visibility="gone" />
-
     <com.thx.bizcat.util.InterceptHWkeyLayout
         android:id="@+id/LOGINLayout"
         android:layout_width="fill_parent"
         android:layout_height="300dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
         android:layout_marginTop="230sp" >
 
         <Button
@@ -54,10 +45,7 @@
             android:hint="아이디"
             android:imeOptions="actionNext"
             android:inputType="textEmailAddress"
-            android:maxLines="1" >
-
-            <requestFocus />
-        </EditText>
+            android:maxLines="1" />
 
         <EditText
             android:id="@+id/LOGINeditPass"
@@ -82,7 +70,7 @@
             android:layout_alignLeft="@+id/LOGINbtnFb"
             android:layout_below="@+id/LOGINeditPass"
             android:layout_marginLeft="10dp"
-            android:background="@drawable/login_login_basic_btn" />
+            android:background="@drawable/login_member_basic_btn" />
 
         <Button
             android:id="@+id/LOGINbtnLogin"
@@ -91,7 +79,7 @@
             android:layout_alignBaseline="@+id/LOGINbtnRegister"
             android:layout_alignBottom="@+id/LOGINbtnRegister"
             android:layout_toRightOf="@+id/LOGINbtnRegister"
-            android:background="@drawable/login_member_basic_btn" />
+            android:background="@drawable/login_login_basic_btn" />
 
         <Button
             android:id="@+id/LOGINbtnFind"
@@ -101,7 +89,12 @@
             android:layout_alignTop="@+id/LOGINeditPass"
             android:layout_marginRight="10dp"
             android:background="@drawable/login_input_identity_lostpw_basic_btn" />
-
     </com.thx.bizcat.util.InterceptHWkeyLayout>
+
+    <TextView
+        android:id="@+id/LOGINtvSplash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/biz_splash" />
 
 </RelativeLayout>

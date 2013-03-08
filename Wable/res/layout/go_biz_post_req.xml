@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/textView1"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_above="@+id/GOBIZ_REQtvGoBtn"
         android:layout_below="@+id/textView3"
@@ -28,7 +28,7 @@
 
     <TextView
         android:id="@+id/GOBIZ_REQtvGoBtn"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
@@ -46,7 +46,7 @@
 
     <TextView
         android:id="@+id/GOBIZ_REQtvTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/textView3"
@@ -57,7 +57,7 @@
 
     <TextView
         android:id="@+id/GOBIZ_REQtvDesc"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_alignLeft="@+id/GOBIZ_REQtvTitle"
         android:layout_alignRight="@+id/GOBIZ_REQtvTitle"
@@ -75,14 +75,14 @@
 
         <TextView
             android:id="@+id/GOBIZ_REQtvPrice"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_weight="0.5"
             android:background="@drawable/registered_asking_price_basic_btn" />
 
         <TextView
             android:id="@+id/GOBIZ_REQtvTime"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_weight="0.5"
             android:background="@drawable/registered_asking_time_basic_btn" />
@@ -90,7 +90,7 @@
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/GOBIZ_REQtvGoBtn"
         android:layout_alignLeft="@+id/GOBIZ_REQtvTitle"
@@ -101,14 +101,14 @@
 
     <com.google.android.maps.MapView
         android:id="@+id/mapview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_alignBottom="@+id/textView4"
         android:layout_alignLeft="@+id/textView1"
         android:layout_alignRight="@+id/textView1"
         android:layout_alignTop="@+id/textView4"
         android:layout_margin="4dp"
-        android:apiKey="0oqzs7eIvbFX8Faveem2CANcvsCaS5O1nULYH3A"
+        android:apiKey="0ifaiNwh-8lROoZpqpF9MxGODOf1i2mAo5RppHg"
         android:clickable="true" >
 
     </com.google.android.maps.MapView>

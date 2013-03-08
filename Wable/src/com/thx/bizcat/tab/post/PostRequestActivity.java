@@ -31,7 +31,7 @@ import com.google.android.maps.MapView.LayoutParams;
 import com.thx.bizcat.R;
 import com.thx.bizcat.http.apiproxy.APICODE;
 
-public class PostRequest extends MapActivity implements LocationListener, OnClickListener {
+public class PostRequestActivity extends MapActivity implements LocationListener, OnClickListener {
 
 	private Geocoder geo;
 	private LocationManager manager;
@@ -122,7 +122,15 @@ public class PostRequest extends MapActivity implements LocationListener, OnClic
 	
 	
 	@Override
-	public void onClick(View arg0) {
+	public void onClick(View v) {
+		
+		switch (v.getId()) {
+		
+		case R.id.GOBIZ_REQtvTitle:
+			
+			break;
+
+		}
 		
 	}
 	

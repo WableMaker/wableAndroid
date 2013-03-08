@@ -27,6 +27,7 @@ import java.lang.ref.SoftReference;
 import java.lang.ref.WeakReference;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -40,6 +41,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.ByteArrayBuffer;
 
+import com.thx.bizcat.Variables;
 import com.thx.bizcat.http.IHttpConnectionLayer;
 
 import android.graphics.Bitmap;
@@ -164,6 +166,58 @@ public class ImageDownloader {
     	{    		
     		imageView.setImageBitmap(bitmap);
     	}
+    }
+    
+    public Bitmap imageViewProcessing(String localImgUrl, String ServerImgUrl )
+    {   
+    	// 1. Cache Check
+    	Bitmap bm = getBitmapFromCache(localImgUrl);
+    	if(bm != null) return bm; 
+    	
+    	// 2. File Check
+    	File file = new File(localImgUrl);    	
+    	if(file.exists()) 
+    	{    		
+    		bm = BitmapFactory.decodeFile(file.getAbsolutePath());
+    		if(bm != null) return bm;
+    		else file.delete();
+    	}
+    	else {
+    		boolean b = file.mkdirs();
+    		b = file.delete();
+    		//b = dir.createNewFile();
+    	}
+
+    	// 3. Download Image
+    	try
+    	{
+    		URL url = new URL(ServerImgUrl);
+    		HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+    		InputStream is = conn.getInputStream();    									
+    		FileOutputStream fos = new FileOutputStream(localImgUrl);
+
+    		int len = conn.getContentLength();										
+    		byte[] raster = new byte[len];
+
+    		int read = 0;
+    		while(true) {
+    			read = is.read(raster);
+    			if (read <= 0)	break;
+    			fos.write(raster, 0, read);
+    		}											
+
+    		is.close();
+    		fos.close();
+    		conn.disconnect();
+
+    		bm = BitmapFactory.decodeFile(localImgUrl);
+    		if(bm != null) return bm;
+    	}
+    	catch(Exception e)
+    	{
+    		e.printStackTrace();
+    	}
+    	return null;
     }
     
     IHttpConnectionLayer _httpLayer;

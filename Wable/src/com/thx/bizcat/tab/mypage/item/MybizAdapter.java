@@ -1,4 +1,4 @@
-package com.thx.bizcat.tab.mypage;
+package com.thx.bizcat.tab.mypage.item;
 
 import java.util.Calendar;
 import java.util.List;
@@ -12,20 +12,21 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.thx.bizcat.R;
+import com.thx.bizcat.Variables;
 
 public class MybizAdapter extends BaseAdapter  {
 	
 	Context context;
 	LayoutInflater inflater;
-	List<MybizElement> list;
+	List<MybizElement>[] arrays;
 	int layout;
 	int mode;
 	
-	public MybizAdapter(final Context context, int layout, List<MybizElement> list, int mode) {
+	public MybizAdapter(final Context context, int layout, List<MybizElement>[] arrays) {
 		
-		this.mode = mode;
+		this.mode = 0;
 		this.context = context;
-		this.list = list;
+		this.arrays = arrays;
 		this.layout = layout;
 		inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
@@ -33,7 +34,7 @@ public class MybizAdapter extends BaseAdapter  {
 	public View getView(final int pos, View view, ViewGroup group) {
 		
 		if(view == null) view = inflater.inflate(layout, group, false);
-		MybizElement e = list.get(pos);
+		MybizElement e = arrays[mode].get(pos);
 		
 		switch(mode) {
 		
@@ -50,6 +51,12 @@ public class MybizAdapter extends BaseAdapter  {
 		tv = (TextView)view.findViewById(R.id.MYBIZITEMtvReq);
 		tv = (TextView)view.findViewById(R.id.MYBIZITEMtvLike);
 		
+		tv = (TextView)view.findViewById(R.id.MYBIZITEMtvPic);
+		if(Variables.USER_PICTURE !=null)
+			tv.setBackgroundDrawable(Variables.USER_PICTURE);
+		else
+			tv.setBackgroundResource(R.drawable.mybizcat_contents_tabbar_userpicture);
+		
 		Calendar c = Calendar.getInstance(Locale.KOREA);
 		
 		try {
@@ -61,8 +68,6 @@ public class MybizAdapter extends BaseAdapter  {
 		
 		//long tick = d.getTime();
 		long tic2 = c.getTimeInMillis();
-		
-		tv.setText("");
 		
 //		switch (e.getStatus()) {
 //		case 0:
@@ -100,6 +105,9 @@ public class MybizAdapter extends BaseAdapter  {
 			tv = (TextView)view.findViewById(R.id.MYBIZITEMtvReq);
 			tv = (TextView)view.findViewById(R.id.MYBIZITEMtvLike);
 			
+			tv = (TextView)view.findViewById(R.id.MYBIZITEMtvPic);
+			tv.setBackgroundResource(R.drawable.mybizcat_contents_tabbar_userpicture);
+			
 			Calendar c = Calendar.getInstance(Locale.KOREA);
 
 			try {
@@ -112,7 +120,6 @@ public class MybizAdapter extends BaseAdapter  {
 			//long tick = d.getTime();
 			long tic2 = c.getTimeInMillis();
 			
-			tv.setText("");
 			
 //			switch (e.getStatus()) {
 //			case 0:
@@ -144,9 +151,11 @@ public class MybizAdapter extends BaseAdapter  {
 		
 	}
 	
-	public int getCount() { return list.size(); }
+	public void setMode(int mode) { this.mode = mode; notifyDataSetInvalidated(); }
+	
+	public int getCount() { return arrays[mode].size(); }
 
-	public Object getItem(int pos) { return list.get(pos); }
+	public Object getItem(int pos) { return arrays[mode].get(pos); }
 
 	public long getItemId(int arg0) { return 0; } 
 

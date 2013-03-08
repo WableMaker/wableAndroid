@@ -10,6 +10,7 @@ import android.os.Message;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout.LayoutParams;
@@ -46,7 +47,8 @@ public class WableActivity extends Activity implements OnClickListener, RefHandl
 	private boolean isUp = false;
 	private LayoutParams params;
 	private InterceptHWkeyLayout upLayout;
-	private int upCnt = 0;
+	
+	private InputMethodManager imm;
 	
 	/* Handler */
 	private WeakHandler mHandler = new WeakHandler(this);
@@ -61,8 +63,11 @@ public class WableActivity extends Activity implements OnClickListener, RefHandl
 			
 			if(r.bsuccess) {
 				
-				String lastid = pref.getString("LAST_ID", "");
-				APIProxyLayer.Instance().RequestMyActiveList(lastid, mHandler);
+				setResult(RESULT_OK);
+				finish();
+				overridePendingTransition(R.anim.right_in, R.anim.fade_out);
+				
+				//APIProxyLayer.Instance().RequestMyActiveList(lastid, mHandler);
 				
 			} else
 				Toast.makeText(context, r.resultCode.toString() , Toast.LENGTH_LONG).show();
@@ -75,10 +80,7 @@ public class WableActivity extends Activity implements OnClickListener, RefHandl
 			sp_GetMyActiveRequests_Items r = (sp_GetMyActiveRequests_Items)msg.obj;
 			
 			if(r.bsuccess) {
-				Intent intent = new Intent(context, MainActivity.class);
-				startActivity(intent);			
-				overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-				finish();
+				
 			}			
 			break;
 		}
@@ -88,7 +90,7 @@ public class WableActivity extends Activity implements OnClickListener, RefHandl
 			sp_BaseImgUrl_Items r = (sp_BaseImgUrl_Items)msg.obj;
 			
 			if(r.bsuccess){
-				Utils.BaseImgUrl = r.result.baseImgUrl;
+				Variables.BASE_SERVER__IMAGE_URL = r.result.baseImgUrl;
 			}
 			else
 				Toast.makeText(context, r.resultCode.toString() , Toast.LENGTH_LONG).show();
@@ -154,6 +156,7 @@ public class WableActivity extends Activity implements OnClickListener, RefHandl
 		
 		upLayout.setInterceptHWkeyLayout(this);
 		
+		imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
 		
 		mHandler.sendEmptyMessageDelayed(10000, 2000);
 		
@@ -166,6 +169,8 @@ public class WableActivity extends Activity implements OnClickListener, RefHandl
 //    
 		//이미지 서버 주소 받아오기
 		APIProxyLayer.Instance().BaseImgUrl(mHandler);
+		
+		loginOk.performClick();
 	
     }
     @Override
@@ -248,7 +253,8 @@ public class WableActivity extends Activity implements OnClickListener, RefHandl
 				Toast.makeText(context, "비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show();
 				break;
 			}
-			
+
+			imm.hideSoftInputFromWindow(etUser.getWindowToken(), 0);
 			pd = ProgressDialog.show(context, "로그인", "사용자 정보 조회중입니다...", true, true);
 			APIProxyLayer.Instance().Login(etUser.getText().toString(), etPass.getText().toString(), mHandler);
 			break;

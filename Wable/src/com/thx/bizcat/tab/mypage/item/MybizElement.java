@@ -1,4 +1,4 @@
-package com.thx.bizcat.tab.mypage;
+package com.thx.bizcat.tab.mypage.item;
 
 
 public class MybizElement {
