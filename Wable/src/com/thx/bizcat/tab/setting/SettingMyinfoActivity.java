@@ -15,6 +15,7 @@ import com.thx.bizcat.R;
 import com.thx.bizcat.http.apiproxy.APICODE;
 import com.thx.bizcat.http.apiproxy.APIProxyLayer;
 import com.thx.bizcat.http.apiproxy.JSONParser.sp_MyInfo_Items;
+import com.thx.bizcat.http.apiproxy.JSONParser.sp_Simple_Items;
 import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetUserInfo_Result;
 import com.thx.bizcat.util.RefHandlerMessage;
 import com.thx.bizcat.util.WeakHandler;
@@ -32,10 +33,15 @@ public class SettingMyinfoActivity extends Activity implements OnClickListener, 
 
 			switch(APICODE.fromInt(msg.what)) {
 			
+			case UserUpdate :
+				
+				break;
+			
 			case MyInfo:
 				try
 				{
 					sp_MyInfo_Items r = (sp_MyInfo_Items)msg.obj;
+					userInfo = r.result;
 					if(r.bsuccess){					
 						//String ServerImgUrl = Utils.BaseImgUrl+r.result.photo;
 						//String localImgUrl = getFilesDir().getAbsolutePath() +'/'+ r.result.photo;
@@ -48,8 +54,8 @@ public class SettingMyinfoActivity extends Activity implements OnClickListener, 
 						setUseableEditText(((EditText)findViewById(R.id.STtvName)),false);
 						setUseableEditText(((EditText)findViewById(R.id.STtvProfile)),false);
 						
-						((EditText)findViewById(R.id.STtvName)).setText(r.result.name);
-						((EditText)findViewById(R.id.STtvProfile)).setText(r.result.introduce);
+						((EditText)findViewById(R.id.STtvName)).setText(userInfo.name);
+						((EditText)findViewById(R.id.STtvProfile)).setText(userInfo.introduce);
 						
 					}
 					else
@@ -84,6 +90,8 @@ public class SettingMyinfoActivity extends Activity implements OnClickListener, 
 		findViewById(R.id.STbtnFacebook).setOnClickListener(this);
 		findViewById(R.id.STbtnEmail).setOnClickListener(this);
 		findViewById(R.id.STbtnPhone).setOnClickListener(this);
+		findViewById(R.id.edit).setOnClickListener(this);
+		findViewById(R.id.update).setOnClickListener(this);
 		
 		findViewById(R.id.STbtnBack).setOnClickListener(this);
 		
@@ -114,11 +122,14 @@ public class SettingMyinfoActivity extends Activity implements OnClickListener, 
 			setUseableEditText(((EditText)findViewById(R.id.STtvProfile)),true);
 			break;
 			
-		case R.id.update:
-
+		case R.id.update:			
 			userInfo.name = ((EditText)findViewById(R.id.STtvName)).getText().toString();
 			userInfo.introduce = ((EditText)findViewById(R.id.STtvProfile)).getText().toString();			
+			//사용자 정보 업데이트
 			APIProxyLayer.Instance().UserUpdate(userInfo.name, userInfo.introduce, userInfo.photo, userInfo.public_fb, userInfo.public_twitter, userInfo.public_email, userInfo.public_mobile, userInfo.public_phone, mHandler);
+
+			setUseableEditText(((EditText)findViewById(R.id.STtvName)),false);
+			setUseableEditText(((EditText)findViewById(R.id.STtvProfile)),false);
 			
 			break;	
 			

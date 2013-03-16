@@ -20,6 +20,43 @@
             android:layout_height="258dp" />
       
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/STmypageCertification"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/STbtnPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="phone" />
+
+        <Button
+            android:id="@+id/STbtnFacebook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="fb" />
+
+        <Button
+            android:id="@+id/STbtnEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="email" />
+
+        <Button
+            android:id="@+id/edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit" />
+
+        <Button
+            android:id="@+id/update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Update" />
+    </LinearLayout>
 
   <EditText
       android:id="@+id/STtvName"
@@ -35,43 +72,5 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:ems="10" />
-
-  <LinearLayout
-      android:id="@+id/STmypageCertification"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:orientation="horizontal" >
-
-      <Button
-          android:id="@+id/STbtnPhone"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="phone" />
-
-      <Button
-          android:id="@+id/STbtnFacebook"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="fb" />
-
-      <Button
-          android:id="@+id/STbtnEmail"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="email" />
-
-      <Button
-          android:id="@+id/edit"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="Edit" />
-
-      <Button
-          android:id="@+id/update"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="Update" />
-
-  </LinearLayout>
 	    
 </LinearLayout>
