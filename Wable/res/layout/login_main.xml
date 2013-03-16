@@ -14,8 +14,8 @@
 
         <Button
             android:id="@+id/LOGINbtnFb"
-            android:layout_width="268dp"
-            android:layout_height="46dp"
+            android:layout_width="264dp"
+            android:layout_height="38dp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
             android:background="@drawable/login_facebook_login_basic_btn" />
@@ -95,6 +95,7 @@
         android:id="@+id/LOGINtvSplash"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/biz_splash" />
+        android:background="@drawable/biz_splash"
+        android:visibility="gone" />
 
 </RelativeLayout>

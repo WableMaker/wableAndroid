@@ -9,12 +9,12 @@
     <TextView
         android:id="@+id/textView3"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/top_indicator_green"
         android:gravity="center"
+        android:text="GO BIZ"
         android:textColor="#FFF"
-        android:textSize="20dp"
-        android:text="GO BIZ" />
+        android:textSize="20dp" />
 
     <TableLayout
         android:layout_width="match_parent"

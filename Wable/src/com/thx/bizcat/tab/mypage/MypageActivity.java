@@ -1,6 +1,7 @@
 package com.thx.bizcat.tab.mypage;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import android.app.Activity;
@@ -16,7 +17,9 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Message;
+import android.os.SystemClock;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -68,6 +71,7 @@ public class MypageActivity extends ActivityGroup  implements OnClickListener, R
 
 		case UserGetUpdatedContents:
 		{
+			
 			sp_UserGetUpdatedContents_Items r =(sp_UserGetUpdatedContents_Items) msg.obj;
 			if(r.bsuccess) {
 
@@ -78,15 +82,15 @@ public class MypageActivity extends ActivityGroup  implements OnClickListener, R
 				LAST_BIDDINGMSG = r.last_modified_time_biddingmessage;
 				
 				Editor edit =  pref.edit();
-				if(LAST_REQUEST != null)
+				if(LAST_REQUEST != "")
 				edit.putString("LAST_REQUEST", LAST_REQUEST);
-				if(LAST_PROVIDE != null)
+				if(LAST_PROVIDE != "")
 				edit.putString("LAST_PROVIDE", LAST_PROVIDE);
-				if(LAST_MATCH != null)
+				if(LAST_MATCH != "")
 				edit.putString("LAST_MATCH", LAST_MATCH);
-				if(LAST_BIDDING != null)
+				if(LAST_BIDDING != "")
 				edit.putString("LAST_BIDDING", LAST_BIDDING);
-				if(LAST_BIDDINGMSG != null)
+				if(LAST_BIDDINGMSG != "")
 				edit.putString("LAST_BIDDINGMSG", LAST_BIDDINGMSG);
 				edit.commit();
 				
@@ -388,6 +392,9 @@ public class MypageActivity extends ActivityGroup  implements OnClickListener, R
 		originView.setSelected(false);
 		v.setSelected(true);
 		originView = v;
+		
 	}
+	
+	
 	
 }

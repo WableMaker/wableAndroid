@@ -151,7 +151,7 @@ public class MybizAdapter extends BaseAdapter  {
 		
 	}
 	
-	public void setMode(int mode) { this.mode = mode; notifyDataSetInvalidated(); }
+	public void setMode(int mode) { this.mode = mode; notifyDataSetChanged(); }
 	
 	public int getCount() { return arrays[mode].size(); }
 

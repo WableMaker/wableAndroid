@@ -75,6 +75,12 @@ public class RequestPostActivity extends Activity implements OnClickListener, Re
 		setContentView(R.layout.mybiz_req_post);
 		context = this;
 		
+		findViewById(R.id.GOBIZ_REQtvTitle).setOnClickListener(this);
+		findViewById(R.id.GOBIZ_REQtvDesc).setOnClickListener(this);
+		findViewById(R.id.GOBIZ_REQtvPrice).setOnClickListener(this);
+		findViewById(R.id.GOBIZ_REQtvTime).setOnClickListener(this);
+		findViewById(R.id.GOBIZ_REQtvMapBtn).setOnClickListener(this);
+		findViewById(R.id.GOBIZ_REQtvGoBtn).setOnClickListener(this);
 		
 //		listview = (ListView)findViewById(R.id.listView1);
 //		adapter = new MybizAdapter(context, R.layout.mybiz_item, Variables.REQPOST, 0);
@@ -89,6 +95,24 @@ public class RequestPostActivity extends Activity implements OnClickListener, Re
 		
 		
 		switch (v.getId()) {
+		
+		case R.id.GOBIZ_REQtvTitle:
+			break;
+			
+		case R.id.GOBIZ_REQtvDesc:
+			break;
+			
+		case R.id.GOBIZ_REQtvPrice:
+			break;
+			
+		case R.id.GOBIZ_REQtvTime:
+			break;
+			
+		case R.id.GOBIZ_REQtvMapBtn:
+			break;
+			
+		case R.id.GOBIZ_REQtvGoBtn:
+			break;
 		
 
 		}

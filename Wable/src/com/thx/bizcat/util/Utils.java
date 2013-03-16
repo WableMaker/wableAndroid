@@ -2,6 +2,7 @@ package com.thx.bizcat.util;
 
 import java.io.File;
 import java.text.DecimalFormat;
+import java.util.Calendar;
 
 import android.view.MotionEvent;
 import android.view.SoundEffectConstants;
@@ -41,6 +42,11 @@ public class Utils {
 		return new DecimalFormat("###,###").format(Long.parseLong(money));
 	}
 	
+	public static String getTime() {
+		
+		Calendar c = Calendar.getInstance();
+		return String.format("%02d:%02d:%d", c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE), c.get(Calendar.MILLISECOND));
+	}
 	
 	//프레그먼트
 //	menu.setOnTouchListener(new OnTouchListener() {

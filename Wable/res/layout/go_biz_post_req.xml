@@ -18,7 +18,7 @@
     <TextView
         android:id="@+id/textView3"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="49dp"
         android:background="@drawable/top_indicator_green"
         android:gravity="center"
         android:text="요청사항 등록하기"
@@ -28,11 +28,12 @@
 
     <TextView
         android:id="@+id/GOBIZ_REQtvGoBtn"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_width="338dp"
+        android:layout_height="41dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:background="@drawable/registered_asking_gobizcat_basic_btn" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/s_gobiz_post_req_btn" />
 
     <TextView
         android:id="@+id/GOBIZ_REQtvMapBtn"
@@ -42,27 +43,27 @@
         android:layout_alignRight="@+id/textView1"
         android:layout_marginBottom="10dp"
         android:layout_marginRight="14dp"
-        android:background="@drawable/registered_asking_location_basic_btn" />
+        android:background="@drawable/s_gobiz_post_req_map" />
 
     <TextView
         android:id="@+id/GOBIZ_REQtvTitle"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_alignParentLeft="true"
+        android:layout_width="337dp"
+        android:layout_height="56dp"
         android:layout_below="@+id/textView3"
+        android:layout_centerHorizontal="true"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/registered_asking_keyword_basic_btn" />
+        android:background="@drawable/s_gobiz_post_req_keyword" />
 
     <TextView
         android:id="@+id/GOBIZ_REQtvDesc"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_width="337dp"
+        android:layout_height="62dp"
         android:layout_alignLeft="@+id/GOBIZ_REQtvTitle"
         android:layout_alignRight="@+id/GOBIZ_REQtvTitle"
         android:layout_below="@+id/GOBIZ_REQtvTitle"
-        android:background="@drawable/registered_asking_text_basic_btn" />
+        android:background="@drawable/s_gobiz_post_req_text" />
 
     <LinearLayout
         android:id="@+id/linearLayout1"
@@ -75,23 +76,23 @@
 
         <TextView
             android:id="@+id/GOBIZ_REQtvPrice"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_width="169dp"
+            android:layout_height="61dp"
             android:layout_weight="0.5"
-            android:background="@drawable/registered_asking_price_basic_btn" />
+            android:background="@drawable/s_gobiz_post_req_price" />
 
         <TextView
             android:id="@+id/GOBIZ_REQtvTime"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_width="169dp"
+            android:layout_height="61dp"
             android:layout_weight="0.5"
-            android:background="@drawable/registered_asking_time_basic_btn" />
+            android:background="@drawable/s_gobiz_post_req_time" />
     </LinearLayout>
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="306dp"
         android:layout_above="@+id/GOBIZ_REQtvGoBtn"
         android:layout_alignLeft="@+id/GOBIZ_REQtvTitle"
         android:layout_alignRight="@+id/GOBIZ_REQtvTitle"
