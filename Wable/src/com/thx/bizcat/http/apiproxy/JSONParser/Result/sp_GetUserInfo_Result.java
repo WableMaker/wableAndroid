@@ -29,6 +29,7 @@ public class sp_GetUserInfo_Result
     public int review_count;
     public String fb_user_id="";
     public String fb_oauth_token="";
+    public String introduce="";
     public String id;
 	public sp_GetUserInfo_Result(JSONObject obj)
 	{
@@ -106,6 +107,9 @@ public class sp_GetUserInfo_Result
 	if(!obj.isNull("fb_oauth_token"))
 		fb_oauth_token= obj.getString("fb_oauth_token");
 
+	if(!obj.isNull("introduce"))
+		introduce= obj.getString("introduce");
+		
 	if(!obj.isNull("id"))
 		id= obj.getString("id");
 
