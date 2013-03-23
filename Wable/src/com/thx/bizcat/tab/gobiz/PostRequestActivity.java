@@ -6,8 +6,8 @@ import java.util.Locale;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.location.Address;
+import android.location.Criteria;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
@@ -84,13 +84,14 @@ public class PostRequestActivity extends MapActivity implements LocationListener
 		findViewById(R.id.GOBIZ_REQtvGoBtn).setOnClickListener(this);
 		
 		mapview = (MapView)findViewById(R.id.mapview);
-		//tvAddr = (TextView)findViewById(R.id.textPostSubmitAddr);
+		mapview.setBuiltInZoomControls(false);
+		mapview.setSatellite(false);
 		
 		mapCtrl = mapview.getController();
 		mapCtrl.setZoom(16);
 		
 		manager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-		manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+		//manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
 		manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 0, this);
 		
 		geo = new Geocoder(this, Locale.KOREAN);		
@@ -99,24 +100,16 @@ public class PostRequestActivity extends MapActivity implements LocationListener
 		
 		pref = PreferenceManager.getDefaultSharedPreferences(this);
 		
-		if(getIntent().getBooleanExtra("FIRST", false)) {
+		Criteria crit = new Criteria();
+		crit.setAccuracy(Criteria.ACCURACY_FINE);
+		//String provider = manager.getBestProvider(crit, true);
 		
-			String price = pref.getString("POST_PRICE", "");
-			String time = pref.getString("POST_TIME", "");
-			
-			btPrice.setText( price + " 원");
-			btTime.setText( time + " 시간");
-			
-			btPrice.setTag( price );
-			btTime.setTag( time );
-			
-			tvDetail.setText(pref.getString("POST_STR", "제공등록"));
-			category = pref.getInt("POST_CATE", 0);
-			
-			Editor editor = pref.edit();
-			editor.remove("FIRST");
-			editor.commit();
-		}
+		Location location = manager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+		if(location != null)
+		onLocationChanged(location);
+
+		isLock = false;
+
 		
 	}
 	
@@ -128,6 +121,10 @@ public class PostRequestActivity extends MapActivity implements LocationListener
 		
 		case R.id.GOBIZ_REQtvTitle:
 			
+			break;
+			
+		case R.id.GOBIZ_REQtvMapBtn:
+			isLock = false;
 			break;
 
 		}
@@ -177,8 +174,20 @@ public class PostRequestActivity extends MapActivity implements LocationListener
 	
 	@Override
 	protected void onPause() {
-		manager.removeUpdates(this);
+		if(manager != null) {
+			manager.removeUpdates(this);
+		}
 		super.onPause();
+	}
+	
+	@Override
+	protected void onResume() {
+		
+		if(manager != null) {
+			manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+			manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 0, this);
+		}
+		super.onResume();
 	}
 	
 	@Override

@@ -1,6 +1,8 @@
 package com.thx.bizcat.tab.mypage.item;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -59,8 +61,12 @@ public class MybizAdapter extends BaseAdapter  {
 		
 		Calendar c = Calendar.getInstance(Locale.KOREA);
 		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.KOREA); 
+
 		try {
-			long d = java.util.Date.parse(e.getDate().replace("T", " "));
+			String due = e.getDate();
+			String re = due.replace("T", " ");
+			Date d = sdf.parse(re);
 		
 		} catch(Exception er) {
 			er.printStackTrace();
