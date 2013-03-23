@@ -1,4 +1,4 @@
-package com.thx.bizcat.tab.post;
+package com.thx.bizcat.tab.gobiz;
 
 import java.io.IOException;
 import java.util.List;

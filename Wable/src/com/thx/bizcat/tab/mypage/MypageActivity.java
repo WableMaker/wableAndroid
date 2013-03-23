@@ -40,9 +40,9 @@ import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetMyUpdatedMatch_Resul
 import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetMyUpdatedProvides_Result;
 import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetMyUpdatedRequests_Result;
 import com.thx.bizcat.http.apiproxy.JSONParser.Result.sp_GetNewMessage_Result;
+import com.thx.bizcat.tab.gobiz.GoBizActivity;
 import com.thx.bizcat.tab.mypage.item.MybizAdapter;
 import com.thx.bizcat.tab.mypage.item.MybizElement;
-import com.thx.bizcat.tab.post.GoBizActivity;
 import com.thx.bizcat.tab.setting.SettingActivity;
 import com.thx.bizcat.util.ImageDownloader;
 import com.thx.bizcat.util.RefHandlerMessage;

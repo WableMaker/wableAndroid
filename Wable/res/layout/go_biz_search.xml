@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    android:orientation="vertical"
+    android:scrollbarAlwaysDrawVerticalTrack="true" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/top_indicator_green"
+        android:gravity="center"
+        android:text="검색"
+        android:textColor="#FFF"
+        android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/SEARCH_PRObtnMore"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:text="더보기" />
+
+    <LinearLayout
+        android:id="@+id/SEARCH_PROtab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="false"
+        android:layout_below="@id/textView1"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="9" >
+
+            <Button
+                android:id="@+id/SEARCHbtnSeg1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:background="@drawable/all_view_menu_new_basic_btn" />
+
+            <Button
+                android:id="@+id/SEARCHbtnSeg2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:background="@drawable/all_view_distance_basic_btn" />
+
+            <Button
+                android:id="@+id/SEARCHbtnSeg3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:background="@drawable/all_view_map_basic_btn" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/SEARCH_PROquery"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <EditText
+                android:id="@+id/SEARCH_PROqueryTxt"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="4" />
+
+            <Button
+                android:id="@+id/SEARCH_PRObtnSearch"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="검색" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/SEARCH_PROlist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/SEARCH_PRObtnMore"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/SEARCH_PROtab" >
+    </ListView>
+
+</RelativeLayout>

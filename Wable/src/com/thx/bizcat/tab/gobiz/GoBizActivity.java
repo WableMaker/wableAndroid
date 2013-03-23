@@ -1,4 +1,4 @@
-package com.thx.bizcat.tab.post;
+package com.thx.bizcat.tab.gobiz;
 
 import java.util.Map;
 import java.util.TreeMap;

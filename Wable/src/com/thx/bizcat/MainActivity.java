@@ -13,8 +13,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 
+import com.thx.bizcat.tab.gobiz.GoBizActivity;
 import com.thx.bizcat.tab.mypage.MypageActivity;
-import com.thx.bizcat.tab.post.GoBizActivity;
 import com.thx.bizcat.tab.setting.SettingActivity;
 
 public class MainActivity extends ActivityGroup implements OnClickListener {
