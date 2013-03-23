@@ -48,6 +48,7 @@
         <activity android:name=".tab.mypage.RequestPostActivity"></activity>
         <activity android:name=".tab.post.PostRequestActivity"></activity>
         <meta-data android:value="AIzaSyCFx__47o346xA4Ksy5Sj8bMN92TcyXYTE" android:name="com.google.android.maps.v2.API_KEY"/>
+        <activity android:name=".tab.gobiz.GoBizActivity"></activity>
         
     </application>
 
