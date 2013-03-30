@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 
+import com.thx.bizcat.chat.ChatActivity;
 import com.thx.bizcat.tab.gobiz.GoBizActivity;
 import com.thx.bizcat.tab.mypage.MypageActivity;
 import com.thx.bizcat.tab.setting.SettingActivity;
@@ -106,8 +107,12 @@ public class MainActivity extends ActivityGroup implements OnClickListener {
 			break;
 
 		case R.id.btnMainSetting:
-			container.addView(views[2]);
-			v.setBackgroundResource(R.drawable.menu_tabbar_setting_selected_btn);
+			//container.addView(views[2]);
+			//v.setBackgroundResource(R.drawable.menu_tabbar_setting_selected_btn);
+			
+			Intent in = new Intent(this,ChatActivity.class);
+			startActivity(in);
+			
 			break;
 
 		}		

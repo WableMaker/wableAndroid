@@ -1194,7 +1194,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					}
 				}
 
-				String result = _httpLayer.GETSync(_domain+"Request/Add", params);
+				String result = _httpLayer.POSTSync(_domain+"Request/Add", params);
 				 
 				JSONObject obj = null;
 				
@@ -1260,7 +1260,7 @@ public class APIProxyLayer implements IAPIProxyLayer {
 					}
 				}
 
-				String result = _httpLayer.GETSync(_domain+"Provide/Add", params);
+				String result = _httpLayer.POSTSync(_domain+"Provide/Add", params);
 				 
 				JSONObject obj = null;
 				
