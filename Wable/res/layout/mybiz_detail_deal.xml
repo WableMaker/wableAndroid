@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/MYBIZPOST_REQtvToplayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/service_info_texttab_base" >
+
+        <TextView
+            android:id="@+id/MYBIZPOST_REQtvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="14dp"
+            android:layout_toRightOf="@+id/textView1"
+            android:text="TextView"
+            android:textColor="#40AA8C" />
+
+        <TextView
+            android:id="@+id/MYBIZPOST_REQtvPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/textView1"
+            android:layout_alignLeft="@+id/MYBIZPOST_REQtvTitle"
+            android:text="50,000" />
+
+        <TextView
+            android:id="@+id/TextView03"
+            android:layout_width="100dp"
+            android:layout_height="1dp"
+            android:layout_below="@+id/MYBIZPOST_REQtvPrice"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/asking_contents_dotline_green" />
+
+        <TextView
+            android:id="@+id/MYBIZPOST_REQtvContents"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textView1"
+            android:layout_below="@+id/TextView03"
+            android:layout_marginTop="5dp"
+            android:text="sadasd" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/TextView03"
+            android:layout_below="@+id/MYBIZPOST_REQtvTitle"
+            android:layout_marginLeft="17dp"
+            android:background="@drawable/service_info_request_icon" />
+
+        <TextView
+            android:id="@+id/MYBIZPOST_REQtvOther"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/MYBIZPOST_REQtvPrice"
+            android:layout_marginLeft="16dp"
+            android:layout_toRightOf="@+id/MYBIZPOST_REQtvTitle"
+            android:background="@drawable/service_info_timebar_green" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/MYBIZPOST_REQtvToplayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/service_info_map_base" >
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/service_info_cancle_basic_btn_green" />
+
+    <com.google.android.maps.MapView
+        android:id="@+id/mapview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignBottom="@+id/relativeLayout2"
+        android:layout_alignLeft="@+id/relativeLayout2"
+        android:layout_alignRight="@+id/relativeLayout2"
+        android:layout_below="@+id/MYBIZPOST_REQtvToplayout"
+        android:apiKey="0ifaiNwh-8lROoZpqpF9MxGODOf1i2mAo5RppHg"
+        android:clickable="true"
+        android:longClickable="true" >
+
+    </com.google.android.maps.MapView>
+
+</RelativeLayout>

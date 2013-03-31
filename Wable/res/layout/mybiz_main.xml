@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/RelativeLayout1"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:orientation="vertical" >
 
     <TextView
@@ -25,29 +25,94 @@
         android:background="@drawable/mybizcat_top_menu_basic_btn"
         android:weightSum="10" >
 
-        <TextView
-            android:id="@+id/MYBIZbtnReqPost"
-            android:layout_width="80dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/s_mybiz_post_req" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" >
 
-        <TextView
-            android:id="@+id/MYBIZbtnReqAsk"
-            android:layout_width="80dp"
-            android:layout_height="70dp"
-            android:background="@drawable/s_mybiz_post_pro" />
+            <TextView
+                android:id="@+id/MYBIZbtnReqPost"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/s_mybiz_post_req" />
 
-        <TextView
-            android:id="@+id/MYBIZbtnProvPost"
-            android:layout_width="80dp"
-            android:layout_height="70dp"
-            android:background="@drawable/s_mybiz_ask_req" />
+            <TextView
+                android:id="@+id/MYBIZbtnReqPostnoti"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/message_number_red"
+                android:gravity="center"
+                android:text="1"
+                android:textColor="#FFF" />
+        </RelativeLayout>
 
-        <TextView
-            android:id="@+id/MYBIZbtnProvAsk"
-            android:layout_width="80dp"
-            android:layout_height="70dp"
-            android:background="@drawable/s_mybiz_ask_pro" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/MYBIZbtnReqAsk"
+                android:layout_width="80dp"
+                android:layout_height="70dp"
+                android:background="@drawable/s_mybiz_post_pro" />
+
+            <TextView
+                android:id="@+id/MYBIZbtnReqAsknoti"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:background="@drawable/message_number_red"
+                android:gravity="center"
+                android:text="1"
+                android:textColor="#FFF" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/MYBIZbtnProvPost"
+                android:layout_width="80dp"
+                android:layout_height="70dp"
+                android:background="@drawable/s_mybiz_ask_req" />
+
+            <TextView
+                android:id="@+id/MYBIZbtnProvPostnoti"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:background="@drawable/message_number_red"
+                android:gravity="center"
+                android:text="1"
+                android:textColor="#FFF" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/MYBIZbtnProvAsk"
+                android:layout_width="80dp"
+                android:layout_height="70dp"
+                android:background="@drawable/s_mybiz_ask_pro" />
+
+            <TextView
+                android:id="@+id/MYBIZbtnProvAsknoti"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:background="@drawable/message_number_red"
+                android:gravity="center"
+                android:text="1"
+                android:textColor="#FFF" />
+
+        </RelativeLayout>
     </LinearLayout>
 
     <ListView
@@ -60,11 +125,26 @@
         android:layout_below="@+id/linearLayout1" >
     </ListView>
 
-    <ProgressBar
-        android:id="@+id/progressBar1"
+    <RelativeLayout
+        android:id="@+id/MYBIZloading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/linearLayout1" >
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#8888" />
+
+        <ProgressBar
+            android:id="@+id/progressBar1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
 
 </RelativeLayout>

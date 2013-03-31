@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="상품 / 서비스에 대한 설명을 적어주세요 (옵션)" />
+
+    <TextView
+        android:id="@+id/GOBIZ_REQtvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="175dp"
+        android:layout_below="@+id/textView1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/registered_asking_textbox_green" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/GOBIZ_REQtvTitle"
+        android:gravity="center"
+        android:weightSum="1" >
+
+        <TextView
+            android:id="@+id/TextView03"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.05"
+            android:text=" " />
+
+        <TextView
+            android:id="@+id/GOBIZSELtvDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:background="@drawable/s_gobiz_dialog_sel_desc" />
+
+        <TextView
+            android:id="@+id/GOBIZSELtvPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:background="@drawable/s_gobiz_dialog_sel_price" />
+
+        <TextView
+            android:id="@+id/GOBIZSELtvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:background="@drawable/s_gobiz_dialog_sel_time" />
+
+        <TextView
+            android:id="@+id/TextView04"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.0001" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/GOBIZSELeditDesc"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/GOBIZ_REQtvTitle"
+        android:layout_alignTop="@+id/GOBIZ_REQtvTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="10dp"
+        android:background="@null"
+        android:ems="10"
+        android:gravity="center_vertical" >
+
+        <requestFocus />
+    </EditText>
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="x" />
+
+    <EditText
+        android:id="@+id/GOBIZSELeditPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/GOBIZSELeditDesc"
+        android:layout_alignBottom="@+id/GOBIZSELeditDesc"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:inputType="number" />
+
+    <LinearLayout
+        android:id="@+id/GOBIZSELlayoutTime"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/linearLayout1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:weightSum="10" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2.5"
+            android:weightSum="3" >
+
+            <Button
+                android:id="@+id/GOBIZSELbtn1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onTimeClick"
+                android:text="1시" />
+
+            <Button
+                android:id="@+id/GOBIZSELbtn2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onTimeClick"
+                android:text="2시" />
+
+            <Button
+                android:id="@+id/GOBIZSELbtn3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onTimeClick"
+                android:text="4시" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2.5"
+            android:weightSum="3" >
+
+            <Button
+                android:id="@+id/GOBIZSELbtn4"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onTimeClick"
+                android:text="6시" />
+
+            <Button
+                android:id="@+id/GOBIZSELbtn5"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onTimeClick"
+                android:singleLine="true"
+                android:text="12시" />
+
+            <Button
+                android:id="@+id/GOBIZSELbtn6"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onTimeClick"
+                android:text="1일" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2.5"
+            android:weightSum="3" >
+
+            <Button
+                android:id="@+id/GOBIZSELbtn7"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onTimeClick"
+                android:text="2일" />
+
+            <Button
+                android:id="@+id/GOBIZSELbtn8"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onTimeClick"
+                android:text="3일" />
+
+            <Button
+                android:id="@+id/GOBIZSELbtn9"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onTimeClick"
+                android:text="4일" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2.5"
+            android:weightSum="3" >
+
+            <Button
+                android:id="@+id/GOBIZSELbtn10"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onTimeClick"
+                android:text="5일" />
+
+            <Button
+                android:id="@+id/GOBIZSELbtn11"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onTimeClick"
+                android:text="6일" />
+
+            <Button
+                android:id="@+id/GOBIZSELbtn12"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onTimeClick"
+                android:text="7일" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/GOBIZSELtvLimit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/GOBIZSELeditDesc"
+        android:layout_alignBottom="@+id/GOBIZSELeditDesc"
+        android:layout_centerHorizontal="true"
+        android:text="1 hour"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#000" />
+
+</RelativeLayout>

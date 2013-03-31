@@ -146,6 +146,7 @@ public class GoBizActivity extends Activity implements OnClickListener, RefHandl
 		setContentView(R.layout.go_biz_main);
 		context = this;
 		pref = PreferenceManager.getDefaultSharedPreferences(this);
+		pref.edit().remove("TEMP_ISUSE").commit();
 		
 		findViewById(R.id.GOBIZtvPostReq).setOnClickListener(this);
 		findViewById(R.id.GOBIZtvPostPro).setOnClickListener(this);

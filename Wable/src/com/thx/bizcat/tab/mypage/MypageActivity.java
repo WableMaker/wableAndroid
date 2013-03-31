@@ -16,6 +16,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
@@ -62,6 +63,8 @@ public class MypageActivity extends ActivityGroup  implements OnClickListener, R
 	private ListView listview;
 	private MybizAdapter adapter;
 	private List<MybizElement>[] arrays;
+	
+	private View loadingBar;
 	
 	/* Handler */
 	private WeakHandler mHandler = new WeakHandler(this);
@@ -236,7 +239,7 @@ public class MypageActivity extends ActivityGroup  implements OnClickListener, R
 				//findViewById(R.id.MYBIZbtnReqPost).performClick();
 			}
 		}
-			
+			mHandler.sendEmptyMessage(9000);
 			break;
 			
 		case MyInfo:
@@ -260,14 +263,14 @@ public class MypageActivity extends ActivityGroup  implements OnClickListener, R
 				e.printStackTrace();	
 			}		
 			
-
 			APIProxyLayer.Instance().UserGetUpdatedContents(
 					LAST_REQUEST, LAST_PROVIDE, LAST_MATCH, LAST_BIDDING, LAST_BIDDINGMSG, "", "", mHandler);
+			
 			break;
 			
 		case USERSET1:
 			
-			Cursor c = SqlManager.getCursor(context, "SELECT * FROM request");
+			Cursor c = SqlManager.getCursor(context, "SELECT * FROM request order by _id desc");
 			
 			while(c.moveToNext()) {
 				
@@ -289,28 +292,38 @@ public class MypageActivity extends ActivityGroup  implements OnClickListener, R
 			SqlManager.Release(c);
 			adapter.notifyDataSetChanged();
 			
-			findViewById(R.id.progressBar1).setVisibility(View.GONE);
-			
-			c = SqlManager.getCursor(context, "SELECT * FROM provide");
+			c = SqlManager.getCursor(context, "SELECT * FROM provide order by _id desc");
 			
 			while(c.moveToNext()) {
 				
 				//Status 0:대기중, 1:기한만료, 2:등록마
 				MybizElement e = new MybizElement();
 				
-				e.setId(c.getLong(0)).setUser(c.getLong(1)).setCategory(c.getLong(5));
-				e.setTitle(c.getString(2)).setDescription(c.getString(3));
-				e.setPrice(c.getInt(4)).setLat(c.getInt(7)).setLon(c.getInt(8))
-					.setStatus(c.getInt(11)).setRecommand(c.getInt(12));
-				e.setDate(c.getString(6)).setCreated_time(c.getString(13));
+				e.setId(c.getLong(0))
+				.setUser(c.getLong(1))
+				.setTitle(c.getString(2))
+				.setMin_price(c.getInt(3))
+				.setLat(c.getInt(4))
+				.setLon(c.getInt(5))
+				.setRadious(c.getInt(6))
+				.setStatus(c.getInt(7))
+				.setCreated_time(c.getString(8))
+				.setDescription(c.getString(9))
+				.setPhoto1(c.getString(10))
+				.setPhoto2(c.getString(11))
+				.setPhoto3(c.getString(12))
+				.setPhoto4(c.getString(13))
+				.setPhoto5(c.getString(14))
+				.setDeleted(c.getInt(15)>0?true:false);
 				
-				e.setTwitter(c.getInt(9) > 0 ? true : false).setFacebook(c.getInt(10) > 0 ? true : false);
-				e.setDeleted(c.getInt(14) > 0 ? true : false);
-				
-				arrays[1].add(e);
+				e.setTwitter(c.getInt(16) > 0 ? true : false).setFacebook(c.getInt(17) > 0 ? true : false);
+								
+				arrays[2].add(e);
 				
 			}
 			SqlManager.Release(c);
+			
+			loadingBar.setVisibility(View.GONE);
 			
 			break;
 			
@@ -341,6 +354,9 @@ public class MypageActivity extends ActivityGroup  implements OnClickListener, R
 		findViewById(R.id.MYBIZbtnProvAsk).setOnClickListener(this);
 	
 		listview = (ListView)findViewById(R.id.MYBIZcontainer);
+
+		loadingBar = findViewById(R.id.MYBIZloading);
+		//loadingBar.setVisibility(View.GONE);
 		
 		originView = findViewById(R.id.MYBIZbtnReqPost);
 		originView.setSelected(true);
@@ -358,7 +374,7 @@ public class MypageActivity extends ActivityGroup  implements OnClickListener, R
 		adapter = new MybizAdapter(context, R.layout.mybiz_item, arrays);
 		listview.setAdapter(adapter);
 		
-		mHandler.sendEmptyMessage(9000);
+		
 	}
 	
 	public void startView() {
@@ -378,6 +394,8 @@ public class MypageActivity extends ActivityGroup  implements OnClickListener, R
 		
 		if(originView.getId() == v.getId()) return;
 		
+		sHandler.sendEmptyMessage(1);
+		
 		switch (v.getId()) {
 		
 		case R.id.MYBIZbtnReqPost:		adapter.setMode(0);	break;
@@ -393,8 +411,37 @@ public class MypageActivity extends ActivityGroup  implements OnClickListener, R
 		v.setSelected(true);
 		originView = v;
 		
+		sHandler.sendEmptyMessageDelayed(0,1000);
+		
 	}
 	
+	private Handler sHandler = new Handler() {
+		
+		@Override
+		public void handleMessage(Message msg) {
+
+			if(loadingBar == null) return;
+			
+			switch(msg.what) {
+			
+			case 0: loadingBar.setVisibility(View.GONE); break;
+			case 1: loadingBar.setVisibility(View.VISIBLE); break;
+			
+			}			
+			super.handleMessage(msg);
+		}
+		
+	};
+	
+	private Runnable loadingRunnable = new Runnable() {
+		
+		@Override
+		public void run() {
+
+			
+			
+		}
+	}; 
 	
 	
 }

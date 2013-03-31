@@ -7,7 +7,6 @@
     <uses-sdk android:minSdkVersion="8" />
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
@@ -50,8 +49,11 @@
         
         <activity android:name=".tab.gobiz.GoBizActivity"></activity>
         
-        <uses-library android:name="com.google.android.maps"></uses-library>
+        <uses-library android:required="true" android:name="com.google.android.maps"></uses-library>
         <activity android:name=".tab.gobiz.SearchProviderActivty"></activity>
+        <activity android:name=".tab.gobiz.SelectTabActivity" android:theme="@android:style/Theme.Dialog" android:windowSoftInputMode="stateAlwaysVisible"></activity>
+        <activity android:name=".tab.mypage.MypageDetailAskActivity" android:theme="@android:style/Theme.NoTitleBar"></activity>
+        <activity android:name=".tab.mypage.MypageDetailProvideActivity" android:theme="@android:style/Theme.NoTitleBar"></activity>
     </application>
 
 </manifest>

@@ -1,13 +1,14 @@
 package com.thx.bizcat.tab.gobiz;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.location.Address;
-import android.location.Criteria;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
@@ -18,7 +19,6 @@ import android.os.Message;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,8 +28,12 @@ import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
 import com.google.android.maps.MapView.LayoutParams;
+import com.google.android.maps.Overlay;
 import com.thx.bizcat.R;
 import com.thx.bizcat.http.apiproxy.APICODE;
+import com.thx.bizcat.http.apiproxy.APIProxyLayer;
+import com.thx.bizcat.http.apiproxy.JSONParser.sp_LogIn_Items;
+import com.thx.bizcat.http.apiproxy.JSONParser.sp_Simple_Items;
 
 public class PostRequestActivity extends MapActivity implements LocationListener, OnClickListener {
 
@@ -41,13 +45,15 @@ public class PostRequestActivity extends MapActivity implements LocationListener
 	private ImageView pin;
 	private double lat, lon;
 	
-	private TextView tvAddr, tvDetail;
-	private Button btPrice, btTime, btCategory;
-	
 	private Context context;
 	
 	private boolean isLock;	
 	private SharedPreferences pref;
+	
+	private List<Overlay> overlays;
+	private TextView tvTitle, tvDesc, tvPrice, tvTime;
+	private String strDesc, strPrice, strTime;
+	private long ticks = 0;
 	
 	Integer category;
 	
@@ -59,8 +65,11 @@ public class PostRequestActivity extends MapActivity implements LocationListener
 			switch(APICODE.fromInt(msg.what)) {
 			
 			case RequestAdd:
-//				if(success)
-//					Toast.makeText(context, "제공 등록완료", Toast.LENGTH_SHORT).show();
+					sp_Simple_Items item = (sp_Simple_Items)msg.obj;
+					if(item.bsuccess)
+						Toast.makeText(context, "제공 등록완료", Toast.LENGTH_SHORT).show();
+					else
+						Toast.makeText(context, "네트워크 오류 잠시 후 다시시도해 주세요", Toast.LENGTH_SHORT).show();
 				break;
 			default:
 				break;
@@ -78,10 +87,16 @@ public class PostRequestActivity extends MapActivity implements LocationListener
 		context = this;
 		
 		findViewById(R.id.GOBIZ_REQtvTitle).setOnClickListener(this);
+		findViewById(R.id.GOBIZ_REQtvDesc).setOnClickListener(this);
 		findViewById(R.id.GOBIZ_REQtvPrice).setOnClickListener(this);
 		findViewById(R.id.GOBIZ_REQtvTime).setOnClickListener(this);
 		findViewById(R.id.GOBIZ_REQtvMapBtn).setOnClickListener(this);
 		findViewById(R.id.GOBIZ_REQtvGoBtn).setOnClickListener(this);
+		
+		tvTitle = (TextView) findViewById(R.id.GOBIZ_REQtvTitle);
+		tvDesc = (TextView) findViewById(R.id.GOBIZ_REQtvDesc);
+		tvPrice = (TextView) findViewById(R.id.GOBIZ_REQtvPrice);
+		tvTime = (TextView) findViewById(R.id.GOBIZ_REQtvTime);
 		
 		mapview = (MapView)findViewById(R.id.mapview);
 		mapview.setBuiltInZoomControls(false);
@@ -91,27 +106,43 @@ public class PostRequestActivity extends MapActivity implements LocationListener
 		mapCtrl.setZoom(16);
 		
 		manager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-		//manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
-		manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 0, this);
+		manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 10, this);
+		manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 5000, 10, this);
+		
+		overlays = mapview.getOverlays();
+		overlays.clear();
+		overlays.add(new MapOverlay());
 		
 		geo = new Geocoder(this, Locale.KOREAN);		
 		pin = new ImageView(this);
+		pin.setImageResource(R.drawable.map_pin);
 		isLock = false;
 		
 		pref = PreferenceManager.getDefaultSharedPreferences(this);
-		
-		Criteria crit = new Criteria();
-		crit.setAccuracy(Criteria.ACCURACY_FINE);
-		//String provider = manager.getBestProvider(crit, true);
-		
-		Location location = manager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-		if(location != null)
-		onLocationChanged(location);
-
-		isLock = false;
 
 		
 	}
+	
+	class MapOverlay extends com.google.android.maps.Overlay
+    {
+	
+		@Override
+		public boolean onTap(GeoPoint gp, MapView mapView) {
+			
+			mapCtrl.animateTo(gp);		
+			MapView.LayoutParams lp = new MapView.LayoutParams
+					(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, gp, LayoutParams.CENTER);
+			
+			mapview.removeView(pin);
+			mapview.addView(pin, lp);		
+			
+			lat = gp.getLatitudeE6() / 1000000;
+			lon = gp.getLongitudeE6() / 1000000;
+			
+			return super.onTap(gp, mapView);
+		}
+		
+    }
 	
 	
 	@Override
@@ -123,12 +154,54 @@ public class PostRequestActivity extends MapActivity implements LocationListener
 			
 			break;
 			
+		case R.id.GOBIZ_REQtvDesc:
+			
+			Intent intent = new Intent(this, SelectTabActivity.class);
+			startActivityForResult(intent, 0);
+					
+			break;
+					
+		case R.id.GOBIZ_REQtvPrice:
+			
+			break;
+			
+		case R.id.GOBIZ_REQtvTime:
+			
+			break;
+			
 		case R.id.GOBIZ_REQtvMapBtn:
 			isLock = false;
+			break;
+			
+		case R.id.GOBIZ_REQtvGoBtn:
+			
+			java.util.Date dt = new Date(System.currentTimeMillis() + ticks);
+			APIProxyLayer.Instance().RequestAdd("TEST POST", strDesc, Integer.parseInt(strPrice), category, dt, lat, lon, null, null, mHandler);
+			
+			
 			break;
 
 		}
 		
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		
+		if(requestCode == 0 && resultCode == RESULT_OK) {
+			
+			strDesc = pref.getString("TEMP_DESC", "");
+			strPrice = pref.getString("TEMP_PRICE", "");
+			strTime = pref.getString("TEMP_TIME", "");
+			ticks = pref.getLong("TEMP_TICK", 0);
+			
+			tvDesc.setText(strDesc);
+			tvPrice.setText(strPrice);
+			tvTime.setText(strTime);
+			
+		}
+		
+		super.onActivityResult(requestCode, resultCode, data);
 	}
 	
 	@Override
@@ -144,7 +217,6 @@ public class PostRequestActivity extends MapActivity implements LocationListener
 		
 		mapCtrl.animateTo(gp);
 		
-		pin.setImageResource(R.drawable.map_pin);
 		MapView.LayoutParams lp = new MapView.LayoutParams
 				(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, gp, LayoutParams.CENTER);
 		
@@ -170,7 +242,8 @@ public class PostRequestActivity extends MapActivity implements LocationListener
 		
 		isLock = true;
 		
-	}
+	}	
+
 	
 	@Override
 	protected void onPause() {

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/mybizcat_contents_tabbar_base" />
+
+    <TextView
+        android:id="@+id/MYBIZ_ASKITEMtvPic"
+        android:layout_width="50dp"
+        android:layout_height="40dp"
+        android:layout_alignBottom="@+id/textView1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/mybizcat_contents_tabbar_userpicture" />
+
+    <TextView
+        android:id="@+id/MYBIZ_ASKITEMtvNoti"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/message_number_red"
+        android:gravity="center"
+        android:text="1"
+        android:textColor="#FFF"
+        android:textSize="12sp"
+        android:typeface="normal" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_alignBottom="@+id/MYBIZITEMtvText"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="4dp"
+        android:layout_toRightOf="@+id/MYBIZ_ASKITEMtvPic"
+        android:background="@drawable/asking_contents_tabbar_base" />
+
+    <TextView
+        android:id="@+id/MYBIZ_ASKITEMtvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="10dp"
+        android:text="피아노 삽니다"
+        android:textColor="#000"
+        android:typeface="normal" />
+
+    <TextView
+        android:id="@+id/MYBIZ_ASKITEMtvTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/textView2"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:text="15,000"
+        android:textColor="#00F"
+        android:typeface="normal" />
+
+    <TextView
+        android:id="@+id/MYBIZ_ASKITEMtvText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="24dp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text="감사합니다"
+        android:textColor="#000"
+        android:typeface="normal" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_alignRight="@+id/textView2"
+        android:layout_alignTop="@+id/textView2"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/asking_contents_dotline_green" />
+
+</RelativeLayout>

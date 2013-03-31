@@ -53,7 +53,9 @@
         android:layout_alignLeft="@+id/GOBIZ_REQtvTitle"
         android:layout_alignRight="@+id/GOBIZ_REQtvTitle"
         android:layout_below="@+id/GOBIZ_REQtvTitle"
-        android:background="@drawable/s_gobiz_post_req_text" />
+        android:background="@drawable/s_gobiz_post_req_text"
+        android:gravity="top|center_horizontal"
+        android:textColor="#000" />
 
     <LinearLayout
         android:id="@+id/linearLayout1"
@@ -69,14 +71,19 @@
             android:layout_width="169dp"
             android:layout_height="61dp"
             android:layout_weight="0.5"
-            android:background="@drawable/s_gobiz_post_req_price" />
+            android:background="@drawable/s_gobiz_post_req_price"
+            android:gravity="center"
+            android:textColor="#000" />
 
         <TextView
             android:id="@+id/GOBIZ_REQtvTime"
             android:layout_width="169dp"
             android:layout_height="61dp"
             android:layout_weight="0.5"
-            android:background="@drawable/s_gobiz_post_req_time" />
+            android:background="@drawable/s_gobiz_post_req_time"
+            android:gravity="center"
+            android:textColor="#000" />
+
     </LinearLayout>
 
     <TextView
@@ -100,7 +107,8 @@
         android:layout_alignTop="@+id/textView4"
         android:layout_margin="4dp"
         android:apiKey="0ifaiNwh-8lROoZpqpF9MxGODOf1i2mAo5RppHg"
-        android:clickable="true" >
+        android:clickable="true"
+        android:longClickable="true" >
 
     </com.google.android.maps.MapView>
 
