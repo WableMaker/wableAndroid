@@ -73,8 +73,7 @@ public class MypageActivity extends ActivityGroup  implements OnClickListener, R
 		switch(APICODE.fromInt(msg.what)) {     
 
 		case UserGetUpdatedContents:
-		{
-			
+		{			
 			sp_UserGetUpdatedContents_Items r =(sp_UserGetUpdatedContents_Items) msg.obj;
 			if(r.bsuccess) {
 

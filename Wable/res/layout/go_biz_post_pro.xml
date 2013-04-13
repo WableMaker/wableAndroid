@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_above="@+id/GOBIZ_REQtvGoBtn"
+        android:layout_below="@+id/textView3"
+        android:layout_margin="10dp"
+        android:background="@drawable/registered_asking_menu_shadow" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:background="@drawable/top_indicator_red"
+        android:gravity="center"
+        android:text="요청사항 등록하기"
+        android:textColor="#FFF"
+        android:textSize="20sp"
+        android:typeface="normal" />
+
+    <TextView
+        android:id="@+id/GOBIZ_REQtvGoBtn"
+        android:layout_width="338dp"
+        android:layout_height="41dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/s_gobiz_post_pro_btn" />
+
+    <TextView
+        android:id="@+id/GOBIZ_REQtvTitle"
+        android:layout_width="337dp"
+        android:layout_height="56dp"
+        android:layout_below="@+id/textView3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/s_gobiz_post_pro_keyword" />
+
+    <TextView
+        android:id="@+id/GOBIZ_REQtvDesc"
+        android:layout_width="337dp"
+        android:layout_height="62dp"
+        android:layout_alignLeft="@+id/GOBIZ_REQtvTitle"
+        android:layout_alignRight="@+id/GOBIZ_REQtvTitle"
+        android:layout_below="@+id/GOBIZ_REQtvTitle"
+        android:background="@drawable/s_gobiz_post_req_text"
+        android:gravity="top|center_horizontal"
+        android:textColor="#000" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/GOBIZ_REQtvTitle"
+        android:layout_alignRight="@+id/GOBIZ_REQtvTitle"
+        android:layout_below="@+id/GOBIZ_REQtvDesc"
+        android:weightSum="1" >
+
+        <TextView
+            android:id="@+id/GOBIZ_REQtvPrice"
+            android:layout_width="169dp"
+            android:layout_height="61dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/s_gobiz_post_pro_price"
+            android:gravity="center"
+            android:textColor="#000" />
+
+        <TextView
+            android:id="@+id/GOBIZ_REQtvTime"
+            android:layout_width="169dp"
+            android:layout_height="61dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/s_gobiz_post_req_time"
+            android:gravity="center"
+            android:textColor="#000" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="306dp"
+        android:layout_above="@+id/GOBIZ_REQtvGoBtn"
+        android:layout_alignLeft="@+id/GOBIZ_REQtvTitle"
+        android:layout_alignRight="@+id/GOBIZ_REQtvTitle"
+        android:layout_below="@+id/linearLayout1"
+        android:layout_marginBottom="70dp"
+        android:background="@drawable/registered_asking_map_base" />
+
+    <com.google.android.maps.MapView
+        android:id="@+id/mapview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignBottom="@+id/textView1"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_alignRight="@+id/textView1"
+        android:layout_alignTop="@+id/textView4"
+        android:layout_margin="4dp"
+        android:apiKey="0ifaiNwh-8lROoZpqpF9MxGODOf1i2mAo5RppHg"
+        android:clickable="true"
+        android:longClickable="true" >
+
+    </com.google.android.maps.MapView>
+
+    <TextView
+        android:id="@+id/GOBIZ_REQtvMapBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/mapview"
+        android:layout_alignRight="@+id/mapview"
+        android:background="@drawable/s_gobiz_post_pro_map" />
+
+</RelativeLayout>
